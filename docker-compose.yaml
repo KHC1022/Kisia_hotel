@@ -2,29 +2,8 @@ version: '3.8'
 
 services:
   web:
-    build: ./php
-    container_name: php-apache
+    build: .
     ports:
       - "8080:80"
     volumes:
-      - ./public:/var/www/html
-      - ./apache/apache.conf:/etc/apache2/sites-enabled/000-default.conf
-    depends_on:
-      - db
-
-  db:
-    image: mysql:5.7
-    container_name: mysql-db
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-
-volumes:
-  db_data:
-  
+      - ./src:/var/www/html
