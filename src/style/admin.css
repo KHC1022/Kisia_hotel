@@ -1,0 +1,262 @@
+/* 관리자 페이지 컨테이너 */
+.admin-container {
+    display: flex;
+    max-width: 1400px;
+    margin: 8rem auto 2rem;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+/* 사이드바 스타일 */
+.admin-sidebar {
+    width: 250px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.admin-sidebar h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.admin-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-menu li {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.admin-menu li:hover {
+    background-color: #f8f9fa;
+    color: #7851A9;
+}
+
+.admin-menu li.active {
+    background-color: #7851A9;
+    color: white;
+}
+
+.admin-menu li i {
+    width: 20px;
+    text-align: center;
+}
+
+/* 컨텐츠 영역 스타일 */
+.admin-content {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* 섹션 헤더 스타일 */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* 검색 박스 스타일 */
+.search-box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-box input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 250px;
+}
+
+.search-box button {
+    padding: 0.5rem 1rem;
+    background-color: #7851A9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 테이블 스타일 */
+.table-container {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* 상태 표시 스타일 */
+.status {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.status.active {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status.pending {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.status.inactive {
+    background-color: #fafafa;
+    color: #666;
+}
+
+/* 액션 버튼 스타일 */
+.section-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 0;
+}
+
+.add-btn {
+    padding: 0.5rem 1rem;
+    background-color: #7851A9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-btn:hover {
+    background-color: #6a4498;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.action-btn {
+    padding: 0.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.action-btn.edit:hover {
+    color: #7851A9;
+}
+
+.action-btn.delete:hover {
+    color: #dc3545;
+}
+
+/* 관리자 이름 스타일 */
+.admin-name {
+    color: #2c3e50;
+    margin-right: 1rem;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 1024px) {
+    .admin-container {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+    }
+
+    .admin-menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .admin-menu li {
+        flex: 1;
+        margin-bottom: 0;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 1rem;
+    }
+
+    .section-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .section-actions {
+        margin-top: 1rem;
+    }
+
+    .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+} 
