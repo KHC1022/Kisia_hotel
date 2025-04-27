@@ -27,10 +27,10 @@
 
     <main class="board-container">
         <div class="board-header">
-            <h1 class="board-title">이용후기</h1>
+            <h1 class="board-title">후기 게시판</h1>
         </div>
 
-        <div class="search-container">
+        <div class="search-sort-container">
             <div class="search-box">
                 <div class="search-input">
                     <i class="fas fa-search"></i>
@@ -38,18 +38,18 @@
                 </div>
                 <button class="search-button">검색</button>
             </div>
-        </div>
-
-        <div class="controls-container">
-            <div class="sort-container">
-                <span class="sort-label">정렬 기준:</span>
-                <select class="sort-dropdown">
-                    <option value="recent">가장 최근한 후기부터</option>
-                    <option value="rating-high">평점 높은 순</option>
-                    <option value="rating-low">평점 낮은 순</option>
+            <div class="sort-controls">
+                <span class="sort-label">정렬:</span>
+                <select class="sort-select">
+                    <option value="recent">최신순</option>
+                    <option value="rating-high">평점 높은순</option>
+                    <option value="rating-low">평점 낮은순</option>
                     <option value="helpful">도움이 된 순</option>
                 </select>
             </div>
+        </div>
+
+        <div class="controls-container">
             <a href="#" class="write-btn">후기 작성</a>
         </div>
 
@@ -291,7 +291,7 @@
                 <h3>바로가기</h3>
                 <ul>
                     <li><a href="index.html">홈</a></li>
-                    <li><a href="#hotels">호텔</a></li>
+                    <li><a href="hotels.html">호텔</a></li>
                     <li><a href="review.html">후기</a></li>
                     <li><a href="inquiry.html">문의</a></li>
                 </ul>
