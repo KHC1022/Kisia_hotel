@@ -1,0 +1,189 @@
+.board-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem 2rem;
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+}
+
+.board-title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.write-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+}
+
+.write-btn {
+    padding: 0.8rem 1.5rem;
+    background-color: #7851A9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.review-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.review-header {
+    margin-bottom: 1rem;
+}
+
+.review-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.stars {
+    color: #f1c40f;
+}
+
+.hotel-name {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.reviewer {
+    color: #666;
+}
+
+.date {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.review-content {
+    margin: 1rem 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+.review-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.helpful {
+    display: flex;
+    gap: 1rem;
+}
+
+.helpful button {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.helpful button:hover {
+    background-color: #f8f9fa;
+    color: #7851A9;
+}
+
+.search-box {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-box select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.search-box button {
+    padding: 0.5rem 1rem;
+    background-color: #7851A9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.pagination {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.pagination a {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #2c3e50;
+}
+
+.pagination a.active {
+    background-color: #7851A9;
+    color: white;
+    border-color: #7851A9;
+}
+
+@media (max-width: 768px) {
+    .board-container {
+        padding: 6rem 1rem 1rem;
+    }
+
+    .board-title {
+        font-size: 1.5rem;
+    }
+
+    .review-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .helpful {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .write-btn-container {
+        justify-content: center;
+    }
+
+    .board-header {
+        margin-top: 2rem;
+    }
+} 
