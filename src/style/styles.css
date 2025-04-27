@@ -212,6 +212,8 @@ nav {
     padding: 4rem 5%;
     max-width: 1400px;
     margin: 0 auto;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
 }
 
 .featured-hotels h2 {
@@ -290,6 +292,7 @@ nav {
 .benefits {
     background-color: #f8f9fa;
     padding: 4rem 5%;
+    margin-top: 3rem;
 }
 
 .benefits h2 {

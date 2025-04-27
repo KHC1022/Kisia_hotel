@@ -5,31 +5,33 @@
 }
 
 .hotels-header {
-    margin-bottom: 2rem;
+    margin-bottom: 8px;
 }
 
 .hotels-title {
     font-size: 2rem;
     color: #2c3e50;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .search-sort-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
     background-color: white;
-    padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .search-box {
-    flex: 1;
+    width: 100%;
+}
+
+.search-row {
     display: flex;
-    gap: 1rem;
+    gap: 10px;
 }
 
 .search-input {
@@ -39,57 +41,203 @@
     align-items: center;
 }
 
-.search-input input {
-    width: 100%;
-    padding: 0.8rem 1rem 0.8rem 2.5rem;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 0.9rem;
-}
-
 .search-input i {
     position: absolute;
-    left: 1rem;
+    left: 12px;
     color: #666;
 }
 
+.search-input input {
+    width: 100%;
+    padding: 10px 12px 10px 35px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
 .search-button {
-    padding: 0.8rem 1.5rem;
+    padding: 10px 20px;
     background-color: #7851A9;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: background-color 0.3s;
 }
 
 .search-button:hover {
     background-color: #6a4498;
 }
 
+.controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+    margin-top: 2rem;
+}
+
 .sort-controls {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    white-space: nowrap;
+    gap: 10px;
 }
 
 .sort-label {
     color: #666;
+    font-size: 14px;
 }
 
 .sort-select {
-    padding: 0.8rem 1rem;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 0.9rem;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
     background-color: white;
+    cursor: pointer;
+}
+
+.filter-controls {
+    position: relative;
+}
+
+.filter-group {
+    position: relative;
+}
+
+.filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    transition: all 0.3s;
+}
+
+.filter-toggle:hover {
+    background-color: #f8f9fa;
+}
+
+.filter-toggle i {
+    transition: transform 0.3s;
+}
+
+.filter-toggle.active i {
+    transform: rotate(180deg);
+}
+
+.filter-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 280px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 16px;
+    margin-top: 8px;
+    display: none;
+    z-index: 1000;
+}
+
+.filter-dropdown.active {
+    display: block;
+}
+
+.filter-section {
+    margin-bottom: 16px;
+}
+
+.filter-section:last-child {
+    margin-bottom: 0;
+}
+
+.filter-section-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 4px 0;
+}
+
+.filter-option input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.filter-option span {
+    font-size: 14px;
+    color: #666;
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.reset-button {
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.reset-button:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+.apply-button {
+    padding: 8px 16px;
+    background-color: #7851A9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.apply-button:hover {
+    background-color: #6a4498;
 }
 
 .hotels-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
+    margin-top: 4rem;
 }
 
 .hotel-card {
@@ -191,6 +339,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9rem;
+    transition: background-color 0.3s;
 }
 
 .book-now:hover {
@@ -205,6 +354,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9rem;
+    transition: all 0.3s;
 }
 
 .view-details:hover {

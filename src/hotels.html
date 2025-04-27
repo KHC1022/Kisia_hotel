@@ -32,19 +32,100 @@
 
         <div class="search-sort-container">
             <div class="search-box">
-                <div class="search-input">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="호텔 이름 또는 위치 검색">
+                <div class="search-row">
+                    <div class="search-input">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="호텔 이름 또는 위치 검색">
+                    </div>
+                    <button class="search-button">검색</button>
                 </div>
-                <button class="search-button">검색</button>
             </div>
-            <div class="sort-controls">
-                <span class="sort-label">정렬:</span>
-                <select class="sort-select">
-                    <option value="price-low">가격 낮은순</option>
-                    <option value="price-high">가격 높은순</option>
-                    <option value="rating">평점순</option>
-                </select>
+            <div class="controls-row">
+                <div class="sort-controls">
+                    <span class="sort-label">정렬:</span>
+                    <select class="sort-select">
+                        <option value="price-low">가격 낮은순</option>
+                        <option value="price-high">가격 높은순</option>
+                        <option value="rating">평점순</option>
+                    </select>
+                </div>
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <button class="filter-toggle">
+                            <span class="filter-label">필터</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="filter-dropdown">
+                            <div class="filter-section">
+                                <h4 class="filter-section-title">가격대</h4>
+                                <div class="filter-options">
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="price-0-100000">
+                                        <span>10만원 이하</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="price-100000-200000">
+                                        <span>10-20만원</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="price-200000-300000">
+                                        <span>20-30만원</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="price-300000-">
+                                        <span>30만원 이상</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-section">
+                                <h4 class="filter-section-title">편의시설</h4>
+                                <div class="filter-options">
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="facility-pool">
+                                        <span>수영장</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="facility-spa">
+                                        <span>스파</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="facility-gym">
+                                        <span>피트니스</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="facility-restaurant">
+                                        <span>레스토랑</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="facility-parking">
+                                        <span>주차</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-section">
+                                <h4 class="filter-section-title">호텔 등급</h4>
+                                <div class="filter-options">
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="grade-5">
+                                        <span>5성급</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="grade-4">
+                                        <span>4성급</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" value="grade-3">
+                                        <span>3성급</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-actions">
+                                <button class="reset-button">초기화</button>
+                                <button class="apply-button">적용</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -296,5 +377,33 @@
             <p>&copy; 2025 KISIA HOTEL. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterToggle = document.querySelector('.filter-toggle');
+            const filterDropdown = document.querySelector('.filter-dropdown');
+
+            filterToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                filterDropdown.classList.toggle('active');
+            });
+
+            // 필터 드롭다운 외부 클릭 시 닫기
+            document.addEventListener('click', function(event) {
+                if (!filterToggle.contains(event.target) && !filterDropdown.contains(event.target)) {
+                    filterToggle.classList.remove('active');
+                    filterDropdown.classList.remove('active');
+                }
+            });
+
+            // 초기화 버튼 클릭 시 모든 체크박스 해제
+            const resetButton = document.querySelector('.reset-button');
+            resetButton.addEventListener('click', function() {
+                const checkboxes = filterDropdown.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+            });
+        });
+    </script>
 </body>
 </html> 

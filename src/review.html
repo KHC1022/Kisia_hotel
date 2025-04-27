@@ -32,25 +32,26 @@
 
         <div class="search-sort-container">
             <div class="search-box">
-                <div class="search-input">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="검색어를 입력하세요">
+                <div class="search-row">
+                    <div class="search-input">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="호텔 이름을 입력하세요">
+                    </div>
+                    <button class="search-button">검색</button>
                 </div>
-                <button class="search-button">검색</button>
             </div>
-            <div class="sort-controls">
-                <span class="sort-label">정렬:</span>
-                <select class="sort-select">
-                    <option value="recent">최신순</option>
-                    <option value="rating-high">평점 높은순</option>
-                    <option value="rating-low">평점 낮은순</option>
-                    <option value="helpful">도움이 된 순</option>
-                </select>
+            <div class="controls-row">
+                <div class="sort-controls">
+                    <span class="sort-label">정렬:</span>
+                    <select class="sort-select">
+                        <option value="recent">최신순</option>
+                        <option value="rating-high">평점 높은순</option>
+                        <option value="rating-low">평점 낮은순</option>
+                        <option value="helpful">도움이 된 순</option>
+                    </select>
+                </div>
+                <a href="#" class="write-btn">후기 작성</a>
             </div>
-        </div>
-
-        <div class="controls-container">
-            <a href="#" class="write-btn">후기 작성</a>
         </div>
 
         <div class="review-list">
@@ -63,13 +64,17 @@
                         <div class="user-details">
                             <span class="hotel-name">그랜드 럭셔리 호텔</span>
                             <span class="user-name">Youngjin</span>
-                            <span class="user-country">
-                                <img src="https://flagcdn.com/w20/kr.png" alt="대한민국" class="country-flag">
-                                대한민국
-                            </span>
                         </div>
                     </div>
-                    <div class="review-rating">9.0</div>
+                    <div class="review-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="review-content">
                     <p>감사합니다.</p>
@@ -81,18 +86,14 @@
                         <i class="fas fa-bed"></i>
                         <span>이코노미 더블룸</span>
                         <span>•</span>
-                        <span>2박 • 2025년 4월</span>
-                        <span>•</span>
                         <span>나홀로 여행객</span>
                     </div>
                     <div class="review-actions">
                         <button class="action-btn">
-                            <i class="far fa-thumbs-up"></i>
-                            도움이 됨
+                            <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(42)</span>
                         </button>
                         <button class="action-btn">
-                            <i class="far fa-thumbs-down"></i>
-                            도움이 되지 않음
+                            <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(5)</span>
                         </button>
                     </div>
                 </div>
@@ -107,13 +108,17 @@
                         <div class="user-details">
                             <span class="hotel-name">비치 파라다이스 호텔</span>
                             <span class="user-name">김철수</span>
-                            <span class="user-country">
-                                <img src="https://flagcdn.com/w20/kr.png" alt="대한민국" class="country-flag">
-                                대한민국
-                            </span>
                         </div>
                     </div>
-                    <div class="review-rating">8.5</div>
+                    <div class="review-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="review-content">
                     <p>위치가 좋고 직원분들이 친절했습니다. 객실도 깨끗하고 전망도 좋았어요.</p>
@@ -124,18 +129,14 @@
                         <i class="fas fa-bed"></i>
                         <span>디럭스 트윈룸</span>
                         <span>•</span>
-                        <span>3박 • 2025년 4월</span>
-                        <span>•</span>
                         <span>가족여행</span>
                     </div>
                     <div class="review-actions">
                         <button class="action-btn">
-                            <i class="far fa-thumbs-up"></i>
-                            도움이 됨
+                            <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(28)</span>
                         </button>
                         <button class="action-btn">
-                            <i class="far fa-thumbs-down"></i>
-                            도움이 되지 않음
+                            <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(3)</span>
                         </button>
                     </div>
                 </div>
@@ -150,13 +151,17 @@
                         <div class="user-details">
                             <span class="hotel-name">도쿄 비즈니스 호텔</span>
                             <span class="user-name">Sakura</span>
-                            <span class="user-country">
-                                <img src="https://flagcdn.com/w20/jp.png" alt="일본" class="country-flag">
-                                일본
-                            </span>
                         </div>
                     </div>
-                    <div class="review-rating">9.2</div>
+                    <div class="review-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="review-content">
                     <p>スタッフがとても親切でした。部屋も清潔で快適でした。</p>
@@ -167,18 +172,14 @@
                         <i class="fas fa-bed"></i>
                         <span>싱글룸</span>
                         <span>•</span>
-                        <span>1박 • 2025년 3월</span>
-                        <span>•</span>
-                        <span>출장</span>
+                        <span>나홀로 여행객</span>
                     </div>
                     <div class="review-actions">
                         <button class="action-btn">
-                            <i class="far fa-thumbs-up"></i>
-                            도움이 됨
+                            <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(15)</span>
                         </button>
                         <button class="action-btn">
-                            <i class="far fa-thumbs-down"></i>
-                            도움이 되지 않음
+                            <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(2)</span>
                         </button>
                     </div>
                 </div>
@@ -193,13 +194,17 @@
                         <div class="user-details">
                             <span class="hotel-name">런던 시티 호텔</span>
                             <span class="user-name">Emily</span>
-                            <span class="user-country">
-                                <img src="https://flagcdn.com/w20/gb.png" alt="영국" class="country-flag">
-                                영국
-                            </span>
                         </div>
                     </div>
-                    <div class="review-rating">7.8</div>
+                    <div class="review-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="review-content">
                     <p>The breakfast was delicious and the location was perfect for sightseeing.</p>
@@ -210,18 +215,14 @@
                         <i class="fas fa-bed"></i>
                         <span>스탠다드룸</span>
                         <span>•</span>
-                        <span>4박 • 2025년 2월</span>
-                        <span>•</span>
                         <span>커플 여행</span>
                     </div>
                     <div class="review-actions">
                         <button class="action-btn">
-                            <i class="far fa-thumbs-up"></i>
-                            도움이 됨
+                            <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(10)</span>
                         </button>
                         <button class="action-btn">
-                            <i class="far fa-thumbs-down"></i>
-                            도움이 되지 않음
+                            <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(1)</span>
                         </button>
                     </div>
                 </div>
@@ -236,13 +237,17 @@
                         <div class="user-details">
                             <span class="hotel-name">부산 해운대 호텔</span>
                             <span class="user-name">박지민</span>
-                            <span class="user-country">
-                                <img src="https://flagcdn.com/w20/kr.png" alt="대한민국" class="country-flag">
-                                대한민국
-                            </span>
                         </div>
                     </div>
-                    <div class="review-rating">8.8</div>
+                    <div class="review-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="review-content">
                     <p>시설이 깔끔하고 조용해서 휴식하기 좋았습니다. 다음에도 또 이용하고 싶어요.</p>
@@ -253,18 +258,14 @@
                         <i class="fas fa-bed"></i>
                         <span>프리미엄룸</span>
                         <span>•</span>
-                        <span>2박 • 2025년 1월</span>
-                        <span>•</span>
                         <span>친구와 여행</span>
                     </div>
                     <div class="review-actions">
                         <button class="action-btn">
-                            <i class="far fa-thumbs-up"></i>
-                            도움이 됨
+                            <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(10)</span>
                         </button>
                         <button class="action-btn">
-                            <i class="far fa-thumbs-down"></i>
-                            도움이 되지 않음
+                            <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(1)</span>
                         </button>
                     </div>
                 </div>
