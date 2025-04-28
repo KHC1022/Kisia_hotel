@@ -146,6 +146,45 @@
     margin-top: 5px;
 }
 
+/* 헤더 버튼 스타일 styles.css와 통일 */
+header .auth-buttons {
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    right: 5%;
+}
+
+header .login-btn, header .signup-btn {
+    padding: 0.5rem 1.5rem;
+    border: 1.5px solid #7851A9;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    font-size: 1rem;
+    background: #fff;
+    color: #7851A9;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+header .login-btn:hover, header .signup-btn:hover {
+    background-color: #7851A9;
+    color: #fff;
+    border-color: #7851A9;
+}
+
+header .login-btn {
+    background-color: #7851A9 !important;
+    color: #fff !important;
+    border-color: #7851A9 !important;
+}
+header .login-btn:hover {
+    background-color: #5B3B8A !important;
+    color: #fff !important;
+    border-color: #5B3B8A !important;
+}
+
 @media (max-width: 768px) {
     .login-container {
         padding: 1rem;
@@ -159,4 +198,39 @@
         flex-direction: column;
         gap: 0.5rem;
     }
+
+    header .auth-buttons {
+        position: static;
+        margin: 1rem 0;
+        justify-content: center;
+    }
+
+    header .login-btn, header .signup-btn {
+        width: 110px;
+        height: 38px;
+        font-size: 14px;
+    }
+}
+
+/* 회원가입 페이지에서만 적용: signup.html에서 <body>에 signup-page 클래스 추가 필요 */
+.signup-page header .signup-btn {
+    background-color: #7851A9 !important;
+    color: #fff !important;
+    border-color: #7851A9 !important;
+}
+.signup-page header .signup-btn:hover {
+    background-color: #5B3B8A !important;
+    color: #fff !important;
+    border-color: #5B3B8A !important;
+}
+
+.signup-page header .login-btn {
+    background: #fff !important;
+    color: #7851A9 !important;
+    border: 1.5px solid #7851A9 !important;
+}
+.signup-page header .login-btn:hover {
+    background: #7851A9 !important;
+    color: #fff !important;
+    border-color: #7851A9 !important;
 } 

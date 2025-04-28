@@ -59,6 +59,10 @@ nav {
     margin: 0 auto;
 }
 
+.nav-links li {
+    white-space: nowrap;
+}
+
 .nav-links a {
     text-decoration: none;
     color: #2c3e50;
@@ -79,30 +83,22 @@ nav {
 
 .login-btn, .signup-btn {
     padding: 0.5rem 1.5rem;
-    border: none;
+    border: 1.5px solid #7851A9;
     border-radius: 5px;
     cursor: pointer;
     font-weight: 500;
     transition: all 0.3s;
+    font-size: 1rem;
+    background: #fff;
+    color: #7851A9;
+    display: inline-block;
+    white-space: nowrap;
 }
 
-.login-btn {
-    background-color: transparent;
-    color: #2c3e50;
-    border: 1px solid #2c3e50;
-}
-
-.signup-btn {
+.login-btn:hover, .signup-btn:hover {
     background-color: #7851A9;
-    color: white;
-}
-
-.login-btn:hover {
-    background-color: #f8f9fa;
-}
-
-.signup-btn:hover {
-    background-color: #5B3B8A;
+    color: #fff;
+    border-color: #7851A9;
 }
 
 /* 히어로 섹션 */
@@ -459,17 +455,13 @@ footer {
         margin-bottom: 1rem;
     }
 
-    .nav-links {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-        margin: 1rem 0;
-    }
-
     .auth-buttons {
         position: static;
-        margin: 1rem 0;
+        margin: 1rem 0 0 0;
         justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 1rem;
     }
 
     .search-container h1 {
