@@ -89,6 +89,33 @@
     background-color: #f8f9fa;
 }
 
+.reply-row {
+    background-color: #f8f9fa;
+    color: #666;
+}
+
+.reply-row td {
+    padding-left: 1rem;
+}
+
+.reply-row td:first-child {
+    padding-left: 1rem;
+}
+
+.reply-row td:nth-child(3) {
+    padding-left: 2rem;
+}
+
+.reply-row .title a {
+    color: #666;
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+.reply-row .title a:hover {
+    color: #7851A9;
+}
+
 .board-table .title {
     text-align: left;
 }
@@ -106,7 +133,8 @@
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 2rem;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
 }
 
 .pagination a {
