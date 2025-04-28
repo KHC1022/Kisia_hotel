@@ -490,4 +490,21 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+}
+
+.detail-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #7851A9;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.detail-btn:hover {
+    background-color: #6a4498;
 } 
