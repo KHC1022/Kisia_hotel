@@ -147,6 +147,8 @@
     margin-top: 8px;
     display: none;
     z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .filter-dropdown.active {
