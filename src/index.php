@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KISIA HOTEL</title>
+    <title>KISIA HOTEL - 메인</title>
     <link rel="stylesheet" href="style/styles.css">
+    <link rel="stylesheet" href="style/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">KISIA <span>HOTEL</span></a>
+            <a href="index.php" class="logo">KISIA <span>HOTEL</span></a>
             <ul class="nav-links">
-                <li><a href="index.html">홈</a></li>
-                <li><a href="hotels.html">호텔</a></li>
-                <li><a href="review.html">후기</a></li>
-                <li><a href="inquiry.html">문의</a></li>
+                <li><a href="index.php">홈</a></li>
+                <li><a href="hotel/hotels.php">호텔</a></li>
+                <li><a href="review/review.php">후기</a></li>
+                <li><a href="inquiry/inquiry.php">문의</a></li>
             </ul>
             <div class="auth-buttons">
-                <a href="login.html" class="login-btn">로그인</a>
-                <a href="signup.html" class="signup-btn">회원가입</a>
+                <a href="user/login.php" class="login-btn">로그인</a>
+                <a href="user/signup.php" class="signup-btn">회원가입</a>
             </div>
         </nav>
     </header>
@@ -84,10 +85,10 @@
                             <span>4.5</span>
                         </div>
                         <p class="price">₩250,000/박</p>
-                        <a href="hotel-detail.html?hotel=grand-luxury" class="detail-btn">상세보기</a>
+                        <a href="./hotel/hotel-detail.php?hotel=grand-luxury" class="detail-btn">상세보기</a>
                     </div>
                 </div>
-                <div class="hotel-card">
+                <div class="hotel-card">    
                     <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="비치 리조트">
                     <div class="hotel-info">
                         <h3>비치 파라다이스 리조트</h3>
@@ -101,7 +102,7 @@
                             <span>5.0</span>
                         </div>
                         <p class="price">₩300,000/박</p>
-                        <a href="hotel-detail.html?hotel=beach-paradise" class="detail-btn">상세보기</a>
+                        <a href="./hotel/hotel-detail.php?hotel=beach-paradise" class="detail-btn">상세보기</a>
                     </div>
                 </div>
                 <div class="hotel-card">
@@ -118,7 +119,7 @@
                             <span>4.0</span>
                         </div>
                         <p class="price">₩200,000/박</p>
-                        <a href="hotel-detail.html?hotel=mountain-view" class="detail-btn">상세보기</a>
+                        <a href="./hotel/hotel-detail.php?hotel=mountain-view" class="detail-btn">상세보기</a>
                     </div>
                 </div>
             </div>
@@ -127,21 +128,21 @@
         <section class="benefits">
             <h2>이벤트 & 프로모션</h2>
             <div class="benefits-grid">
-                <a href="event-review.html" class="benefit-card">
+                <a href="event/event-review.php" class="benefit-card">
                     <i class="fas fa-gift"></i>
                     <h3>의견 남기고 선물 받자!</h3>
                     <p>KISIA HOTEL 이용 소감을 댓글로 남기면 추첨을 통해 특별 선물 증정</p>
                     <span class="event-date">2025년 5월 1일 ~ 5월 30일</span>
                     <span class="benefit-link">자세히 보기 <i class="fas fa-arrow-right"></i></span>
                 </a>
-                <a href="event-timedeal.html" class="benefit-card">
+                <a href="event/event-timedeal.php" class="benefit-card">
                     <i class="fas fa-percent"></i>
                     <h3>부산 호텔 타임딜</h3>
                     <p>오늘만 부산 호텔 40% 할인</p>
                     <span class="event-date">오늘 자정까지</span>
                     <span class="benefit-link">자세히 보기 <i class="fas fa-arrow-right"></i></span>
                 </a>
-                <a href="event-japan.html" class="benefit-card">
+                <a href="event/event-japan.php" class="benefit-card">
                     <i class="fas fa-hotel"></i>
                     <h3>일본 호텔 단독 특가</h3>
                     <p>도쿄, 오사카, 후쿠오카 등 일본 전역 호텔 20% 할인</p>
@@ -161,10 +162,10 @@
             <div class="footer-section">
                 <h3>바로가기</h3>
                 <ul>
-                    <li><a href="index.html">홈</a></li>
-                    <li><a href="hotels.html">호텔</a></li>
-                    <li><a href="review.html">후기</a></li>
-                    <li><a href="inquiry.html">문의</a></li>
+                    <li><a href="index.php">홈</a></li>
+                    <li><a href="hotel/hotels.php">호텔</a></li>
+                    <li><a href="review/review.php">후기</a></li>
+                    <li><a href="inquiry/inquiry.php">문의</a></li>
                 </ul>
             </div>
             <div class="footer-section">

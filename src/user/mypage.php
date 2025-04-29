@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KISIA HOTEL - 마이페이지</title>
-    <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="style/mypage.css">
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="../style/mypage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">KISIA <span>HOTEL</span></a>
+            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
             <ul class="nav-links">
-                <li><a href="index.html">홈</a></li>
-                <li><a href="hotels.html">호텔</a></li>
-                <li><a href="review.html">후기</a></li>
-                <li><a href="inquiry.html">문의</a></li>
+                <li><a href="../index.php">홈</a></li>
+                <li><a href="../hotel/hotels.php">호텔</a></li>
+                <li><a href="../review/review.php">후기</a></li>
+                <li><a href="../inquiry/inquiry.php">문의</a></li>
             </ul>
             <div class="auth-buttons">
-                <a href="mypage.html" class="mypage-btn">마이페이지</a>
-                <a href="index.html" class="logout-btn">로그아웃</a>
+                <span class="user-name">김철수님</span>
+                <a href="login.php" class="logout-btn">로그아웃</a>
             </div>
         </nav>
     </header>
@@ -30,7 +30,7 @@
             <div class="profile-section">
                 <div class="profile-image-container">
                     <img src="https://via.placeholder.com/150" alt="프로필 사진" id="profileImage">
-                    <button class="change-profile-btn" onclick="changeProfileImage()">
+                    <button class="change-profile-btn">
                         <i class="fas fa-camera"></i>
                     </button>
                 </div>
@@ -75,8 +75,8 @@
                             </div>
                         </div>
                         <div class="reservation-actions">
-                            <button class="modify-btn" onclick="window.location.href='hotel-detail.html'">상세보기</button>
-                            <button class="cancel-btn" onclick="cancelReservation()">예약 취소</button>
+                            <button class="modify-btn" onclick="window.location.href='../hotel/hotel-detail.php'">상세보기</button>
+                            <button class="cancel-btn">예약 취소</button>
                         </div>
                     </div>
                 </div>
@@ -127,8 +127,8 @@
                                 <div class="hotel-row">
                                     <span>그랜드 럭셔리 호텔</span>
                                     <div class="button-group">
-                                        <button class="detail-btn" onclick="window.location.href='hotel-detail.html'">상세보기</button>
-                                        <button class="delete-btn" onclick="removeFromWishlist(this)">
+                                        <button class="detail-btn" onclick="window.location.href='../hotel/hotel-detail.php'">상세보기</button>
+                                        <button class="delete-btn">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -140,8 +140,8 @@
                                 <div class="hotel-row">
                                     <span>시그니처 호텔</span>
                                     <div class="button-group">
-                                        <button class="detail-btn" onclick="window.location.href='hotel-detail.html'">상세보기</button>
-                                        <button class="delete-btn" onclick="removeFromWishlist(this)">
+                                        <button class="detail-btn" onclick="window.location.href='../hotel/hotel-detail.php'">상세보기</button>
+                                        <button class="delete-btn">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -153,8 +153,8 @@
                                 <div class="hotel-row">
                                     <span>파크 프리미엄 호텔</span>
                                     <div class="button-group">
-                                        <button class="detail-btn" onclick="window.location.href='hotel-detail.html'">상세보기</button>
-                                        <button class="delete-btn" onclick="removeFromWishlist(this)">
+                                        <button class="detail-btn" onclick="window.location.href='../hotel/hotel-detail.php'">상세보기</button>
+                                        <button class="delete-btn">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -176,10 +176,10 @@
             <div class="footer-section">
                 <h3>바로가기</h3>
                 <ul>
-                    <li><a href="index.html">홈</a></li>
-                    <li><a href="hotels.html">호텔</a></li>
-                    <li><a href="review.html">후기</a></li>
-                    <li><a href="inquiry.html">문의</a></li>
+                    <li><a href="../index.php">홈</a></li>
+                    <li><a href="../hotel/hotels.php">호텔</a></li>
+                    <li><a href="../review/review.php">후기</a></li>
+                    <li><a href="../inquiry/inquiry.php">문의</a></li>
                 </ul>
             </div>
             <div class="footer-section">
