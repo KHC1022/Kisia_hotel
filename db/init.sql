@@ -10,7 +10,9 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL UNIQUE,
     phone VARCHAR(20),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    is_admin BOOLEAN DEFAULT FALSE
+    is_admin BOOLEAN DEFAULT FALSE,
+    terms BOOLEAN DEFAULT FALSE,
+    marketing BOOLEAN DEFAULT FALSE
 );
 
 -- 2. hotels (호텔 정보)

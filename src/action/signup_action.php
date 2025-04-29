@@ -1,0 +1,46 @@
+<?php
+include_once '../includes/db_connection.php';
+
+$name = $_POST['name'];
+$id = $_POST['id'];
+$password = $_POST['password'];
+$passwordConfirm = $_POST['passwordConfirm'];
+$email = $_POST['email'];
+$phone = $_POST['phone'];
+$terms = isset($_POST['terms']) ? 1 : 0;
+$marketing = isset($_POST['marketing']) ? 1 : 0;
+
+if ($name && $id && $password && $passwordConfirm && $email && $phone) {
+    if ($password !== $passwordConfirm) {
+        echo "<script>
+            alert('비밀번호 확인이 일치하지 않습니다.');
+            history.back();
+        </script>";
+    }
+
+    if ($terms == 0) {
+        echo "<script>
+            alert('이용약관 및 개인정보 처리방침에 동의하지 않으셨습니다.');
+            history.back();
+        </script>";
+    }
+
+    if (($password == $passwordConfirm)&&($terms == 1)) {
+        $sql = "INSERT INTO users (username, password, email, phone, terms, marketing) 
+        VALUES ('$id', '$password', '$email', '$phone', $terms, $marketing)";
+    }
+
+    if ($db->query($sql)) {
+        echo "<script>
+            alert('회원가입 성공');
+            window.location.href = '../index.php';
+        </script>";
+    } else {
+        echo "<script>
+            alert('회원가입 실패');
+            history.back();
+        </script>";
+    }
+}
+
+?>
