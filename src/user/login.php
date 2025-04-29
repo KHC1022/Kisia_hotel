@@ -29,12 +29,12 @@
     <main class="login-container">
         <div class="login-box">
             <h1>로그인</h1>
-            <form id="loginForm">
+            <form id="loginForm" method="post" action="../action/login_action.php">
                 <div class="form-group">
                     <label for="username">아이디</label>
                     <div class="input-group">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
+                        <input type="text" id="id" name="id" placeholder="아이디를 입력하세요" required>
                     </div>
                 </div>
                 <div class="form-group">
