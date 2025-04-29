@@ -29,7 +29,7 @@
     <main class="login-container">
         <div class="login-box">
             <h1>회원가입</h1>
-            <form id="signupForm" method="post" action="../action/signup_action.php">
+            <form id="signupForm" method ="post" action="../action/signup_action.php">
                 <div class="form-group">
                     <label for="name">이름</label>
                     <div class="input-group">
@@ -48,7 +48,10 @@
                     <label for="password">비밀번호</label>
                     <div class="input-group">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                        <input type="password" id="password" name="password" placeholder="8자 이상, 영문 대소문자, 숫자, 특수문자 포함" required>
+                    </div>
+                    <div class="password-requirements">
+                        <p>비밀번호는 8자 이상, 영문 대소문자, 숫자, 특수문자를 포함해야 합니다.</p>
                     </div>
                 </div>
                 <div class="form-group">
@@ -74,13 +77,13 @@
                 </div>
                 <div class="form-options">
                     <label class="terms-agree">
-                        <input type="checkbox" id="terms" name="terms" required>
+                        <input type="checkbox" name="terms" required>
                         <span>(필수)이용약관 및 개인정보 처리방침에 동의합니다</span>
                     </label>
                 </div>
                 <div class="form-options">
                     <label class="terms-agree">
-                        <input type="checkbox" id="marketing" name="marketing">
+                        <input type="checkbox" name="marketing">
                         <span>(선택)마케팅 정보 수신에 동의합니다.</span>
                     </label>
                 </div>

@@ -5,10 +5,10 @@ $user = 'kisia';
 $password = 'kisia';
 $databaseName = 'kisia_hotel';
 
-$db = new mysqli($host, $user, $password, $databaseName);
+$conn = new mysqli($host, $user, $password, $databaseName);
 
-if ($db->connect_error) {
-    die("DB 연결 실패 : ". $db->connect_error);
+if ($conn->connect_error) {
+    die("DB 연결 실패 : ". $conn->connect_error);
 }
 
 ?>

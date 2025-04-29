@@ -30,7 +30,7 @@ if ($name && $id && $password && $passwordConfirm && $email && $phone) {
         VALUES ('$id', '$password', '$email', '$phone', $terms, $marketing)";
     }
 
-    if ($db->query($sql)) {
+    if ($conn->query($sql)) {
         echo "<script>
             alert('회원가입 성공');
             window.location.href = '../index.php';
