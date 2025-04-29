@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KISIA HOTEL - 부산 호텔 타임딜</title>
-    <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="style/event-timedeal.css">
-    <link rel="stylesheet" href="style/event.css">
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="../style/event-timedeal.css">
+    <link rel="stylesheet" href="../style/event.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">KISIA <span>HOTEL</span></a>
+            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
             <ul class="nav-links">
-                <li><a href="index.html">홈</a></li>
-                <li><a href="hotels.html">호텔</a></li>
-                <li><a href="review.html">후기</a></li>
-                <li><a href="inquiry.html">문의</a></li>
+                <li><a href="../index.php">홈</a></li>
+                <li><a href="../hotel/hotels.php">호텔</a></li>
+                <li><a href="../review/review.php">후기</a></li>
+                <li><a href="../inquiry/inquiry.php">문의</a></li>
             </ul>
             <div class="auth-buttons">
-                <a href="login.html" class="login-btn">로그인</a>
-                <a href="signup.html" class="signup-btn">회원가입</a>
+                <a href="../user/login.php" class="login-btn">로그인</a>
+                <a href="../user/signup.php" class="signup-btn">회원가입</a>
             </div>
         </nav>
     </header>
@@ -56,7 +56,7 @@
                                     <p class="original-price">₩550,000원</p>
                                     <p class="discount-price">₩330,000원/박</p>
                                 </div>
-                                <a href="hotel-detail.html?hotel=paradise" class="detail-btn">상세보기</a>
+                                <a href="../hotel/hotel-detail.php?hotel=paradise" class="detail-btn">상세보기</a>
                             </div>
                         </div>
 
@@ -71,7 +71,7 @@
                                     <p class="original-price">₩680,000원</p>
                                     <p class="discount-price">₩408,000원/박</p>
                                 </div>
-                                <a href="hotel-detail.html?hotel=signiel" class="detail-btn">상세보기</a>
+                                <a href="../hotel/hotel-detail.php?hotel=signiel" class="detail-btn">상세보기</a>
                             </div>
                         </div>
 
@@ -86,7 +86,7 @@
                                     <p class="original-price">₩600,000원</p>
                                     <p class="discount-price">₩360,000원/박</p>
                                 </div>
-                                <a href="hotel-detail.html?hotel=parkhyatt" class="detail-btn">상세보기</a>
+                                <a href="../hotel/hotel-detail.php?hotel=parkhyatt" class="detail-btn">상세보기</a>
                             </div>
                         </div>
                     </div>
@@ -127,10 +127,10 @@
             <div class="footer-section">
                 <h3>바로가기</h3>
                 <ul>
-                    <li><a href="index.html">홈</a></li>
-                    <li><a href="hotels.html">호텔</a></li>
-                    <li><a href="review.html">후기</a></li>
-                    <li><a href="inquiry.html">문의</a></li>
+                    <li><a href="../index.php">홈</a></li>
+                    <li><a href="../hotel/hotels.php">호텔</a></li>
+                    <li><a href="../review/review.php">후기</a></li>
+                    <li><a href="../inquiry/inquiry.php">문의</a></li>
                 </ul>
             </div>
             <div class="footer-section">

@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KISIA HOTEL - 회원가입</title>
-    <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="../style/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="signup-page">
     <header>
         <nav>
-            <a href="index.html" class="logo">KISIA <span>HOTEL</span></a>
+            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
             <ul class="nav-links">
-                <li><a href="index.html">홈</a></li>
-                <li><a href="hotels.html">호텔</a></li>
-                <li><a href="review.html">후기</a></li>
-                <li><a href="inquiry.html">문의</a></li>
+                <li><a href="../index.php">홈</a></li>
+                <li><a href="../hotel/hotels.php">호텔</a></li>
+                <li><a href="../review/review.php">후기</a></li>
+                <li><a href="../inquiry/inquiry.php">문의</a></li>
             </ul>
             <div class="auth-buttons">
-                <a href="login.html" class="login-btn">로그인</a>
-                <a href="signup.html" class="signup-btn">회원가입</a>
+                <a href="login.php" class="login-btn">로그인</a>
+                <a href="signup.php" class="signup-btn">회원가입</a>
             </div>
         </nav>
     </header>
@@ -89,7 +89,7 @@
                 <button type="submit" class="login-btn">회원가입</button>
             </form>
             <div class="signup-link">
-                이미 회원이신가요? <a href="login.html">로그인</a>
+                이미 회원이신가요? <a href="login.php">로그인</a>
             </div>
         </div>
     </main>
@@ -103,10 +103,10 @@
             <div class="footer-section">
                 <h3>바로가기</h3>
                 <ul>
-                    <li><a href="index.html">홈</a></li>
-                    <li><a href="hotels.html">호텔</a></li>
-                    <li><a href="review.html">후기</a></li>
-                    <li><a href="inquiry.html">문의</a></li>
+                    <li><a href="../index.php">홈</a></li>
+                    <li><a href="../hotel/hotels.php">호텔</a></li>
+                    <li><a href="../review/review.php">후기</a></li>
+                    <li><a href="../inquiry/inquiry.php">문의</a></li>
                 </ul>
             </div>
             <div class="footer-section">

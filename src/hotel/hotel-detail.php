@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KISIA HOTEL - 호텔 상세</title>
-    <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="style/hotel-detail.css">
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="../style/hotel-detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">KISIA <span>HOTEL</span></a>
+            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
             <ul class="nav-links">
-                <li><a href="index.html">홈</a></li>
-                <li><a href="hotels.html" class="active">호텔</a></li>
-                <li><a href="review.html">후기</a></li>
-                <li><a href="inquiry.html">문의</a></li>
+                <li><a href="../index.php">홈</a></li>
+                <li><a href="hotels.php">호텔</a></li>
+                <li><a href="../review/review.php">후기</a></li>
+                <li><a href="../inquiry/inquiry.php">문의</a></li>
             </ul>
             <div class="auth-buttons">
-                <a href="login.html" class="login-btn">로그인</a>
-                <a href="signup.html" class="signup-btn">회원가입</a>
+                <a href="../user/login.php" class="login-btn">로그인</a>
+                <a href="../user/signup.php" class="signup-btn">회원가입</a>
             </div>
         </nav>
     </header>
@@ -232,7 +232,7 @@
             <div class="sidebar">
                 <div class="booking-widget">
                     <h3>객실 예약</h3>
-                    <form class="booking-form" action="payment.html">
+                    <form class="booking-form" action="../user/payment.php">
                         <div class="form-group">
                             <label for="check-in">체크인</label>
                             <input type="date" id="check-in" required>
@@ -280,10 +280,10 @@
             <div class="footer-section">
                 <h3>바로가기</h3>
                 <ul>
-                    <li><a href="index.html">홈</a></li>
-                    <li><a href="hotels.html">호텔</a></li>
-                    <li><a href="review.html">후기</a></li>
-                    <li><a href="inquiry.html">문의</a></li>
+                    <li><a href="../index.php">홈</a></li>
+                    <li><a href="hotels.php">호텔</a></li>
+                    <li><a href="../review/review.php">후기</a></li>
+                    <li><a href="../inquiry/inquiry.php">문의</a></li>
                 </ul>
             </div>
             <div class="footer-section">
