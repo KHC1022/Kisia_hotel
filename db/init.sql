@@ -1,6 +1,6 @@
 -- 0. 데이터베이스 생성 및 사용
-CREATE DATABASE IF NOT EXISTS hotel_project DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE hotel_project;
+CREATE DATABASE IF NOT EXISTS kisia_hotel DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE kisia_hotel;
 
 -- 1. users (회원 정보)
 CREATE TABLE users (
@@ -9,7 +9,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     phone VARCHAR(20),
-    created_date DATE DEFAULT CURRENT_DATE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     is_admin BOOLEAN DEFAULT FALSE
 );
 
@@ -58,7 +58,7 @@ CREATE TABLE reservations (
     check_out DATE NOT NULL,
     total_price INT NOT NULL,
     guests INT NOT NULL,
-    created_date DATE DEFAULT CURRENT_DATE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     status ENUM('done', 'cancel') DEFAULT 'done',
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE CASCADE
@@ -116,7 +116,7 @@ CREATE TABLE wishlist (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
     hotel_id INT,
-    created_date DATE DEFAULT CURRENT_DATE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (hotel_id) REFERENCES hotels(hotel_id) ON DELETE CASCADE
 );
