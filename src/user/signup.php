@@ -34,14 +34,14 @@
                     <label for="name">이름</label>
                     <div class="input-group">
                         <i class="fas fa-user-circle"></i>
-                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                        <input type="text" id="username" name="username" placeholder="이름을 입력하세요" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="id">아이디</label>
                     <div class="input-group">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="id" name="id" placeholder="아이디를 입력하세요" required>
+                        <input type="text" id="real_id" name="real_id" placeholder="아이디를 입력하세요" required>
                     </div>
                 </div>
                 <div class="form-group">

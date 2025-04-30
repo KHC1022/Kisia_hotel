@@ -21,8 +21,7 @@
                 <li><a href="../inquiry/inquiry.php">문의</a></li>
             </ul>
             <div class="auth-buttons">
-                <span class="user-name">김철수님</span>
-                <a href="login.php" class="logout-btn">로그아웃</a>
+                <?php include __DIR__ . '../action/auto_buttons.php'; ?>
             </div>
         </nav>
     </header>

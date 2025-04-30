@@ -1,8 +1,8 @@
 <?php
-include_once '../includes/db_connection.php';
+include_once __DIR__ . '/../includes/db_connection.php';
 
-$name = $_POST['name'];
-$id = $_POST['id'];
+$name = $_POST['username'];
+$id = $_POST['real_id'];
 $password = $_POST['password'];
 $passwordConfirm = $_POST['passwordConfirm'];
 $email = $_POST['email'];
@@ -26,8 +26,8 @@ if ($name && $id && $password && $passwordConfirm && $email && $phone) {
     }
 
     if (($password == $passwordConfirm)&&($terms == 1)) {
-        $sql = "INSERT INTO users (username, password, email, phone, terms, marketing) 
-        VALUES ('$id', '$password', '$email', '$phone', $terms, $marketing)";
+        $sql = "INSERT INTO users (username, real_id ,password, email, phone, terms, marketing) 
+        VALUES ('$name','$id', '$password', '$email', '$phone', $terms, $marketing)";
     }
 
     if ($conn->query($sql)) {

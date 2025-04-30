@@ -1,4 +1,6 @@
-<?php include '../includes/db_connection.php'; ?>
+<?php 
+include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/../includes/db_connection.php'; ?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,8 +22,7 @@
                 <li><a href="../inquiry/inquiry.php">문의</a></li>
             </ul>
             <div class="auth-buttons">
-                <a href="../user/login.php" class="login-btn">로그인</a>
-                <a href="../user/signup.php" class="signup-btn">회원가입</a>
+                <?php include __DIR__ . '/../action/auto_buttons.php'; ?>
             </div>
         </nav>
     </header>
