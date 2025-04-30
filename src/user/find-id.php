@@ -20,8 +20,7 @@
                 <li><a href="../inquiry/inquiry.php">문의</a></li>
             </ul>
             <div class="auth-buttons">
-                <a href="login.php" class="login-btn">로그인</a>
-                <a href="signup.php" class="signup-btn">회원가입</a>
+                <?php include __DIR__ . '../action/auto_buttons.php'; ?>
             </div>
         </nav>
     </header>

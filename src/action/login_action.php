@@ -1,22 +1,29 @@
 <?php
-include_once '../includes/session.php';
-include_once '../includes/db_connection.php';
-
-$id = $_POST['id'];
+include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/../includes/db_connection.php';
+$id = $_POST['real_id'];
 $password = $_POST['password'];
 
-$sql = "SELECT user_id, password FROM users WHERE user_id='$id' AND password='$password'";
+$sql = "SELECT user_id, real_id, username, password FROM users WHERE real_id='$id' AND password='$password'";
+$result = $conn->query($sql);
+$row = $result->fetch_array(MYSQLI_ASSOC);
 
-if ($db->query($sql)) {
+if ($row!=null) {
+    $_SESSION['is_login'] =true;
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['real_id'] = $row['real_id'];
+    $_SESSION['user_id'] = $row['user_id']; 
     echo "<script>
             alert('로그인 성공');
             window.location.href = '../index.php';
-        </script>";
+    </script>";
+    exit;
 }
 else {
     echo "<script>
-            alert('로그인 실패');
+            alert('아이디 또는 패스워드가 틀렸습니다.');
             history.back();
-        </script>";
+    </script>";
+    exit;
 }
 ?>

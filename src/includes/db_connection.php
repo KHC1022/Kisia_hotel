@@ -1,14 +1,11 @@
 <?php
-
 $host = 'mysql';
 $user = 'kisia';
 $password = 'kisia';
-$databaseName = 'kisia_hotel';
+$database = 'kisia_hotel';
 
-$db = new mysqli($host, $user, $password, $databaseName);
+$conn = new mysqli($host, $user, $password, $database);
 
-if ($db->connect_error) {
-    die("DB 연결 실패 : ". $db->connect_error);
+if ($conn->connect_error) {
+    die("DB 연결 실패 : " . $conn->connect_error);
 }
-
-?>
