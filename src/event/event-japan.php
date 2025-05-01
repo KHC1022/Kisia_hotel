@@ -1,32 +1,6 @@
 <?php 
-include_once __DIR__ . '/../includes/session.php';
-include_once __DIR__ . '/../includes/db_connection.php'; ?>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KISIA HOTEL - 일본 호텔 단독 특가</title>
-    <link rel="stylesheet" href="../style/styles.css">
-    <link rel="stylesheet" href="../style/event-timedeal.css">
-    <link rel="stylesheet" href="../style/event.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
-            <ul class="nav-links">
-                <li><a href="../index.php">홈</a></li>
-                <li><a href="../hotel/hotels.php">호텔</a></li>
-                <li><a href="../review/review.php">후기</a></li>
-                <li><a href="../inquiry/inquiry.php">문의</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <?php include __DIR__ . '/../action/auto_buttons.php'; ?>
-            </div>
-        </nav>
-    </header>
+include_once __DIR__ . '/../includes/header.php';
+?>
 
     <main class="event-container">
         <div class="event-header">
@@ -45,49 +19,49 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
 
                 <div class="event-section">
                     <h3>할인 호텔</h3>
-                    <div class="hotel-deals">
-                        <div class="hotel-deal-item">
-                            <div class="hotel-image">
+                    <div class="timedeal-deals">
+                        <div class="timedeal-deal-item">
+                            <div class="timedeal-hotel-image">
                                 <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80" alt="파크 하얏트 도쿄">
-                                <span class="discount-badge">20% 할인</span>
+                                <span class="timedeal-discount-badge">20% 할인</span>
                             </div>
-                            <div class="hotel-info">
+                            <div class="timedeal-hotel-info">
                                 <h4>파크 하얏트 도쿄</h4>
-                                <div class="price-info">
-                                    <p class="original-price">₩750,000원</p>
-                                    <p class="discount-price">₩600,000원/박</p>
+                                <div class="timedeal-price-info">
+                                    <p class="timedeal-original-price">₩750,000원</p>
+                                    <p class="timedeal-discount-price">₩600,000원/박</p>
                                 </div>
-                                <a href="../hotel/hotel-detail.php?hotel=parkhyatt-tokyo" class="detail-btn">상세보기</a>
+                                <a href="../hotel/hotel-detail.php?hotel=parkhyatt-tokyo" class="timedeal-detail-btn">상세보기</a>
                             </div>
                         </div>
 
-                        <div class="hotel-deal-item">
-                            <div class="hotel-image">
+                        <div class="timedeal-deal-item">
+                            <div class="timedeal-hotel-image">
                                 <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80" alt="리츠칼튼 오사카">
-                                <span class="discount-badge">20% 할인</span>
+                                <span class="timedeal-discount-badge">20% 할인</span>
                             </div>
-                            <div class="hotel-info">
+                            <div class="timedeal-hotel-info">
                                 <h4>리츠칼튼 오사카</h4>
-                                <div class="price-info">
-                                    <p class="original-price">₩680,000원</p>
-                                    <p class="discount-price">₩544,000원/박</p>
+                                <div class="timedeal-price-info">
+                                    <p class="timedeal-original-price">₩680,000원</p>
+                                    <p class="timedeal-discount-price">₩544,000원/박</p>
                                 </div>
-                                <a href="../hotel/hotel-detail.php?hotel=ritz-osaka" class="detail-btn">상세보기</a>
+                                <a href="../hotel/hotel-detail.php?hotel=ritz-osaka" class="timedeal-detail-btn">상세보기</a>
                             </div>
                         </div>
 
-                        <div class="hotel-deal-item">
-                            <div class="hotel-image">
+                        <div class="timedeal-deal-item">
+                            <div class="timedeal-hotel-image">
                                 <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80" alt="힐튼 후쿠오카">
-                                <span class="discount-badge">20% 할인</span>
+                                <span class="timedeal-discount-badge">20% 할인</span>
                             </div>
-                            <div class="hotel-info">
+                            <div class="timedeal-hotel-info">
                                 <h4>힐튼 후쿠오카</h4>
-                                <div class="price-info">
-                                    <p class="original-price">₩550,000원</p>
-                                    <p class="discount-price">₩440,000원/박</p>
+                                <div class="timedeal-price-info">
+                                    <p class="timedeal-original-price">₩550,000원</p>
+                                    <p class="timedeal-discount-price">₩440,000원/박</p>
                                 </div>
-                                <a href="../hotel/hotel-detail.php?hotel=hilton-fukuoka" class="detail-btn">상세보기</a>
+                                <a href="../hotel/hotel-detail.php?hotel=hilton-fukuoka" class="timedeal-detail-btn">상세보기</a>
                             </div>
                         </div>
                     </div>
@@ -123,30 +97,4 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
         </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>회사 소개</h3>
-                <p>경쟁력 있는 가격과 우수한 고객 서비스로 최고의 호텔 예약 경험을 제공합니다.</p>
-            </div>
-            <div class="footer-section">
-                <h3>바로가기</h3>
-                <ul>
-                    <li><a href="../index.php">홈</a></li>
-                    <li><a href="../hotel/hotels.php">호텔</a></li>
-                    <li><a href="../review/review.php">후기</a></li>
-                    <li><a href="../inquiry/inquiry.php">문의</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>연락처</h3>
-                <p><i class="fas fa-phone"></i> +82 02-1234-5678</p>
-                <p><i class="fas fa-envelope"></i> info@kisiahotel.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 KISIA HOTEL. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html> 
+<?php include_once __DIR__ . '/../includes/footer.php'; ?> 

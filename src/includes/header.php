@@ -1,0 +1,56 @@
+<?php 
+include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/../includes/db_connection.php'; ?>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KISIA HOTEL</title>
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="../style/login.css">
+    <link rel="stylesheet" href="../style/mypage.css">
+    <link rel="stylesheet" href="../style/inquiry.css">
+    <link rel="stylesheet" href="../style/review.css">
+    <link rel="stylesheet" href="../style/event.css">
+    <link rel="stylesheet" href="../style/event-timedeal.css">
+    <link rel="stylesheet" href="../style/hotels.css">
+    <link rel="stylesheet" href="../style/admin.css">
+    <link rel="stylesheet" href="../style/payment.css">
+    <link rel="stylesheet" href="../style/hotel-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="style-header">
+        <div class="style-nav">
+            <a href="../index.php" class="style-logo">KISIA <span>HOTEL</span></a>
+            <ul class="style-nav-links">
+                <li><a href="../index.php">홈</a></li>
+                <li><a href="../hotel/hotels.php">호텔</a></li>
+                <li><a href="../review/review.php">후기</a></li>
+                <li><a href="../inquiry/inquiry.php">문의</a></li>
+            </ul>
+            <div class="style-auth-buttons">
+                <?php include __DIR__ . '/../action/auto_buttons.php'; ?>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>로그인</h2>
+            <form>
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="사용자 이름" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="비밀번호" required>
+                </div>
+                <button type="submit" class="login-submit-btn">로그인</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 

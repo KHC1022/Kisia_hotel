@@ -1,45 +1,20 @@
 <?php 
-include_once __DIR__ . '/../includes/session.php';
-include_once __DIR__ . '/../includes/db_connection.php'; ?>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KISIA HOTEL - 후기</title>
-    <link rel="stylesheet" href="../style/styles.css">
-    <link rel="stylesheet" href="../style/review.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
-            <ul class="nav-links">
-                <li><a href="../index.php">홈</a></li>
-                <li><a href="../hotel/hotels.php">호텔</a></li>
-                <li><a href="review.php" class="active">후기</a></li>
-                <li><a href="../inquiry/inquiry.php">문의</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <?php include __DIR__ . '/../action/auto_buttons.php'; ?>
-            </div>
-        </nav>
-    </header>
+include_once __DIR__ . '/../includes/header.php';
+?>
 
     <main class="board-container">
         <div class="board-header">
             <h1 class="board-title">후기 게시판</h1>
         </div>
 
-        <div class="search-sort-container">
-            <div class="search-box">
-                <div class="search-row">
-                    <div class="search-input">
+        <div class="hotels-search-sort-container">
+            <div class="hotels-search-box">
+                <div class="hotels-search-row">
+                    <div class="hotels-search-input">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="호텔 이름을 입력하세요">
+                        <input class="hotels-search-input-input" type="text" placeholder="호텔 이름을 입력하세요">
                     </div>
-                    <button class="search-button">검색</button>
+                    <button class="style-search-btn">검색</button>
                 </div>
             </div>
             <div class="controls-row">
@@ -64,7 +39,7 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="user-details">
-                            <span class="hotel-name">그랜드 럭셔리 호텔</span>
+                            <span class="review-hotel-name">그랜드 럭셔리 호텔</span>
                             <span class="user-name">Youngjin</span>
                         </div>
                     </div>
@@ -109,7 +84,7 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="user-details">
-                            <span class="hotel-name">비치 파라다이스 호텔</span>
+                            <span class="review-hotel-name">비치 파라다이스 호텔</span>
                             <span class="user-name">김철수</span>
                         </div>
                     </div>
@@ -153,7 +128,7 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="user-details">
-                            <span class="hotel-name">도쿄 비즈니스 호텔</span>
+                            <span class="review-hotel-name">도쿄 비즈니스 호텔</span>
                             <span class="user-name">Sakura</span>
                         </div>
                     </div>
@@ -197,7 +172,7 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="user-details">
-                            <span class="hotel-name">런던 시티 호텔</span>
+                            <span class="review-hotel-name">런던 시티 호텔</span>
                             <span class="user-name">Emily</span>
                         </div>
                     </div>
@@ -241,7 +216,7 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="user-details">
-                            <span class="hotel-name">부산 해운대 호텔</span>
+                            <span class="review-hotel-name">부산 해운대 호텔</span>
                             <span class="user-name">박지민</span>
                         </div>
                     </div>
@@ -289,30 +264,4 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
         </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>회사 소개</h3>
-                <p>경쟁력 있는 가격과 우수한 고객 서비스로 최고의 호텔 예약 경험을 제공합니다.</p>
-            </div>
-            <div class="footer-section">
-                <h3>바로가기</h3>
-                <ul>
-                    <li><a href="../index.php">홈</a></li>
-                    <li><a href="../hotel/hotels.php">호텔</a></li>
-                    <li><a href="review.php">후기</a></li>
-                    <li><a href="../inquiry/inquiry.php">문의</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>연락처</h3>
-                <p><i class="fas fa-phone"></i> +82 02-1234-5678</p>
-                <p><i class="fas fa-envelope"></i> info@kisiahotel.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 KISIA HOTEL. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html> 
+<?php include_once __DIR__ . '/../includes/footer.php'; ?> 

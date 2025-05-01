@@ -1,30 +1,6 @@
-<?php include '../includes/db_connection.php'; ?>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KISIA HOTEL - 마이페이지</title>
-    <link rel="stylesheet" href="../style/styles.css">
-    <link rel="stylesheet" href="../style/mypage.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
-            <ul class="nav-links">
-                <li><a href="../index.php">홈</a></li>
-                <li><a href="../hotel/hotels.php">호텔</a></li>
-                <li><a href="../review/review.php">후기</a></li>
-                <li><a href="../inquiry/inquiry.php">문의</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <span class="user-name">김철수님</span>
-                <a href="login.php" class="logout-btn">로그아웃</a>
-            </div>
-        </nav>
-    </header>
+<?php 
+include_once __DIR__ . '/../includes/header.php';
+?>
 
     <main class="mypage-container">
         <div class="mypage-sidebar">
@@ -58,26 +34,26 @@
                             <span class="status confirmed">확정</span>
                         </div>
                         <div class="reservation-details">
-                            <div class="detail-item">
+                            <div class="mypage-detail-item">
                                 <i class="fas fa-calendar"></i>
                                 <span>체크인: 2024-04-01</span>
                             </div>
-                            <div class="detail-item">
+                            <div class="mypage-detail-item">
                                 <i class="fas fa-calendar"></i>
                                 <span>체크아웃: 2024-04-03</span>
                             </div>
-                            <div class="detail-item">
+                            <div class="mypage-detail-item">
                                 <i class="fas fa-bed"></i>
                                 <span>디럭스 더블룸</span>
                             </div>
-                            <div class="detail-item">
+                            <div class="mypage-detail-item">
                                 <i class="fas fa-user"></i>
                                 <span>2명</span>
                             </div>
                         </div>
                         <div class="reservation-actions">
                             <button class="modify-btn" onclick="window.location.href='../hotel/hotel-detail.php'">상세보기</button>
-                            <button class="cancel-btn">예약 취소</button>
+                            <button class="mypage-cancel-btn">예약 취소</button>
                         </div>
                     </div>
                 </div>
@@ -168,32 +144,6 @@
         </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>회사 소개</h3>
-                <p>경쟁력 있는 가격과 우수한 고객 서비스로 최고의 호텔 예약 경험을 제공합니다.</p>
-            </div>
-            <div class="footer-section">
-                <h3>바로가기</h3>
-                <ul>
-                    <li><a href="../index.php">홈</a></li>
-                    <li><a href="../hotel/hotels.php">호텔</a></li>
-                    <li><a href="../review/review.php">후기</a></li>
-                    <li><a href="../inquiry/inquiry.php">문의</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>연락처</h3>
-                <p><i class="fas fa-phone"></i> +82 02-1234-5678</p>
-                <p><i class="fas fa-envelope"></i> info@kisiahotel.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 KISIA HOTEL. All rights reserved.</p>
-        </div>
-    </footer>
-
     <script src="js/mypage.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -218,5 +168,5 @@
             });
         });
     </script>
-</body>
-</html> 
+
+<?php include_once __DIR__ . '/../includes/footer.php'; ?> 

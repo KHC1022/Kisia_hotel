@@ -8,7 +8,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 3rem;
+    margin-top: 4rem;
+    
 }
 
 .board-title {
@@ -21,7 +23,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 7rem;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
@@ -50,7 +52,7 @@
     color: #666;
 }
 
-.search-input input {
+.search-input-input {
     width: 100%;
     padding: 10px 12px 10px 35px;
     border: 1px solid #ddd;
@@ -165,7 +167,7 @@
     flex-direction: column;
 }
 
-.hotel-name {
+.review-hotel-name {
     font-weight: bold;
     color: #7851A9;
     margin-right: 0.5rem;
@@ -383,6 +385,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-top: 1rem;
+    margin-bottom: 8rem;
 }
 
 .review-form {

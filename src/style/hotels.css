@@ -5,49 +5,52 @@
 }
 
 .hotels-header {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+    margin-top: 4rem;
 }
 
 .hotels-title {
     font-size: 2rem;
     color: #2c3e50;
-    margin-bottom: 0.5rem;
+    margin-bottom: 4rem;
 }
 
-.search-sort-container {
+.hotels-search-sort-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 7rem;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-top: 2rem;
+    margin-bottom: 7rem;
 }
 
-.search-box {
+.hotels-search-box {
     width: 100%;
 }
 
-.search-row {
+.hotels-search-row {
     display: flex;
     gap: 10px;
 }
 
-.search-input {
+.hotels-search-input {
     flex: 1;
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.search-input i {
+.hotels-search-input i {
     position: absolute;
     left: 12px;
     color: #666;
 }
 
-.search-input input {
+.hotels-search-input-input {
     width: 100%;
     padding: 10px 12px 10px 35px;
     border: 1px solid #ddd;
@@ -55,7 +58,7 @@
     font-size: 14px;
 }
 
-.search-button {
+.hotels-search-button {
     padding: 10px 20px;
     background-color: #7851A9;
     color: white;
@@ -71,7 +74,7 @@
     background-color: #6a4498;
 }
 
-.controls-row {
+.hotels-controls-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -80,18 +83,18 @@
     margin-top: 2rem;
 }
 
-.sort-controls {
+.hotels-sort-controls {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.sort-label {
+.hotels-sort-label {
     color: #666;
     font-size: 14px;
 }
 
-.sort-select {
+.hotels-sort-select {
     padding: 8px 12px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -100,15 +103,15 @@
     cursor: pointer;
 }
 
-.filter-controls {
+.hotels-filter-controls {
     position: relative;
 }
 
-.filter-group {
+.hotels-filter-group {
     position: relative;
 }
 
-.filter-toggle {
+.hotels-filter-toggle {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -122,19 +125,19 @@
     transition: all 0.3s;
 }
 
-.filter-toggle:hover {
+.hotels-filter-toggle:hover {
     background-color: #f8f9fa;
 }
 
-.filter-toggle i {
+.hotels-filter-toggle i {
     transition: transform 0.3s;
 }
 
-.filter-toggle.active i {
+.hotels-filter-toggle.active i {
     transform: rotate(180deg);
 }
 
-.filter-dropdown {
+.hotels-filter-dropdown {
     position: absolute;
     top: 100%;
     right: 0;
@@ -151,32 +154,32 @@
     overflow-y: auto;
 }
 
-.filter-dropdown.active {
+.hotels-filter-dropdown.active {
     display: block;
 }
 
-.filter-section {
+.hotels-filter-section {
     margin-bottom: 16px;
 }
 
-.filter-section:last-child {
+.hotels-filter-section:last-child {
     margin-bottom: 0;
 }
 
-.filter-section-title {
+.hotels-filter-section-title {
     font-size: 14px;
     font-weight: bold;
     color: #333;
     margin-bottom: 8px;
 }
 
-.filter-options {
+.hotels-filter-options {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.filter-option {
+.hotels-filter-option {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -184,18 +187,18 @@
     padding: 4px 0;
 }
 
-.filter-option input[type="checkbox"] {
+.hotels-filter-option input[type="checkbox"] {
     width: 16px;
     height: 16px;
     cursor: pointer;
 }
 
-.filter-option span {
+.hotels-filter-option span {
     font-size: 14px;
     color: #666;
 }
 
-.filter-actions {
+.hotels-filter-actions {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
@@ -204,7 +207,7 @@
     border-top: 1px solid #eee;
 }
 
-.reset-button {
+.hotels-reset-button {
     padding: 8px 16px;
     background-color: #f8f9fa;
     color: #666;
@@ -215,12 +218,12 @@
     transition: all 0.3s;
 }
 
-.reset-button:hover {
+.hotels-reset-button:hover {
     background-color: #e9ecef;
     color: #333;
 }
 
-.apply-button {
+.hotels-apply-button {
     padding: 8px 16px;
     background-color: #7851A9;
     color: white;
@@ -235,25 +238,6 @@
     background-color: #6a4498;
 }
 
-.hotels-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 4rem;
-}
-
-.hotel-card {
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    transition: transform 0.2s;
-}
-
-.hotel-card:hover {
-    transform: translateY(-5px);
-}
-
 .hotel-image {
     width: 100%;
     height: 200px;
@@ -264,7 +248,7 @@
     padding: 1.5rem;
 }
 
-.hotel-name {
+.hotels-name {
     font-size: 1.2rem;
     font-weight: bold;
     color: #2c3e50;
