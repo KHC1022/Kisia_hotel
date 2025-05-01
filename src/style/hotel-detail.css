@@ -2,7 +2,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    margin-top: 4rem;
+    margin-top: 8rem;
     margin-bottom: 4rem;
 }
 
@@ -10,7 +10,10 @@
     display: flex;
     gap: 2rem;
     margin-bottom: 2rem;
-    margin-top: 2rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .hotel-gallery {
@@ -99,7 +102,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: #f5f5f5;
+    background-color: #f0f0f0;
     padding: 0.5rem 1rem;
     border-radius: 20px;
     color: #333;
@@ -123,13 +126,27 @@
     padding: 1.5rem;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid rgba(120, 81, 169, 0.1);
 }
 
 .description h2, .facilities h2, .rooms h2, .reviews h2 {
     font-size: 1.5rem;
-    color: #333;
+    color: #7851A9;
     margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.description h2::after, .facilities h2::after, .rooms h2::after, .reviews h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #7851A9;
+    border-radius: 3px;
 }
 
 .facility-grid {
@@ -197,31 +214,47 @@
     color: #333;
 }
 
-.review-summary {
+.reviews {
     margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.reviews h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 24rem;
+}
+
+.review-summary {
+    display: flex;
+    align-items: center;
 }
 
 .overall-rating {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.5rem;
 }
 
 .overall-rating .stars {
     font-size: 1.2rem;
     color: #ffd700;
-    margin-right: 0.5rem;
 }
 
 .overall-rating .rating {
-    font-size: 2rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: #333;
 }
 
 .overall-rating .total-reviews {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #666;
 }
 
@@ -371,56 +404,126 @@
     background-color: #e0e0e0;
 }
 
-.booking-widget, .location-widget {
+.booking-widget {
     background-color: white;
-    padding: 1.2rem;
+    padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
+    position: sticky;
+    top: 100px;
+    border: 1px solid rgba(120, 81, 169, 0.1);
+}
+
+.booking-widget h2 {
+    color: #7851A9;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.booking-widget h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #7851A9;
+    border-radius: 3px;
 }
 
 .booking-form {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.5rem;
 }
 
 .form-group label {
+    color: #7851A9;
     font-weight: 500;
-    color: #333;
     font-size: 0.9rem;
 }
 
-.form-group input, .form-group select {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #ddd;
+.form-group input,
+.form-group select {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid rgba(120, 81, 169, 0.2);
     border-radius: 4px;
     font-size: 0.95rem;
-    width: 100%;
-    height: 38px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #7851A9;
+    box-shadow: 0 0 0 2px rgba(120, 81, 169, 0.1);
+    outline: none;
 }
 
 .book-now-btn {
-    padding: 0.8rem;
-    margin-top: 0.5rem;
     background-color: #7851A9;
     color: white;
+    padding: 0.8rem 1.5rem;
     border: none;
     border-radius: 4px;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
 }
 
 .book-now-btn:hover {
     background-color: #6a4498;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(120, 81, 169, 0.2);
+}
+
+.book-now-btn:active {
+    transform: translateY(0);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .booking-widget {
+        padding: 1.2rem;
+        position: static;
+    }
+    
+    .booking-widget h2 {
+        font-size: 1.3rem;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 0.5rem 0.7rem;
+    }
+    
+    .book-now-btn {
+        padding: 0.7rem 1.3rem;
+        font-size: 0.95rem;
+    }
+}
+
+.location-widget {
+    background-color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
 }
 
 .location-info {

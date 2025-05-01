@@ -280,11 +280,11 @@
     font-weight: 500;
 }
 
-.admin-form-label {
+.admin-form-group label {
     display: block;
     margin-bottom: 0.5rem;
     color: #2c3e50;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .admin-form input[type="text"],
@@ -307,7 +307,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
 }
 
 .admin-checkbox-group label {
@@ -315,6 +316,7 @@
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
+    font-weight: 400;
 }
 
 .image-preview {

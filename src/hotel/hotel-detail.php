@@ -116,14 +116,16 @@ include_once __DIR__ . '/../includes/header.php';
                 </section>
 
                 <section class="reviews">
-                    <h2>후기</h2>
-                    <div class="review-summary">
-                        <div class="overall-rating">
-                            <div class="stars">★★★★★</div>
-                            <div class="rating">4.8</div>
-                            <div class="total-reviews">(1,234 reviews)</div>
+                    <h2>
+                        후기
+                        <div class="review-summary">
+                            <div class="overall-rating">
+                                <div class="stars">★★★★★</div>
+                                <div class="rating">4.8</div>
+                                <div class="total-reviews">(1,234 reviews)</div>
+                            </div>
                         </div>
-                    </div>
+                    </h2>
                     <div class="review-list">
                         <div class="review-card">
                             <div class="reviewer-info">
@@ -177,7 +179,7 @@ include_once __DIR__ . '/../includes/header.php';
 
             <div class="sidebar">
                 <div class="booking-widget">
-                    <h3>객실 예약</h3>
+                    <h2>객실 예약</h2>
                     <form class="booking-form" action="../user/payment.php">
                         <div class="form-group">
                             <label for="check-in">체크인</label>
