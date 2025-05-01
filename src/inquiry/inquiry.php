@@ -1,52 +1,35 @@
 <?php 
-include_once __DIR__ . '/../includes/session.php';
-include_once __DIR__ . '/../includes/db_connection.php'; ?>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KISIA HOTEL - 문의</title>
-    <link rel="stylesheet" href="../style/styles.css">
-    <link rel="stylesheet" href="../style/inquiry.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
-            <ul class="nav-links">
-                <li><a href="../index.php">홈</a></li>
-                <li><a href="../hotel/hotels.php">호텔</a></li>
-                <li><a href="../review/review.php">후기</a></li>
-                <li><a href="inquiry.php" class="active">문의</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <?php include __DIR__ . '/../action/auto_buttons.php'; ?>
+include_once __DIR__ . '/../includes/header.php';
+?>
+
+    <main class="inquiry-board-container">
+        <div class="inquiry-board-header">
+            <h1 class="inquiry-board-title">문의 게시판</h1>
+        </div>
+
+        <div class="hotels-search-sort-container">
+            <div class="hotels-search-box">
+                <div class="hotels-search-row">
+                    <div class="hotels-search-input">
+                        <i class="fas fa-search"></i>
+                        <input class="hotels-search-input-input" type="text" placeholder="제목을 입력하세요">
+                    </div>
+                    <button class="style-search-btn">검색</button>
+                </div>
             </div>
-        </nav>
-    </header>
-
-    <main class="board-container">
-        <div class="board-header">
-            <h1 class="board-title">문의 게시판</h1>
+            <div class="controls-row">
+                <div class="sort-controls">
+                    <span class="sort-label">정렬:</span>
+                    <select class="sort-select">
+                        <option value="recent">최신순</option>
+                        <option value="old">오래된순</option>
+                    </select>
+                </div>
+                <a href="inquiry-write.php" class="write-btn">문의하기</a>
+            </div>
         </div>
 
-        <div class="search-box">
-            <select>
-                <option value="title">제목</option>
-                <option value="content">내용</option>
-                <option value="writer">작성자</option>
-            </select>
-            <input type="text" placeholder="검색어를 입력하세요">
-            <button>검색</button>
-        </div>
-
-        <div class="write-btn-container">
-            <a href="inquiry-write.php" class="write-btn">문의하기</a>
-        </div>
-
-        <table class="board-table">
+        <table class="inquiry-board-table">
             <thead>
                 <tr>
                     <th style="width: 10%">번호</th>
@@ -60,49 +43,49 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
                 <tr>
                     <td>5</td>
                     <td>예약</td>
-                    <td class="title"><a href="#">예약 변경 관련 문의드립니다</a></td>
+                    <td class="inquiry-title"><a href="#">예약 변경 관련 문의드립니다</a></td>
                     <td>홍길동</td>
                     <td>2024-03-15</td>
                 </tr>
-                <tr class="reply-row">
+                <tr class="inquiry-reply-row">
                     <td></td>
                     <td>답변</td>
-                    <td class="title"><a href="#">└ 예약 변경 관련 답변드립니다</a></td>
+                    <td class="inquiry-title"><a href="#">└ 예약 변경 관련 답변드립니다</a></td>
                     <td>관리자</td>
                     <td>2024-03-15</td>
                 </tr>
                 <tr>
                     <td>4</td>
                     <td>결제</td>
-                    <td class="title"><a href="#">결제 취소 문의</a></td>
+                    <td class="inquiry-title"><a href="#">결제 취소 문의</a></td>
                     <td>김철수</td>
                     <td>2024-03-14</td>
                 </tr>
                 <tr>
                     <td>3</td>
                     <td>객실</td>
-                    <td class="title"><a href="#">객실 시설 문의</a></td>
+                    <td class="inquiry-title"><a href="#">객실 시설 문의</a></td>
                     <td>이영희</td>
                     <td>2024-03-13</td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>기타</td>
-                    <td class="title"><a href="#">체크인 시간 문의</a></td>
+                    <td class="inquiry-title"><a href="#">체크인 시간 문의</a></td>
                     <td>박민수</td>
                     <td>2024-03-12</td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>예약</td>
-                    <td class="title"><a href="#">예약 확인 문의</a></td>
+                    <td class="inquiry-title"><a href="#">예약 확인 문의</a></td>
                     <td>최지원</td>
                     <td>2024-03-11</td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="pagination">
+        <div class="inquiry-pagination">
             <a href="#" class="active">1</a>
             <a href="#">2</a>
             <a href="#">3</a>
@@ -111,30 +94,4 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
         </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>회사 소개</h3>
-                <p>경쟁력 있는 가격과 우수한 고객 서비스로 최고의 호텔 예약 경험을 제공합니다.</p>
-            </div>
-            <div class="footer-section">
-                <h3>바로가기</h3>
-                <ul>
-                    <li><a href="../index.html">홈</a></li>
-                    <li><a href="#hotels">호텔</a></li>
-                    <li><a href="../review/review.html">후기</a></li>
-                    <li><a href="inquiry.html">문의</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>연락처</h3>
-                <p><i class="fas fa-phone"></i> +82 02-1234-5678</p>
-                <p><i class="fas fa-envelope"></i> info@kisiahotel.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 KISIA HOTEL. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html> 
+<?php include_once __DIR__ . '/../includes/footer.php'; ?> 

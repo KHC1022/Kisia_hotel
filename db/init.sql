@@ -132,3 +132,11 @@ CREATE TABLE event_comments (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
+
+SET NAMES utf8mb4;
+
+-- 일반 사용자 계정
+INSERT INTO users (username, real_id, password, email, phone, created_at, is_admin, terms, marketing) VALUES ('홍길동', 'test', 'test', 'test@naver.com', '010-1111-2222', now(), 0, 1, 0);
+
+-- 관리자 계정
+INSERT INTO users (username, real_id, password, email, phone, created_at, is_admin, terms, marketing) VALUES ('관리자', 'admin', 'admin', 'admin@naver.com', '010-1234-1234', NOW(), 1, 1, 0);

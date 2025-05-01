@@ -1,32 +1,6 @@
 <?php 
-include_once __DIR__ . '/../includes/session.php';
-include_once __DIR__ . '/../includes/db_connection.php'; ?>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KISIA HOTEL - 호텔 상세</title>
-    <link rel="stylesheet" href="../style/styles.css">
-    <link rel="stylesheet" href="../style/hotel-detail.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
-            <ul class="nav-links">
-                <li><a href="../index.php">홈</a></li>
-                <li><a href="hotels.php">호텔</a></li>
-                <li><a href="../review/review.php">후기</a></li>
-                <li><a href="../inquiry/inquiry.php">문의</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <?php include __DIR__ . '/../action/auto_buttons.php'; ?>
-            </div>
-        </nav>
-    </header>
+include_once __DIR__ . '/../includes/header.php';
+?>
 
     <main class="hotel-detail-container">
         <div class="hotel-header">
@@ -149,56 +123,26 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
                             <div class="rating">4.8</div>
                             <div class="total-reviews">(1,234 reviews)</div>
                         </div>
-                        <div class="rating-breakdown">
-                            <div class="rating-item">
-                                <span class="label">청결</span>
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: 95%"></div>
-                                </div>
-                                <span class="score">4.8</span>
-                            </div>
-                            <div class="rating-item">
-                                <span class="label">편안함</span>
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: 90%"></div>
-                                </div>
-                                <span class="score">4.5</span>
-                            </div>
-                            <div class="rating-item">
-                                <span class="label">장소</span>
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: 98%"></div>
-                                </div>
-                                <span class="score">4.9</span>
-                            </div>
-                            <div class="rating-item">
-                                <span class="label">서비스</span>
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: 92%"></div>
-                                </div>
-                                <span class="score">4.6</span>
-                            </div>
-                        </div>
                     </div>
                     <div class="review-list">
                         <div class="review-card">
                             <div class="reviewer-info">
                                 <img src="https://via.placeholder.com/50" alt="Reviewer">
                                 <div class="reviewer-details">
-                                    <div class="reviewer-name">John Doe</div>
+                                    <div class="reviewer-name">김민수</div>
                                     <div class="review-rating">
                                         <div class="stars">★★★★★</div>
-                                        <div class="review-date">2 days ago</div>
+                                        <div class="review-date">2024.03.15</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="review-text">
-                                Amazing stay! The room was spacious and clean, with a beautiful view of the city. The staff was incredibly helpful and made our stay memorable. Would definitely recommend!
+                                정말 멋진 숙박이었습니다! 객실이 넓고 깨끗했으며, 도시의 아름다운 전망을 감상할 수 있었습니다. 직원분들이 매우 친절하게 대해주셔서 잊지 못할 추억을 만들 수 있었습니다. 꼭 추천드립니다!
                             </div>
                             <div class="review-actions">
                                 <button class="like-button">
                                     <i class="fas fa-thumbs-up"></i>
-                                    <span>Helpful</span>
+                                    <span>도움이 되었어요</span>
                                 </button>
                             </div>
                         </div>
@@ -207,20 +151,20 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
                             <div class="reviewer-info">
                                 <img src="https://via.placeholder.com/50" alt="Reviewer">
                                 <div class="reviewer-details">
-                                    <div class="reviewer-name">Jane Smith</div>
+                                    <div class="reviewer-name">이지은</div>
                                     <div class="review-rating">
                                         <div class="stars">★★★★☆</div>
-                                        <div class="review-date">1 week ago</div>
+                                        <div class="review-date">2024.03.08</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="review-text">
-                                Great location and comfortable rooms. The breakfast buffet was excellent with a wide variety of options. The only minor issue was the slow elevator during peak hours.
+                                위치가 좋고 객실이 편안했습니다. 조식 뷔페는 다양한 메뉴로 구성되어 있어서 훌륭했습니다. 유일한 단점은 피크 시간대에 엘리베이터가 조금 느렸다는 점입니다.
                             </div>
                             <div class="review-actions">
                                 <button class="like-button">
                                     <i class="fas fa-thumbs-up"></i>
-                                    <span>Helpful</span>
+                                    <span>도움이 되었어요</span>
                                 </button>
                             </div>
                         </div>
@@ -257,46 +201,8 @@ include_once __DIR__ . '/../includes/db_connection.php'; ?>
                         <button type="submit" class="book-now-btn">예약하기</button>
                     </form>
                 </div>
-
-                <div class="location-widget">
-                    <h3>위치</h3>
-                    <div class="map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2z7JiB7KeE7J6l!5e0!3m2!1sko!2skr!4v1648123456789!5m2!1sko!2skr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                    <div class="location-info">
-                        <p><i class="fas fa-map-marker-alt"></i> 123 Broadway, New York, NY 10001</p>
-                        <p><i class="fas fa-phone"></i> +1 212-555-1234</p>
-                        <p><i class="fas fa-envelope"></i> info@grandluxuryhotel.com</p>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>회사 소개</h3>
-                <p>경쟁력 있는 가격과 우수한 고객 서비스로 최고의 호텔 예약 경험을 제공합니다.</p>
-            </div>
-            <div class="footer-section">
-                <h3>바로가기</h3>
-                <ul>
-                    <li><a href="../index.php">홈</a></li>
-                    <li><a href="hotels.php">호텔</a></li>
-                    <li><a href="../review/review.php">후기</a></li>
-                    <li><a href="../inquiry/inquiry.php">문의</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>연락처</h3>
-                <p><i class="fas fa-phone"></i> +82 02-1234-5678</p>
-                <p><i class="fas fa-envelope"></i> info@kisiahotel.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 KISIA HOTEL. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html> 
+<?php include_once __DIR__ . '/../includes/footer.php'; ?> 

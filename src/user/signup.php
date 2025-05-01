@@ -1,90 +1,63 @@
-<?php include '../includes/db_connection.php'; ?>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KISIA HOTEL - 회원가입</title>
-    <link rel="stylesheet" href="../style/styles.css">
-    <link rel="stylesheet" href="../style/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body class="signup-page">
-    <header>
-        <nav>
-            <a href="../index.php" class="logo">KISIA <span>HOTEL</span></a>
-            <ul class="nav-links">
-                <li><a href="../index.php">홈</a></li>
-                <li><a href="../hotel/hotels.php">호텔</a></li>
-                <li><a href="../review/review.php">후기</a></li>
-                <li><a href="../inquiry/inquiry.php">문의</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <a href="login.php" class="login-btn">로그인</a>
-                <a href="signup.php" class="signup-btn">회원가입</a>
-            </div>
-        </nav>
-    </header>
+<?php 
+include_once __DIR__ . '/../includes/header.php';
+?>
 
     <main class="login-container">
         <div class="login-box">
             <h1>회원가입</h1>
             <form id="signupForm" method ="post" action="../action/signup_action.php">
-                <div class="form-group">
+                <div class="login-form-group">
                     <label for="name">이름</label>
                     <div class="input-group">
                         <i class="fas fa-user-circle"></i>
                         <input type="text" id="username" name="username" placeholder="이름을 입력하세요" required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="login-form-group">
                     <label for="id">아이디</label>
                     <div class="input-group">
                         <i class="fas fa-user"></i>
                         <input type="text" id="real_id" name="real_id" placeholder="아이디를 입력하세요" required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="login-form-group">
                     <label for="password">비밀번호</label>
                     <div class="input-group">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" name="password" placeholder="8자 이상, 영문 대소문자, 숫자, 특수문자 포함" required>
-                    </div>
-                    <div class="password-requirements">
-                        <p>비밀번호는 8자 이상, 영문 대소문자, 숫자, 특수문자를 포함해야 합니다.</p>
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="login-form-group">
                     <label for="passwordConfirm">비밀번호 확인</label>
                     <div class="input-group">
                         <i class="fas fa-lock"></i>
                         <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호를 다시 입력하세요" required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="login-form-group">
                     <label for="email">이메일</label>
                     <div class="input-group">
                         <i class="fas fa-envelope"></i>
                         <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="login-form-group">
                     <label for="phone">전화번호</label>
                     <div class="input-group">
                         <i class="fas fa-phone"></i>
                         <input type="tel" id="phone" name="phone" placeholder="전화번호를 입력하세요" required>
                     </div>
                 </div>
-                <div class="form-options">
+                <div class="login-form-check-options">
                     <label class="terms-agree">
                         <input type="checkbox" name="terms" required>
-                        <span>(필수)이용약관 및 개인정보 처리방침에 동의합니다</span>
+                        <span>(필수) 이용약관 및 개인정보 처리방침에 동의합니다</span>
                     </label>
                 </div>
-                <div class="form-options">
+                <div class="login-form-check-options">
                     <label class="terms-agree">
                         <input type="checkbox" name="marketing">
-                        <span>(선택)마케팅 정보 수신에 동의합니다.</span>
+                        <span>(선택) 마케팅 정보 수신에 동의합니다.</span>
                     </label>
                 </div>
                 <button type="submit" class="login-btn">회원가입</button>
@@ -95,30 +68,4 @@
         </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>회사 소개</h3>
-                <p>경쟁력 있는 가격과 우수한 고객 서비스로 최고의 호텔 예약 경험을 제공합니다.</p>
-            </div>
-            <div class="footer-section">
-                <h3>바로가기</h3>
-                <ul>
-                    <li><a href="../index.php">홈</a></li>
-                    <li><a href="../hotel/hotels.php">호텔</a></li>
-                    <li><a href="../review/review.php">후기</a></li>
-                    <li><a href="../inquiry/inquiry.php">문의</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>연락처</h3>
-                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
-                <p><i class="fas fa-envelope"></i> info@kisiahotel.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 KISIA HOTEL. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html> 
+<?php include_once __DIR__ . '/../includes/footer.php'; ?> 

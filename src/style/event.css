@@ -2,6 +2,7 @@ body .event-container {
     max-width: 1200px;
     margin: 15rem auto 2rem;
     padding: 0 2rem;
+    margin-bottom: 10rem;
 }
 
 .event-header {
