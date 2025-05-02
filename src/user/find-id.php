@@ -5,12 +5,12 @@ include_once __DIR__ . '/../includes/header.php';
     <main class="login-container">
         <div class="login-box">
             <h1>아이디 찾기</h1>
-            <form id="findIdForm">
+            <form id="findIdForm" method="get" action="../action/find_id_action.php">
                 <div class="login-form-group">
                     <label for="name">이름</label>
                     <div class="input-group">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                        <input type="text" id="username" name="username" placeholder="이름을 입력하세요" required>
                     </div>
                 </div>
                 <div class="login-form-group">
