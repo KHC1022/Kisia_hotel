@@ -1,8 +1,8 @@
 <?php
 include_once __DIR__ . '/../includes/session.php';
 include_once __DIR__ . '/../includes/db_connection.php';
-$id = $_POST['real_id'];
-$password = $_POST['password'];
+$id = $_GET['real_id'];
+$password = $_GET['password'];
 
 $sql = "SELECT user_id, real_id, username, password, is_admin FROM users WHERE real_id='$id' AND password='$password'";
 $result = $conn->query($sql);
