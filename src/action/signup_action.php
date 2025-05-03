@@ -1,14 +1,14 @@
 <?php
 include_once __DIR__ . '/../includes/db_connection.php';
 
-$name = $_POST['username'];
-$id = $_POST['real_id'];
-$password = $_POST['password'];
-$passwordConfirm = $_POST['passwordConfirm'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-$terms = isset($_POST['terms']) ? 1 : 0;
-$marketing = isset($_POST['marketing']) ? 1 : 0;
+$name = $_GET['username'];
+$id = $_GET['real_id'];
+$password = $_GET['password'];
+$passwordConfirm = $_GET['passwordConfirm'];
+$email = $_GET['email'];
+$phone = $_GET['phone'];
+$terms = isset($_GET['terms']) ? 1 : 0;
+$marketing = isset($_GET['marketing']) ? 1 : 0;
 
 if ($name && $id && $password && $passwordConfirm && $email && $phone) {
     if ($password !== $passwordConfirm) {

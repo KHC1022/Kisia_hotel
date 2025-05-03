@@ -5,7 +5,7 @@ include_once __DIR__ . '/../includes/header.php';
     <main class="login-container">
         <div class="login-box">
             <h1>로그인</h1>
-            <form id="loginForm" method="post" action="../action/login_action.php">
+            <form id="loginForm" method="get" action="../action/login_action.php">
                 <div class="login-form-group">
                     <label for="username">아이디</label>
                     <div class="input-group">
