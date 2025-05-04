@@ -32,7 +32,7 @@ if ($name && $id && $password && $passwordConfirm && $email && $phone) {
 
     if ($conn->query($sql)) {
         echo "<script>
-            alert('회원가입 성공');
+            alert('회원가입 성공! $name 님 환영합니다!');
             window.location.href = '../index.php';
         </script>";
     } else {

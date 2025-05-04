@@ -1,5 +1,6 @@
 <?php 
 include_once __DIR__ . '/../includes/header.php';
+include_once __DIR__ . '/../includes/hotels_info.php';
 ?>
 
     <main class="event-container">
@@ -20,50 +21,24 @@ include_once __DIR__ . '/../includes/header.php';
                 <div class="event-section">
                     <h3>할인 호텔</h3>
                     <div class="timedeal-deals">
-                        <div class="timedeal-deal-item">
-                            <div class="timedeal-hotel-image">
-                                <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=800&q=80" alt="파라다이스 호텔 부산">
+                        <?php foreach ($busan_hotels as $hotel): ?>
+                            <div class="timedeal-deal-item">
+                                <img src="<?= $hotel['main_image'] ?>" alt="<?= $hotel['name'] ?>" class="hotel-image">
                                 <span class="timedeal-discount-badge">40% 할인</span>
-                            </div>
-                            <div class="timedeal-hotel-info">
-                                <h4>파라다이스 호텔 부산</h4>
-                                <div class="timedeal-price-info">
-                                    <p class="timedeal-original-price">₩550,000원</p>
-                                    <p class="timedeal-discount-price">₩330,000원/박</p>
+                                <div class="timedeal-hotel-info">
+                                    <h3 class="hotels-name"><?= $hotel['name'] ?></h3>
+                                    <p class="style-location">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <?= $hotel['location'] ?>
+                                    </p>
+                                    <div class="timedeal-price-info">
+                                        <span class="timedeal-original-price">₩<?= number_format($hotel['price_per_night']) ?></span>
+                                        <p class="timedeal-discount-price">₩<?= number_format($hotel['price_per_night']*0.6) ?>/박</p>
+                                    </div>
+                                    <a href="../hotel/hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="style-detail-btn">상세보기</a>
                                 </div>
-                                <a href="../hotel/hotel-detail.php?hotel=paradise" class="timedeal-detail-btn">상세보기</a>
                             </div>
-                        </div>
-
-                        <div class="timedeal-deal-item">
-                            <div class="timedeal-hotel-image">
-                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="시그니엘 부산">
-                                <span class="timedeal-discount-badge">40% 할인</span>
-                            </div>
-                            <div class="timedeal-hotel-info">
-                                <h4>시그니엘 부산</h4>
-                                <div class="timedeal-price-info">
-                                    <p class="timedeal-original-price">₩680,000원</p>
-                                    <p class="timedeal-discount-price">₩408,000원/박</p>
-                                </div>
-                                <a href="../hotel/hotel-detail.php?hotel=signiel" class="timedeal-detail-btn">상세보기</a>
-                            </div>
-                        </div>
-
-                        <div class="timedeal-deal-item">
-                            <div class="timedeal-hotel-image">
-                                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" alt="파크 하얏트 부산">
-                                <span class="timedeal-discount-badge">40% 할인</span>
-                            </div>
-                            <div class="timedeal-hotel-info">
-                                <h4>파크 하얏트 부산</h4>
-                                <div class="timedeal-price-info">
-                                    <p class="timedeal-original-price">₩600,000원</p>
-                                    <p class="timedeal-discount-price">₩360,000원/박</p>
-                                </div>
-                                <a href="../hotel/hotel-detail.php?hotel=parkhyatt" class="timedeal-detail-btn">상세보기</a>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
 
@@ -84,7 +59,7 @@ include_once __DIR__ . '/../includes/header.php';
                 </div>
 
                 <div class="event-buttons">
-                    <button class="share-btn">
+                    <button class="share-btn" onclick="showShareBox()">
                         <i class="fas fa-share-alt"></i>
                         공유하기
                     </button>
@@ -93,4 +68,5 @@ include_once __DIR__ . '/../includes/header.php';
         </div>
     </main>
 
+<?php include_once __DIR__ . '/../action/share_action.php'; ?>
 <?php include_once __DIR__ . '/../includes/footer.php'; ?> 

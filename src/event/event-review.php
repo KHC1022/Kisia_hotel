@@ -1,5 +1,6 @@
 <?php 
 include_once __DIR__ . '/../includes/header.php';
+include_once __DIR__ . '/../includes/event_comments.php';
 ?>
 
     <main class="event-container">
@@ -45,10 +46,10 @@ include_once __DIR__ . '/../includes/header.php';
                         <li>로그인 후 참여 가능합니다.</li>
                     </ul>
                 </div>
-
+            
                 <div class="comment-section">
                     <h3>의견 남기기</h3>
-                    <form id="commentForm" class="comment-form">
+                    <form id="commentForm" class="comment-form" method="get" action="../action/event_review_action.php">
                         <textarea id="comment" name="comment" placeholder="KISIA HOTEL에 대한 의견을 자유롭게 작성해주세요." required></textarea>
                         <button type="submit" class="submit-btn">등록하기</button>
                     </form>
@@ -56,49 +57,19 @@ include_once __DIR__ . '/../includes/header.php';
 
                 <div class="comments-list">
                     <h3>등록된 의견</h3>
+                    <?php foreach ($event_comments as $event_comment): ?>
                     <div class="comment-item">
                         <div class="comment-header">
-                            <span class="comment-author">김철수</span>
-                            <span class="comment-date">2025-04-01 14:30</span>
+                            <span class="comment-author"><?= $event_comment['username'] ?></span>
+                            <span class="comment-date"><?= $event_comment['created_at'] ?></span>
                         </div>
-                        <p class="comment-text">예약하기 너무 편리합니다!</p>
+                        <p class="comment-text"><?= $event_comment['comment'] ?></p>
                     </div>
-                    <div class="comment-item">
-                        <div class="comment-header">
-                            <span class="comment-author">이영희</span>
-                            <span class="comment-date">2025-04-01 15:45</span>
-                        </div>
-                        <p class="comment-text">호텔 예약 사이트 중에 최저가가 많아요.</p>
-                    </div>
-                    <div class="comment-item">
-                        <div class="comment-header">
-                            <span class="comment-author">박지민</span>
-                            <span class="comment-date">2025-04-01 16:20</span>
-                        </div>
-                        <p class="comment-text">다른 예약 사이트보다 홈페이지가 복잡하지 않아서 좋아요.</p>
-                    </div>
-                    <div class="comment-item">
-                        <div class="comment-header">
-                            <span class="comment-author">최준호</span>
-                            <span class="comment-date">2025-04-01 17:10</span>
-                        </div>
-                        <p class="comment-text">이벤트가 많아서 자주 이용하고 있어요!</p>
-                    </div>
-                    <div class="comment-item">
-                        <div class="comment-header">
-                            <span class="comment-author">강미래</span>
-                            <span class="comment-date">2025-04-01 18:05</span>
-                        </div>
-                        <p class="comment-text">호텔이 종류가 진짜 많은 것 같습니다.</p>
-                    </div>
-                    <div class="pagination">
-                        <button class="page-btn active">1</button>
-                        <button class="page-btn">2</button>
-                        <button class="page-btn">3</button>
-                        <button class="page-btn">4</button>
-                        <button class="page-btn">5</button>
-                        <button class="page-btn next">다음 ></button>
-                    </div>
+                    <?php endforeach; ?>
+                    <?php 
+                        include_once __DIR__ . '/../includes/pagination.php';
+                        pagination($total_event_comments, 5);
+                    ?>
                 </div>
             </div>
         </div>

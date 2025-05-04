@@ -6,7 +6,7 @@ include_once __DIR__ . '/../includes/header.php';
         <div class="admin-sidebar">
             <h2>관리자 메뉴</h2>
             <ul class="admin-menu">
-                <li data-tab="members" onclick="window.location.href='admin.php?tab=members'">
+                <li data-tab="users" onclick="window.location.href='admin.php?tab=users'">
                     <i class="fas fa-users"></i>
                     회원 관리
                 </li>
