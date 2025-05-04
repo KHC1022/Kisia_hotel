@@ -1,5 +1,6 @@
 <?php 
 include_once __DIR__ . '/includes/header.php';
+include_once __DIR__ . '/includes/hotels_info.php';
 ?>
 
     <main>
@@ -32,63 +33,38 @@ include_once __DIR__ . '/includes/header.php';
         <section class="style-featured-hotels">
             <h2>추천 호텔</h2>
             <div class="style-hotel-grid">
+                <?php foreach ($featured_hotels as $hotel): ?>
                 <div class="style-hotel-card">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="럭셔리 호텔">
+                    <img src="<?= $hotel['main_image'] ?>" alt="<?= $hotel['name'] ?>" class="hotel-image">
                     <div class="style-hotel-info">
-                        <h3>그랜드 럭셔리 호텔</h3>
-                        <p class="style-location"><i class="fas fa-map-marker-alt"></i> 뉴욕, 미국</p>
+                        <h3 class="hotels-name"><?= $hotel['name'] ?></h3>
+                        <p class="style-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <?= $hotel['location'] ?>
+                        </p>
                         <div class="style-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5</span>
+                            <?php
+                            $fullStars = floor($hotel['rating']);
+                            $emptyStars = 5 - $fullStars;
+                            
+                            for ($i = 0; $i < $fullStars; $i++) {
+                                echo '<i class="fas fa-star"></i>';
+                            }
+                            for ($i = 0; $i < $emptyStars; $i++) {
+                                echo '<i class="far fa-star"></i>';
+                            }
+                            ?>
+                            <span><?= $hotel['rating'] ?></span>
                         </div>
                         <div class="style-price">
-                        ₩250,000 <span class="price-per-night">/ 박</span>
+                            ₩<?= number_format($hotel['price_per_night']) ?> <span class="price-per-night">/ 박</span>
                         </div>
-                        <a href="./hotel/hotel-detail.php?hotel=grand-luxury" class="style-detail-btn">상세보기</a>
+                        <div class="hotel-actions">
+                            <a href="hotel/hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="style-detail-btn">상세보기</a>
+                        </div>
                     </div>
                 </div>
-                <div class="style-hotel-card">    
-                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="비치 리조트">
-                    <div class="style-hotel-info">
-                        <h3>비치 파라다이스 리조트</h3>
-                        <p class="style-location"><i class="fas fa-map-marker-alt"></i> 마이애미, 미국</p>
-                        <div class="style-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>5.0</span>
-                        </div>
-                        <div class="style-price">
-                        ₩300,000 <span class="price-per-night">/ 박</span>
-                        </div>
-                        <a href="./hotel/hotel-detail.php?hotel=beach-paradise" class="style-detail-btn">상세보기</a>
-                    </div>
-                </div>
-                <div class="style-hotel-card">
-                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="마운틴 뷰 호텔">
-                    <div class="style-hotel-info">
-                        <h3>마운틴 뷰 호텔</h3>
-                        <p class="style-location"><i class="fas fa-map-marker-alt"></i> 덴버, 미국</p>
-                        <div class="style-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>4.0</span>
-                        </div>
-                        <div class="style-price">
-                        ₩450,000 <span class="price-per-night">/ 박</span>
-                        </div>
-                        <a href="./hotel/hotel-detail.php?hotel=mountain-view" class="style-detail-btn">상세보기</a>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </section>
 

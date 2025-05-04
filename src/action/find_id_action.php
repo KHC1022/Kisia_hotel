@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/../includes/session.php';
 include_once __DIR__ . '/../includes/db_connection.php';
+
 $username = $_GET['username'];
 $email = $_GET['email'];
 
@@ -10,7 +11,7 @@ $row = $result->fetch_array(MYSQLI_ASSOC);
 
 if ($row!=null) {
     echo "<script>
-            alert('고객님의 id는 ". $row['real_id'] ." 입니다.');
+            alert('$username 님의 id는 ". $row['real_id'] ." 입니다.');
             window.location.href = '../user/login.php';
     </script>";
     exit;

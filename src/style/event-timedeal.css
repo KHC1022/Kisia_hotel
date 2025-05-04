@@ -215,6 +215,7 @@
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    position: relative;
 }
 
 .timedeal-deal-item:hover {
@@ -242,6 +243,7 @@
     padding: 0.5rem 1rem;
     border-radius: 5px;
     font-weight: bold;
+    z-index: 1;
 }
 
 .timedeal-hotel-info {
@@ -269,7 +271,7 @@
 .timedeal-original-price {
     text-decoration: line-through;
     color: #999;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 }
 
 .timedeal-hotel-info .timedeal-price-info .timedeal-discount-price {
@@ -446,4 +448,65 @@
 
 .timedeal-detail-btn:hover {
     background-color: #5B3B8A;
+}
+
+.spi_copyurl {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: 90%;
+    max-width: 600px;
+}
+
+.spi_copyurl.show {
+    display: block;
+}
+
+.spi_overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.spi_overlay.show {
+    display: block;
+}
+
+._spi_copyurl_txt {
+    display: inline-block;
+    width: calc(100% - 100px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+    word-break: break-all;
+    color: #2196f3;
+    vertical-align: middle;
+}
+
+._spi_btn_copyurl {
+    display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background: #7851A9;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+    height: 40px;
+    vertical-align: middle;
+    line-height: 20px;
 } 

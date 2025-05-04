@@ -253,12 +253,12 @@ a {
 
 .style-location {
     color: #7f8c8d;
-    margin-bottom: 0.5rem;
+    margin-top: 0.8rem;
 }
 
 .style-rating {
     color: #f1c40f;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.1rem;
 }
 
 .style-price {
@@ -266,6 +266,7 @@ a {
     font-weight: bold;
     color: #2c3e50;
     margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .style-book-btn {

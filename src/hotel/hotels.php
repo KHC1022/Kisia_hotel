@@ -1,5 +1,6 @@
 <?php 
 include_once __DIR__ . '/../includes/header.php';
+include_once __DIR__ . '/../includes/hotels_info.php';
 ?>
 
     <main class="hotels-container">
@@ -24,7 +25,7 @@ include_once __DIR__ . '/../includes/header.php';
                         <option value="price-low">가격 낮은순</option>
                         <option value="price-high">가격 높은순</option>
                         <option value="rating">평점순</option>
-                        <option value="rating">후기 많은순</option>
+                        <option value="many_reviews">후기 많은순</option>
                     </select>
                 </div>
                 <div class="hotels-filter-controls">
@@ -59,41 +60,28 @@ include_once __DIR__ . '/../includes/header.php';
                                 <h4 class="hotels-filter-section-title">편의시설</h4>
                                 <div class="hotels-filter-options">
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="facility-pool">
+                                        <input type="checkbox" value="pool">
                                         <span>수영장</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="facility-spa">
+                                        <input type="checkbox" value="spa">
                                         <span>스파</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="facility-gym">
+                                        <input type="checkbox" value="fitness">
                                         <span>피트니스</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="facility-restaurant">
+                                        <input type="checkbox" value="restaurant">
                                         <span>레스토랑</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="facility-parking">
+                                        <input type="checkbox" value="parking">
                                         <span>주차</span>
                                     </label>
-                                </div>
-                            </div>
-                            <div class="hotels-filter-section">
-                                <h4 class="hotels-filter-section-title">호텔 등급</h4>
-                                <div class="hotels-filter-options">
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="grade-5">
-                                        <span>5성급</span>
-                                    </label>
-                                    <label class="hotels-filter-option">
-                                        <input type="checkbox" value="grade-4">
-                                        <span>4성급</span>
-                                    </label>
-                                    <label class="hotels-filter-option">
-                                        <input type="checkbox" value="grade-3">
-                                        <span>3성급</span>
+                                        <input type="checkbox" value="wifi">
+                                        <span>와이파이</span>
                                     </label>
                                 </div>
                             </div>
@@ -107,203 +95,53 @@ include_once __DIR__ . '/../includes/header.php';
             </div>
         </div>
 
-        <div class="style-hotel-grid">
-            <!-- 호텔 카드 1 -->
-            <div class="style-hotel-card">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=60" alt="그랜드 럭셔리 호텔" class="hotel-image">
-                <div class="style-hotel-info">
-                    <h3 class="hotels-name">그랜드 럭셔리 호텔</h3>
-                    <p class="style-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        뉴욕, 미국
-                    </p>
-                    <div class="hotel-features">
-                        <span class="feature">수영장</span>
-                        <span class="feature">스파</span>
-                        <span class="feature">피트니스</span>
-                    </div>
-                    <div class="style-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5</span>
+        <div class="style-hotel-grid"> 
+            <?php foreach ($current_hotels as $hotel): ?>
+                <div class="style-hotel-card">
+                    <img src="<?= $hotel['main_image'] ?>" alt="<?= $hotel['name'] ?>" class="hotel-image">
+                    <div class="style-hotel-info">
+                        <h3 class="hotels-name"><?= $hotel['name'] ?></h3>
+                        <p class="style-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <?= $hotel['location'] ?>
+                        </p>
+                        <div class="style-rating">
+                            <?php
+                            $fullStars = floor($hotel['rating']);
+                            $emptyStars = 5 - $fullStars;
+                            
+                            for ($i = 0; $i < $fullStars; $i++) {
+                                echo '<i class="fas fa-star"></i>';
+                            }
+                            for ($i = 0; $i < $emptyStars; $i++) {
+                                echo '<i class="far fa-star"></i>';
+                            }
+                            ?>
+                            <span><?= $hotel['rating'] ?></span>
                         </div>
-                    <div class="style-price">
-                        ₩250,000 <span class="price-per-night">/ 박</span>
-                    </div>
-                    <div class="hotel-actions">
-                        <a href="hotel-detail.php?hotel=paradise" class="style-detail-btn">상세보기</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 호텔 카드 2 -->
-            <div class="style-hotel-card">
-                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=500&q=60" alt="비치 파라다이스 호텔" class="hotel-image">
-                <div class="style-hotel-info">
-                    <h3 class="hotels-name">비치 파라다이스 호텔</h3>
-                    <p class="style-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        마이애미, 미국
-                    </p>
-                    <div class="hotel-features">
-                        <span class="feature">해변</span>
-                        <span class="feature">수영장</span>
-                        <span class="feature">레스토랑</span>
-                    </div>
-                    <div class="style-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5</span>
+                        <div class="hotel-features">
+                                <?php if ($hotel['pool']) : ?><span class="feature">수영장</span><?php endif; ?>
+                                <?php if ($hotel['spa']) : ?><span class="feature">스파</span><?php endif; ?>
+                                <?php if ($hotel['fitness']) : ?><span class="feature">피트니스</span><?php endif; ?>
+                                <?php if ($hotel['restaurant']) : ?><span class="feature">레스토랑</span><?php endif; ?>
+                                <?php if ($hotel['parking']) : ?><span class="feature">주차</span><?php endif; ?>
+                                <?php if ($hotel['wifi']) : ?><span class="feature">와이파이</span><?php endif; ?>
                         </div>
-                    <div class="style-price">
-                        ₩300,000 <span class="price-per-night">/ 박</span>
-                    </div>
-                    <div class="hotel-actions">
-                        <a href="hotel-detail.php?hotel=signiel" class="style-detail-btn">상세보기</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 호텔 카드 3 -->
-            <div class="style-hotel-card">
-                <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=500&q=60" alt="마운틴 뷰 호텔" class="hotel-image">
-                <div class="style-hotel-info">
-                    <h3 class="hotels-name">마운틴 뷰 호텔</h3>
-                    <p class="style-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        덴버, 미국
-                    </p>
-                    <div class="hotel-features">
-                        <span class="feature">스키</span>
-                        <span class="feature">온천</span>
-                        <span class="feature">바베큐</span>
-                    </div>
-                    <div class="style-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5</span>
+                        <div class="style-price">
+                            ₩<?= number_format($hotel['price_per_night']) ?> <span class="price-per-night">/ 박</span>
                         </div>
-                    <div class="style-price">
-                        ₩200,000 <span class="price-per-night">/ 박</span>
-                    </div>
-                    <div class="hotel-actions">
-                        <a href="hotel-detail.php?hotel=parkhyatt" class="style-detail-btn">상세보기</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 호텔 카드 4 -->
-            <div class="style-hotel-card">
-                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=500&q=60" alt="시티 센터 호텔" class="hotel-image">
-                <div class="style-hotel-info">
-                    <h3 class="hotels-name">시티 센터 호텔</h3>
-                    <p class="style-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        서울, 대한민국
-                    </p>
-                    <div class="hotel-features">
-                        <span class="feature">비즈니스</span>
-                        <span class="feature">레스토랑</span>
-                        <span class="feature">주차</span>
-                    </div>
-                    <div class="style-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5</span>
-                    </div>
-                    <div class="style-price">
-                        ₩180,000 <span class="price-per-night">/ 박</span>
-                    </div>
-                    <div class="hotel-actions">
-                        <a href="hotel-detail.php?hotel=paradise" class="style-detail-btn">상세보기</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 호텔 카드 5 -->
-            <div class="style-hotel-card">
-                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=500&q=60" alt="오션 뷰 리조트" class="hotel-image">
-                <div class="style-hotel-info">
-                    <h3 class="hotels-name">오션 뷰 리조트</h3>
-                    <p class="style-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        제주도, 대한민국
-                    </p>
-                    <div class="hotel-features">
-                        <span class="feature">해변</span>
-                        <span class="feature">수영장</span>
-                        <span class="feature">키즈존</span>
-                    </div>
-                    <div class="style-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5</span>
+                        <div class="hotel-actions">
+                            <a href="hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="style-detail-btn">상세보기</a>
                         </div>
-                    <div class="style-price">
-                        ₩280,000 <span class="price-per-night">/ 박</span>
-                    </div>
-                    <div class="hotel-actions">
-                        <a href="hotel-detail.php?hotel=signiel" class="style-detail-btn">상세보기</a>
                     </div>
                 </div>
-            </div>
-
-            <!-- 호텔 카드 6 -->
-            <div class="style-hotel-card">
-                <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=500&q=60" alt="히스토릭 팰리스 호텔" class="hotel-image">
-                <div class="style-hotel-info">
-                    <h3 class="hotels-name">히스토릭 팰리스 호텔</h3>
-                    <p class="style-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        파리, 프랑스
-                    </p>
-                    <div class="hotel-features">
-                        <span class="feature">역사적 건물</span>
-                        <span class="feature">미슐랭</span>
-                        <span class="feature">스파</span>
-                    </div>
-                    <div class="style-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5</span>
-                    </div>
-                    <div class="style-price">
-                        ₩450,000 <span class="price-per-night">/ 박</span>
-                    </div>
-                    <div class="hotel-actions">
-                        <a href="hotel-detail.php?hotel=parkhyatt" class="style-detail-btn">상세보기</a>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
 
-        <div class="pagination">
-            <a href="#" class="arrow" aria-label="이전 페이지"><i class="fas fa-angle-left"></i></a>
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#" class="arrow" aria-label="다음 페이지"><i class="fas fa-angle-right"></i></a>
-        </div>
+        <?php 
+            include_once __DIR__ . '/../includes/pagination.php';
+            pagination($total_hotels, 9);
+        ?>
     </main>
 
 <?php include_once __DIR__ . '/../includes/footer.php'; ?>

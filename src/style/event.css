@@ -181,6 +181,7 @@ body .event-container {
     font-size: 1rem;
     resize: none;
     box-sizing: border-box;
+    margin-top: 1rem;
 }
 
 .comment-form textarea:focus {
