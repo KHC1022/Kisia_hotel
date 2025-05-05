@@ -138,12 +138,23 @@
     padding-bottom: 0.5rem;
 }
 
-.description h2::after, .facilities h2::after, .rooms h2::after, .reviews h2::after {
+.description h2::after, .facilities h2::after, .rooms h2::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 50px;
+    width: 95px;
+    height: 3px;
+    background: #7851A9;
+    border-radius: 3px;
+}
+
+.reviews h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 45px;
     height: 3px;
     background: #7851A9;
     border-radius: 3px;
@@ -153,6 +164,8 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 .facility-item {
@@ -175,6 +188,8 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 .room-card {
@@ -224,7 +239,7 @@
 
 .reviews h2 {
     font-size: 1.5rem;
-    color: #333;
+    color: #7851A9;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -243,8 +258,9 @@
 }
 
 .overall-rating .stars {
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     color: #ffd700;
+    margin-left: 6rem;
 }
 
 .overall-rating .rating {
@@ -321,6 +337,7 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    margin-top: 0.4rem;
 }
 
 .reviewer-details {
@@ -332,6 +349,7 @@
     font-weight: 500;
     color: #333;
     margin-bottom: 0.25rem;
+    font-weight: 650;
 }
 
 .review-rating {
@@ -348,13 +366,15 @@
 .review-date {
     font-size: 0.85rem;
     color: #666;
-    margin-top: 0.25rem;
+    margin-left: 1rem;
+    margin-top: 2rem;
 }
 
 .review-text {
     color: #333;
     line-height: 1.6;
     margin-bottom: 1rem;
+    margin-top: 2rem;
 }
 
 .review-actions {
@@ -431,7 +451,7 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 50px;
+    width: 95px;
     height: 3px;
     background: #7851A9;
     border-radius: 3px;
