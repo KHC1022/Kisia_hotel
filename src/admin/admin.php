@@ -69,7 +69,6 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <td><?= $user['created_at'] ?></td>
                                 <td>
                                     <form method="get" action="../action/admin_editDelete_action.php">
-                                        <button name="user_edit" class="action-btn edit" value="<?= $user['user_id'] ?>"><i class="fas fa-edit"></i></button>
                                         <button name="user_delete" class="action-btn delete" value="<?= $user['user_id'] ?>"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
