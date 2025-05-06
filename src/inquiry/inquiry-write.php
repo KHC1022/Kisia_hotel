@@ -8,15 +8,15 @@ include_once __DIR__ . '/../action/login_check.php';
             <h1 class="inquiry-board-title">문의 작성</h1>
         </div>
         <div class="inquiry-form-container">
-            <form class="inquiry-form">
+            <form class="inquiry-form" method="post" action="../action/inquiry_write_action.php" enctype="multipart/form-data">
                 <div class="inquiry-form-group">
                     <label for="category">분류</label>
                     <select id="category" name="category" required>
                         <option value="">분류 선택</option>
-                        <option value="예약">예약</option>
-                        <option value="결제">결제</option>
-                        <option value="객실">객실</option>
-                        <option value="기타">기타</option>
+                        <option value="reservation">예약</option>
+                        <option value="payment">결제 및 환불</option>
+                        <option value="room">객실</option>
+                        <option value="other">기타</option>
                     </select>
                 </div>
                 <div class="inquiry-form-group">
@@ -26,14 +26,19 @@ include_once __DIR__ . '/../action/login_check.php';
                 <div class="inquiry-form-group">
                     <label for="content">내용</label>
                     <textarea id="content" name="content" required></textarea>
-                </div>
-                <div class="file-input-container">
-                    <label for="file">사진 첨부</label>
+                </div>  
+                <!-- <div class="file-input-container">
+                    <label for="file">파일 첨부</label>
                     <div class="file-input-box">
                         <i class="fas fa-cloud-upload-alt"></i>
-                        <p>이미지를 업로드하려면 여기를 클릭하세요</p>
+                        <p>파일을 업로드하려면 여기를 클릭하세요</p>
                         <p class="text-muted">또는 파일을 여기에 드래그하세요</p>
-                        <input type="file" id="photos" name="photos" multiple accept="image/*">
+                        <input type="file" id="files" name="files[]" multiple>
+                    </div>
+                </div> -->
+                <div class="inquiry-form-group">
+                    <label for="files">파일 첨부</label>
+                    <input type="file" id="files" name="files[]" multiple>
                     </div>
                 </div>
                 <div class="inquiry-form-actions">
@@ -44,4 +49,4 @@ include_once __DIR__ . '/../action/login_check.php';
         </div>
     </main>
 
-<?php include_once __DIR__ . '/../includes/footer.php'; ?> 
+<?php include_once __DIR__ . '/../includes/footer.php'; ?>

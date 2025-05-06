@@ -5,7 +5,7 @@ $password = 'kisia';
 $database = 'kisia_hotel';
 
 $conn = new mysqli($host, $user, $password, $database);
-
+mysqli_query($conn, "SET time_zone = '+09:00'");
 mysqli_set_charset($conn, "utf8mb4");
 
 if ($conn->connect_error) {
