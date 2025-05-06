@@ -40,6 +40,7 @@ main.board-container {
     font-size: 1.5rem;
     color: #222;
     margin-bottom: 0.5rem;
+    margin-top: 1rem;
 }
 
 .inquiry-meta {
@@ -57,10 +58,14 @@ main.board-container {
     background-color: #fafafa;
     border-radius: 6px;
     border: 1px solid #eee;
+    min-height: 180px;
+    height: auto;
+    margin-bottom: 3rem;
 }
 
 .inquiry-actions {
     margin-top: 1.5rem;
+    text-align: right;
 }
 
 .edit-btn,
@@ -75,15 +80,17 @@ main.board-container {
 }
 
 .edit-btn {
-    background-color: #6c757d;
+    background-color: #7851A9;
+    margin-top: 1rem;
 }
 
 .edit-btn:hover {
-    background-color: #5a6268;
+    background-color: #68439a;
 }
 
 .delete-btn {
     background-color: #dc3545;
+    margin-top: 1rem;
 }
 
 .delete-btn:hover {
@@ -91,15 +98,17 @@ main.board-container {
 }
 
 .answers-section {
-    margin-top: 2rem;
+    margin-top: 6rem;
     border-top: 2px solid #eee;
     padding-top: 1.5rem;
+    margin-bottom: 3rem;
 }
 
 .answers-section h3 {
     font-size: 1.25rem;
     color: #7851A9;
     margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .answer-item {
@@ -118,9 +127,19 @@ main.board-container {
 }
 
 .answer-content {
+    margin-top: 1.5rem;
     font-size: 1rem;
     line-height: 1.6;
-    white-space: pre-wrap;
+    padding: 1rem;
+    background-color: #f5f5ff;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    min-height: 180px;
+    height: auto;
+}
+
+.answer-content p {
+    margin: 0;
 }
 
 .board-actions {
@@ -177,7 +196,43 @@ main.board-container {
     background-color: #e0e0e0;
 }
 .admin-answer-form {
-    margin-top: 2rem;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
     border-top: 1px solid #ddd;
     padding-top: 1.5rem;
+}
+
+.admin-answer-form h2{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #7851A9;
+}
+
+.admin-answer-form textarea{
+    margin-bottom: 1rem;
+}
+
+.admin-actions {
+    margin-top: 3rem;
+    text-align: right;
+}
+
+.section-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.back-btn:hover {
+    color: #7851A9;
 }

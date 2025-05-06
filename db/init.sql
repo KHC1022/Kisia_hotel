@@ -98,7 +98,7 @@ CREATE TABLE review_helpful (
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
--- 8. inquiries (1:1 문의)
+-- 8. inquiries (문의)
 CREATE TABLE inquiries (
     inquiry_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -115,9 +115,11 @@ CREATE TABLE inquiries (
 CREATE TABLE inquiry_responses (
     response_id INT PRIMARY KEY AUTO_INCREMENT,
     inquiry_id INT,
+    admin_id INT NOT NULL,
     content TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (inquiry_id) REFERENCES inquiries(inquiry_id) ON DELETE CASCADE
+    FOREIGN KEY (inquiry_id) REFERENCES inquiries(inquiry_id) ON DELETE CASCADE,
+    FOREIGN KEY (admin_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 -- 10. wishlist (찜 목록)
@@ -183,55 +185,55 @@ INSERT INTO users (username, real_id, password, email, phone, created_at, is_adm
 
 -- 호텔 데이터 추가
 INSERT INTO hotels (name, location, description, price_per_night, rating, main_image, detail_image_1, detail_image_2, detail_image_3, detail_image_4) VALUES
-('그랜드 인터컨티넨탈 서울', '한국, 서울', '남산의 전망과 도심의 활기를 모두 누릴 수 있는 럭셔리 호텔입니다. 최고급 시설과 맞춤형 서비스로 잊지 못할 특별한 경험을 제공합니다. 5성급 레스토랑과 스파, 피트니스 센터를 갖추고 있어 도심 속에서도 완벽한 휴식을 즐길 수 있습니다.', 250000, 4.8, '/image/grand_hotel.jpg', '/image/grand_hotel_1.jpg', '/image/grand_hotel_2.jpg', '/image/grand_hotel_3.jpg', '/image/grand_hotel_4.jpg'),
-('리츠칼튼 뉴욕', '미국, 뉴욕', '센트럴파크의 아름다운 전망을 자랑하는 뉴욕의 대표적인 럭셔리 호텔입니다. 클래식한 디자인과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 세계적인 스파 브랜드가 입점해 있습니다. 뉴욕의 화려한 도시 생활과 고급스러운 휴식을 동시에 경험할 수 있습니다.', 450000, 4.9, '/image/newyork_central.jpg', '/image/newyork_1.jpg', '/image/newyork_2.jpg', '/image/newyork_3.jpg', '/image/newyork_4.jpg'),
-('파라다이스 호텔 해운대', '한국, 부산', '해운대 해변과 불과 몇 걸음 거리에 위치한 프리미엄 호텔입니다. 모든 객실에서 아름다운 동해의 전망을 감상할 수 있으며, 실내외 수영장과 스파 시설을 갖추고 있습니다. 신선한 해산물을 맛볼 수 있는 레스토랑과 바가 있어 부산의 맛과 멋을 모두 즐길 수 있습니다.', 680000, 4.7, '/image/signature_busan.jpg', '/image/signature_busan_1.jpg', '/image/signature_busan_2.jpg', '/image/signature_busan_3.jpg', '/image/signature_busan_4.jpg'),
-('포시즌스 파리', '프랑스, 파리', '에펠탑이 바로 눈앞에 펼쳐지는 파리의 대표적인 럭셔리 호텔입니다. 18세기 건축물을 현대적으로 리모델링하여 고급스러움과 역사적 가치를 모두 갖추고 있습니다. 미슐랭 스타 셰프가 운영하는 레스토랑과 전통적인 프랑스 스파를 경험할 수 있는 최고의 휴식 공간을 제공합니다.', 520000, 4.8, '/image/paris_eiffel.jpg', '/image/paris_1.jpg', '/image/paris_2.jpg', '/image/paris_3.jpg', '/image/paris_4.jpg'),
-('신라스테이 제주', '한국, 제주', '제주의 아름다운 바다와 한라산의 전망을 모두 감상할 수 있는 프리미엄 호텔입니다. 현대적인 디자인과 제주 특유의 자연을 담은 인테리어가 특징이며, 제주 특산물을 활용한 다이닝과 스파 시설을 제공합니다. 제주의 자연과 문화를 모두 경험할 수 있는 최적의 휴식 공간입니다.', 150000, 4.6, '/image/jeju_ocean.jpg', '/image/jeju_ocean_1.jpg', '/image/jeju_ocean_2.jpg', '/image/jeju_ocean_3.jpg', '/image/jeju_ocean_4.jpg'),
-('만다린 오리엔탈 도쿄', '일본, 도쿄', '도쿄의 스카이라인을 한눈에 볼 수 있는 최고급 호텔입니다. 일본의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 일본 스파를 제공합니다. 도쿄의 활기와 고요함을 동시에 경험할 수 있는 특별한 공간입니다.', 750000, 4.7, '/image/tokyo_view.jpg', '/image/tokyo_1.jpg', '/image/tokyo_2.jpg', '/image/tokyo_3.jpg', '/image/tokyo_4.jpg'),
-('하얏트 리젠시 인천', '한국, 인천', '인천국제공항과 인접한 비즈니스 호텔로, 출장객들에게 최적의 편의를 제공합니다. 현대적인 시설과 효율적인 서비스가 특징이며, 피트니스 센터와 비즈니스 라운지를 갖추고 있습니다. 공항 셔틀 서비스와 24시간 룸서비스를 제공하여 출장객들의 편의를 최우선으로 생각합니다.', 120000, 4.5, '/image/incheon_sky.jpg', '/image/incheon_sky_1.jpg', '/image/incheon_sky_2.jpg', '/image/incheon_sky_3.jpg', '/image/incheon_sky_4.jpg'),
-('페닌슐라 홍콩', '중국, 홍콩', '빅토리아 하버의 환상적인 전망을 자랑하는 홍콩의 상징적인 호텔입니다. 1928년에 지어진 역사적인 건물을 현대적으로 리노베이션하여 고급스러움과 전통을 모두 갖추고 있습니다. 미슐랭 스타 레스토랑과 전통적인 중국 스파를 제공하며, 홍콩의 화려한 야경을 감상할 수 있는 루프탑 바가 있습니다.', 460000, 4.8, '/image/hongkong_harbor.jpg', '/image/hongkong_1.jpg', '/image/hongkong_2.jpg', '/image/hongkong_3.jpg', '/image/hongkong_4.jpg'),
-('메리어트 대구', '한국, 대구', '대구 도심의 중심에 위치한 비즈니스 호텔입니다. 현대적인 시설과 효율적인 서비스로 출장객들에게 최적의 편의를 제공합니다. 피트니스 센터와 비즈니스 라운지를 갖추고 있으며, 대구의 전통 음식을 맛볼 수 있는 레스토랑이 있습니다. 도심 속에서도 편안한 휴식을 취할 수 있는 공간을 제공합니다.', 100000, 4.4, '/image/daegu_central.jpg', '/image/daegu_central_1.jpg', '/image/daegu_central_2.jpg', '/image/daegu_central_3.jpg', '/image/daegu_central_4.jpg'),
-('버즈 알 아랍', '아랍에미리트, 두바이', '세계 최초의 7성급 호텔로 알려진 두바이의 상징적인 호텔입니다. 인공섬 위에 세워진 돛 모양의 건물이 특징이며, 모든 객실이 2층 구조의 스위트룸으로 구성되어 있습니다. 24시간 버틀러 서비스와 헬리콥터 전용 착륙장을 갖추고 있으며, 세계 최고의 럭셔리를 경험할 수 있는 공간을 제공합니다.', 890000, 4.9, '/image/dubai_burj.jpg', '/image/dubai_1.jpg', '/image/dubai_2.jpg', '/image/dubai_3.jpg', '/image/dubai_4.jpg'),
-('라마다 프라자 광주', '한국, 광주', '광주천과 인접한 쾌적한 호텔로, 도심 속에서도 자연을 느낄 수 있는 공간을 제공합니다. 현대적인 시설과 친절한 서비스가 특징이며, 피트니스 센터와 사우나 시설을 갖추고 있습니다. 광주의 전통 음식을 맛볼 수 있는 레스토랑이 있어 지역의 맛과 멋을 모두 경험할 수 있습니다.', 90000, 4.3, '/image/gwangju_riverside.jpg', '/image/gwangju_riverside_1.jpg', '/image/gwangju_riverside_2.jpg', '/image/gwangju_riverside_3.jpg', '/image/gwangju_riverside_4.jpg'),
-('래플스 싱가포르', '싱가포르, 싱가포르', '1887년에 지어진 싱가포르의 역사적인 호텔로, 식민지 시대의 건축 양식을 그대로 보존하고 있습니다. 전통적인 팬하우스 스타일의 객실과 정원이 특징이며, 싱가포르 슬링이 탄생한 롱 바가 유명합니다. 식민지 시대의 고급스러움과 현대적인 편의시설이 조화를 이루는 특별한 공간을 제공합니다.', 420000, 4.8, '/image/singapore_raffles.jpg', '/image/singapore_1.jpg', '/image/singapore_2.jpg', '/image/singapore_3.jpg', '/image/singapore_4.jpg'),
-('노보텔 대전', '한국, 대전', '대덕연구단지와 인접한 비즈니스 호텔로, 연구원과 출장객들에게 최적의 편의를 제공합니다. 현대적인 시설과 효율적인 서비스가 특징이며, 피트니스 센터와 비즈니스 라운지를 갖추고 있습니다. 대전의 특산물을 활용한 레스토랑이 있어 지역의 맛을 경험할 수 있습니다.', 110000, 4.2, '/image/daejeon_techno.jpg', '/image/daejeon_techno_1.jpg', '/image/daejeon_techno_2.jpg', '/image/daejeon_techno_3.jpg', '/image/daejeon_techno_4.jpg'),
-('베네치안 마카오', '중국, 마카오', '베네치아의 운하와 건축 양식을 재현한 대규모 리조트 호텔입니다. 실내 운하에서 곤돌라를 타고 이동할 수 있으며, 세계 최대 규모의 카지노와 쇼핑몰을 갖추고 있습니다. 미슐랭 스타 레스토랑과 럭셔리 스파를 제공하며, 베네치아의 낭만을 아시아에서 경험할 수 있는 특별한 공간을 제공합니다.', 380000, 4.7, '/image/macau_venetian.jpg', '/image/macau_1.jpg', '/image/macau_2.jpg', '/image/macau_3.jpg', '/image/macau_4.jpg'),
-('롯데호텔 울산', '한국, 울산', '울산항과 인접한 해양 리조트 호텔로, 바다 전망을 감상할 수 있는 최적의 위치에 자리잡고 있습니다. 현대적인 시설과 쾌적한 서비스가 특징이며, 실내외 수영장과 스파 시설을 갖추고 있습니다. 신선한 해산물을 맛볼 수 있는 레스토랑이 있어 울산의 맛을 경험할 수 있습니다.', 130000, 4.1, '/image/ulsan_marina.jpg', '/image/ulsan_marina_1.jpg', '/image/ulsan_marina_2.jpg', '/image/ulsan_marina_3.jpg', '/image/ulsan_marina_4.jpg'),
-('플라자 뉴욕', '미국, 뉴욕', '센트럴파크 사우스에 위치한 뉴욕의 역사적인 호텔로, 1907년에 지어진 건물이 특징입니다. 클래식한 디자인과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 티 룸을 제공합니다. 뉴욕의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 470000, 4.8, '/image/newyork_plaza.jpg', '/image/plaza_1.jpg', '/image/plaza_2.jpg', '/image/plaza_3.jpg', '/image/plaza_4.jpg'),
-('힐튼 수원', '한국, 수원', '수원화성과 인접한 관광 호텔로, 수원의 역사와 문화를 경험할 수 있는 최적의 위치에 자리잡고 있습니다. 현대적인 시설과 친절한 서비스가 특징이며, 피트니스 센터와 사우나 시설을 갖추고 있습니다. 수원의 전통 음식을 맛볼 수 있는 레스토랑이 있어 지역의 맛을 경험할 수 있습니다.', 95000, 4.0, '/image/suwon_paldal.jpg', '/image/suwon_paldal_1.jpg', '/image/suwon_paldal_2.jpg', '/image/suwon_paldal_3.jpg', '/image/suwon_paldal_4.jpg'),
-('웨스틴 로마', '이탈리아, 로마', '바티칸과 가까운 로마의 대표적인 럭셔리 호텔입니다. 로마의 역사적인 건축 양식을 현대적으로 재해석한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 이탈리아 스파를 제공합니다. 로마의 역사와 문화를 모두 경험할 수 있는 최적의 위치에 자리잡고 있습니다.', 350000, 4.6, '/image/rome_westin.jpg', '/image/rome_1.jpg', '/image/rome_2.jpg', '/image/rome_3.jpg', '/image/rome_4.jpg'),
-('하얏트 리젠시 시드니', '호주, 시드니', '오페라하우스와 하버브릿지가 보이는 시드니의 대표적인 호텔입니다. 현대적인 디자인과 쾌적한 서비스가 특징이며, 미슐랭 스타 레스토랑과 루프탑 바를 제공합니다. 시드니의 상징적인 전망을 감상할 수 있는 최적의 위치에 자리잡고 있습니다.', 420000, 4.7, '/image/sydney_hyatt.jpg', '/image/sydney_1.jpg', '/image/sydney_2.jpg', '/image/sydney_3.jpg', '/image/sydney_4.jpg'),
-('W 바르셀로나', '스페인, 바르셀로나', '지중해가 보이는 바르셀로나의 현대적인 호텔입니다. 디자이너 호텔로 유명하며, 현대적인 디자인과 트렌디한 시설이 특징입니다. 루프탑 바와 미슐랭 스타 레스토랑을 제공하며, 바르셀로나의 활기와 지중해의 휴식을 동시에 경험할 수 있습니다.', 380000, 4.6, '/image/barcelona_w.jpg', '/image/barcelona_1.jpg', '/image/barcelona_2.jpg', '/image/barcelona_3.jpg', '/image/barcelona_4.jpg'),
-('아만 도쿄', '일본, 도쿄', '도쿄의 전망을 감상할 수 있는 프라이빗 부티크 호텔입니다. 일본의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 프라이빗 스파와 미슐랭 스타 레스토랑을 제공합니다. 도쿄의 활기와 고요함을 동시에 경험할 수 있는 특별한 공간을 제공합니다.', 680000, 4.9, '/image/tokyo_aman.jpg', '/image/aman_1.jpg', '/image/aman_2.jpg', '/image/aman_3.jpg', '/image/aman_4.jpg'),
-('포시즌스 방콕', '태국, 방콕', '차오프라야 강변에 위치한 방콕의 대표적인 럭셔리 호텔입니다. 태국의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 태국 스파를 제공합니다. 방콕의 활기와 차오프라야 강의 휴식을 동시에 경험할 수 있습니다.', 320000, 4.7, '/image/bangkok_fourseasons.jpg', '/image/bangkok_1.jpg', '/image/bangkok_2.jpg', '/image/bangkok_3.jpg', '/image/bangkok_4.jpg'),
-('샹그릴라 런던', '영국, 런던', '템즈강이 보이는 런던의 대표적인 럭셔리 호텔입니다. 영국의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 티 룸을 제공합니다. 런던의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 480000, 4.8, '/image/london_shangri.jpg', '/image/london_1.jpg', '/image/london_2.jpg', '/image/london_3.jpg', '/image/london_4.jpg'),
-('벨라지오 라스베가스', '미국, 라스베가스', '라스베가스의 상징적인 분수쇼로 유명한 럭셔리 호텔입니다. 이탈리아의 베네치아를 모티브로 한 디자인이 특징이며, 세계 최대 규모의 카지노와 쇼핑몰을 갖추고 있습니다. 미슐랭 스타 레스토랑과 럭셔리 스파를 제공하며, 라스베가스의 화려한 밤을 경험할 수 있습니다.', 390000, 4.7, '/image/vegas_bellagio.jpg', '/image/bellagio_1.jpg', '/image/bellagio_2.jpg', '/image/bellagio_3.jpg', '/image/bellagio_4.jpg'),
-('파크 하얏트 비엔나', '오스트리아, 비엔나', '비엔나의 역사적인 건물을 현대적으로 리모델링한 럭셔리 호텔입니다. 오스트리아의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 카페를 제공합니다. 비엔나의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 420000, 4.8, '/image/vienna_hyatt.jpg', '/image/vienna_1.jpg', '/image/vienna_2.jpg', '/image/vienna_3.jpg', '/image/vienna_4.jpg'),
-('인터컨티넨탈 몰디브', '몰디브, 말레', '에메랄드빛 바다 위에 떠있는 워터빌라 리조트입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 스노클링과 다이빙을 즐길 수 있는 산호초가 바로 앞에 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 몰디브의 아름다운 자연을 만끽할 수 있습니다.', 780000, 4.9, '/image/maldives_ic.jpg', '/image/maldives_1.jpg', '/image/maldives_2.jpg', '/image/maldives_3.jpg', '/image/maldives_4.jpg'),
-('만다린 오리엔탈 방콕', '태국, 방콕', '차오프라야 강변에 위치한 방콕의 전통적인 럭셔리 호텔입니다. 태국의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 태국 스파를 제공합니다. 방콕의 활기와 차오프라야 강의 휴식을 동시에 경험할 수 있습니다.', 350000, 4.8, '/image/bangkok_mandarin.jpg', '/image/mandarin_1.jpg', '/image/mandarin_2.jpg', '/image/mandarin_3.jpg', '/image/mandarin_4.jpg'),
-('리츠칼튼 마이애미', '미국, 마이애미', '마이애미 비치에 위치한 럭셔리 리조트 호텔입니다. 아트 데코 스타일의 디자인이 특징이며, 프라이빗 비치와 수영장을 갖추고 있습니다. 미슐랭 스타 레스토랑과 럭셔리 스파를 제공하며, 마이애미의 화려한 해변을 경험할 수 있습니다.', 420000, 4.7, '/image/miami_ritz.jpg', '/image/miami_1.jpg', '/image/miami_2.jpg', '/image/miami_3.jpg', '/image/miami_4.jpg'),
-('아틀란티스 두바이', '아랍에미리트, 두바이', '팜 주메이라의 해양 테마 리조트 호텔입니다. 세계 최대 규모의 수족관과 워터파크를 갖추고 있으며, 해양 생물과 함께 수영할 수 있는 특별한 경험을 제공합니다. 미슐랭 스타 레스토랑과 럭셔리 스파를 제공하며, 두바이의 화려한 리조트 라이프를 경험할 수 있습니다.', 520000, 4.8, '/image/dubai_atlantis.jpg', '/image/atlantis_1.jpg', '/image/atlantis_2.jpg', '/image/atlantis_3.jpg', '/image/atlantis_4.jpg'),
-('웨스틴 발리', '인도네시아, 발리', '발리의 열대 해변에 위치한 럭셔리 리조트 호텔입니다. 발리의 전통적인 건축 양식과 현대적인 편의시설이 조화를 이루며, 프라이빗 비치와 수영장을 갖추고 있습니다. 미슐랭 스타 레스토랑과 전통적인 발리 스파를 제공하며, 발리의 자연과 문화를 모두 경험할 수 있습니다.', 380000, 4.7, '/image/bali_westin.jpg', '/image/bali_1.jpg', '/image/bali_2.jpg', '/image/bali_3.jpg', '/image/bali_4.jpg'),
-('페어몬트 밴프', '캐나다, 밴프', '로키 산맥의 성같은 리조트 호텔입니다. 캐나다의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 스파를 제공합니다. 로키 산맥의 장관을 감상할 수 있는 최적의 위치에 자리잡고 있습니다.', 450000, 4.8, '/image/banff_fairmont.jpg', '/image/banff_1.jpg', '/image/banff_2.jpg', '/image/banff_3.jpg', '/image/banff_4.jpg'),
-('샹그릴라 파리', '프랑스, 파리', '에펠탑 전망의 팔레스 호텔로, 파리의 대표적인 럭셔리 호텔입니다. 프랑스의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 프랑스 스파를 제공합니다. 파리의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 580000, 4.9, '/image/paris_shangri.jpg', '/image/shangri_1.jpg', '/image/shangri_2.jpg', '/image/shangri_3.jpg', '/image/shangri_4.jpg'),
-('콘래드 몰디브', '몰디브, 랑갈리', '인도양의 럭셔리 리조트 호텔입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 스노클링과 다이빙을 즐길 수 있는 산호초가 바로 앞에 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 몰디브의 아름다운 자연을 만끽할 수 있습니다.', 690000, 4.8, '/image/maldives_conrad.jpg', '/image/conrad_1.jpg', '/image/conrad_2.jpg', '/image/conrad_3.jpg', '/image/conrad_4.jpg'),
-('세인트 레지스 보라보라', '프랑스령폴리네시아, 보라보라', '남태평양의 럭셔리 리조트 호텔입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 오버워터 빌라에서 산호초를 감상할 수 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 보라보라의 아름다운 자연을 만끽할 수 있습니다.', 820000, 4.9, '/image/borabora_regis.jpg', '/image/regis_1.jpg', '/image/regis_2.jpg', '/image/regis_3.jpg', '/image/regis_4.jpg'),
-('아만풀로 베니스', '이탈리아, 베니스', '그랜드 운하의 16세기 궁전을 리모델링한 럭셔리 호텔입니다. 베네치아의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 이탈리아 스파를 제공합니다. 베네치아의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 750000, 4.9, '/image/venice_aman.jpg', '/image/amanvenice_1.jpg', '/image/amanvenice_2.jpg', '/image/amanvenice_3.jpg', '/image/amanvenice_4.jpg'),
-('포시즌스 보라보라', '프랑스령폴리네시아, 보라보라', '산호초 위의 럭셔리 리조트 호텔입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 오버워터 빌라에서 산호초를 감상할 수 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 보라보라의 아름다운 자연을 만끽할 수 있습니다.', 780000, 4.8, '/image/borabora_four.jpg', '/image/fourseasons_1.jpg', '/image/fourseasons_2.jpg', '/image/fourseasons_3.jpg', '/image/fourseasons_4.jpg'),
-('리츠칼튼 몰디브', '몰디브, 파리', '인도양의 프라이빗 아일랜드 리조트 호텔입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 스노클링과 다이빙을 즐길 수 있는 산호초가 바로 앞에 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 몰디브의 아름다운 자연을 만끽할 수 있습니다.', 850000, 4.9, '/image/maldives_ritz.jpg', '/image/ritzmaldives_1.jpg', '/image/ritzmaldives_2.jpg', '/image/ritzmaldives_3.jpg', '/image/ritzmaldives_4.jpg'),
-('만다린 오리엔탈 마라케시', '모로코, 마라케시', '아틀라스 산맥이 보이는 마라케시의 럭셔리 리조트 호텔입니다. 모로코의 전통적인 건축 양식과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 모로코 스파를 제공합니다. 마라케시의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 420000, 4.7, '/image/marrakech_mandarin.jpg', '/image/marrakech_1.jpg', '/image/marrakech_2.jpg', '/image/marrakech_3.jpg', '/image/marrakech_4.jpg'),
-('페닌슐라 파리', '프랑스, 파리', '샹젤리제 근처의 팔레스 호텔로, 파리의 대표적인 럭셔리 호텔입니다. 프랑스의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 프랑스 스파를 제공합니다. 파리의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 620000, 4.8, '/image/paris_peninsula.jpg', '/image/peninsula_1.jpg', '/image/peninsula_2.jpg', '/image/peninsula_3.jpg', '/image/peninsula_4.jpg'),
-('래플스 이스탄불', '터키, 이스탄불', '보스포러스 해협이 보이는 이스탄불의 럭셔리 호텔입니다. 터키의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 터키 스파를 제공합니다. 이스탄불의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 380000, 4.7, '/image/istanbul_raffles.jpg', '/image/raffles_1.jpg', '/image/raffles_2.jpg', '/image/raffles_3.jpg', '/image/raffles_4.jpg'),
-('카페 로얄 런던', '영국, 런던', '리젠트 거리의 역사적인 럭셔리 호텔입니다. 영국의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 티 룸을 제공합니다. 런던의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 450000, 4.8, '/image/london_cafe.jpg', '/image/cafe_1.jpg', '/image/cafe_2.jpg', '/image/cafe_3.jpg', '/image/cafe_4.jpg'),
-('아만 베니스', '이탈리아, 베니스', '그랜드 운하의 16세기 팔라조를 리모델링한 럭셔리 호텔입니다. 베네치아의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 이탈리아 스파를 제공합니다. 베네치아의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 720000, 4.9, '/image/venice_aman2.jpg', '/image/amanvenice2_1.jpg', '/image/amanvenice2_2.jpg', '/image/amanvenice2_3.jpg', '/image/amanvenice2_4.jpg'),
-('이터널 부산', '한국, 부산', '부산의 명물 호텔로, 해운대 해변과 가까운 위치에 자리잡고 있습니다. 현대적인 디자인과 쾌적한 서비스가 특징이며, 실내외 수영장과 스파 시설을 갖추고 있습니다. 신선한 해산물을 맛볼 수 있는 레스토랑이 있어 부산의 맛을 경험할 수 있습니다.', 550000, 4.9, '/image/busan_eternal.jpg', '/image/eternal_1.jpg', '/image/eternal_2.jpg', '/image/eternal_3.jpg', '/image/eternal_4.jpg'),
-('아만 아무안', '인도네시아, 발리', '인도양 전망의 프라이빗 빌라 리조트입니다. 발리의 전통적인 건축 양식과 현대적인 편의시설이 조화를 이루며, 프라이빗 수영장과 해변을 갖추고 있습니다. 미슐랭 스타 레스토랑과 전통적인 발리 스파를 제공하며, 발리의 자연과 문화를 모두 경험할 수 있습니다.', 850000, 4.9, '/image/amankila.jpg', '/image/amankila_1.jpg', '/image/amankila_2.jpg', '/image/amankila_3.jpg', '/image/amankila_4.jpg'),
-('포시즌스 하노이', '베트남, 하노이', '호안끼엠 호수가 보이는 하노이의 럭셔리 호텔입니다. 베트남의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 베트남 스파를 제공합니다. 하노이의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 320000, 4.7, '/image/hanoi_fs.jpg', '/image/hanoi_1.jpg', '/image/hanoi_2.jpg', '/image/hanoi_3.jpg', '/image/hanoi_4.jpg'),
-('콘래드 도쿄', '일본, 도쿄', '도쿄만 전망의 현대적 럭셔리 호텔입니다. 일본의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 일본 스파를 제공합니다. 도쿄의 활기와 고요함을 동시에 경험할 수 있는 특별한 공간을 제공합니다.', 580000, 4.8, '/image/tokyo_conrad.jpg', '/image/conradtokyo_1.jpg', '/image/conradtokyo_2.jpg', '/image/conradtokyo_3.jpg', '/image/conradtokyo_4.jpg'),
-('리츠칼튼 몬테카를로', '모나코, 몬테카를로', '지중해 전망의 카지노 리조트 호텔입니다. 모나코의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 카지노를 제공합니다. 몬테카를로의 화려한 밤을 경험할 수 있는 특별한 공간을 제공합니다.', 650000, 4.9, '/image/montecarlo_ritz.jpg', '/image/montecarlo_1.jpg', '/image/montecarlo_2.jpg', '/image/montecarlo_3.jpg', '/image/montecarlo_4.jpg'),
-('페닌슐라 베이루트', '레바논, 베이루트', '지중해 전망의 중동 럭셔리 호텔입니다. 레바논의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 중동 스파를 제공합니다. 베이루트의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 420000, 4.7, '/image/beirut_peninsula.jpg', '/image/beirut_1.jpg', '/image/beirut_2.jpg', '/image/beirut_3.jpg', '/image/beirut_4.jpg'),
-('홀리데이 인 부산', '한국, 부산', '부산의 명물 호텔로, 해운대 해변과 가까운 위치에 자리잡고 있습니다. 현대적인 디자인과 쾌적한 서비스가 특징이며, 실내외 수영장과 스파 시설을 갖추고 있습니다. 신선한 해산물을 맛볼 수 있는 레스토랑이 있어 부산의 맛을 경험할 수 있습니다.', 600000, 4.9, '/image/holiday_inn.jpg', '/image/holiday_inn_1.jpg', '/image/holiday_inn_2.jpg', '/image/holiday_inn_3.jpg', '/image/holiday_inn_4.jpg');
+('그랜드 인터컨티넨탈 서울', '한국, 서울', '남산의 전망과 도심의 활기를 모두 누릴 수 있는 럭셔리 호텔입니다. 최고급 시설과 맞춤형 서비스로 잊지 못할 특별한 경험을 제공합니다. 5성급 레스토랑과 스파, 피트니스 센터를 갖추고 있어 도심 속에서도 완벽한 휴식을 즐길 수 있습니다.', 250000, 0.0, '/image/grand_hotel.jpg', '/image/grand_hotel_1.jpg', '/image/grand_hotel_2.jpg', '/image/grand_hotel_3.jpg', '/image/grand_hotel_4.jpg'),
+('리츠칼튼 뉴욕', '미국, 뉴욕', '센트럴파크의 아름다운 전망을 자랑하는 뉴욕의 대표적인 럭셔리 호텔입니다. 클래식한 디자인과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 세계적인 스파 브랜드가 입점해 있습니다. 뉴욕의 화려한 도시 생활과 고급스러운 휴식을 동시에 경험할 수 있습니다.', 450000, 0.0, '/image/newyork_central.jpg', '/image/newyork_1.jpg', '/image/newyork_2.jpg', '/image/newyork_3.jpg', '/image/newyork_4.jpg'),
+('파라다이스 호텔 해운대', '한국, 부산', '해운대 해변과 불과 몇 걸음 거리에 위치한 프리미엄 호텔입니다. 모든 객실에서 아름다운 동해의 전망을 감상할 수 있으며, 실내외 수영장과 스파 시설을 갖추고 있습니다. 신선한 해산물을 맛볼 수 있는 레스토랑과 바가 있어 부산의 맛과 멋을 모두 즐길 수 있습니다.', 680000, 0.0, '/image/signature_busan.jpg', '/image/signature_busan_1.jpg', '/image/signature_busan_2.jpg', '/image/signature_busan_3.jpg', '/image/signature_busan_4.jpg'),
+('포시즌스 파리', '프랑스, 파리', '에펠탑이 바로 눈앞에 펼쳐지는 파리의 대표적인 럭셔리 호텔입니다. 18세기 건축물을 현대적으로 리모델링하여 고급스러움과 역사적 가치를 모두 갖추고 있습니다. 미슐랭 스타 셰프가 운영하는 레스토랑과 전통적인 프랑스 스파를 경험할 수 있는 최고의 휴식 공간을 제공합니다.', 520000, 0.0, '/image/paris_eiffel.jpg', '/image/paris_1.jpg', '/image/paris_2.jpg', '/image/paris_3.jpg', '/image/paris_4.jpg'),
+('신라스테이 제주', '한국, 제주', '제주의 아름다운 바다와 한라산의 전망을 모두 감상할 수 있는 프리미엄 호텔입니다. 현대적인 디자인과 제주 특유의 자연을 담은 인테리어가 특징이며, 제주 특산물을 활용한 다이닝과 스파 시설을 제공합니다. 제주의 자연과 문화를 모두 경험할 수 있는 최적의 휴식 공간입니다.', 150000, 0.0, '/image/jeju_ocean.jpg', '/image/jeju_ocean_1.jpg', '/image/jeju_ocean_2.jpg', '/image/jeju_ocean_3.jpg', '/image/jeju_ocean_4.jpg'),
+('만다린 오리엔탈 도쿄', '일본, 도쿄', '도쿄의 스카이라인을 한눈에 볼 수 있는 최고급 호텔입니다. 일본의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 일본 스파를 제공합니다. 도쿄의 활기와 고요함을 동시에 경험할 수 있는 특별한 공간입니다.', 750000, 0.0, '/image/tokyo_view.jpg', '/image/tokyo_1.jpg', '/image/tokyo_2.jpg', '/image/tokyo_3.jpg', '/image/tokyo_4.jpg'),
+('하얏트 리젠시 인천', '한국, 인천', '인천국제공항과 인접한 비즈니스 호텔로, 출장객들에게 최적의 편의를 제공합니다. 현대적인 시설과 효율적인 서비스가 특징이며, 피트니스 센터와 비즈니스 라운지를 갖추고 있습니다. 공항 셔틀 서비스와 24시간 룸서비스를 제공하여 출장객들의 편의를 최우선으로 생각합니다.', 120000, 0.0, '/image/incheon_sky.jpg', '/image/incheon_sky_1.jpg', '/image/incheon_sky_2.jpg', '/image/incheon_sky_3.jpg', '/image/incheon_sky_4.jpg'),
+('페닌슐라 홍콩', '중국, 홍콩', '빅토리아 하버의 환상적인 전망을 자랑하는 홍콩의 상징적인 호텔입니다. 1928년에 지어진 역사적인 건물을 현대적으로 리노베이션하여 고급스러움과 전통을 모두 갖추고 있습니다. 미슐랭 스타 레스토랑과 전통적인 중국 스파를 제공하며, 홍콩의 화려한 야경을 감상할 수 있는 루프탑 바가 있습니다.', 460000, 0.0, '/image/hongkong_harbor.jpg', '/image/hongkong_1.jpg', '/image/hongkong_2.jpg', '/image/hongkong_3.jpg', '/image/hongkong_4.jpg'),
+('메리어트 대구', '한국, 대구', '대구 도심의 중심에 위치한 비즈니스 호텔입니다. 현대적인 시설과 효율적인 서비스로 출장객들에게 최적의 편의를 제공합니다. 피트니스 센터와 비즈니스 라운지를 갖추고 있으며, 대구의 전통 음식을 맛볼 수 있는 레스토랑이 있습니다. 도심 속에서도 편안한 휴식을 취할 수 있는 공간을 제공합니다.', 100000, 0.0, '/image/daegu_central.jpg', '/image/daegu_central_1.jpg', '/image/daegu_central_2.jpg', '/image/daegu_central_3.jpg', '/image/daegu_central_4.jpg'),
+('버즈 알 아랍', '아랍에미리트, 두바이', '세계 최초의 7성급 호텔로 알려진 두바이의 상징적인 호텔입니다. 인공섬 위에 세워진 돛 모양의 건물이 특징이며, 모든 객실이 2층 구조의 스위트룸으로 구성되어 있습니다. 24시간 버틀러 서비스와 헬리콥터 전용 착륙장을 갖추고 있으며, 세계 최고의 럭셔리를 경험할 수 있는 공간을 제공합니다.', 890000, 0.0, '/image/dubai_burj.jpg', '/image/dubai_1.jpg', '/image/dubai_2.jpg', '/image/dubai_3.jpg', '/image/dubai_4.jpg'),
+('라마다 프라자 광주', '한국, 광주', '광주천과 인접한 쾌적한 호텔로, 도심 속에서도 자연을 느낄 수 있는 공간을 제공합니다. 현대적인 시설과 친절한 서비스가 특징이며, 피트니스 센터와 사우나 시설을 갖추고 있습니다. 광주의 전통 음식을 맛볼 수 있는 레스토랑이 있어 지역의 맛과 멋을 모두 경험할 수 있습니다.', 90000, 0.0, '/image/gwangju_riverside.jpg', '/image/gwangju_riverside_1.jpg', '/image/gwangju_riverside_2.jpg', '/image/gwangju_riverside_3.jpg', '/image/gwangju_riverside_4.jpg'),
+('래플스 싱가포르', '싱가포르, 싱가포르', '1887년에 지어진 싱가포르의 역사적인 호텔로, 식민지 시대의 건축 양식을 그대로 보존하고 있습니다. 전통적인 팬하우스 스타일의 객실과 정원이 특징이며, 싱가포르 슬링이 탄생한 롱 바가 유명합니다. 식민지 시대의 고급스러움과 현대적인 편의시설이 조화를 이루는 특별한 공간을 제공합니다.', 420000, 0.0, '/image/singapore_raffles.jpg', '/image/singapore_1.jpg', '/image/singapore_2.jpg', '/image/singapore_3.jpg', '/image/singapore_4.jpg'),
+('노보텔 대전', '한국, 대전', '대덕연구단지와 인접한 비즈니스 호텔로, 연구원과 출장객들에게 최적의 편의를 제공합니다. 현대적인 시설과 효율적인 서비스가 특징이며, 피트니스 센터와 비즈니스 라운지를 갖추고 있습니다. 대전의 특산물을 활용한 레스토랑이 있어 지역의 맛을 경험할 수 있습니다.', 110000, 0.0, '/image/daejeon_techno.jpg', '/image/daejeon_techno_1.jpg', '/image/daejeon_techno_2.jpg', '/image/daejeon_techno_3.jpg', '/image/daejeon_techno_4.jpg'),
+('베네치안 마카오', '중국, 마카오', '베네치아의 운하와 건축 양식을 재현한 대규모 리조트 호텔입니다. 실내 운하에서 곤돌라를 타고 이동할 수 있으며, 세계 최대 규모의 카지노와 쇼핑몰을 갖추고 있습니다. 미슐랭 스타 레스토랑과 럭셔리 스파를 제공하며, 베네치아의 낭만을 아시아에서 경험할 수 있는 특별한 공간을 제공합니다.', 380000, 0.0, '/image/macau_venetian.jpg', '/image/macau_1.jpg', '/image/macau_2.jpg', '/image/macau_3.jpg', '/image/macau_4.jpg'),
+('롯데호텔 울산', '한국, 울산', '울산항과 인접한 해양 리조트 호텔로, 바다 전망을 감상할 수 있는 최적의 위치에 자리잡고 있습니다. 현대적인 시설과 쾌적한 서비스가 특징이며, 실내외 수영장과 스파 시설을 갖추고 있습니다. 신선한 해산물을 맛볼 수 있는 레스토랑이 있어 울산의 맛을 경험할 수 있습니다.', 130000, 0.0, '/image/ulsan_marina.jpg', '/image/ulsan_marina_1.jpg', '/image/ulsan_marina_2.jpg', '/image/ulsan_marina_3.jpg', '/image/ulsan_marina_4.jpg'),
+('플라자 뉴욕', '미국, 뉴욕', '센트럴파크 사우스에 위치한 뉴욕의 역사적인 호텔로, 1907년에 지어진 건물이 특징입니다. 클래식한 디자인과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 티 룸을 제공합니다. 뉴욕의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 470000, 0.0, '/image/newyork_plaza.jpg', '/image/plaza_1.jpg', '/image/plaza_2.jpg', '/image/plaza_3.jpg', '/image/plaza_4.jpg'),
+('힐튼 수원', '한국, 수원', '수원화성과 인접한 관광 호텔로, 수원의 역사와 문화를 경험할 수 있는 최적의 위치에 자리잡고 있습니다. 현대적인 시설과 친절한 서비스가 특징이며, 피트니스 센터와 사우나 시설을 갖추고 있습니다. 수원의 전통 음식을 맛볼 수 있는 레스토랑이 있어 지역의 맛을 경험할 수 있습니다.', 95000, 0.0, '/image/suwon_paldal.jpg', '/image/suwon_paldal_1.jpg', '/image/suwon_paldal_2.jpg', '/image/suwon_paldal_3.jpg', '/image/suwon_paldal_4.jpg'),
+('웨스틴 로마', '이탈리아, 로마', '바티칸과 가까운 로마의 대표적인 럭셔리 호텔입니다. 로마의 역사적인 건축 양식을 현대적으로 재해석한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 이탈리아 스파를 제공합니다. 로마의 역사와 문화를 모두 경험할 수 있는 최적의 위치에 자리잡고 있습니다.', 350000, 0.0, '/image/rome_westin.jpg', '/image/rome_1.jpg', '/image/rome_2.jpg', '/image/rome_3.jpg', '/image/rome_4.jpg'),
+('하얏트 리젠시 시드니', '호주, 시드니', '오페라하우스와 하버브릿지가 보이는 시드니의 대표적인 호텔입니다. 현대적인 디자인과 쾌적한 서비스가 특징이며, 미슐랭 스타 레스토랑과 루프탑 바를 제공합니다. 시드니의 상징적인 전망을 감상할 수 있는 최적의 위치에 자리잡고 있습니다.', 420000, 0.0, '/image/sydney_hyatt.jpg', '/image/sydney_1.jpg', '/image/sydney_2.jpg', '/image/sydney_3.jpg', '/image/sydney_4.jpg'),
+('W 바르셀로나', '스페인, 바르셀로나', '지중해가 보이는 바르셀로나의 현대적인 호텔입니다. 디자이너 호텔로 유명하며, 현대적인 디자인과 트렌디한 시설이 특징입니다. 루프탑 바와 미슐랭 스타 레스토랑을 제공하며, 바르셀로나의 활기와 지중해의 휴식을 동시에 경험할 수 있습니다.', 380000, 0.0, '/image/barcelona_w.jpg', '/image/barcelona_1.jpg', '/image/barcelona_2.jpg', '/image/barcelona_3.jpg', '/image/barcelona_4.jpg'),
+('아만 도쿄', '일본, 도쿄', '도쿄의 전망을 감상할 수 있는 프라이빗 부티크 호텔입니다. 일본의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 프라이빗 스파와 미슐랭 스타 레스토랑을 제공합니다. 도쿄의 활기와 고요함을 동시에 경험할 수 있는 특별한 공간을 제공합니다.', 680000, 0.0, '/image/tokyo_aman.jpg', '/image/aman_1.jpg', '/image/aman_2.jpg', '/image/aman_3.jpg', '/image/aman_4.jpg'),
+('포시즌스 방콕', '태국, 방콕', '차오프라야 강변에 위치한 방콕의 대표적인 럭셔리 호텔입니다. 태국의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 태국 스파를 제공합니다. 방콕의 활기와 차오프라야 강의 휴식을 동시에 경험할 수 있습니다.', 320000, 0.0, '/image/bangkok_fourseasons.jpg', '/image/bangkok_1.jpg', '/image/bangkok_2.jpg', '/image/bangkok_3.jpg', '/image/bangkok_4.jpg'),
+('샹그릴라 런던', '영국, 런던', '템즈강이 보이는 런던의 대표적인 럭셔리 호텔입니다. 영국의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 티 룸을 제공합니다. 런던의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 480000, 0.0, '/image/london_shangri.jpg', '/image/london_1.jpg', '/image/london_2.jpg', '/image/london_3.jpg', '/image/london_4.jpg'),
+('벨라지오 라스베가스', '미국, 라스베가스', '라스베가스의 상징적인 분수쇼로 유명한 럭셔리 호텔입니다. 이탈리아의 베네치아를 모티브로 한 디자인이 특징이며, 세계 최대 규모의 카지노와 쇼핑몰을 갖추고 있습니다. 미슐랭 스타 레스토랑과 럭셔리 스파를 제공하며, 라스베가스의 화려한 밤을 경험할 수 있습니다.', 390000, 0.0, '/image/vegas_bellagio.jpg', '/image/bellagio_1.jpg', '/image/bellagio_2.jpg', '/image/bellagio_3.jpg', '/image/bellagio_4.jpg'),
+('파크 하얏트 비엔나', '오스트리아, 비엔나', '비엔나의 역사적인 건물을 현대적으로 리모델링한 럭셔리 호텔입니다. 오스트리아의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 카페를 제공합니다. 비엔나의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 420000, 0.0, '/image/vienna_hyatt.jpg', '/image/vienna_1.jpg', '/image/vienna_2.jpg', '/image/vienna_3.jpg', '/image/vienna_4.jpg'),
+('인터컨티넨탈 몰디브', '몰디브, 말레', '에메랄드빛 바다 위에 떠있는 워터빌라 리조트입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 스노클링과 다이빙을 즐길 수 있는 산호초가 바로 앞에 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 몰디브의 아름다운 자연을 만끽할 수 있습니다.', 780000, 0.0, '/image/maldives_ic.jpg', '/image/maldives_1.jpg', '/image/maldives_2.jpg', '/image/maldives_3.jpg', '/image/maldives_4.jpg'),
+('만다린 오리엔탈 방콕', '태국, 방콕', '차오프라야 강변에 위치한 방콕의 전통적인 럭셔리 호텔입니다. 태국의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 태국 스파를 제공합니다. 방콕의 활기와 차오프라야 강의 휴식을 동시에 경험할 수 있습니다.', 350000, 0.0, '/image/bangkok_mandarin.jpg', '/image/mandarin_1.jpg', '/image/mandarin_2.jpg', '/image/mandarin_3.jpg', '/image/mandarin_4.jpg'),
+('리츠칼튼 마이애미', '미국, 마이애미', '마이애미 비치에 위치한 럭셔리 리조트 호텔입니다. 아트 데코 스타일의 디자인이 특징이며, 프라이빗 비치와 수영장을 갖추고 있습니다. 미슐랭 스타 레스토랑과 럭셔리 스파를 제공하며, 마이애미의 화려한 해변을 경험할 수 있습니다.', 420000, 0.0, '/image/miami_ritz.jpg', '/image/miami_1.jpg', '/image/miami_2.jpg', '/image/miami_3.jpg', '/image/miami_4.jpg'),
+('아틀란티스 두바이', '아랍에미리트, 두바이', '팜 주메이라의 해양 테마 리조트 호텔입니다. 세계 최대 규모의 수족관과 워터파크를 갖추고 있으며, 해양 생물과 함께 수영할 수 있는 특별한 경험을 제공합니다. 미슐랭 스타 레스토랑과 럭셔리 스파를 제공하며, 두바이의 화려한 리조트 라이프를 경험할 수 있습니다.', 520000, 0.0, '/image/dubai_atlantis.jpg', '/image/atlantis_1.jpg', '/image/atlantis_2.jpg', '/image/atlantis_3.jpg', '/image/atlantis_4.jpg'),
+('웨스틴 발리', '인도네시아, 발리', '발리의 열대 해변에 위치한 럭셔리 리조트 호텔입니다. 발리의 전통적인 건축 양식과 현대적인 편의시설이 조화를 이루며, 프라이빗 비치와 수영장을 갖추고 있습니다. 미슐랭 스타 레스토랑과 전통적인 발리 스파를 제공하며, 발리의 자연과 문화를 모두 경험할 수 있습니다.', 380000, 0.0, '/image/bali_westin.jpg', '/image/bali_1.jpg', '/image/bali_2.jpg', '/image/bali_3.jpg', '/image/bali_4.jpg'),
+('페어몬트 밴프', '캐나다, 밴프', '로키 산맥의 성같은 리조트 호텔입니다. 캐나다의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 스파를 제공합니다. 로키 산맥의 장관을 감상할 수 있는 최적의 위치에 자리잡고 있습니다.', 450000, 0.0, '/image/banff_fairmont.jpg', '/image/banff_1.jpg', '/image/banff_2.jpg', '/image/banff_3.jpg', '/image/banff_4.jpg'),
+('샹그릴라 파리', '프랑스, 파리', '에펠탑 전망의 팔레스 호텔로, 파리의 대표적인 럭셔리 호텔입니다. 프랑스의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 프랑스 스파를 제공합니다. 파리의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 580000, 0.0, '/image/paris_shangri.jpg', '/image/shangri_1.jpg', '/image/shangri_2.jpg', '/image/shangri_3.jpg', '/image/shangri_4.jpg'),
+('콘래드 몰디브', '몰디브, 랑갈리', '인도양의 럭셔리 리조트 호텔입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 스노클링과 다이빙을 즐길 수 있는 산호초가 바로 앞에 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 몰디브의 아름다운 자연을 만끽할 수 있습니다.', 690000, 0.0, '/image/maldives_conrad.jpg', '/image/conrad_1.jpg', '/image/conrad_2.jpg', '/image/conrad_3.jpg', '/image/conrad_4.jpg'),
+('세인트 레지스 보라보라', '프랑스령폴리네시아, 보라보라', '남태평양의 럭셔리 리조트 호텔입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 오버워터 빌라에서 산호초를 감상할 수 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 보라보라의 아름다운 자연을 만끽할 수 있습니다.', 820000, 0.0, '/image/borabora_regis.jpg', '/image/regis_1.jpg', '/image/regis_2.jpg', '/image/regis_3.jpg', '/image/regis_4.jpg'),
+('아만풀로 베니스', '이탈리아, 베니스', '그랜드 운하의 16세기 궁전을 리모델링한 럭셔리 호텔입니다. 베네치아의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 이탈리아 스파를 제공합니다. 베네치아의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 750000, 0.0, '/image/venice_aman.jpg', '/image/amanvenice_1.jpg', '/image/amanvenice_2.jpg', '/image/amanvenice_3.jpg', '/image/amanvenice_4.jpg'),
+('포시즌스 보라보라', '프랑스령폴리네시아, 보라보라', '산호초 위의 럭셔리 리조트 호텔입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 오버워터 빌라에서 산호초를 감상할 수 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 보라보라의 아름다운 자연을 만끽할 수 있습니다.', 780000, 0.0, '/image/borabora_four.jpg', '/image/fourseasons_1.jpg', '/image/fourseasons_2.jpg', '/image/fourseasons_3.jpg', '/image/fourseasons_4.jpg'),
+('리츠칼튼 몰디브', '몰디브, 파리', '인도양의 프라이빗 아일랜드 리조트 호텔입니다. 모든 빌라가 프라이빗 수영장과 해변을 갖추고 있으며, 스노클링과 다이빙을 즐길 수 있는 산호초가 바로 앞에 있습니다. 미슐랭 스타 레스토랑과 오버워터 스파를 제공하며, 몰디브의 아름다운 자연을 만끽할 수 있습니다.', 850000, 0.0, '/image/maldives_ritz.jpg', '/image/ritzmaldives_1.jpg', '/image/ritzmaldives_2.jpg', '/image/ritzmaldives_3.jpg', '/image/ritzmaldives_4.jpg'),
+('만다린 오리엔탈 마라케시', '모로코, 마라케시', '아틀라스 산맥이 보이는 마라케시의 럭셔리 리조트 호텔입니다. 모로코의 전통적인 건축 양식과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 모로코 스파를 제공합니다. 마라케시의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 420000, 0.0, '/image/marrakech_mandarin.jpg', '/image/marrakech_1.jpg', '/image/marrakech_2.jpg', '/image/marrakech_3.jpg', '/image/marrakech_4.jpg'),
+('페닌슐라 파리', '프랑스, 파리', '샹젤리제 근처의 팔레스 호텔로, 파리의 대표적인 럭셔리 호텔입니다. 프랑스의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 프랑스 스파를 제공합니다. 파리의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 620000, 0.0, '/image/paris_peninsula.jpg', '/image/peninsula_1.jpg', '/image/peninsula_2.jpg', '/image/peninsula_3.jpg', '/image/peninsula_4.jpg'),
+('래플스 이스탄불', '터키, 이스탄불', '보스포러스 해협이 보이는 이스탄불의 럭셔리 호텔입니다. 터키의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 터키 스파를 제공합니다. 이스탄불의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 380000, 0.0, '/image/istanbul_raffles.jpg', '/image/raffles_1.jpg', '/image/raffles_2.jpg', '/image/raffles_3.jpg', '/image/raffles_4.jpg'),
+('카페 로얄 런던', '영국, 런던', '리젠트 거리의 역사적인 럭셔리 호텔입니다. 영국의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 티 룸을 제공합니다. 런던의 역사와 현대를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 450000, 0.0, '/image/london_cafe.jpg', '/image/cafe_1.jpg', '/image/cafe_2.jpg', '/image/cafe_3.jpg', '/image/cafe_4.jpg'),
+('아만 베니스', '이탈리아, 베니스', '그랜드 운하의 16세기 팔라조를 리모델링한 럭셔리 호텔입니다. 베네치아의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 이탈리아 스파를 제공합니다. 베네치아의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 720000, 0.0, '/image/venice_aman2.jpg', '/image/amanvenice2_1.jpg', '/image/amanvenice2_2.jpg', '/image/amanvenice2_3.jpg', '/image/amanvenice2_4.jpg'),
+('이터널 부산', '한국, 부산', '부산의 명물 호텔로, 해운대 해변과 가까운 위치에 자리잡고 있습니다. 현대적인 디자인과 쾌적한 서비스가 특징이며, 실내외 수영장과 스파 시설을 갖추고 있습니다. 신선한 해산물을 맛볼 수 있는 레스토랑이 있어 부산의 맛을 경험할 수 있습니다.', 550000, 0.0, '/image/busan_eternal.jpg', '/image/eternal_1.jpg', '/image/eternal_2.jpg', '/image/eternal_3.jpg', '/image/eternal_4.jpg'),
+('아만 아무안', '인도네시아, 발리', '인도양 전망의 프라이빗 빌라 리조트입니다. 발리의 전통적인 건축 양식과 현대적인 편의시설이 조화를 이루며, 프라이빗 수영장과 해변을 갖추고 있습니다. 미슐랭 스타 레스토랑과 전통적인 발리 스파를 제공하며, 발리의 자연과 문화를 모두 경험할 수 있습니다.', 850000, 0.0, '/image/amankila.jpg', '/image/amankila_1.jpg', '/image/amankila_2.jpg', '/image/amankila_3.jpg', '/image/amankila_4.jpg'),
+('포시즌스 하노이', '베트남, 하노이', '호안끼엠 호수가 보이는 하노이의 럭셔리 호텔입니다. 베트남의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 베트남 스파를 제공합니다. 하노이의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 320000, 0.0, '/image/hanoi_fs.jpg', '/image/hanoi_1.jpg', '/image/hanoi_2.jpg', '/image/hanoi_3.jpg', '/image/hanoi_4.jpg'),
+('콘래드 도쿄', '일본, 도쿄', '도쿄만 전망의 현대적 럭셔리 호텔입니다. 일본의 전통 미학과 현대적인 럭셔리를 조화롭게 결합한 디자인이 특징이며, 미슐랭 스타 레스토랑과 전통적인 일본 스파를 제공합니다. 도쿄의 활기와 고요함을 동시에 경험할 수 있는 특별한 공간을 제공합니다.', 580000, 0.0, '/image/tokyo_conrad.jpg', '/image/conradtokyo_1.jpg', '/image/conradtokyo_2.jpg', '/image/conradtokyo_3.jpg', '/image/conradtokyo_4.jpg'),
+('리츠칼튼 몬테카를로', '모나코, 몬테카를로', '지중해 전망의 카지노 리조트 호텔입니다. 모나코의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 카지노를 제공합니다. 몬테카를로의 화려한 밤을 경험할 수 있는 특별한 공간을 제공합니다.', 650000, 0.0, '/image/montecarlo_ritz.jpg', '/image/montecarlo_1.jpg', '/image/montecarlo_2.jpg', '/image/montecarlo_3.jpg', '/image/montecarlo_4.jpg'),
+('페닌슐라 베이루트', '레바논, 베이루트', '지중해 전망의 중동 럭셔리 호텔입니다. 레바논의 전통적인 고급스러움과 현대적인 편의시설이 조화를 이루며, 미슐랭 스타 레스토랑과 전통적인 중동 스파를 제공합니다. 베이루트의 역사와 문화를 모두 경험할 수 있는 특별한 공간을 제공합니다.', 100000, 0.0, '/image/beirut_peninsula.jpg', '/image/beirut_1.jpg', '/image/beirut_2.jpg', '/image/beirut_3.jpg', '/image/beirut_4.jpg'),
+('홀리데이 인 부산', '한국, 부산', '부산의 명물 호텔로, 해운대 해변과 가까운 위치에 자리잡고 있습니다. 현대적인 디자인과 쾌적한 서비스가 특징이며, 실내외 수영장과 스파 시설을 갖추고 있습니다. 신선한 해산물을 맛볼 수 있는 레스토랑이 있어 부산의 맛을 경험할 수 있습니다.', 70000, 0.0, '/image/holiday_inn.jpg', '/image/holiday_inn_1.jpg', '/image/holiday_inn_2.jpg', '/image/holiday_inn_3.jpg', '/image/holiday_inn_4.jpg');
 
 -- 리뷰 데이터 추가
 INSERT INTO reviews (user_id, hotel_id, reservation_id, rating, content, room_type, travel_type, created_at) VALUES
@@ -443,7 +445,9 @@ INSERT INTO hotel_facilities (hotel_id, pool, spa, fitness, restaurant, parking,
 (44, 0, 1, 1, 1, 0, 1),
 (45, 1, 0, 1, 1, 1, 1),
 (46, 1, 1, 0, 1, 0, 1),
-(47, 0, 1, 1, 0, 1, 1);
+(47, 0, 1, 1, 0, 1, 1),
+(48, 0, 1, 1, 0, 1, 1),
+(49, 1, 1, 0, 0, 1, 1);
 
 -- 이벤트 댓글 더미 데이터
 INSERT INTO event_comments (user_id, comment, created_at) VALUES
@@ -616,7 +620,14 @@ INSERT INTO rooms (hotel_id, room_type, max_person, price, available, rooms_imag
 (46, 'suite', 4, 880000, TRUE, '/image/suite.jpg'),
 -- 호텔 47
 (47, 'deluxe', 2, 350000, TRUE, '/image/deluxe.jpg'),
-(47, 'suite', 4, 450000, TRUE, '/image/suite.jpg');
+(47, 'suite', 4, 450000, TRUE, '/image/suite.jpg'),
+-- 호텔 48
+(48, 'deluxe', 2, 100000, TRUE, '/image/deluxe.jpg'),
+(48, 'suite', 4, 200000, TRUE, '/image/suite.jpg'),
+-- 호텔 49
+(49, 'deluxe', 2, 70000, TRUE, '/image/deluxe.jpg'),
+(49, 'suite', 4, 170000, TRUE, '/image/suite.jpg');
+
 
 -- 후기 도움돼요 기록 추가
 INSERT INTO review_helpful (review_id, user_id, is_helpful, not_helpful) VALUES
@@ -821,3 +832,25 @@ INSERT INTO review_helpful (review_id, user_id, is_helpful, not_helpful) VALUES
 (40, 10, 1, 0),
 (40, 11, 0, 1),
 (40, 12, 1, 0);
+
+-- 문의글 추가
+INSERT INTO inquiries (user_id, category, title, content, is_secret) VALUES
+(12, 'reservation', '예약 취소 문의드립니다', '다음 주 예약을 취소하고 싶은데 어떻게 해야 하나요?', 0),
+(2, 'payment', '결제 수단 변경 가능한가요?', '신용카드로 결제했는데 현금으로 변경하고 싶습니다.', 0),
+(3, 'room', '객실 뷰 문의', '오션뷰 객실이 정확히 어느 방향을 보고 있나요?', 0),
+(4, 'other', '수영장 이용 시간', '수영장 이용 가능 시간을 알려주세요.', 0),
+(5, 'reservation', '체크인 시간 문의', '체크인 시간이 꼭 3시인가요?', 0),
+(6, 'payment', '영수증 재발급', '영수증을 분실했는데 재발급 받을 수 있나요?', 1),
+(7, 'room', '객실 청소 시간', '객실 청소는 하루에 몇 번 이루어지나요?', 0),
+(8, 'other', '주차 공간 문의', '호텔 주차장이 어디에 있나요?', 0),
+(9, 'reservation', '조기 체크인 가능한가요?', '오전 11시에 체크인 가능한가요?', 0),
+(10, 'payment', '환불 정책 문의', '예약 취소 시 환불 정책을 알려주세요.', 1);
+
+-- 문의 답변 (관리자 ID: 1번 사용자)
+INSERT INTO inquiry_responses (inquiry_id, admin_id, content) VALUES
+(1, 1, '예약 취소는 마이페이지 > 예약 내역에서 가능합니다. 취소 수수료는 체크인 24시간 전까지는 없습니다.'),
+(2, 1, '결제 수단 변경은 체크인 24시간 전까지 가능합니다. 호텔 프론트로 연락 주시면 도와드리겠습니다.'),
+(3, 1, '오션뷰 객실은 남쪽 방향을 바라보고 있으며, 바다가 한눈에 들어오는 전망을 제공합니다.'),
+(4, 1, '수영장은 오전 7시부터 오후 10시까지 이용 가능합니다. 단, 정기 점검 시간(오후 2시~4시)에는 이용이 제한됩니다.'),
+(5, 1, '체크인 시간은 오후 3시부터 오후 11시까지입니다. 단, 객실 상황에 따라 조기 체크인이 가능할 수 있습니다.'),
+(6, 1, '영수증 재발급은 호텔 프론트에서 가능합니다. 신분증을 지참해 주시면 도와드리겠습니다.');

@@ -108,12 +108,106 @@ else if ($current_tab === 'reservations') {
 
 // 후기 관리 탭
 else if ($current_tab === 'reviews') {
-    // 구현 예정
+    // 검색어가 있는 경우
+    if (isset($_GET['review_number_search']) && trim($_GET['review_number_search']) !== '') {
+        $keyword = (int)trim($_GET['review_number_search']);
+        
+        $count_sql = "SELECT COUNT(*) as total FROM reviews WHERE review_id = $keyword";
+        $count_result = $conn->query($count_sql);
+        $total_items = $count_result->fetch_assoc()['total'];
+        $total_pages = ceil($total_items / $items_per_page);
+        
+        $sql = "SELECT r.*, h.name as hotel_name, u.username 
+                FROM reviews r 
+                LEFT JOIN hotels h ON r.hotel_id = h.hotel_id 
+                LEFT JOIN users u ON r.user_id = u.user_id 
+                WHERE r.review_id = $keyword 
+                ORDER BY r.review_id ASC 
+                LIMIT $offset, $items_per_page";
+        $result = $conn->query($sql);
+        
+        $reviews = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $reviews[] = $row;
+            }
+        }
+    } 
+    // 검색어 없는 경우 전체 목록
+    else {
+        $count_sql = "SELECT COUNT(*) as total FROM reviews";
+        $count_result = $conn->query($count_sql);
+        $total_items = $count_result->fetch_assoc()['total'];
+        $total_pages = ceil($total_items / $items_per_page);
+        
+        $sql = "SELECT r.*, h.name as hotel_name, u.username 
+                FROM reviews r 
+                LEFT JOIN hotels h ON r.hotel_id = h.hotel_id 
+                LEFT JOIN users u ON r.user_id = u.user_id 
+                ORDER BY r.review_id ASC 
+                LIMIT $offset, $items_per_page";
+        $result = $conn->query($sql);
+        
+        $reviews = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $reviews[] = $row;
+            }
+        }
+    }
 }
 
 // 문의 관리 탭
 else if ($current_tab === 'inquiries') {
-    // 구현 예정
+    // 검색어가 있는 경우
+    if (isset($_GET['inquiry_number_search']) && trim($_GET['inquiry_number_search']) !== '') {
+        $keyword = (int)trim($_GET['inquiry_number_search']);
+        
+        $count_sql = "SELECT COUNT(*) as total FROM inquiries WHERE inquiry_id = $keyword";
+        $count_result = $conn->query($count_sql);
+        $total_items = $count_result->fetch_assoc()['total'];
+        $total_pages = ceil($total_items / $items_per_page);
+        
+        $sql = "SELECT i.*, u.username, 
+                CASE WHEN ir.response_id IS NOT NULL THEN 1 ELSE 0 END as is_answered 
+                FROM inquiries i 
+                LEFT JOIN users u ON i.user_id = u.user_id 
+                LEFT JOIN inquiry_responses ir ON i.inquiry_id = ir.inquiry_id 
+                WHERE i.inquiry_id = $keyword 
+                ORDER BY i.created_at DESC 
+                LIMIT $offset, $items_per_page";
+        $result = $conn->query($sql);
+        
+        $inquiries = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $inquiries[] = $row;
+            }
+        }
+    } 
+    // 검색어 없는 경우 전체 목록
+    else {
+        $count_sql = "SELECT COUNT(*) as total FROM inquiries";
+        $count_result = $conn->query($count_sql);
+        $total_items = $count_result->fetch_assoc()['total'];
+        $total_pages = ceil($total_items / $items_per_page);
+        
+        $sql = "SELECT i.*, u.username, 
+                CASE WHEN ir.response_id IS NOT NULL THEN 1 ELSE 0 END as is_answered 
+                FROM inquiries i 
+                LEFT JOIN users u ON i.user_id = u.user_id 
+                LEFT JOIN inquiry_responses ir ON i.inquiry_id = ir.inquiry_id 
+                ORDER BY i.inquiry_id ASC 
+                LIMIT $offset, $items_per_page";
+        $result = $conn->query($sql);
+        
+        $inquiries = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $inquiries[] = $row;
+            }
+        }
+    }
 }
 
 // 검색 타입에 따른 탭 결정

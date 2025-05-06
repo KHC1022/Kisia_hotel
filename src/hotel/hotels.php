@@ -10,22 +10,23 @@ include_once __DIR__ . '/../includes/hotels_info.php';
 
         <div class="hotels-search-sort-container">
             <div class="hotels-search-box">
-                <div class="hotels-search-row">
-                    <div class="hotels-search-input">
-                        <i class="fas fa-search"></i>
-                        <input class="hotels-search-input-input" type="text" placeholder="호텔 이름 또는 위치를 입력하세요">
+                <form id="searchForm" method="GET" action="">
+                    <div class="hotels-search-row">
+                        <div class="hotels-search-input">
+                            <i class="fas fa-search"></i>
+                            <input class="hotels-search-input-input" type="text" name="search" placeholder="호텔 이름 또는 위치를 입력하세요" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+                        </div>
+                        <button type="submit" class="style-search-btn">검색</button>
                     </div>
-                    <button class="style-search-btn">검색</button>
-                </div>
+                </form>
             </div>
             <div class="hotels-controls-row">
                 <div class="hotels-sort-controls">
                     <span class="hotels-sort-label">정렬:</span>
-                    <select class="hotels-sort-select">
-                        <option value="price-low">가격 낮은순</option>
-                        <option value="price-high">가격 높은순</option>
-                        <option value="rating">평점순</option>
-                        <option value="many_reviews">후기 많은순</option>
+                    <select class="hotels-sort-select" name="sort">
+                        <option value="price-low" <?= isset($_GET['sort']) && $_GET['sort'] === 'price-low' ? 'selected' : '' ?>>가격 낮은순</option>
+                        <option value="price-high" <?= isset($_GET['sort']) && $_GET['sort'] === 'price-high' ? 'selected' : '' ?>>가격 높은순</option>
+                        <option value="rating" <?= isset($_GET['sort']) && $_GET['sort'] === 'rating' ? 'selected' : '' ?>>평점순</option>
                     </select>
                 </div>
                 <div class="hotels-filter-controls">
@@ -39,19 +40,19 @@ include_once __DIR__ . '/../includes/hotels_info.php';
                                 <h4 class="hotels-filter-section-title">가격대</h4>
                                 <div class="hotels-filter-options">
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="price-0-100000">
+                                        <input type="radio" name="price" value="price-0-100000" <?= isset($_GET['price']) && $_GET['price'] === 'price-0-100000' ? 'checked' : '' ?>>
                                         <span>10만원 이하</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="price-100000-200000">
+                                        <input type="radio" name="price" value="price-100000-200000" <?= isset($_GET['price']) && $_GET['price'] === 'price-100000-200000' ? 'checked' : '' ?>>
                                         <span>10-20만원</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="price-200000-300000">
+                                        <input type="radio" name="price" value="price-200000-300000" <?= isset($_GET['price']) && $_GET['price'] === 'price-200000-300000' ? 'checked' : '' ?>>
                                         <span>20-30만원</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="price-300000-">
+                                        <input type="radio" name="price" value="price-300000-" <?= isset($_GET['price']) && $_GET['price'] === 'price-300000-' ? 'checked' : '' ?>>
                                         <span>30만원 이상</span>
                                     </label>
                                 </div>
@@ -60,34 +61,34 @@ include_once __DIR__ . '/../includes/hotels_info.php';
                                 <h4 class="hotels-filter-section-title">편의시설</h4>
                                 <div class="hotels-filter-options">
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="pool">
+                                        <input type="checkbox" name="facilities[]" value="pool" <?= isset($_GET['facilities']) && strpos($_GET['facilities'], 'pool') !== false ? 'checked' : '' ?>>
                                         <span>수영장</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="spa">
+                                        <input type="checkbox" name="facilities[]" value="spa" <?= isset($_GET['facilities']) && strpos($_GET['facilities'], 'spa') !== false ? 'checked' : '' ?>>
                                         <span>스파</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="fitness">
+                                        <input type="checkbox" name="facilities[]" value="fitness" <?= isset($_GET['facilities']) && strpos($_GET['facilities'], 'fitness') !== false ? 'checked' : '' ?>>
                                         <span>피트니스</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="restaurant">
+                                        <input type="checkbox" name="facilities[]" value="restaurant" <?= isset($_GET['facilities']) && strpos($_GET['facilities'], 'restaurant') !== false ? 'checked' : '' ?>>
                                         <span>레스토랑</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="parking">
+                                        <input type="checkbox" name="facilities[]" value="parking" <?= isset($_GET['facilities']) && strpos($_GET['facilities'], 'parking') !== false ? 'checked' : '' ?>>
                                         <span>주차</span>
                                     </label>
                                     <label class="hotels-filter-option">
-                                        <input type="checkbox" value="wifi">
+                                        <input type="checkbox" name="facilities[]" value="wifi" <?= isset($_GET['facilities']) && strpos($_GET['facilities'], 'wifi') !== false ? 'checked' : '' ?>>
                                         <span>와이파이</span>
                                     </label>
                                 </div>
                             </div>
                             <div class="hotels-filter-actions">
-                                <button class="hotels-reset-button">초기화</button>
-                                <button class="hotels-apply-button">적용</button>
+                                <button type="button" class="hotels-reset-button">초기화</button>
+                                <button type="button" class="hotels-apply-button">적용</button>
                             </div>
                         </div>
                     </div>
@@ -149,13 +150,16 @@ include_once __DIR__ . '/../includes/hotels_info.php';
         document.addEventListener('DOMContentLoaded', function() {
             const filterToggle = document.querySelector('.hotels-filter-toggle');
             const filterDropdown = document.querySelector('.hotels-filter-dropdown');
+            const searchForm = document.getElementById('searchForm');
+            const resetButton = document.querySelector('.hotels-reset-button');
+            const applyButton = document.querySelector('.hotels-apply-button');
+            const sortSelect = document.querySelector('.hotels-sort-select');
 
             filterToggle.addEventListener('click', function() {
                 this.classList.toggle('active');
                 filterDropdown.classList.toggle('active');
             });
 
-            // 필터 드롭다운 외부 클릭 시 닫기
             document.addEventListener('click', function(event) {
                 if (!filterToggle.contains(event.target) && !filterDropdown.contains(event.target)) {
                     filterToggle.classList.remove('active');
@@ -163,13 +167,53 @@ include_once __DIR__ . '/../includes/hotels_info.php';
                 }
             });
 
-            // 초기화 버튼 클릭 시 모든 체크박스 해제
-            const resetButton = document.querySelector('.hotels-reset-button');
             resetButton.addEventListener('click', function() {
+                const radioButtons = filterDropdown.querySelectorAll('input[type="radio"]');
                 const checkboxes = filterDropdown.querySelectorAll('input[type="checkbox"]');
+                radioButtons.forEach(radio => {
+                    radio.checked = false;
+                });
                 checkboxes.forEach(checkbox => {
                     checkbox.checked = false;
                 });
+            });
+
+            applyButton.addEventListener('click', function() {
+                const selectedPrice = document.querySelector('input[name="price"]:checked');
+                const selectedFacilities = document.querySelectorAll('input[name="facilities[]"]:checked');
+                const currentSearch = document.querySelector('input[name="search"]').value;
+                const currentSort = sortSelect.value;
+                
+                let params = new URLSearchParams();
+                if (currentSearch) params.append('search', currentSearch);
+                if (selectedPrice) params.append('price', selectedPrice.value);
+                if (currentSort) params.append('sort', currentSort);
+                
+                if (selectedFacilities.length > 0) {
+                    const facilities = Array.from(selectedFacilities).map(f => f.value);
+                    params.append('facilities', facilities.join(','));
+                }
+                
+                window.location.href = '?' + params.toString();
+            });
+
+            // 정렬 변경 시 자동 적용
+            sortSelect.addEventListener('change', function() {
+                const selectedPrice = document.querySelector('input[name="price"]:checked');
+                const selectedFacilities = document.querySelectorAll('input[name="facilities[]"]:checked');
+                const currentSearch = document.querySelector('input[name="search"]').value;
+                
+                let params = new URLSearchParams();
+                if (currentSearch) params.append('search', currentSearch);
+                if (selectedPrice) params.append('price', selectedPrice.value);
+                if (this.value) params.append('sort', this.value);
+                
+                if (selectedFacilities.length > 0) {
+                    const facilities = Array.from(selectedFacilities).map(f => f.value);
+                    params.append('facilities', facilities.join(','));
+                }
+                
+                window.location.href = '?' + params.toString();
             });
         });
     </script>

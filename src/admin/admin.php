@@ -206,29 +206,33 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                 <div class="table-container">
                     <table class="admin-table">
                         <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>호텔</th>
-                                <th>작성자</th>
-                                <th>평점</th>
-                                <th>작성일</th>
-                                <th>관리</th>
+                            <tr style="text-align: center;">
+                                <th style="width: 10%">번호</th>
+                                <th style="width: 20%">호텔</th>
+                                <th style="width: 15%">작성자</th>
+                                <th style="width: 10%">평점</th>
+                                <th style="width: 25%">내용</th>
+                                <th style="width: 15%">작성일</th>
+                                <th style="width: 15%">관리</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach ($reviews as $review): ?>
                             <tr>
-                                <td>1</td>
-                                <td>그랜드 럭셔리 호텔</td>
-                                <td>김철수</td>
-                                <td>5</td>
-                                <td>2024-04-01</td>
+                                <td><?= $review['review_id'] ?></td>
+                                <td><?= $review['hotel_name'] ?></td>
+                                <td><?= $review['username'] ?></td>
+                                <td><?= $review['rating'] ?></td>
+                                <td><?= mb_substr($review['content'], 0, 30) . (mb_strlen($review['content']) > 30 ? '...' : '') ?></td>
+                                <td><?= $review['created_at'] ?></td>
                                 <td>
                                     <form method="get" action="../action/admin_editDelete_action.php">
-                                        <button name="review_edit" class="action-btn edit" value="<?= $review['review_id'] ?>"><i class="fas fa-edit"></i></button>
+                                        <a href="../review/review_detail.php?review_id=<?= $review['review_id'] ?>" class="action-btn view"><i class="fas fa-eye"></i></a>
                                         <button name="review_delete" class="action-btn delete" value="<?= $review['review_id'] ?>"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -256,34 +260,65 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                 <div class="table-container">
                     <table class="admin-table">
                         <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>제목</th>
-                                <th>작성자</th>
-                                <th>작성일</th>
-                                <th>상태</th>
-                                <th>관리</th>
+                            <tr style="text-align: center;">
+                                <th style="width: 10%">번호</th>
+                                <th style="width: 10%">분류</th>
+                                <th style="width: 30%">제목</th>
+                                <th style="width: 15%">작성자</th>
+                                <th style="width: 20%">작성일</th>
+                                <th style="width: 10%">답변상태</th>
+                                <th style="width: 20%">관리</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach ($inquiries as $inquiry): ?>
                             <tr>
-                                <td>1</td>
-                                <td>예약 문의</td>
-                                <td>김철수</td>
-                                <td>2024-04-01</td>
-                                <td><span class="status pending">답변 대기</span></td>
+                                <td><?= $inquiry['inquiry_id'] ?></td>
+                                <td>
+                                    <?php
+                                    switch($inquiry['category']) {
+                                        case 'reservation':
+                                            echo '예약';
+                                            break;
+                                        case 'payment':
+                                            echo '결제';
+                                            break;
+                                        case 'room':
+                                            echo '객실';
+                                            break;
+                                        case 'other':
+                                            echo '기타';
+                                            break;
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php if ($inquiry['is_secret']): ?>
+                                        <span class="lock-icon">🔒</span>
+                                    <?php endif; ?>
+                                    <?= $inquiry['title'] ?>
+                                </td>
+                                <td><?= $inquiry['username'] ?></td>
+                                <td><?= $inquiry['created_at'] ?></td>
+                                <td>
+                                    <?php if ($inquiry['is_answered']): ?>
+                                        <span class="status-complete">답변완료</span>
+                                    <?php else: ?>
+                                        <span class="status-pending">미답변</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td>
                                     <form method="get" action="../action/admin_editDelete_action.php">
-                                        <button name="inquiry_edit" class="action-btn edit" value="<?= $inquiry['inquiry_id'] ?>"><i class="fas fa-edit"></i></button>
+                                        <a href="../inquiry/inquiry_detail.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="action-btn view"><i class="fas fa-eye"></i></a>
                                         <button name="inquiry_delete" class="action-btn delete" value="<?= $inquiry['inquiry_id'] ?>"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
                 <?php 
-                include_once __DIR__ . '/../includes/pagination.php';
                 if (isset($_GET['inquiry_number_search'])) {
                     searchPagination($page, $total_pages, 'inquiries', $_GET['inquiry_number_search']);
                 } else {

@@ -26,16 +26,7 @@ include_once __DIR__ . '/../action/login_check.php';
                 <div class="inquiry-form-group">
                     <label for="content">내용</label>
                     <textarea id="content" name="content" required></textarea>
-                </div>  
-                <!-- <div class="file-input-container">
-                    <label for="file">파일 첨부</label>
-                    <div class="file-input-box">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>파일을 업로드하려면 여기를 클릭하세요</p>
-                        <p class="text-muted">또는 파일을 여기에 드래그하세요</p>
-                        <input type="file" id="files" name="files[]" multiple>
-                    </div>
-                </div> -->
+                </div>
                 <div class="inquiry-form-group">
                     <label for="files">파일 첨부</label>
                         <input type="file" id="files" name="files[]" multiple>
@@ -45,11 +36,11 @@ include_once __DIR__ . '/../action/login_check.php';
                     <input type="checkbox" id="is_secret" name="is_secret" value="1">
                     비밀글로 등록합니다
                 </label>
-        </div>
                 <div class="inquiry-form-actions">
                     <a href="inquiry.php" class="inquiry-write-btn inquiry-cancel-btn">취소</a>
                     <button type="submit" class="inquiry-write-btn">등록</button>
                 </div>
+        </div>
             </form>
         </div>
     </main>

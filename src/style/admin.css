@@ -211,9 +211,10 @@
     color: #3498db;
 }
 
-.action-btn.delete:hover {
-    color: #dc3545;
+.action-btn.delete {
+    color: #ff5555;
 }
+
 
 /* 관리자 이름 스타일 */
 .admin-name {

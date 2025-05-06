@@ -2,12 +2,71 @@
 include_once __DIR__ . '/../includes/session.php';
 include_once __DIR__ . '/../includes/db_connection.php';
 
-$hotels = array(); // 배열 초기화
+$hotels = array();
+
+// 검색어와 필터 파라미터 가져오기
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$price_filter = isset($_GET['price']) ? $_GET['price'] : '';
+$facility_filters = isset($_GET['facilities']) ? explode(',', $_GET['facilities']) : array();
+$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
 
 $query = "SELECT h.*, 
           hf.pool, hf.spa, hf.fitness, hf.restaurant, hf.parking, hf.wifi
           FROM hotels h
-          LEFT JOIN hotel_facilities hf ON h.hotel_id = hf.hotel_id";
+          LEFT JOIN hotel_facilities hf ON h.hotel_id = hf.hotel_id
+          WHERE 1=1";
+
+// 검색어 조건
+if (!empty($search)) {
+    $search = $conn->real_escape_string($search);
+    $query .= " AND (h.name LIKE '%$search%' OR h.location LIKE '%$search%')";
+}
+
+// 가격 필터 조건
+if (!empty($price_filter)) {
+    switch ($price_filter) {
+        case 'price-0-100000':
+            $query .= " AND h.price_per_night <= 100000";
+            break;
+        case 'price-100000-200000':
+            $query .= " AND h.price_per_night > 100000 AND h.price_per_night <= 200000";
+            break;
+        case 'price-200000-300000':
+            $query .= " AND h.price_per_night > 200000 AND h.price_per_night <= 300000";
+            break;
+        case 'price-300000-':
+            $query .= " AND h.price_per_night > 300000";
+            break;
+    }
+}
+
+// 편의시설 필터 조건
+if (!empty($facility_filters)) {
+    foreach ($facility_filters as $facility) {
+        $facility = $conn->real_escape_string($facility);
+        $query .= " AND hf.$facility = 1";
+    }
+}
+
+// 정렬 조건
+if (!empty($sort)) {
+    switch ($sort) {
+        case 'price-low':
+            $query .= " ORDER BY h.price_per_night ASC";
+            break;
+        case 'price-high':
+            $query .= " ORDER BY h.price_per_night DESC";
+            break;
+        case 'rating':
+            $query .= " ORDER BY h.rating DESC";
+            break;
+        default:
+            $query .= " ORDER BY h.hotel_id DESC";
+    }
+} else {
+    $query .= " ORDER BY h.hotel_id ASC";
+}
+
 $result = $conn->query($query);
 
 if ($result && $result->num_rows > 0) {
