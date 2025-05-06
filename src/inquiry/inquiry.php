@@ -42,9 +42,10 @@ $page = $GLOBALS['page'] ?? 1;
             <tr>
                 <th style="width: 10%">번호</th>
                 <th style="width: 10%">분류</th>
-                <th style="width: 50%">제목</th>
+                <th style="width: 35%">제목</th>
                 <th style="width: 15%">작성자</th>
                 <th style="width: 15%">작성일</th>
+                <th style="width: 15%">답변여부</th>
             </tr>
         </thead>
         <tbody>
@@ -66,18 +67,21 @@ $page = $GLOBALS['page'] ?? 1;
                     </td>
                     <td><?= $inquiry['username'] ?></td>
                     <td><?= $inquiry['created_at'] ?></td>
+                    <td>
+                        <?php if ($inquiry['response']): ?>
+                            <span class="status-complete">답변완료</span>
+                        <?php else: ?>
+                            <span class="status-pending">미답변</span>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 
-    <div class="pagination">
-        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a href="?page=<?= $i ?>&sort=<?= $_GET['sort'] ?? 'recent' ?><?= !empty($_GET['keyword']) ? '&keyword=' . $_GET['keyword'] : '' ?>" 
-            <?= $i == $page ? 'style="font-weight:bold;"' : '' ?>>
-            <?= $i ?>
-            </a>
-        <?php endfor; ?>
-    </div>
+    <?php 
+    include_once __DIR__ . '/../includes/pagination.php';
+    pagination($total_inquiries, $limit);
+    ?>
 </main>
 <?php include_once __DIR__ . '/../includes/footer.php'; ?>

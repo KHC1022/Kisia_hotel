@@ -22,5 +22,5 @@ if (mysqli_num_rows($check_result) > 0) {
     mysqli_query($conn, $insert_sql);
 }
 
-echo "<script>location.href='../inquiry/inquiry_detail.php?inquiry_id=$inquiry_id';</script>";
+echo "<script>alert('답변이 수정되었습니다.'); location.href='../inquiry/inquiry_detail.php?inquiry_id=$inquiry_id';</script>";
 exit;

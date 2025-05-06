@@ -1,6 +1,6 @@
 <?php 
 include_once __DIR__ . '/../includes/header.php'; 
-include_once __DIR__ . '/../action/inquiry_detail_action.php'; // $inquiry, $response, $files 포함
+include_once __DIR__ . '/../action/inquiry_detail_action.php';
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,12 +11,11 @@ include_once __DIR__ . '/../action/inquiry_detail_action.php'; // $inquiry, $res
     <link rel="stylesheet" href="../style/inquiry-detail.css">
 </head>
 <body>
-<main class="board-container">
-    <div class="board-header">
-        <h1 class="board-title">문의 상세</h1>
-    </div>
-    
+<main class="board-container"> 
     <div class="inquiry-detail">
+            <div class="section-header">
+                <a href="inquiry.php" class="back-btn"><i class="fas fa-arrow-left"></i> 목록으로 돌아가기</a>
+            </div>
         <div class="inquiry-header">
             <h2 class="inquiry-title"><?= $inquiry['title'] ?></h2>
             <div class="inquiry-meta">
@@ -56,42 +55,37 @@ include_once __DIR__ . '/../action/inquiry_detail_action.php'; // $inquiry, $res
         <!-- 답변 표시 -->
         <?php if ($response): ?>
             <div class="answers-section">
-                <h3>답변</h3>
-                <div class="answer-item">
-                    <div class="answer-header">
-                        <span class="answer-writer">관리자</span>
-                        <span class="answer-date"><?= date('Y-m-d H:i', strtotime($response['created_at'])) ?></span>
-                    </div>
-                    <div class="answer-content">
-                        <p><?= nl2br($response['content']) ?></p>
+                <div class="inquiry-header">
+                    <h2 class="inquiry-title" style="color: #7851A9;">답변</h2>
+                    <div class="inquiry-meta">
+                        <span class="writer">작성자 : 관리자</span>
+                        <span class="date">작성일: <?= date('Y-m-d H:i', strtotime($response['created_at'])) ?></span>
                     </div>
                 </div>
+                <div class="answer-content">
+                    <p><?= nl2br($response['content']) ?></p>
+                </div>
+                <!-- 관리자일 경우 수정 버튼 -->
+                <?php if ($_SESSION['is_admin'] ?? false): ?>
+                    <div class="admin-actions">
+                    <a href="inquiry_response_edit.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="edit-btn">답변 수정</a>
+                    </div>
+                <?php endif; ?>
             </div>
-
-            <!-- 관리자일 경우 수정 버튼 -->
-            <?php if ($_SESSION['is_admin'] ?? false): ?>
-                <div class="admin-actions" style="margin-top: 1rem;">
-                <a href="inquiry_response_edit.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="edit-btn">답변 수정</a>
-                </div>
-            <?php endif; ?>
         
         <?php elseif ($_SESSION['is_admin'] ?? false): ?>
             <!-- 관리자일 경우 답변 작성 폼 -->
             <div class="admin-answer-form">
-                <h3>답변 작성</h3>
+                <h2>답변 작성</h2>
                 <form action="../action/inquiry_response_action.php" method="get">
                     <input type="hidden" name="inquiry_id" value="<?= $inquiry['inquiry_id'] ?>">
                     <textarea name="content" rows="6" style="width:100%;" required></textarea>
-                    <div style="margin-top: 0.5rem;">
+                    <div style="margin-top: 0.5rem; text-align: right;">
                         <button type="submit" class="edit-btn">등록</button>
                     </div>
                 </form>
             </div>
         <?php endif; ?>
-    </div>
-
-    <div class="board-actions">
-        <a href="inquiry.php" class="list-btn">목록으로</a>
     </div>
 </main>
 <?php include_once __DIR__ . '/../includes/footer.php'; ?>

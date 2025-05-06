@@ -262,4 +262,25 @@
     .inquiry-form-group select {
         width: 100%;
     }
+}
+
+.status-complete,
+.status-pending {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    width: 80px;
+    text-align: center;
+}
+
+.status-complete {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-pending {
+    background-color: #fff3e0;
+    color: #ef6c00;
 } 
