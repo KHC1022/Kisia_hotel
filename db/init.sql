@@ -138,6 +138,16 @@ CREATE TABLE event_comments (
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
+-- 12. 문의 게시판(파일 업로드)
+CREATE TABLE inquiry_files (
+    file_id INT AUTO_INCREMENT PRIMARY KEY,
+    inquiry_id INT NOT NULL,
+    file_name VARCHAR(255) NOT NULL,        -- 원본 파일명
+    file_path VARCHAR(255) NOT NULL,        -- 저장된 서버 경로
+    uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (inquiry_id) REFERENCES inquiries(inquiry_id) ON DELETE CASCADE
+);
+
 SET NAMES utf8mb4;
 
 -- 사용자 계정 추가
