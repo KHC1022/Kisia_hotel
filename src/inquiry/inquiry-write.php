@@ -38,9 +38,14 @@ include_once __DIR__ . '/../action/login_check.php';
                 </div> -->
                 <div class="inquiry-form-group">
                     <label for="files">파일 첨부</label>
-                    <input type="file" id="files" name="files[]" multiple>
-                    </div>
+                        <input type="file" id="files" name="files[]" multiple>
                 </div>
+                <div class="inquiry-form-group"></div>
+                <label for="secret">
+                    <input type="checkbox" id="is_secret" name="is_secret" value="1">
+                    비밀글로 등록합니다
+                </label>
+        </div>
                 <div class="inquiry-form-actions">
                     <a href="inquiry.php" class="inquiry-write-btn inquiry-cancel-btn">취소</a>
                     <button type="submit" class="inquiry-write-btn">등록</button>

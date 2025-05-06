@@ -6,9 +6,10 @@ $user_id = $_SESSION['user_id'];
 $category = $_POST['category'];
 $title = $_POST['title'];
 $content = $_POST['content'];
+$is_secret=isset($_POST['is_secret']) ? 1 : 0;
 
-mysqli_query($conn, "INSERT INTO inquiries (user_id, category, title, content) 
-VALUES ('$user_id', '$category', '$title', '$content')");
+mysqli_query($conn, "INSERT INTO inquiries (user_id, category, title, content, is_secret) 
+VALUES ('$user_id', '$category', '$title', '$content', '$is_secret')");
 
 $inquiry_id = mysqli_insert_id($conn);
 

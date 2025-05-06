@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . '/../includes/db_connection.php';
+include_once __DIR__ . '/../includes/session.php';
 
 $inquiry_id = isset($_GET['inquiry_id']) ? (int)$_GET['inquiry_id'] : 0;
 
@@ -21,6 +22,17 @@ $inquiry = mysqli_fetch_assoc($result);
 if (!$inquiry) {
     echo "<script>alert('존재하지 않는 문의입니다.'); history.back();</script>";
     exit;
+}
+
+// ✅ 비밀글 접근 제한 처리
+$current_user_id = $_SESSION['user_id'] ?? null;
+$is_admin = $_SESSION['is_admin'] ?? false;
+
+if ($inquiry['is_secret']) {
+    if (!$current_user_id || ($inquiry['user_id'] != $current_user_id && !$is_admin)) {
+        echo "<script>alert('비밀글은 작성자 또는 관리자만 열람할 수 있습니다.'); history.back();</script>";
+        exit;
+    }
 }
 
 // 답변 조회
@@ -45,3 +57,8 @@ $files = [];
 while ($file_row = mysqli_fetch_assoc($file_result)) {
     $files[] = $file_row;
 }
+
+// 뷰에서 사용하도록 전역 변수에 할당
+$GLOBALS['inquiry'] = $inquiry;
+$GLOBALS['response'] = $response;
+$GLOBALS['files'] = $files;
