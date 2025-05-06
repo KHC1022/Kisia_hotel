@@ -21,10 +21,10 @@ $inquiry_list = [];
 
 if ($keyword !== '') {
     $sql = "
-        SELECT i.inquiry_id, i.category, i.title, i.created_at, u.username
+        SELECT i.inquiry_id, i.category, i.title, i.created_at, i.is_secret, u.username
         FROM inquiries i
         JOIN users u ON i.user_id = u.user_id
-        WHERE i.title LIKE '%$keyword%'
+        WHERE i.title LIKE '%$keyword%' 
         ORDER BY i.inquiry_id $order_by
     ";
     $result = mysqli_query($conn, $sql);
@@ -41,7 +41,7 @@ if ($keyword !== '') {
     $total_pages = ceil($total_inquiries / $limit);
 
     $sql = "
-        SELECT i.inquiry_id, i.category, i.title, i.created_at, u.username
+        SELECT i.inquiry_id, i.category, i.title, i.created_at, i.is_secret, u.username
         FROM inquiries i
         JOIN users u ON i.user_id = u.user_id
         ORDER BY i.inquiry_id $order_by
@@ -61,6 +61,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         'title' => $row['title'],
         'username' => $row['username'],
         'created_at' => $row['created_at'],
+        'is_secret' => $row['is_secret'],
         'response' => $response
     ];
 }

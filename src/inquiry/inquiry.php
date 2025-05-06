@@ -57,6 +57,9 @@ $page = $GLOBALS['page'] ?? 1;
                     <td><?= $display_num-- ?></td>
                     <td><?= $inquiry['category'] ?></td>
                     <td>
+                        <?php if ($inquiry['is_secret']): ?>
+                            <span class="lock-icon">🔒</span>
+                        <?php endif; ?>
                         <a href="inquiry_detail.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>">
                             <?= $inquiry['title'] ?>
                         </a>
