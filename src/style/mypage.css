@@ -463,3 +463,12 @@
     color: #fff;
     border-color: #7851A9;
 } 
+.readonly-input {
+    background-color: #f9f9f9; /* 입력 불가능한 느낌 */
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: normal;
+}

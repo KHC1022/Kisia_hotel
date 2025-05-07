@@ -1,5 +1,9 @@
 <?php 
+include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/../includes/db_connection.php';
 include_once __DIR__ . '/../includes/header.php';
+include_once __DIR__ . '/../action/mypage_action.php';
+$users = $GLOBALS['users'];
 ?>
 
     <main class="mypage-container">
@@ -11,8 +15,8 @@ include_once __DIR__ . '/../includes/header.php';
                         <i class="fas fa-camera"></i>
                     </button>
                 </div>
-                <h2 id="userName">홍길동</h2>
-                <p id="userEmail">user@example.com</p>
+                <h2 id="username"><?= $users['username']?></h2>
+                <p id="email"><?= $users['email']?></p>
             </div>
             <nav class="mypage-nav">
                 <ul>
@@ -63,26 +67,30 @@ include_once __DIR__ . '/../includes/header.php';
             <section id="profile" class="content-section">
                 <h2>여행객 정보</h2>
                 <div class="profile-form-container">
-                    <form class="profile-form">
+                    <form class="profile-form" method="get" action="../action/mypage_change_action.php">
                         <div class="form-group">
-                            <label for="name">이름</label>
-                            <input type="text" id="name" value="홍길동">
+                            <label for="username">이름</label>
+                            <input type="text" id="username" name="username" value="<?= $users['username']?>" readonly class="readonly-input">
                         </div>
                         <div class="form-group">
                             <label for="email">이메일</label>
-                            <input type="email" id="email" value="user@example.com">
+                            <input type="email" id="email" value="<?= $users['email'] ?>" readonly class="readonly-input">
                         </div>
                         <div class="form-group">
                             <label for="phone">전화번호</label>
-                            <input type="tel" id="phone" value="010-1234-5678">
+                            <input type="tel" id="phone" value="<?= $users['phone'] ?>" readonly class="readonly-input">
                         </div>
                         <div class="form-group">
-                            <label for="password">비밀번호 변경</label>
-                            <input type="password" id="password" placeholder="새 비밀번호">
+                            <label for="password">기존 비밀번호</label>
+                            <input type="password" id="password" name="password" placeholder="기존 비밀번호">
                         </div>
                         <div class="form-group">
-                            <label for="passwordConfirm">비밀번호 확인</label>
-                            <input type="password" id="passwordConfirm" placeholder="새 비밀번호 확인">
+                            <label for="new_password">비밀번호 변경</label>
+                            <input type="password" id="new_password" name="new_password"  placeholder="새 비밀번호">
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password_check">비밀번호 확인</label>
+                            <input type="password" id="new_password_check" name="new_password_check" placeholder="새 비밀번호 확인">
                         </div>
                         <button type="submit" class="save-btn">저장</button>
                     </form>
