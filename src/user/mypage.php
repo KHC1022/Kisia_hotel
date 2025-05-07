@@ -9,12 +9,21 @@ $users = $GLOBALS['users'];
     <main class="mypage-container">
         <div class="mypage-sidebar">
             <div class="profile-section">
-                <div class="profile-image-container">
-                    <img src="https://via.placeholder.com/150" alt="프로필 사진" id="profileImage">
-                    <button class="change-profile-btn">
-                        <i class="fas fa-camera"></i>
-                    </button>
-                </div>
+                <form method="post" action="../action/upload_profile_image.php" enctype="multipart/form-data">
+                    <?php
+                    $has_image = !empty($users['profile_image']) ? 'has-image' : '';
+                    $profile_img = !empty($users['profile_image']) 
+                        ? '/' . $users['profile_image']
+                        : 'https://via.placeholder.com/150';
+                    ?>
+                    <div class="profile-image-container <?= $has_image ?>">
+                        <img src="<?= $profile_img ?>" alt="프로필 사진" id="profileImage" class="profile-image">
+                        <label for="profileUpload" class="change-profile-btn">
+                            <i class="fas fa-camera"></i>
+                        </label>
+                        <input type="file" id="profileUpload" name="profile_image" accept="image/*" style="display: none;" onchange="this.form.submit()">
+                    </div>
+                </form>
                 <h2 id="username"><?= $users['username']?></h2>
                 <p id="email"><?= $users['email']?></p>
             </div>
