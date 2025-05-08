@@ -133,6 +133,13 @@ include_once __DIR__ . '/../includes/hotels_info.php';
                         </div>
                         <div class="hotel-actions">
                             <a href="hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="style-detail-btn">상세보기</a>
+                            <form method="get" action="../action/wishlist_action.php" style="display:inline;">
+                                <input type="hidden" name="hotel_id" value="<?= $hotel['hotel_id'] ?>">
+                                <button type="submit" class="style-wishlist-btn">
+                                    <i class="fas fa-heart"></i>
+                                    찜
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

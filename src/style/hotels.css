@@ -439,3 +439,29 @@
         font-size: 0.8rem;
     }
 } 
+.style-wishlist-btn {
+    background: #fff;
+    border: 1.5px solid #dc3545;
+    color: #dc3545;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* 아이콘 + 텍스트 중앙 정렬 */
+    gap: 6px;
+    height: 38px; /* 버튼 높이 고정 */
+    line-height: 1;
+    transition: all 0.3s;
+}
+
+.style-wishlist-btn i {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.style-wishlist-btn:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
