@@ -115,47 +115,24 @@ $users = $GLOBALS['users'];
                             <th>호텔 이름</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="hotel-row">
-                                    <span>그랜드 럭셔리 호텔</span>
-                                    <div class="button-group">
-                                        <button class="detail-btn" onclick="window.location.href='../hotel/hotel-detail.php'">상세보기</button>
-                                        <button class="delete-btn">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                        <tbody>
+                        <?php foreach ($wishlist_items as $hotel): ?>
+                            <tr>
+                                <td>
+                                    <div class="hotel-row">
+                                        <h2 class="hotel-name"><?=$hotel['name'] ?></h2>
+                                        <div class="button-group">
+                                            <a href="../hotel/hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="detail-btn">상세보기</a>
+                                            <form method="get" action="../action/wishlist_delete.php" style="display:inline;">
+                                                <input type="hidden" name="hotel_id" value="<?= $hotel['hotel_id'] ?>">
+                                                <button type="submit" class="delete-btn"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="hotel-row">
-                                    <span>시그니처 호텔</span>
-                                    <div class="button-group">
-                                        <button class="detail-btn" onclick="window.location.href='../hotel/hotel-detail.php'">상세보기</button>
-                                        <button class="delete-btn">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="hotel-row">
-                                    <span>파크 프리미엄 호텔</span>
-                                    <div class="button-group">
-                                        <button class="detail-btn" onclick="window.location.href='../hotel/hotel-detail.php'">상세보기</button>
-                                        <button class="delete-btn">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
                 </table>
             </section>
         </div>
