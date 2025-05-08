@@ -377,10 +377,10 @@
     margin-top: 2rem;
 }
 
-.review-actions {
+.detail-review-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 6.5rem;
 }
 
 .like-button {

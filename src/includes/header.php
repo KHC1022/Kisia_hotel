@@ -20,6 +20,7 @@ include_once __DIR__ . '/../includes/pagination.php';
     <link rel="stylesheet" href="../style/admin.css">
     <link rel="stylesheet" href="../style/payment.css">
     <link rel="stylesheet" href="../style/hotel-detail.css">
+    <link rel="stylesheet" href="../style/hotel-add.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>

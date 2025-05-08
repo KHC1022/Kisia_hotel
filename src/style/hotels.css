@@ -412,6 +412,28 @@
     color: #000;
 }
 
+.no-results {
+    width: 100%;
+    text-align: center;
+    padding: 50px 0;
+    font-size: 1.2rem;
+    color: #666;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.no-results::before {
+    content: '\f002';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    display: block;
+    font-size: 2.5rem;
+    color: #999;
+    margin-bottom: 15px;
+}
+
 @media (max-width: 768px) {
     .hotels-container {
         padding: 1rem;
@@ -451,7 +473,7 @@
     align-items: center;
     justify-content: center; /* 아이콘 + 텍스트 중앙 정렬 */
     gap: 6px;
-    height: 38px; /* 버튼 높이 고정 */
+    height: 50px; /* 버튼 높이 고정 */
     line-height: 1;
     transition: all 0.3s;
 }

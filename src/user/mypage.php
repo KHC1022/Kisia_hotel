@@ -11,10 +11,10 @@ $users = $GLOBALS['users'];
             <div class="profile-section">
                 <form method="post" action="../action/upload_profile_image.php" enctype="multipart/form-data">
                     <?php
-                    $has_image = !empty($users['profile_image']) ? 'has-image' : '';
-                    $profile_img = !empty($users['profile_image']) 
-                        ? '/' . $users['profile_image']
-                        : 'https://via.placeholder.com/150';
+                        $has_image = !empty($users['profile_image']) ? 'has-image' : '';
+                        $profile_img = !empty($users['profile_image']) 
+                        ? $users['profile_image']
+                        : '/image/default_profile.jpg';
                     ?>
                     <div class="profile-image-container <?= $has_image ?>">
                         <img src="<?= $profile_img ?>" alt="프로필 사진" id="profileImage" class="profile-image">
@@ -112,7 +112,8 @@ $users = $GLOBALS['users'];
                 <table class="wishlist-table">
                     <thead>
                         <tr>
-                            <th>호텔 이름</th>
+                            <th width="90%">호텔 이름</th>
+                            <th width="10%" style="padding-left: 25px;">관리</th>
                         </tr>
                     </thead>
                         <tbody>
@@ -121,13 +122,15 @@ $users = $GLOBALS['users'];
                                 <td>
                                     <div class="hotel-row">
                                         <h2 class="hotel-name"><?=$hotel['name'] ?></h2>
-                                        <div class="button-group">
-                                            <a href="../hotel/hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="detail-btn">상세보기</a>
-                                            <form method="get" action="../action/wishlist_delete.php" style="display:inline;">
-                                                <input type="hidden" name="hotel_id" value="<?= $hotel['hotel_id'] ?>">
-                                                <button type="submit" class="delete-btn"><i class="fas fa-trash"></i></button>
-                                            </form>
-                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button-group">
+                                        <a href="../hotel/hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="detail-btn">상세보기</a>
+                                        <form method="get" action="../action/wishlist_delete.php" style="display:inline;">
+                                            <input type="hidden" name="hotel_id" value="<?= $hotel['hotel_id'] ?>">
+                                            <button type="submit" class="delete-btn"><i class="fas fa-trash"></i></button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -148,14 +151,11 @@ $users = $GLOBALS['users'];
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     
-                    // Remove active class from all links and sections
                     navLinks.forEach(l => l.classList.remove('active'));
                     contentSections.forEach(section => section.classList.remove('active'));
                     
-                    // Add active class to clicked link
                     this.classList.add('active');
                     
-                    // Show corresponding section
                     const targetTab = this.getAttribute('data-tab');
                     document.getElementById(targetTab).classList.add('active');
                 });

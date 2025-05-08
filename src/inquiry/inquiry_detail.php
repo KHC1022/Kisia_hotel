@@ -13,9 +13,9 @@ include_once __DIR__ . '/../action/inquiry_detail_action.php';
 <body>
 <main class="board-container"> 
     <div class="inquiry-detail">
-            <div class="section-header">
-                <a href="inquiry.php" class="back-btn"><i class="fas fa-arrow-left"></i> 목록으로 돌아가기</a>
-            </div>
+        <div class="inquiry-section-header">
+            <a href="inquiry.php" class="inquiry-back-btn"><i class="fas fa-arrow-left"></i> 목록으로 돌아가기</a>
+        </div>
         <div class="inquiry-header">
             <h2 class="inquiry-title"><?= $inquiry['title'] ?></h2>
             <div class="inquiry-meta">
@@ -44,10 +44,10 @@ include_once __DIR__ . '/../action/inquiry_detail_action.php';
         <!-- 작성자 또는 관리자 수정/삭제 -->
         <?php if ((isset($_SESSION['user_id']) && $_SESSION['user_id'] == $inquiry['user_id']) || ($_SESSION['is_admin'] ?? false)): ?>
         <div class="inquiry-actions">
-            <a href="inquiry_edit.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="edit-btn">수정</a>
+            <a href="inquiry_edit.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="inquiry-edit-btn">수정</a>
             <form action="../action/inquiry_delete_action.php" method="get" onsubmit="return confirm('정말 삭제하시겠습니까?');" style="display:inline;">
                 <input type="hidden" name="inquiry_id" value="<?= $inquiry['inquiry_id'] ?>">
-                <button type="submit" class="delete-btn">삭제</button>
+                <button type="submit" class="inquiry-delete-btn">삭제</button>
             </form>
         </div>
         <?php endif; ?>
@@ -68,7 +68,7 @@ include_once __DIR__ . '/../action/inquiry_detail_action.php';
                 <!-- 관리자일 경우 수정 버튼 -->
                 <?php if ($_SESSION['is_admin'] ?? false): ?>
                     <div class="admin-actions">
-                    <a href="inquiry_response_edit.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="edit-btn">답변 수정</a>
+                    <a href="inquiry_response_edit.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="inquiry-edit-btn">답변 수정</a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -81,7 +81,7 @@ include_once __DIR__ . '/../action/inquiry_detail_action.php';
                     <input type="hidden" name="inquiry_id" value="<?= $inquiry['inquiry_id'] ?>">
                     <textarea name="content" rows="6" style="width:100%;" required></textarea>
                     <div style="margin-top: 0.5rem; text-align: right;">
-                        <button type="submit" class="edit-btn">등록</button>
+                        <button type="submit" class="inquiry-edit-btn">등록</button>
                     </div>
                 </form>
             </div>

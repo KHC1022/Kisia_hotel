@@ -183,6 +183,9 @@ INSERT INTO users (username, real_id, password, email, phone, created_at, is_adm
 ('윤지훈', 'jihun', 'jihun606', 'jihun@naver.com', '010-3333-9999', '2024-01-26 16:05:00', 0, 1, 1),
 ('장수아', 'sua', 'sua707', 'sua@gmail.com', '010-3333-0000', '2024-01-27 11:40:00', 0, 1, 0);
 
+UPDATE users SET profile_image='/uploads/discord.png' WHERE user_id=3;
+UPDATE users SET profile_image='/uploads/discord.png' WHERE user_id=18;
+
 -- 호텔 데이터 추가
 INSERT INTO hotels (name, location, description, price_per_night, rating, main_image, detail_image_1, detail_image_2, detail_image_3, detail_image_4) VALUES
 ('그랜드 인터컨티넨탈 서울', '한국, 서울', '남산의 전망과 도심의 활기를 모두 누릴 수 있는 럭셔리 호텔입니다. 최고급 시설과 맞춤형 서비스로 잊지 못할 특별한 경험을 제공합니다. 5성급 레스토랑과 스파, 피트니스 센터를 갖추고 있어 도심 속에서도 완벽한 휴식을 즐길 수 있습니다.', 250000, 0.0, '/image/grand_hotel.jpg', '/image/grand_hotel_1.jpg', '/image/grand_hotel_2.jpg', '/image/grand_hotel_3.jpg', '/image/grand_hotel_4.jpg'),

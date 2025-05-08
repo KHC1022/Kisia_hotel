@@ -8,23 +8,25 @@ include_once __DIR__ . '/includes/hotels_info.php';
             <div class="style-search-container">
                 <h1>완벽한 숙소를 찾아보세요</h1>
                 <div class="style-search-box">
-                    <div class="style-search-input">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" placeholder="어디로 가시나요?">
-                    </div>
-                    <div class="style-search-input">
-                        <i class="fas fa-calendar"></i>
-                        <input type="date" placeholder="체크인 날짜">
-                    </div>
-                    <div class="style-search-input">
-                        <i class="fas fa-calendar"></i>
-                        <input type="date" placeholder="체크아웃 날짜">
-                    </div>
-                    <div class="style-search-input">
-                        <i class="fas fa-user"></i>
-                        <input type="number" placeholder="게스트 수" min="1" max="10">
-                    </div>
-                    <button class="style-search-btn">검색</button>
+                    <form action="hotel/hotels.php" method="GET">
+                        <div class="style-search-input">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" name="search" placeholder="어디로 가시나요?" required>
+                        </div>
+                        <div class="style-search-input">
+                            <i class="fas fa-calendar"></i>
+                            <input type="date" name="checkin" placeholder="체크인 날짜">
+                        </div>
+                        <div class="style-search-input">
+                            <i class="fas fa-calendar"></i>
+                            <input type="date" name="checkout" placeholder="체크아웃 날짜">
+                        </div>
+                        <div class="style-search-input">
+                            <i class="fas fa-user"></i>
+                            <input type="number" name="guests" placeholder="게스트 수" min="1" max="4" value="1">
+                        </div>
+                        <button type="submit" class="style-search-btn" style="width: 100%;">검색</button>
+                    </form>
                 </div>
                 <div id="searchResults" class="search-results"></div>
             </div>

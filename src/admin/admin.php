@@ -4,9 +4,9 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
 ?>
 
     <main class="admin-container">
-        <div class="admin-sidebar">
-            <h2>관리자 메뉴</h2>
-            <ul class="admin-menu">
+        <h2 class="admin-title">관리자 메뉴</h2>
+        <div class="admin-menu" style="width: 80%;">
+            <ul>
                 <li class="active" data-tab="users">
                     <i class="fas fa-users"></i>
                     회원 관리
@@ -35,13 +35,15 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
             <section id="users" class="content-section active">
                 <div class="section-header">
                     <h2>회원 관리</h2>
-                    <form method="get" action="../includes/info_for_admin.php">
-                        <input type="hidden" name="search" value="user_name_search">
-                        <div class="admin-search-box">
-                            <input type="text" name="user_name_search" placeholder="회원 이름 검색...">
-                            <button><i class="fas fa-search"></i></button>
-                        </div>
-                    </form>
+                    <div class="search-form-container">
+                        <form method="get" action="../includes/info_for_admin.php">
+                            <input type="hidden" name="search" value="user_name_search">
+                            <div class="admin-search-box">
+                                <input type="text" name="user_name_search" placeholder="회원 이름 검색...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table class="admin-table">
@@ -54,7 +56,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <th>이메일</th>
                                 <th>전화번호</th>
                                 <th>가입일</th>
-                                <th>관리</th>
+                                <th style="padding-left: 30px;">관리</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,16 +92,18 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
             <section id="hotels" class="content-section">
                 <div class="section-header">
                     <h2>호텔 관리</h2>
-                    <form method="get" action="../includes/info_for_admin.php">
-                        <input type="hidden" name="search" value="hotel_name_search">
-                        <div class="admin-search-box">
-                            <input type="text" name="hotel_name_search" placeholder="호텔 이름 검색...">
-                            <button><i class="fas fa-search"></i></button>
+                    <div class="search-form-container">
+                        <div class="section-actions">
+                            <a href="hotel-add.php" class="add-btn"><i class="fas fa-plus"></i> 호텔 추가</a>
                         </div>
-                    </form>
-                </div>
-                <div class="section-actions">
-                    <a href="hotel-add.php" class="add-btn"><i class="fas fa-plus"></i> 호텔 추가</a>
+                        <form method="get" action="../includes/info_for_admin.php">
+                            <input type="hidden" name="search" value="hotel_name_search">
+                            <div class="admin-search-box">
+                                <input type="text" name="hotel_name_search" placeholder="호텔 이름 검색...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table class="admin-table">
@@ -109,7 +113,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <th>호텔명</th>
                                 <th>위치</th>
                                 <th>객실 수</th>
-                                <th>관리</th>
+                                <th style="padding-left: 35px;">관리</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -118,7 +122,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <td><?= $hotel['hotel_id'] ?></td>
                                 <td><?= $hotel['name'] ?></td>
                                 <td><?= $hotel['location'] ?></td>
-                                <td><?= $hotel['room_count'] ?></td>
+                                <td style="padding-left: 40px;"><?= $hotel['room_count'] ?></td>
                                 <td>
                                     <form method="get" action="../action/admin_editDelete_action.php">
                                         <button name="hotel_edit" class="action-btn edit" value="<?= $hotel['hotel_id'] ?>"><i class="fas fa-edit"></i></button>
@@ -143,13 +147,15 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
             <section id="reservations" class="content-section">
                 <div class="section-header">
                     <h2>예약 관리</h2>
-                    <form method="get" action="../includes/info_for_admin.php">
-                        <input type="hidden" name="search" value="reservation_number_search">
-                        <div class="admin-search-box">
-                            <input type="text" name="reservation_number_search" placeholder="예약 번호 검색...">
-                            <button><i class="fas fa-search"></i></button>
-                        </div>
-                    </form>
+                    <div class="search-form-container">
+                        <form method="get" action="../includes/info_for_admin.php">
+                            <input type="hidden" name="search" value="reservation_number_search">
+                            <div class="admin-search-box">
+                                <input type="text" name="reservation_number_search" placeholder="예약 번호 검색...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table class="admin-table">
@@ -160,7 +166,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <th>고객명</th>
                                 <th>체크인</th>
                                 <th>체크아웃</th>
-                                <th>관리</th>
+                                <th style="padding-left: 30px;">관리</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -195,13 +201,15 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
             <section id="reviews" class="content-section">
                 <div class="section-header">
                     <h2>후기 관리</h2>
-                    <form method="get" action="../includes/info_for_admin.php">
-                        <input type="hidden" name="search" value="review_number_search">
-                        <div class="admin-search-box">
-                            <input type="text" name="review_number_search" placeholder="후기 번호 검색...">
-                            <button><i class="fas fa-search"></i></button>
-                        </div>
-                    </form>
+                    <div class="search-form-container">
+                        <form method="get" action="../includes/info_for_admin.php">
+                            <input type="hidden" name="search" value="review_number_search">
+                            <div class="admin-search-box">
+                                <input type="text" name="review_number_search" placeholder="후기 번호 검색...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table class="admin-table">
@@ -213,7 +221,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <th style="width: 10%">평점</th>
                                 <th style="width: 25%">내용</th>
                                 <th style="width: 15%">작성일</th>
-                                <th style="width: 15%">관리</th>
+                                <th  style="padding-left: 30px;">관리</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -249,13 +257,15 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
             <section id="inquiries" class="content-section">
                 <div class="section-header">
                     <h2>문의 관리</h2>
-                    <form method="get" action="../includes/info_for_admin.php">
-                        <input type="hidden" name="search" value="inquiry_number_search">
-                        <div class="admin-search-box">
-                            <input type="text" name="inquiry_number_search" placeholder="문의 번호 검색...">
-                            <button><i class="fas fa-search"></i></button>
-                        </div>
-                    </form>
+                    <div class="search-form-container">
+                        <form method="get" action="../includes/info_for_admin.php">
+                            <input type="hidden" name="search" value="inquiry_number_search">
+                            <div class="admin-search-box">
+                                <input type="text" name="inquiry_number_search" placeholder="문의 번호 검색...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table class="admin-table">
