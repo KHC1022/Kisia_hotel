@@ -4,12 +4,13 @@ include_once __DIR__ . '/../includes/db_connection.php';
 
 $hotels = array();
 
-// 검색어와 필터 파라미터 가져오기
+// 검색어 및 필터 파라미터 가져오기
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $price_filter = isset($_GET['price']) ? $_GET['price'] : '';
-$facility_filters = isset($_GET['facilities']) ? explode(',', $_GET['facilities']) : array();
+$facility_filters = isset($_GET['facilities']) ? (is_array($_GET['facilities']) ? $_GET['facilities'] : explode(',', $_GET['facilities'])) : array();
 $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
 
+// 필터링된 호텔 목록 가져오기
 $query = "SELECT h.*, 
           hf.pool, hf.spa, hf.fitness, hf.restaurant, hf.parking, hf.wifi
           FROM hotels h
@@ -52,16 +53,19 @@ if (!empty($facility_filters)) {
 if (!empty($sort)) {
     switch ($sort) {
         case 'price-low':
-            $query .= " ORDER BY h.price_per_night ASC";
+            $query .= " ORDER BY h.price_per_night ASC, h.hotel_id ASC";
             break;
         case 'price-high':
-            $query .= " ORDER BY h.price_per_night DESC";
+            $query .= " ORDER BY h.price_per_night DESC, h.hotel_id ASC";
             break;
         case 'rating':
-            $query .= " ORDER BY h.rating DESC";
+            $query .= " ORDER BY h.rating DESC, h.hotel_id ASC";
+            break;
+        case 'hotel-id':
+            $query .= " ORDER BY h.hotel_id ASC";
             break;
         default:
-            $query .= " ORDER BY h.hotel_id DESC";
+            $query .= " ORDER BY h.hotel_id ASC";
     }
 } else {
     $query .= " ORDER BY h.hotel_id ASC";
@@ -79,13 +83,9 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $page = max(1, $page);
 
 $total_hotels = count($hotels);
-
 $total_pages = ceil($total_hotels / 9);
-
 $start_index = ($page - 1) * 9;
 $current_hotels = array_slice($hotels, $start_index, 9);
-
-
 
 // 추천 호텔
 $featured_query = "SELECT h.*, 

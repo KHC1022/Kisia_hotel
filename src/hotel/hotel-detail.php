@@ -181,7 +181,7 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
                             <div class="review-text">
                                 <?php echo $review['content']; ?>
                             </div>
-                            <div class="review-actions" style="margin-left: 25rem;">
+                            <div class="detail-review-actions" style="margin-left: 25rem;">
                                 <a href="../action/helpful_action.php?review_id=<?php echo $review['review_id']; ?>&action=helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
                                     <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(<?php echo $review['count_is_helpful']; ?>)</span>
                                 </a>
@@ -201,15 +201,15 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
                     <form class="booking-form" action="../user/payment.php">
                         <div class="form-group">
                             <label for="check-in">체크인</label>
-                            <input type="date" id="check-in" required>
+                            <input type="date" id="check-in" name="checkin" value="<?= isset($_GET['checkin']) ? $_GET['checkin'] : '' ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="check-out">체크아웃</label>
-                            <input type="date" id="check-out" required>
+                            <input type="date" id="check-out" name="checkout" value="<?= isset($_GET['checkout']) ? $_GET['checkout'] : '' ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="guests">인원</label>
-                            <input type="number" id="guests" name="guests" value="1" min="1" max="10" required>
+                            <input type="number" id="guests" name="guests" value="<?= isset($_GET['guests']) ? (int)$_GET['guests'] : 1 ?>" min="1" max="4" required>
                         </div>
                         <div class="form-group">
                             <label for="room-type">객실 타입</label>

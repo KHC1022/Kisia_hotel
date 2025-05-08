@@ -1,100 +1,79 @@
-<?php 
+<?php
 include_once __DIR__ . '/../includes/header.php';
+include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/../includes/db_connection.php';
+
 ?>
 
-    <main class="admin-container">
-        <div class="admin-sidebar">
-            <h2>관리자 메뉴</h2>
-            <ul class="admin-menu">
-                <li data-tab="users" onclick="window.location.href='admin.php?tab=users'">
-                    <i class="fas fa-users"></i>
-                    회원 관리
-                </li>
-                <li class="active" data-tab="hotels" onclick="window.location.href='admin.php?tab=hotels'">
-                    <i class="fas fa-hotel"></i>
-                    호텔 관리
-                </li>
-                <li data-tab="reservations" onclick="window.location.href='admin.php?tab=reservations'">
-                    <i class="fas fa-calendar-check"></i>
-                    예약 관리
-                </li>
-                <li data-tab="reviews" onclick="window.location.href='admin.php?tab=reviews'">
-                    <i class="fas fa-star"></i>
-                    후기 관리
-                </li>
-                <li data-tab="inquiries" onclick="window.location.href='admin.php?tab=inquiries'">
-                    <i class="fas fa-question-circle"></i>
-                    문의 관리
-                </li>
-            </ul>
+<main class="admin-hotel-add-container">
+    
+    <form action="../action/hotel_add_action.php" method="POST" enctype="multipart/form-data" class="hotel-add-admin-form">
+    <div class="hotel-add-admin-header">
+        <a href="admin.php?tab=hotels" class="hotel-add-admin-back-btn"><i class="fas fa-arrow-left"></i> 목록으로 돌아가기</a>
+        <h1 class="hotel-add-admin-title">호텔 추가</h1>
+    </div>
+        <div class="hotel-add-admin-form-group">
+            <label for="name">호텔 이름</label>
+            <input type="text" id="name" name="name" required>
         </div>
 
-        <div class="admin-content">
-            <div class="section-header">
-                <h2>호텔 추가</h2>
-                <a href="admin.php?tab=hotels" class="back-btn"><i class="fas fa-arrow-left"></i> 목록으로 돌아가기</a>
+        <div class="hotel-add-admin-form-group">
+            <label for="location">위치</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+
+        <div class="hotel-add-admin-form-group">
+            <label for="description">설명</label>
+            <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+
+        <div class="hotel-add-admin-form-group">
+            <label for="price_per_night">1박 가격</label>
+            <input type="number" id="price_per_night" name="price_per_night" min="0" required>
+        </div>
+
+        <div class="hotel-add-admin-form-group">
+            <label>부대시설</label>
+            <div class="hotel-add-admin-checkbox-group">
+                <label>
+                    <input type="checkbox" name="facilities[]" value="pool"> 수영장
+                </label>
+                <label>
+                    <input type="checkbox" name="facilities[]" value="spa"> 스파
+                </label>
+                <label>
+                    <input type="checkbox" name="facilities[]" value="fitness"> 피트니스
+                </label>
+                <label>
+                    <input type="checkbox" name="facilities[]" value="restaurant"> 레스토랑
+                </label>
+                <label>
+                    <input type="checkbox" name="facilities[]" value="parking"> 주차장
+                </label>
+                <label>
+                    <input type="checkbox" name="facilities[]" value="wifi"> 와이파이
+                </label>
             </div>
-
-            <form id="hotelAddForm" class="admin-form">
-                <div class="admin-form-group">
-                    <label for="hotelName">호텔 이름</label>
-                    <input type="text" id="hotelName" name="hotelName" required>
-                </div>
-
-                <div class="admin-form-group">
-                    <label for="location">위치</label>
-                    <input type="text" id="location" name="location" required>
-                </div>
-
-                <div class="admin-form-group">
-                    <label for="description">설명</label>
-                    <textarea id="description" name="description" rows="5" required></textarea>
-                </div>
-
-                <div class="admin-form-group">
-                    <label for="amenities">편의시설</label>
-                    <div class="admin-checkbox-group">
-                        <label><input type="checkbox" name="amenities" value="wifi"> 무선 인터넷</label>
-                        <label><input type="checkbox" name="amenities" value="parking"> 주차장</label>
-                        <label><input type="checkbox" name="amenities" value="pool"> 수영장</label>
-                        <label><input type="checkbox" name="amenities" value="gym"> 피트니스 센터</label>
-                        <label><input type="checkbox" name="amenities" value="restaurant"> 레스토랑</label>
-                        <label><input type="checkbox" name="amenities" value="spa"> 스파</label>
-                    </div>
-                </div>
-
-                <div class="admin-form-group">
-                    <label for="images">호텔 이미지 추가</label>
-                    <div class="file-input-container">
-                        <div class="file-input-box">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>이미지를 업로드하려면 여기를 클릭하세요</p>
-                            <p class="text-muted">또는 파일을 여기에 드래그하세요</p>
-                            <input type="file" id="images" name="images" multiple accept="image/*">
-                        </div>
-                    </div>
-                    <div class="image-preview" id="imagePreview"></div>
-                </div>
-
-                <div class="admin-form-group">
-                    <label for="roomTypes">객실 유형</label>
-                    <div id="roomTypes">
-                        <div class="room-type">
-                            <input type="text" placeholder="객실 유형" required>
-                            <input type="number" placeholder="가격" required>
-                            <input type="number" placeholder="최대 인원" required>
-                            <button type="button" class="remove-room">삭제</button>
-                        </div>
-                    </div>
-                    <button type="button" class="add-room-btn">객실 유형 추가</button>
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" class="cancel-btn" onclick="window.location.href='admin.php?tab=hotels'">취소</button>
-                    <button type="submit" class="submit-btn">호텔 추가</button>
-                </div>
-            </form>
         </div>
-    </main>
+
+        <div class="hotel-add-admin-files">
+            <label for="files">메인 이미지</label>
+            <input type="file" id="files" name="files[]" multiple>
+            <label for="files">상세 이미지 1</label>
+            <input type="file" id="files" name="files[]" multiple>
+            <label for="files">상세 이미지 2</label>
+            <input type="file" id="files" name="files[]" multiple>
+            <label for="files">상세 이미지 3</label>
+            <input type="file" id="files" name="files[]" multiple>
+            <label for="files">상세 이미지 4</label>
+            <input type="file" id="files" name="files[]" multiple>
+        </div>
+
+        <div class="hotel-add-admin-form-actions">
+            <a href="admin.php?tab=hotels" class="hotel-add-admin-cancel-btn">취소</a>
+            <button type="submit" class="hotel-add-admin-submit-btn">호텔 추가</button>
+        </div>
+    </form>
+</main>
 
 <?php include_once __DIR__ . '/../includes/footer.php'; ?> 

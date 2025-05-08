@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/../includes/db_connection.php';
 include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/../action/login_check.php';
 
 $hotel_id = $_GET['hotel_id'];
 $user_id = $_SESSION['user_id'];
