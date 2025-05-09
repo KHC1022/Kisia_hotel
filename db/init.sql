@@ -152,6 +152,14 @@ CREATE TABLE inquiry_files (
     FOREIGN KEY (inquiry_id) REFERENCES inquiries(inquiry_id) ON DELETE CASCADE
 );
 
+-- 13. 후기 게시판(사진 업로드)
+CREATE TABLE review_images (
+    image_id INT PRIMARY KEY AUTO_INCREMENT,
+    review_id INT,
+    image_path VARCHAR(255) NOT NULL,
+    FOREIGN KEY (review_id) REFERENCES reviews(review_id) ON DELETE CASCADE
+);
+
 SET NAMES utf8mb4;
 
 -- 사용자 계정 추가
