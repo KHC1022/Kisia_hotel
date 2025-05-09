@@ -66,6 +66,10 @@ include_once __DIR__ . '/../includes/header.php';
                     </div>
                     <button type="submit" class="payment-btn">포인트로 결제하기</button>
                     <input type="hidden" name="room_id" value="<?= $room_id ?>">
+                    <input type="hidden" name="checkin" value="<?= $checkin ?>">
+                    <input type="hidden" name="checkout" value="<?= $checkout ?>">
+                    <input type="hidden" name="total_price" value="<?= $total_price ?>">
+                    <input type="hidden" name="guests" value="<?= $guests ?>">
                 </form>
             </div>
         </div>
