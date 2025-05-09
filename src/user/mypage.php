@@ -78,27 +78,27 @@ $users = $GLOBALS['users'];
                 <h2>여행객 정보</h2>
                 <div class="profile-form-container">
                     <form class="profile-form" method="get" action="../action/mypage_change_action.php">
-                        <div class="form-group">
+                        <div class="mypage-form-group">
                             <label for="username">이름</label>
                             <input type="text" id="username" name="username" value="<?= $users['username']?>" readonly class="readonly-input">
                         </div>
-                        <div class="form-group">
+                        <div class="mypage-form-group">
                             <label for="email">이메일</label>
                             <input type="email" id="email" value="<?= $users['email'] ?>" readonly class="readonly-input">
                         </div>
-                        <div class="form-group">
+                        <div class="mypage-form-group">
                             <label for="phone">전화번호</label>
                             <input type="tel" id="phone" value="<?= $users['phone'] ?>" readonly class="readonly-input">
                         </div>
-                        <div class="form-group">
+                        <div class="mypage-form-group">
                             <label for="password">기존 비밀번호</label>
                             <input type="password" id="password" name="password" placeholder="기존 비밀번호">
                         </div>
-                        <div class="form-group">
+                        <div class="mypage-form-group">
                             <label for="new_password">비밀번호 변경</label>
                             <input type="password" id="new_password" name="new_password"  placeholder="새 비밀번호">
                         </div>
-                        <div class="form-group">
+                        <div class="mypage-form-group">
                             <label for="new_password_check">비밀번호 확인</label>
                             <input type="password" id="new_password_check" name="new_password_check" placeholder="새 비밀번호 확인">
                         </div>
@@ -142,9 +142,9 @@ $users = $GLOBALS['users'];
             <section id="point" class="content-section">
                 <h2>포인트 관리</h2>
                 <div class="profile-form-container">
-                    <p><strong>현재 보유 포인트:</strong> <?=number_format( $users['point']) ?> P</p>
+                    <p><strong>현재 보유 포인트 :</strong> <?=number_format( $users['point']) ?> P</p>
                     <form action="../action/charge_point_action.php" method="get">
-                        <div class="form-group">
+                        <div class="mypage-form-group">
                             <label for="charge_amount">충전할 포인트</label>
                             <input type="number" name="point" id="point" min="1000" step="1000" required>
                         </div>

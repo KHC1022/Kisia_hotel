@@ -51,13 +51,13 @@ include_once __DIR__ . '/../includes/header.php';
             <div class="payment-form">
                 <h2>포인트 결제</h2>
                 <form action="../action/point_pay_action.php" method="get">
-                    <div class="form-group">
+                    <div class="payment-form-group">
                         <label>보유 포인트</label>
                         <p><?= number_format($users['point']) ?> P</p>
                     </div>
-                    <div class="form-group">
+                    <div class="payment-form-group">
                         <label>총 결제 금액</label>
-                        <span><?= number_format($total_price) ?> P</span>
+                        <p><?= number_format($total_price) ?> P</p>
                         <input type="hidden" name="charge_amount" value="<?= $total_price ?>">
                     </div>
                     <div class="terms-agreement">
@@ -65,6 +65,7 @@ include_once __DIR__ . '/../includes/header.php';
                         <label for="terms">포인트 차감 및 예약에 동의합니다.</label>
                     </div>
                     <button type="submit" class="payment-btn">포인트로 결제하기</button>
+                    <input type="hidden" name="room_id" value="<?= $room_id ?>">
                 </form>
             </div>
         </div>

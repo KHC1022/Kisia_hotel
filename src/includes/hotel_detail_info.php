@@ -41,30 +41,44 @@ if ($facility_result && $facility_result->num_rows > 0) {
     );
 }
 
+// 예약 가능한 객실 확인
+$available_rooms_sql = "SELECT COUNT(*) as count FROM rooms WHERE hotel_id = $hotel_id AND status = 'available'";
+$available_rooms_result = $conn->query($available_rooms_sql);
+$available_rooms = $available_rooms_result->fetch_assoc()['count'];
 
 // 호텔 객실 deluxe 정보 가져오기
-$room_deluxe_sql = "SELECT * FROM rooms WHERE hotel_id = $hotel_id AND room_type = 'deluxe' ORDER BY price ASC";
+$room_deluxe_sql = "SELECT * FROM rooms WHERE hotel_id = $hotel_id AND room_type = 'deluxe' AND status = 'available' ORDER BY price ASC LIMIT 1";
 $room_deluxe_result = $conn->query($room_deluxe_sql);
 $room_deluxe_count = $room_deluxe_result->num_rows;
 
 $hotel_rooms_deluxe = [];
+$deluxe_room_id = '';
 if ($room_deluxe_result && $room_deluxe_result->num_rows > 0) {
-    while ($room_row = $room_deluxe_result->fetch_assoc()) {
-        $hotel_rooms_deluxe[] = $room_row;
-    }
+    $room_row = $room_deluxe_result->fetch_assoc();
+    $hotel_rooms_deluxe[] = $room_row;
+    $deluxe_room_id = intval($room_row['room_id']);
 }
 
-
 // 호텔 객실 suite 정보 가져오기
-$room_suite_sql = "SELECT * FROM rooms WHERE hotel_id = $hotel_id AND room_type = 'suite' ORDER BY price ASC";
+$room_suite_sql = "SELECT * FROM rooms WHERE hotel_id = $hotel_id AND room_type = 'suite' AND status = 'available' ORDER BY price ASC LIMIT 1";
 $room_suite_result = $conn->query($room_suite_sql);
 $room_suite_count = $room_suite_result->num_rows;
 
 $hotel_rooms_suite = [];
+$suite_room_id = '';
 if ($room_suite_result && $room_suite_result->num_rows > 0) {
-    while ($room_row = $room_suite_result->fetch_assoc()) {
-        $hotel_rooms_suite[] = $room_row;
-    }
+    $room_row = $room_suite_result->fetch_assoc();
+    $hotel_rooms_suite[] = $room_row;
+    $suite_room_id = intval($room_row['room_id']);
+}
+
+// room_ids 배열 초기화
+$room_ids = array();
+if ($deluxe_room_id) {
+    $room_ids[] = $deluxe_room_id;
+}
+if ($suite_room_id) {
+    $room_ids[] = $suite_room_id;
 }
 
 // 후기 정보 가져오기
