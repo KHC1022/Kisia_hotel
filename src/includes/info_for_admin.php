@@ -103,7 +103,55 @@ else if ($current_tab === 'hotels') {
 
 // 예약 관리 탭
 else if ($current_tab === 'reservations') {
-    // 구현 예정
+    // 검색어가 있는 경우
+    if (isset($_GET['reservation_number_search']) && trim($_GET['reservation_number_search']) !== '') {
+        $keyword = (int)trim($_GET['reservation_number_search']);
+        
+        $count_sql = "SELECT COUNT(*) as total FROM reservations WHERE reservation_id = $keyword";
+        $count_result = $conn->query($count_sql);
+        $total_items = $count_result->fetch_assoc()['total']; 
+        $total_pages = ceil($total_items / $items_per_page);
+        
+        $sql = "SELECT r.*, h.name, u.username 
+                FROM reservations r 
+                JOIN rooms rm ON r.room_id = rm.room_id 
+                JOIN hotels h ON rm.hotel_id = h.hotel_id 
+                JOIN users u ON r.user_id = u.user_id 
+                WHERE r.reservation_id = $keyword 
+                ORDER BY r.reservation_id ASC 
+                LIMIT $offset, $items_per_page";
+        $result = $conn->query($sql);
+        
+        $reservations = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $reservations[] = $row;
+            }
+        }
+    }
+    // 검색어 없는 경우 전체 목록
+    else {
+        $count_sql = "SELECT COUNT(*) as total FROM reservations";
+        $count_result = $conn->query($count_sql);
+        $total_items = $count_result->fetch_assoc()['total'];
+        $total_pages = ceil($total_items / $items_per_page);
+        
+        $sql = "SELECT r.*, h.name, u.username 
+                FROM reservations r 
+                JOIN rooms rm ON r.room_id = rm.room_id 
+                JOIN hotels h ON rm.hotel_id = h.hotel_id 
+                JOIN users u ON r.user_id = u.user_id 
+                ORDER BY r.reservation_id ASC 
+                LIMIT $offset, $items_per_page";
+        $result = $conn->query($sql);
+        
+        $reservations = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $reservations[] = $row;
+            }
+        }
+    }
 }
 
 // 후기 관리 탭
