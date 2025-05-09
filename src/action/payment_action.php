@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/../includes/db_connection.php';
 include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/../action/login_check.php';
 
 $user_id = $_SESSION['user_id'] ?? null;
 $hotel_id = $_GET['id'] ?? 0;
@@ -8,6 +9,7 @@ $checkin = $_GET['checkin'] ?? '';
 $checkout = $_GET['checkout'] ?? '';
 $guests = $_GET['guests'] ?? '';
 $room_type = $_GET['room_type'] ?? '';
+
 
 if ($checkin && $checkout) {
     $checkin_date = new DateTime($checkin);
@@ -40,8 +42,11 @@ if ($checkin && $checkout) {
 }
 
 // 객실 요금 계산
-$price_per_night = $hotel['price_per_night'] ?? 0;
-$room_fee = $price_per_night * $days * $guests;
+$room_sql = "SELECT price FROM rooms WHERE hotel_id = $hotel_id AND room_type = '$room_type'";
+$room_result = mysqli_query($conn, $room_sql);
+$room = mysqli_fetch_assoc($room_result);
+$price_per_night = $room['price'] ?? 0;
+$room_fee = $price_per_night * $days;
 
 // 세금 및 수수료: 객실 요금의 10%
 $tax = round($room_fee * 0.1);

@@ -14,10 +14,18 @@ if ($row!=null) {
     $_SESSION['real_id'] = $row['real_id'];
     $_SESSION['user_id'] = $row['user_id'];
     $_SESSION['is_admin'] = $row['is_admin'];
-    echo "<script>
-            alert('로그인 되었습니다.');
-            window.location.href = '../index.php';
-    </script>";
+
+    if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']):
+        echo "<script>
+                alert('관리자님 안녕하세요.');
+                window.location.href = '../admin/admin.php';
+        </script>";
+    else:
+        echo "<script>
+                alert('로그인 되었습니다.');
+                window.location.href = '../index.php';
+        </script>";
+    endif;
     exit;
 }
 else {

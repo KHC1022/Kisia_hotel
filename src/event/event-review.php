@@ -51,7 +51,7 @@ include_once __DIR__ . '/../includes/event_comments.php';
                     <h3>의견 남기기</h3>
                     <form id="commentForm" class="comment-form" method="get" action="../action/event_review_action.php">
                         <textarea id="comment" name="comment" placeholder="KISIA HOTEL에 대한 의견을 자유롭게 작성해주세요." required></textarea>
-                        <button type="submit" class="submit-btn">등록하기</button>
+                        <button type="submit" class="event-submit-btn">등록하기</button>
                     </form>
                 </div>
 

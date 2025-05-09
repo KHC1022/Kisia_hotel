@@ -8,9 +8,9 @@ include_once __DIR__ . '/../includes/header.php';
             <div class="booking-summary">
                 <h2>예약 정보</h2>
                 <div class="summary-card">
-                    <div class="hotel-info">
+                    <div class="payment-hotel-info">
                         <h3><?= $hotel['name'] ?></h3>
-                        <p class="location"><i class="fas fa-map-marker-alt"></i> <?=$hotel['location'] ?></p>
+                        <p class="payment-location"><i class="fas fa-map-marker-alt"></i> <?=$hotel['location'] ?></p>
                     </div>
                     <div class="booking-details">
                         <div class="detail-item">
@@ -56,7 +56,7 @@ include_once __DIR__ . '/../includes/header.php';
                         <p><?= number_format($users['point']) ?> P</p>
                     </div>
                     <div class="form-group">
-                        <label>총 금액</label>
+                        <label>총 결제 금액</label>
                         <span><?= number_format($total_price) ?> P</span>
                         <input type="hidden" name="charge_amount" value="<?= $total_price ?>">
                     </div>

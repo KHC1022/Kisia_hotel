@@ -13,9 +13,15 @@ include_once __DIR__ . '/../action/inquiry_detail_action.php';
 <body>
 <main class="board-container"> 
     <div class="inquiry-detail">
+        <?php if ($_SESSION['is_admin'] ?? false): ?>
+        <div class="inquiry-section-header">
+            <a href="../admin/admin.php?tab=inquiries" class="inquiry-back-btn"><i class="fas fa-arrow-left"></i> 관리자 메뉴로 돌아가기</a>
+        </div>
+        <?php else: ?>
         <div class="inquiry-section-header">
             <a href="inquiry.php" class="inquiry-back-btn"><i class="fas fa-arrow-left"></i> 목록으로 돌아가기</a>
         </div>
+        <?php endif; ?>
         <div class="inquiry-header">
             <h2 class="inquiry-title"><?= $inquiry['title'] ?></h2>
             <div class="inquiry-meta">

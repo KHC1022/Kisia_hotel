@@ -189,7 +189,7 @@ body .event-container {
     border-color: #7851A9;
 }
 
-.submit-btn {
+.event-submit-btn {
     align-self: flex-end;
     padding: 1rem 2rem;
     background-color: #7851A9;
@@ -202,7 +202,7 @@ body .event-container {
     min-width: 120px;
 }
 
-.submit-btn:hover {
+.event-submit-btn:hover {
     background-color: #6a4498;
 }
 
@@ -379,7 +379,7 @@ body .event-container {
         padding: 0.3rem 0.8rem;
     }
 
-    .submit-btn {
+    .event-submit-btn {
         align-self: stretch;
         padding: 0.8rem;
     }
