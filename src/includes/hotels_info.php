@@ -137,6 +137,4 @@ if ($japan_result && $japan_result->num_rows > 0) {
     }
 }
 
-
-
 ?>

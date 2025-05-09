@@ -1,8 +1,10 @@
 <?php 
 include_once __DIR__ . '/../includes/header.php';
 include_once __DIR__ . '/../includes/hotel_detail_info.php';
-?>
 
+// room_type을 GET 파라미터로 받아오기
+$room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
+?>
     <main class="hotel-detail-container">
         <div class="hotel-header">
             <div class="hotel-gallery">
@@ -107,6 +109,7 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
 
                 <section class="rooms">
                     <h2>객실 타입</h2>
+                    <?php if ($available_rooms > 0) : ?>
                     <div class="room-grid">
                         <?php foreach ($hotel_rooms_deluxe as $deluxe) : ?>
                         <div class="room-card">
@@ -147,6 +150,11 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
                         </div>
                         <?php endforeach; ?>
                     </div>
+                    <?php else : ?>
+                    <div class="no-rooms-message">
+                        <p>현재 예약 가능한 객실이 없습니다.</p>
+                    </div>
+                    <?php endif; ?>
                 </section>
 
                 <section class="reviews">
@@ -196,10 +204,11 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
             </div>
 
             <div class="sidebar">
+                <?php if ($available_rooms > 0) : ?>
                 <div class="booking-widget">
                     <h2>객실 예약</h2>
                     <form class="booking-form" action="../user/payment.php" method="get">
-                        <input type="hidden" name="id" value="<?= $hotel_id ?>">
+                        <input type="hidden" name="id" id="id" value="<?= $hotel_id ?>">
                         <div class="booking-form-group">
                             <label for="check-in">체크인</label>
                             <input type="date" id="check-in" name="checkin" value="<?= isset($_GET['checkin']) ? $_GET['checkin'] : '' ?>" required>
@@ -215,24 +224,26 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
                         <div class="booking-form-group">
                             <label for="room-type">객실 타입</label>
                             <select id="room-type" name="room_type">
-                                <option value="deluxe">디럭스 룸</option>
-                                <option value="suite">스위트 룸</option>
+                                <?php if ($deluxe_room_id) : ?>
+                                <option value="deluxe" <?= ($room_type === 'deluxe') ? 'selected' : '' ?>>디럭스 룸</option>
+                                <?php endif; ?>
+                                <?php if ($suite_room_id) : ?>
+                                <option value="suite" <?= ($room_type === 'suite') ? 'selected' : '' ?>>스위트 룸</option>
+                                <?php endif; ?>
                             </select>
+                            <?php if ($deluxe_room_id) : ?>
+                            <input type="hidden" name="deluxe_room_id" value="<?= $deluxe_room_id ?>">
+                            <?php endif; ?>
+                            <?php if ($suite_room_id) : ?>
+                            <input type="hidden" name="suite_room_id" value="<?= $suite_room_id ?>">
+                            <?php endif; ?>
                         </div>
                         <button type="submit" class="book-now-btn">예약하기</button>
                     </form>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </main>
-
-    <script>
-    document.querySelector('.booking-form').addEventListener('submit', function () {
-    document.getElementById('hidden-checkin').value = document.getElementById('check-in').value;
-    document.getElementById('hidden-checkout').value = document.getElementById('check-out').value;
-    document.getElementById('hidden-guests').value = document.getElementById('guests').value;
-    document.getElementById('hidden-room-type').value = document.getElementById('room-type').value;
-    });
-    </script>
 
 <?php include_once __DIR__ . '/../includes/footer.php'; ?> 

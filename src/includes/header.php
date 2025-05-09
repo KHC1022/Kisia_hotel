@@ -51,22 +51,6 @@ include_once __DIR__ . '/../includes/pagination.php';
             </div>
         </div>
     </div>
-
-    <div id="loginModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>로그인</h2>
-            <form>
-                <div class="form-group">
-                    <input type="text" id="username" placeholder="사용자 이름" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="password" placeholder="비밀번호" required>
-                </div>
-                <button type="submit" class="login-submit-btn">로그인</button>
-            </form>
-        </div>
-    </div>
 </body>
 <?php endif; ?>
 </html> 

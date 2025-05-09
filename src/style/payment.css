@@ -110,19 +110,27 @@
     border-top: 2px solid #f0f2f5;
 }
 
-.form-group {
-    margin-bottom: 2rem;
+.payment-form-group {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
 }
 
-.form-group label {
+.payment-form-group label {
     display: block;
     margin-bottom: 0.8rem;
-    color: #2c3e50;
-    font-weight: 600;
+    color: #7851A9;
+    font-weight: 700;
     font-size: 1.1rem;
 }
 
-.form-group input {
+.payment-form-group p {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.payment-form-group input {
     width: 100%;
     padding: 1rem;
     border: 2px solid #e9ecef;
@@ -131,7 +139,7 @@
     transition: border-color 0.3s ease;
 }
 
-.form-group input:focus {
+.payment-form-group input:focus {
     border-color: #7851A9;
     outline: none;
     box-shadow: 0 0 0 3px rgba(120, 81, 169, 0.1);

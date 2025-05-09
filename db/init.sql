@@ -52,8 +52,8 @@ CREATE TABLE rooms (
     room_type VARCHAR(50) NOT NULL,
     max_person INT NOT NULL,
     price INT NOT NULL,
-    available BOOLEAN DEFAULT TRUE,
     rooms_image VARCHAR(255),
+    status ENUM('available', 'reserved') DEFAULT 'available',
     FOREIGN KEY (hotel_id) REFERENCES hotels(hotel_id) ON DELETE CASCADE
 );
 
@@ -146,8 +146,8 @@ CREATE TABLE event_comments (
 CREATE TABLE inquiry_files (
     file_id INT AUTO_INCREMENT PRIMARY KEY,
     inquiry_id INT NOT NULL,
-    file_name VARCHAR(255) NOT NULL,        -- 원본 파일명
-    file_path VARCHAR(255) NOT NULL,        -- 저장된 서버 경로
+    file_name VARCHAR(255) NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
     uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (inquiry_id) REFERENCES inquiries(inquiry_id) ON DELETE CASCADE
 );
@@ -483,154 +483,154 @@ INSERT INTO event_comments (user_id, comment, created_at) VALUES
 
 
 -- 객실 데이터 추가
-INSERT INTO rooms (hotel_id, room_type, max_person, price, available, rooms_image) VALUES
+INSERT INTO rooms (hotel_id, room_type, max_person, price, rooms_image) VALUES
 -- 호텔 1
-(1, 'deluxe', 2, 250000, TRUE, '/image/deluxe.jpg'),
-(1, 'suite', 4, 350000, TRUE, '/image/suite.jpg'),
+(1, 'deluxe', 2, 250000, '/image/deluxe.jpg'),
+(1, 'suite', 4, 350000, '/image/suite.jpg'),
 -- 호텔 2
-(2, 'deluxe', 2, 450000, TRUE, '/image/deluxe.jpg'),
-(2, 'suite', 4, 550000, TRUE, '/image/suite.jpg'),
+(2, 'deluxe', 2, 450000, '/image/deluxe.jpg'),
+(2, 'suite', 4, 550000, '/image/suite.jpg'),
 -- 호텔 3
-(3, 'deluxe', 2, 680000, TRUE, '/image/deluxe.jpg'),
-(3, 'suite', 4, 780000, TRUE, '/image/suite.jpg'),
+(3, 'deluxe', 2, 680000, '/image/deluxe.jpg'),
+(3, 'suite', 4, 780000, '/image/suite.jpg'),
 -- 호텔 4
-(4, 'deluxe', 2, 520000, TRUE, '/image/deluxe.jpg'),
-(4, 'suite', 4, 620000, TRUE, '/image/suite.jpg'),
+(4, 'deluxe', 2, 520000, '/image/deluxe.jpg'),
+(4, 'suite', 4, 620000, '/image/suite.jpg'),
 -- 호텔 5
-(5, 'deluxe', 2, 150000, TRUE, '/image/deluxe.jpg'),
-(5, 'suite', 4, 250000, TRUE, '/image/suite.jpg'),
+(5, 'deluxe', 2, 150000, '/image/deluxe.jpg'),
+(5, 'suite', 4, 250000, '/image/suite.jpg'),
 -- 호텔 6
-(6, 'deluxe', 2, 750000, TRUE, '/image/deluxe.jpg'),
-(6, 'suite', 4, 850000, TRUE, '/image/suite.jpg'),
+(6, 'deluxe', 2, 750000, '/image/deluxe.jpg'),
+(6, 'suite', 4, 850000, '/image/suite.jpg'),
 -- 호텔 7
-(7, 'deluxe', 2, 120000, TRUE, '/image/deluxe.jpg'),
-(7, 'suite', 4, 220000, TRUE, '/image/suite.jpg'),
+(7, 'deluxe', 2, 120000, '/image/deluxe.jpg'),
+(7, 'suite', 4, 220000, '/image/suite.jpg'),
 -- 호텔 8
-(8, 'deluxe', 2, 460000, TRUE, '/image/deluxe.jpg'),
-(8, 'suite', 4, 560000, TRUE, '/image/suite.jpg'),
+(8, 'deluxe', 2, 460000, '/image/deluxe.jpg'),
+(8, 'suite', 4, 560000, '/image/suite.jpg'),
 -- 호텔 9
-(9, 'deluxe', 2, 100000, TRUE, '/image/deluxe.jpg'),
-(9, 'suite', 4, 200000, TRUE, '/image/suite.jpg'),
+(9, 'deluxe', 2, 100000, '/image/deluxe.jpg'),
+(9, 'suite', 4, 200000, '/image/suite.jpg'),
 -- 호텔 10
-(10, 'deluxe', 2, 890000, TRUE, '/image/deluxe.jpg'),
-(10, 'suite', 4, 990000, TRUE, '/image/suite.jpg'),
+(10, 'deluxe', 2, 890000, '/image/deluxe.jpg'),
+(10, 'suite', 4, 990000, '/image/suite.jpg'),
 -- 호텔 11
-(11, 'deluxe', 2, 90000, TRUE, '/image/deluxe.jpg'),
-(11, 'suite', 4, 190000, TRUE, '/image/suite.jpg'),
+(11, 'deluxe', 2, 90000, '/image/deluxe.jpg'),
+(11, 'suite', 4, 190000, '/image/suite.jpg'),
 -- 호텔 12
-(12, 'deluxe', 2, 420000, TRUE, '/image/deluxe.jpg'),
-(12, 'suite', 4, 520000, TRUE, '/image/suite.jpg'),
+(12, 'deluxe', 2, 420000, '/image/deluxe.jpg'),
+(12, 'suite', 4, 520000, '/image/suite.jpg'),
 -- 호텔 13
-(13, 'deluxe', 2, 110000, TRUE, '/image/deluxe.jpg'),
-(13, 'suite', 4, 210000, TRUE, '/image/suite.jpg'),
+(13, 'deluxe', 2, 110000, '/image/deluxe.jpg'),
+(13, 'suite', 4, 210000, '/image/suite.jpg'),
 -- 호텔 14
-(14, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(14, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(14, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(14, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 15
-(15, 'deluxe', 2, 130000, TRUE, '/image/deluxe.jpg'),
-(15, 'suite', 4, 230000, TRUE, '/image/suite.jpg'),
+(15, 'deluxe', 2, 130000, '/image/deluxe.jpg'),
+(15, 'suite', 4, 230000, '/image/suite.jpg'),
 -- 호텔 16
-(16, 'deluxe', 2, 470000, TRUE, '/image/deluxe.jpg'),
-(16, 'suite', 4, 570000, TRUE, '/image/suite.jpg'),
+(16, 'deluxe', 2, 470000, '/image/deluxe.jpg'),
+(16, 'suite', 4, 570000, '/image/suite.jpg'),
 -- 호텔 17
-(17, 'deluxe', 2, 95000, TRUE, '/image/deluxe.jpg'),
-(17, 'suite', 4, 195000, TRUE, '/image/suite.jpg'),
+(17, 'deluxe', 2, 95000, '/image/deluxe.jpg'),
+(17, 'suite', 4, 195000, '/image/suite.jpg'),
 -- 호텔 18
-(18, 'deluxe', 2, 350000, TRUE, '/image/deluxe.jpg'),
-(18, 'suite', 4, 450000, TRUE, '/image/suite.jpg'),
+(18, 'deluxe', 2, 350000, '/image/deluxe.jpg'),
+(18, 'suite', 4, 450000, '/image/suite.jpg'),
 -- 호텔 19
-(19, 'deluxe', 2, 420000, TRUE, '/image/deluxe.jpg'),
-(19, 'suite', 4, 520000, TRUE, '/image/suite.jpg'),
+(19, 'deluxe', 2, 420000, '/image/deluxe.jpg'),
+(19, 'suite', 4, 520000, '/image/suite.jpg'),
 -- 호텔 20
-(20, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(20, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(20, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(20, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 21
-(21, 'deluxe', 2, 680000, TRUE, '/image/deluxe.jpg'),
-(21, 'suite', 4, 780000, TRUE, '/image/suite.jpg'),
+(21, 'deluxe', 2, 680000, '/image/deluxe.jpg'),
+(21, 'suite', 4, 780000, '/image/suite.jpg'),
 -- 호텔 22
-(22, 'deluxe', 2, 320000, TRUE, '/image/deluxe.jpg'),
-(22, 'suite', 4, 420000, TRUE, '/image/suite.jpg'),
+(22, 'deluxe', 2, 320000, '/image/deluxe.jpg'),
+(22, 'suite', 4, 420000, '/image/suite.jpg'),
 -- 호텔 23
-(23, 'deluxe', 2, 480000, TRUE, '/image/deluxe.jpg'),
-(23, 'suite', 4, 580000, TRUE, '/image/suite.jpg'),
+(23, 'deluxe', 2, 480000, '/image/deluxe.jpg'),
+(23, 'suite', 4, 580000, '/image/suite.jpg'),
 -- 호텔 24
-(24, 'deluxe', 2, 390000, TRUE, '/image/deluxe.jpg'),
-(24, 'suite', 4, 490000, TRUE, '/image/suite.jpg'),
+(24, 'deluxe', 2, 390000, '/image/deluxe.jpg'),
+(24, 'suite', 4, 490000, '/image/suite.jpg'),
 -- 호텔 25
-(25, 'deluxe', 2, 420000, TRUE, '/image/deluxe.jpg'),
-(25, 'suite', 4, 520000, TRUE, '/image/suite.jpg'),
+(25, 'deluxe', 2, 420000, '/image/deluxe.jpg'),
+(25, 'suite', 4, 520000, '/image/suite.jpg'),
 -- 호텔 26
-(26, 'deluxe', 2, 780000, TRUE, '/image/deluxe.jpg'),
-(26, 'suite', 4, 880000, TRUE, '/image/suite.jpg'),
+(26, 'deluxe', 2, 780000, '/image/deluxe.jpg'),
+(26, 'suite', 4, 880000, '/image/suite.jpg'),
 -- 호텔 27
-(27, 'deluxe', 2, 350000, TRUE, '/image/deluxe.jpg'),
-(27, 'suite', 4, 450000, TRUE, '/image/suite.jpg'),
+(27, 'deluxe', 2, 350000, '/image/deluxe.jpg'),
+(27, 'suite', 4, 450000, '/image/suite.jpg'),
 -- 호텔 28
-(28, 'deluxe', 2, 420000, TRUE, '/image/deluxe.jpg'),
-(28, 'suite', 4, 520000, TRUE, '/image/suite.jpg'),
+(28, 'deluxe', 2, 420000, '/image/deluxe.jpg'),
+(28, 'suite', 4, 520000, '/image/suite.jpg'),
 -- 호텔 29
-(29, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(29, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(29, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(29, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 30
-(30, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(30, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(30, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(30, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 31
-(31, 'deluxe', 2, 780000, TRUE, '/image/deluxe.jpg'),
-(31, 'suite', 4, 880000, TRUE, '/image/suite.jpg'),
+(31, 'deluxe', 2, 780000, '/image/deluxe.jpg'),
+(31, 'suite', 4, 880000, '/image/suite.jpg'),
 -- 호텔 32
-(32, 'deluxe', 2, 350000, TRUE, '/image/deluxe.jpg'),
-(32, 'suite', 4, 450000, TRUE, '/image/suite.jpg'),
+(32, 'deluxe', 2, 350000, '/image/deluxe.jpg'),
+(32, 'suite', 4, 450000, '/image/suite.jpg'),
 -- 호텔 33
-(33, 'deluxe', 2, 420000, TRUE, '/image/deluxe.jpg'),
-(33, 'suite', 4, 520000, TRUE, '/image/suite.jpg'),
+(33, 'deluxe', 2, 420000, '/image/deluxe.jpg'),
+(33, 'suite', 4, 520000, '/image/suite.jpg'),
 -- 호텔 34
-(34, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(34, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(34, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(34, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 35
-(35, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(35, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(35, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(35, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 36
-(36, 'deluxe', 2, 780000, TRUE, '/image/deluxe.jpg'),
-(36, 'suite', 4, 880000, TRUE, '/image/suite.jpg'),
+(36, 'deluxe', 2, 780000, '/image/deluxe.jpg'),
+(36, 'suite', 4, 880000, '/image/suite.jpg'),
 -- 호텔 37
-(37, 'deluxe', 2, 350000, TRUE, '/image/deluxe.jpg'),
-(37, 'suite', 4, 450000, TRUE, '/image/suite.jpg'),
+(37, 'deluxe', 2, 350000, '/image/deluxe.jpg'),
+(37, 'suite', 4, 450000, '/image/suite.jpg'),
 -- 호텔 38
-(38, 'deluxe', 2, 420000, TRUE, '/image/deluxe.jpg'),
-(38, 'suite', 4, 520000, TRUE, '/image/suite.jpg'),
+(38, 'deluxe', 2, 420000, '/image/deluxe.jpg'),
+(38, 'suite', 4, 520000, '/image/suite.jpg'),
 -- 호텔 39
-(39, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(39, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(39, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(39, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 40
-(40, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(40, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(40, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(40, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 41
-(41, 'deluxe', 2, 780000, TRUE, '/image/deluxe.jpg'),
-(41, 'suite', 4, 880000, TRUE, '/image/suite.jpg'),
+(41, 'deluxe', 2, 780000, '/image/deluxe.jpg'),
+(41, 'suite', 4, 880000, '/image/suite.jpg'),
 -- 호텔 42
-(42, 'deluxe', 2, 350000, TRUE, '/image/deluxe.jpg'),
-(42, 'suite', 4, 450000, TRUE, '/image/suite.jpg'),
+(42, 'deluxe', 2, 350000, '/image/deluxe.jpg'),
+(42, 'suite', 4, 450000, '/image/suite.jpg'),
 -- 호텔 43
-(43, 'deluxe', 2, 420000, TRUE, '/image/deluxe.jpg'),
-(43, 'suite', 4, 520000, TRUE, '/image/suite.jpg'),
+(43, 'deluxe', 2, 420000, '/image/deluxe.jpg'),
+(43, 'suite', 4, 520000, '/image/suite.jpg'),
 -- 호텔 44
-(44, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(44, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(44, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(44, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 45
-(45, 'deluxe', 2, 380000, TRUE, '/image/deluxe.jpg'),
-(45, 'suite', 4, 480000, TRUE, '/image/suite.jpg'),
+(45, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
+(45, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 46
-(46, 'deluxe', 2, 780000, TRUE, '/image/deluxe.jpg'),
-(46, 'suite', 4, 880000, TRUE, '/image/suite.jpg'),
+(46, 'deluxe', 2, 780000, '/image/deluxe.jpg'),
+(46, 'suite', 4, 880000, '/image/suite.jpg'),
 -- 호텔 47
-(47, 'deluxe', 2, 350000, TRUE, '/image/deluxe.jpg'),
-(47, 'suite', 4, 450000, TRUE, '/image/suite.jpg'),
+(47, 'deluxe', 2, 350000, '/image/deluxe.jpg'),
+(47, 'suite', 4, 450000, '/image/suite.jpg'),
 -- 호텔 48
-(48, 'deluxe', 2, 100000, TRUE, '/image/deluxe.jpg'),
-(48, 'suite', 4, 200000, TRUE, '/image/suite.jpg'),
+(48, 'deluxe', 2, 100000, '/image/deluxe.jpg'),
+(48, 'suite', 4, 200000, '/image/suite.jpg'),
 -- 호텔 49
-(49, 'deluxe', 2, 70000, TRUE, '/image/deluxe.jpg'),
-(49, 'suite', 4, 170000, TRUE, '/image/suite.jpg');
+(49, 'deluxe', 2, 70000, '/image/deluxe.jpg'),
+(49, 'suite', 4, 170000, '/image/suite.jpg');
 
 
 -- 후기 도움돼요 기록 추가

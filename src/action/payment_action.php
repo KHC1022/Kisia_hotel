@@ -9,7 +9,14 @@ $checkin = $_GET['checkin'] ?? '';
 $checkout = $_GET['checkout'] ?? '';
 $guests = $_GET['guests'] ?? '';
 $room_type = $_GET['room_type'] ?? '';
+$deluxe_room_id = $_GET['deluxe_room_id'] ?? 0;
+$suite_room_id = $_GET['suite_room_id'] ?? 0;
 
+if ($room_type == 'deluxe') {
+    $room_id = $deluxe_room_id;
+} else {
+    $room_id = $suite_room_id;
+}
 
 if ($checkin && $checkout) {
     $checkin_date = new DateTime($checkin);
@@ -20,6 +27,7 @@ if ($checkin && $checkout) {
         exit;
     }
 }
+
 // 호텔 정보 불러오기
 $hotel_sql = "SELECT * FROM hotels WHERE hotel_id = $hotel_id";
 $hotel_result = mysqli_query($conn, $hotel_sql);
@@ -33,6 +41,7 @@ if ($user_id) {
 } else {
     $users = null;
 }
+
 $days = 1;
 if ($checkin && $checkout) {
     $start = new DateTime($checkin);
@@ -42,9 +51,9 @@ if ($checkin && $checkout) {
 }
 
 // 객실 요금 계산
-$room_sql = "SELECT price FROM rooms WHERE hotel_id = $hotel_id AND room_type = '$room_type'";
-$room_result = mysqli_query($conn, $room_sql);
-$room = mysqli_fetch_assoc($room_result);
+$room_price_sql = "SELECT price FROM rooms WHERE room_id = $room_id";
+$room_price_result = mysqli_query($conn, $room_price_sql);
+$room = mysqli_fetch_assoc($room_price_result);
 $price_per_night = $room['price'] ?? 0;
 $room_fee = $price_per_night * $days;
 
