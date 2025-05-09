@@ -23,3 +23,22 @@ $wishlist_items = [];
 while ($row = mysqli_fetch_assoc($wishlist_result)) {
     $wishlist_items[] = $row;
 }
+
+// 예약 내역 조회
+$reservation_query = "
+    SELECT r.*, h.name AS hotel_name, rm.room_type, rm.hotel_id
+    FROM reservations r
+    JOIN rooms rm ON r.room_id = rm.room_id
+    JOIN hotels h ON rm.hotel_id = h.hotel_id
+    WHERE r.user_id = '$user_id'
+    ORDER BY r.created_at DESC;
+";
+
+$reservation_result = mysqli_query($conn, $reservation_query);
+$reservations = [];
+while ($row = mysqli_fetch_assoc($reservation_result)) {
+    $reservations[] = $row;
+}
+
+$GLOBALS['reservations'] = $reservations;
+
