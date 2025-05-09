@@ -198,7 +198,8 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
             <div class="sidebar">
                 <div class="booking-widget">
                     <h2>객실 예약</h2>
-                    <form class="booking-form" action="../user/payment.php">
+                    <form class="booking-form" action="../user/payment.php" method="get">
+                        <input type="hidden" name="id" value="<?= $hotel_id ?>">
                         <div class="form-group">
                             <label for="check-in">체크인</label>
                             <input type="date" id="check-in" name="checkin" value="<?= isset($_GET['checkin']) ? $_GET['checkin'] : '' ?>" required>
@@ -213,7 +214,7 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
                         </div>
                         <div class="form-group">
                             <label for="room-type">객실 타입</label>
-                            <select id="room-type" required>
+                            <select id="room-type" name="room_type">
                                 <option value="deluxe">디럭스 룸</option>
                                 <option value="suite">스위트 룸</option>
                             </select>
@@ -224,5 +225,14 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
             </div>
         </div>
     </main>
+
+    <script>
+    document.querySelector('.booking-form').addEventListener('submit', function () {
+    document.getElementById('hidden-checkin').value = document.getElementById('check-in').value;
+    document.getElementById('hidden-checkout').value = document.getElementById('check-out').value;
+    document.getElementById('hidden-guests').value = document.getElementById('guests').value;
+    document.getElementById('hidden-room-type').value = document.getElementById('room-type').value;
+    });
+    </script>
 
 <?php include_once __DIR__ . '/../includes/footer.php'; ?> 

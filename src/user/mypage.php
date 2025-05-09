@@ -32,6 +32,7 @@ $users = $GLOBALS['users'];
                     <li><a href="#" data-tab="reservations" class="active">예약 관리</a></li>
                     <li><a href="#" data-tab="profile">여행객 정보</a></li>
                     <li><a href="#" data-tab="wishlist">찜 목록</a></li>
+                    <li><a href="#" data-tab="point">포인트</a></li>
                 </ul>
             </nav>
         </div>
@@ -138,6 +139,20 @@ $users = $GLOBALS['users'];
                         </tbody>
                 </table>
             </section>
+            <section id="point" class="content-section">
+                <h2>포인트 관리</h2>
+                <div class="profile-form-container">
+                    <p><strong>현재 보유 포인트:</strong> <?=number_format( $users['point']) ?> P</p>
+                    <form action="../action/charge_point_action.php" method="get">
+                        <div class="form-group">
+                            <label for="charge_amount">충전할 포인트</label>
+                            <input type="number" name="point" id="point" min="1000" step="1000" required>
+                        </div>
+                        <button type="submit" class="save-btn">충전</button>
+                    </form>
+                </div>
+            </section>
+
         </div>
     </main>
 
