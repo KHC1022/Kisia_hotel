@@ -111,7 +111,7 @@ include_once __DIR__ . '/../includes/header.php';
                         <span>가족여행</span>
                     </div>
                     <div class="review-actions">
-                        <button class="action-btn">
+                        <button class="action-btn" style="margin-left: 25rem;">
                             <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(28)</span>
                         </button>
                         <button class="action-btn">

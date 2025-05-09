@@ -252,6 +252,7 @@
 .review-actions {
     display: flex;
     gap: 1rem;
+    margin-left: 25rem;
 }
 
 .action-btn {

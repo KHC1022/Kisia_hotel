@@ -463,30 +463,31 @@
     gap: 0.3rem;
 }
 
-.form-group {
+.booking-form-group {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
 }
 
-.form-group label {
+.booking-form-group label {
     color: #7851A9;
     font-weight: 500;
     font-size: 0.9rem;
 }
 
-.form-group input,
-.form-group select {
+.booking-form-group input,
+.booking-form-group select {
     padding: 0.6rem 0.8rem;
     border: 1px solid rgba(120, 81, 169, 0.2);
     border-radius: 4px;
     font-size: 0.95rem;
     transition: all 0.3s ease;
     background-color: #fff;
+    margin-bottom: 1.3rem;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.booking-form-group input:focus,
+.booking-form-group select:focus {
     border-color: #7851A9;
     box-shadow: 0 0 0 2px rgba(120, 81, 169, 0.1);
     outline: none;

@@ -55,11 +55,8 @@ include_once __DIR__ . '/../action/login_check.php';
                 </div>
                 <div class="file-input-container">
                     <label for="photos">사진 첨부</label>
-                    <div class="file-input-box">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>이미지를 업로드하려면 여기를 클릭하세요</p>
-                        <p class="text-muted">또는 파일을 여기에 드래그하세요</p>
-                        <input type="file" id="photos" name="photos" multiple accept="image/*">
+                    <div class="inquiry-form-group">
+                        <input type="file" id="files" name="files[]" multiple>
                     </div>
                 </div>
                 <div class="inquiry-form-actions">

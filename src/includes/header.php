@@ -24,6 +24,18 @@ include_once __DIR__ . '/../includes/pagination.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
+<?php if ($_SESSION['is_admin'] ?? false): ?>
+    <body>
+    <div class="style-header">
+        <div class="style-nav">
+            <a class="style-logo">KISIA <span>HOTEL</span></a>
+            <div class="style-auth-buttons">
+                <?php include __DIR__ . '/../action/auto_buttons.php'; ?>
+            </div>
+        </div>
+    </div>
+</body>
+<?php else: ?>
 <body>
     <div class="style-header">
         <div class="style-nav">
@@ -56,4 +68,5 @@ include_once __DIR__ . '/../includes/pagination.php';
         </div>
     </div>
 </body>
+<?php endif; ?>
 </html> 

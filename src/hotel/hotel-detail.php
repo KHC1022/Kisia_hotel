@@ -200,19 +200,19 @@ include_once __DIR__ . '/../includes/hotel_detail_info.php';
                     <h2>객실 예약</h2>
                     <form class="booking-form" action="../user/payment.php" method="get">
                         <input type="hidden" name="id" value="<?= $hotel_id ?>">
-                        <div class="form-group">
+                        <div class="booking-form-group">
                             <label for="check-in">체크인</label>
                             <input type="date" id="check-in" name="checkin" value="<?= isset($_GET['checkin']) ? $_GET['checkin'] : '' ?>" required>
                         </div>
-                        <div class="form-group">
+                        <div class="booking-form-group">
                             <label for="check-out">체크아웃</label>
                             <input type="date" id="check-out" name="checkout" value="<?= isset($_GET['checkout']) ? $_GET['checkout'] : '' ?>" required>
                         </div>
-                        <div class="form-group">
+                        <div class="booking-form-group">
                             <label for="guests">인원</label>
                             <input type="number" id="guests" name="guests" value="<?= isset($_GET['guests']) ? (int)$_GET['guests'] : 1 ?>" min="1" max="4" required>
                         </div>
-                        <div class="form-group">
+                        <div class="booking-form-group">
                             <label for="room-type">객실 타입</label>
                             <select id="room-type" name="room_type">
                                 <option value="deluxe">디럭스 룸</option>
