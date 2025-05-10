@@ -50,7 +50,7 @@
 
 .hotel-add-admin-form-group {
     margin-bottom: 1.5rem;
-    margin-top: 3rem;
+    margin-top: 6rem;
 }
 
 .hotel-add-admin-form-group label {
@@ -80,7 +80,7 @@
 
 .hotel-add-admin-checkbox-group {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     margin-top: 0.5rem;
 }
@@ -89,14 +89,23 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-weight: normal;
+    font-weight: 500;
+    color: #4a5568;
     cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.hotel-add-admin-checkbox-group label:hover {
+    background-color: #ebf8ff;
 }
 
 .hotel-add-admin-checkbox-group input[type="checkbox"] {
     width: 18px;
     height: 18px;
     cursor: pointer;
+    accent-color: #4299e1;
 }
 
 .hotel-add-admin-files {
@@ -173,4 +182,200 @@
         width: 100%;
         text-align: center;
     }
+}
+
+.room-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%
+}
+
+.room-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.room-info-item label {
+    font-weight: 600;
+    color: #2c5282;
+    font-size: 0.95rem;
+    margin-top: 0.7rem;
+}
+
+.room-info-item input {
+    padding: 0.8rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.room-info-item input:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    outline: none;
+}
+
+.room-info-item input[type="number"] {
+    width: 100%;
+    -moz-appearance: textfield;
+}
+
+.room-info-item input[type="number"]::-webkit-outer-spin-button,
+.room-info-item input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.room-info-item input[type="file"] {
+    padding: 0.8rem 0;
+    border: 2px dashed #e2e8f0;
+    background-color: #f8fafc;
+    cursor: pointer;
+}
+
+.room-info-item input[type="file"]:hover {
+    border-color: #4299e1;
+    background-color: #ebf8ff;
+}
+
+.room-info-item textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background-color: white;
+    resize: vertical;
+}
+
+.room-info-item textarea:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    outline: none;
+}
+
+.detail-image-section h4 {
+    color: #2d3748;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* 이미지 업로드 섹션 그룹화 */
+.hotel-add-admin-form-group.image-upload-section {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.hotel-add-admin-form-group.image-upload-section label {
+    color: #2d3748;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* 이미지 업로드 그리드 컨테이너 */
+.image-upload-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* 메인 이미지는 전체 너비 사용 */
+.image-upload-grid .main-image-section {
+    grid-column: 1 / -1;
+    background-color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+}
+
+/* 상세 이미지 섹션 */
+.image-upload-grid .detail-image-section {
+    background-color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.image-upload-grid .detail-image-section label {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.image-upload-grid .detail-image-section input[type="file"] {
+    margin-top: 0.5rem;
+}
+
+.main-image-section input[type="file"] {
+    padding: 0.8rem 0;
+    border: 2px dashed #e2e8f0;
+    background-color: #f8fafc;
+    cursor: pointer;
+}
+
+.main-image-section input[type="file"]:hover {
+    border-color: #4299e1;
+    background-color: #ebf8ff;
+}
+
+.detail-image-section input[type="file"] {
+    padding: 0.8rem 0;
+    border: 2px dashed #e2e8f0;
+    background-color: #f8fafc;
+    cursor: pointer;
+}
+
+.detail-image-section input[type="file"]:hover {
+    border-color: #4299e1;
+    background-color: #ebf8ff;
+}
+
+/* 이미지 미리보기 스타일 */
+.main-image-section img,
+.detail-image-section img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-image-section,
+.detail-image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main-image-section label,
+.detail-image-section label {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.main-image-section input[type="file"],
+.detail-image-section input[type="file"] {
+    margin-top: 10px;
+}
+
+.hotel-add-admin-form-group h3 {
+    margin: 2rem 0 1rem;
+    color: #2d3748;
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4299e1;
 } 

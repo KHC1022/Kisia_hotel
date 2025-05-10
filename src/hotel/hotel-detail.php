@@ -2,8 +2,7 @@
 include_once __DIR__ . '/../includes/header.php';
 include_once __DIR__ . '/../includes/hotel_detail_info.php';
 
-// room_type을 GET 파라미터로 받아오기
-$room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
+$room_type = $_GET['room_type'] ?? 'deluxe';
 ?>
     <main class="hotel-detail-container">
         <div class="hotel-header">
@@ -106,11 +105,7 @@ $room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
                         <?php endif; ?>
                     </div>
                 </section>
-
-                <div class="section-tabs">
-                    <button class="tab-btn active" data-section="rooms">객실 타입</button>
-                    <button class="tab-btn" data-section="reviews">후기</button>
-                </div>
+                
                 <section class="rooms section-tab-content" style="display: block;">
                     <h2>객실 타입</h2>
                     <?php if ($available_rooms > 0) : ?>
@@ -161,18 +156,15 @@ $room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
                     <?php endif; ?>
                 </section>
 
-                <section class="reviews section-tab-content" style="display: none;">
-                    <h2>후기</h2>
+                <section class="reviews">
+                    <h2>후기 작성</h2>
                     <div class="reviews-section">
                         <div class="write-review">
-                            <h3>후기 작성</h3>
                             <?php if (isset($_SESSION['user_id'])): ?>
                                 <form class="review-form" action="../action/review_action.php" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="hotel_id" value="<?php echo $hotel_id; ?>">
                                     <div class="rating-input">
                                         <label>평점</label>
-                                        <!-- ⭐⭐ 반드시 오른쪽부터 data-value가 작아지게 -->
-                                       <!-- 후기 작성 부분만 이렇게 바꾸세요 -->
                                     <div class="star-rating">
                                         <i class="far fa-star" data-value="1"></i>
                                         <i class="far fa-star" data-value="2"></i>
@@ -200,7 +192,9 @@ $room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
                                         <label for="image">사진 첨부 (선택)</label>
                                         <input type="file" name="review_image" accept="image/*">
                                     </div>
-                                    <button type="submit" name="submit_review" class="submit-review">후기 등록</button>
+                                    <div class="review-form-actions">
+                                        <button type="submit" name="submit_review" class="submit-review">후기 등록</button>
+                                    </div>
                                 </form>
                             <?php else: ?>
                                 <div class="login-notice">
@@ -209,6 +203,7 @@ $room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
                             <?php endif; ?>
                         </div>
                     </div>
+                    <h2>후기</h2>
                     <div class="review-list">
                         <?php if (!empty($reviews)): ?>
                             <?php foreach ($reviews as $review) : ?>
@@ -237,37 +232,37 @@ $room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
                                     </div>
                                 </div>
 
-                                <!-- ✅ 여행 유형 표시 -->
-                                <div class="review-travel-type" style="color:#666; font-size:0.9rem; margin-bottom:10px;">
-                                    <?php
-                                    $types = [
-                                        'solo' => '혼자',
-                                        'couple' => '커플',
-                                        'friend' => '친구',
-                                        'family' => '가족',
-                                        'business' => '출장'
-                                    ];
-                                    echo "여행 유형: " . ($types[$review['travel_type']] ?? '미정');
-                                    ?>
-                                </div>
-                                <!-- ✅ 리뷰 사진 표시 (이미지 업로드한 경우만) -->
-                                <?php if (!empty($review['image_url'])): ?>
-                                <div class="review-image">
-                                    <img src="/<?php echo ltrim($review['image_url'], '/'); ?>" alt="Review Image" style="max-width:200px; border-radius:8px;">
-                                </div>
-                                <?php endif; ?>
-
-                                <div class="review-text">
+                                <div class="review-content">
                                     <?php echo $review['content']; ?>
                                 </div>
 
-                                <div class="detail-review-actions">
-                                    <a href="../action/review_action.php?review_id=<?php echo $review['review_id']; ?>&action=helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
-                                        <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(<?php echo $review['count_is_helpful']; ?>)</span>
-                                    </a>
-                                    <a href="../action/review_action.php?review_id=<?php echo $review['review_id']; ?>&action=not_helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
-                                        <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(<?php echo $review['count_is_not_helpful']; ?>)</span>
-                                    </a>
+                                <?php if (!empty($review['image_url'])): ?>
+                                <div class="review-image">
+                                    <img src="/<?php echo ltrim($review['image_url'], '/'); ?>" alt="Review Image">
+                                </div>
+                                <?php endif; ?>
+
+                                <div class="review-meta">
+                                    <div class="review-travel-type">
+                                        <?php
+                                        $types = [
+                                            'solo' => '혼자',
+                                            'couple' => '커플',
+                                            'friend' => '친구',
+                                            'family' => '가족',
+                                            'business' => '출장'
+                                        ];
+                                        echo "여행 유형: <span>" . ($types[$review['travel_type']] ?? '미정') . "</span>";
+                                        ?>
+                                    </div>
+                                    <div class="detail-review-actions">
+                                        <a href="../action/review_action.php?review_id=<?php echo $review['review_id']; ?>&action=helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
+                                            <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(<?php echo $review['count_is_helpful']; ?>)</span>
+                                        </a>
+                                        <a href="../action/review_action.php?review_id=<?php echo $review['review_id']; ?>&action=not_helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
+                                            <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(<?php echo $review['count_is_not_helpful']; ?>)</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <?php endforeach; ?>
