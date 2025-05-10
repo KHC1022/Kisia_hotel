@@ -42,34 +42,36 @@ $users = $GLOBALS['users'];
             <section id="reservations" class="content-section active">
                 <h2>예약 관리</h2>
                 <div class="reservation-list">
+                    <?php foreach ($reservations as $reservation): ?>
                     <div class="reservation-card">
                         <div class="reservation-header">
-                            <h3>그랜드 럭셔리 호텔</h3>
-                            <span class="status confirmed">확정</span>
+                            <h3><?=$reservation['hotel_name']?></h3>
+                            <span class="status <?=$reservation['status']?>"><?=$reservation['status']?></span>
                         </div>
                         <div class="reservation-details">
                             <div class="mypage-detail-item">
                                 <i class="fas fa-calendar"></i>
-                                <span>체크인: 2024-04-01</span>
+                                <span>체크인: <?=$reservation['check_in']?></span>
                             </div>
                             <div class="mypage-detail-item">
                                 <i class="fas fa-calendar"></i>
-                                <span>체크아웃: 2024-04-03</span>
+                                <span>체크아웃: <?=$reservation['check_out']?></span>
                             </div>
                             <div class="mypage-detail-item">
                                 <i class="fas fa-bed"></i>
-                                <span>디럭스 더블룸</span>
+                                <span><?=$reservation['room_type']?></span>
                             </div>
                             <div class="mypage-detail-item">
                                 <i class="fas fa-user"></i>
-                                <span>2명</span>
+                                <span><?=$reservation['guests']?>명</span>
                             </div>
                         </div>
                         <div class="reservation-actions">
-                            <button class="modify-btn" onclick="window.location.href='../hotel/hotel-detail.php'">상세보기</button>
+                            <button class="modify-btn" onclick="window.location.href='../hotel/hotel-detail.php?id=<?=$reservation['hotel_id']?>'">상세보기</button>
                             <button class="mypage-cancel-btn">예약 취소</button>
                         </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
             </section>
 
