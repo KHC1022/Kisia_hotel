@@ -1,6 +1,6 @@
 /* 관리자 페이지 전체 컨테이너 */
 .admin-container {
-    max-width: 75%;
+    max-width: 70%;
     margin: 0;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.95);
@@ -52,6 +52,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(44, 82, 130, 0.1);
     margin-bottom: 2rem;
+    max-width: 80%;
     position: sticky;
     top: 80px;
     z-index: 100;

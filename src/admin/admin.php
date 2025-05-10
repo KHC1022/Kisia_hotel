@@ -5,7 +5,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
 
     <main class="admin-container">
         <h2 class="admin-title">관리자 메뉴</h2>
-        <div class="admin-menu" style="width: 80%;">
+        <div class="admin-menu">
             <ul>
                 <li class="active" data-tab="users">
                     <i class="fas fa-users"></i>
@@ -70,7 +70,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <td><?= $user['phone'] ?></td>
                                 <td><?= $user['created_at'] ?></td>
                                 <td>
-                                    <form method="get" action="../action/admin_editDelete_action.php">
+                                    <form method="get" action="../action/admin_delete_action.php">
                                         <button name="user_delete" class="action-btn delete" value="<?= $user['user_id'] ?>"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
@@ -113,6 +113,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <th>호텔명</th>
                                 <th>위치</th>
                                 <th>객실 수</th>
+                                <th>예약 가능 객실 수</th>
                                 <th style="padding-left: 35px;">관리</th>
                             </tr>
                         </thead>
@@ -123,9 +124,12 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <td><?= $hotel['name'] ?></td>
                                 <td><?= $hotel['location'] ?></td>
                                 <td style="padding-left: 40px;"><?= $hotel['room_count'] ?></td>
+                                <td style="padding-left: 40px;"><?= $hotel['available_room_count'] ?></td>
                                 <td>
-                                    <form method="get" action="../action/admin_editDelete_action.php">
+                                    <form method="get" action="../admin/hotel-edit.php">
                                         <button name="hotel_edit" class="action-btn edit" value="<?= $hotel['hotel_id'] ?>"><i class="fas fa-edit"></i></button>
+                                    </form>
+                                    <form method="get" action="../action/admin_delete_action.php">
                                         <button name="hotel_delete" class="action-btn delete" value="<?= $hotel['hotel_id'] ?>"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
@@ -166,6 +170,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <th>고객명</th>
                                 <th>체크인</th>
                                 <th>체크아웃</th>
+                                <th>상태</th>
                                 <th style="padding-left: 30px;">관리</th>
                             </tr>
                         </thead>
@@ -177,9 +182,25 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                     <td><?= $reservation['username'] ?></td>
                                     <td><?= $reservation['check_in'] ?></td>
                                     <td><?= $reservation['check_out'] ?></td>
+                                    <td> <span class="status <?php 
+                                if ($reservation['status'] == 'done'): 
+                                    echo 'status-complete';
+                                elseif ($reservation['status'] == 'cancel'): 
+                                    echo 'status-pending';
+                                endif; 
+                            ?>">
+                                <?php 
+                                    if ($reservation['status'] == 'done'): 
+                                        echo '예약확정';
+                                    elseif ($reservation['status'] == 'cancel'): 
+                                        echo '취소완료';
+                                    endif; 
+                                ?>
+                            </span>
+                            </td>
                                     <td>
-                                        <form method="get" action="../action/admin_editDelete_action.php">
-                                            <button name="reservation_edit" class="action-btn edit" value="<?= $reservation['reservation_id'] ?>"><i class="fas fa-edit"></i></button>
+                                        <form method="get" action="../action/admin_delete_action.php">
+                                            <input type="hidden" name="room_id" value="<?= $reservation['room_id'] ?>">
                                             <button name="reservation_delete" class="action-btn delete" value="<?= $reservation['reservation_id'] ?>"><i class="fas fa-trash"></i></button>
                                         </form>
                                     </td>
@@ -234,8 +255,8 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                 <td><?= mb_substr($review['content'], 0, 30) . (mb_strlen($review['content']) > 30 ? '...' : '') ?></td>
                                 <td><?= $review['created_at'] ?></td>
                                 <td>
-                                    <form method="get" action="../action/admin_editDelete_action.php">
-                                        <a href="../review/review_detail.php?review_id=<?= $review['review_id'] ?>" class="action-btn view"><i class="fas fa-eye"></i></a>
+                                    <form method="get" action="../action/admin_delete_action.php">
+                                        <a href="../hotel/hotel-detail.php?id=<?= $review['hotel_id'] ?>" class="action-btn view"><i class="fas fa-eye"></i></a>
                                         <button name="review_delete" class="action-btn delete" value="<?= $review['review_id'] ?>"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
@@ -318,7 +339,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <form method="get" action="../action/admin_editDelete_action.php">
+                                    <form method="get" action="../action/admin_delete_action.php">
                                         <a href="../inquiry/inquiry_detail.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="action-btn view"><i class="fas fa-eye"></i></a>
                                         <button name="inquiry_delete" class="action-btn delete" value="<?= $inquiry['inquiry_id'] ?>"><i class="fas fa-trash"></i></button>
                                     </form>

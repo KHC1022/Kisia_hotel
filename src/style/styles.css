@@ -90,106 +90,96 @@ a {
 
 /* 히어로 섹션 */
 .style-hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
                 url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
     background-size: cover;
     background-position: center;
     height: 80vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-top: 10px;
+    align-items: center;
+    position: relative;
 }
 
 .style-search-container {
-    text-align: center;
-    color: white;
-    padding: 2rem;
-    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    margin: 0 auto;
 }
 
 .style-search-container h1 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
+    color: #fff;                                /* ✅ 글씨 흰색으로 */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* ✅ 그림자 추가로 배경과 구분 */
+    position: relative;
+    z-index: 10;
+}
+.style-search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);   /* ✅ 반투명 흰 배경 */
+    padding: 1rem 2rem;
+    border-radius: 15px;                          /* ✅ 살짝 둥글게 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);    /* ✅ 그림자 */
 }
 
-.style-search-box {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.style-search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .style-search-input {
-    position: relative;
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding: 6px 10px;
+    gap: 5px;
+    min-width: 160px;                      /* ⭐ 최소 폭 설정 (아고다 느낌) */
 }
 
+
 .style-search-input i {
-    position: absolute;
-    left: 10px;
-    color: #7f8c8d;
+    font-size: 14px;
+    color: #999;
 }
 
 .style-search-input input {
-    width: 100%;
-    padding: 0.8rem 1rem 0.8rem 2.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
+    width: 100px;                      
+    border: none;
+    outline: none;
 }
+
 
 .style-search-input input[type="date"] {
-    width: 100%;
-    padding: 0.8rem 1rem 0.8rem 2.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #7f8c8d;
-}
-
-.style-search-input input[type="date"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #7f8c8d;
-}
-
-.style-search-input input[type="number"] {
-    width: 100%;
-    padding: 0.8rem 1rem 0.8rem 2.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.style-search-input input[type="number"]::-webkit-inner-spin-button,
-.style-search-input input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    color: #333;
 }
 
 .style-search-btn {
-    background-color: #7851A9;
+    background: linear-gradient(to right, #7851A9, #7851A9);
     color: white;
     border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
+    border-radius: 30px;
+    padding: 10px 20px;
     cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    min-width: 80px;                 
 }
 
+
 .style-search-btn:hover {
-    background-color: #5B3B8A;
+    background: linear-gradient(to right, #6039b1, #4e2c99);
 }
+
 
 /* 추천 호텔 섹션 */
 .style-featured-hotels {
@@ -458,7 +448,12 @@ a {
     }
 
     .style-search-box {
-        grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+    }
+
+    .style-search-btn {
+        margin-top: 10px;
     }
 
     .style-board-container {

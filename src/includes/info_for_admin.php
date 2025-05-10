@@ -61,7 +61,9 @@ else if ($current_tab === 'hotels') {
         $total_items = $count_result->fetch_assoc()['total'];
         $total_pages = ceil($total_items / $items_per_page);
         
-        $sql = "SELECT h.hotel_id, h.name, h.location, COUNT(r.room_id) as room_count 
+        $sql = "SELECT h.hotel_id, h.name, h.location, 
+                COUNT(r.room_id) as room_count,
+                SUM(CASE WHEN r.status = 'available' THEN 1 ELSE 0 END) as available_room_count
                 FROM hotels h 
                 LEFT JOIN rooms r ON h.hotel_id = r.hotel_id 
                 WHERE h.name LIKE '%$keyword%' 
@@ -84,7 +86,9 @@ else if ($current_tab === 'hotels') {
         $total_items = $count_result->fetch_assoc()['total'];
         $total_pages = ceil($total_items / $items_per_page);
         
-        $sql = "SELECT h.hotel_id, h.name, h.location, COUNT(r.room_id) as room_count 
+        $sql = "SELECT h.hotel_id, h.name, h.location, 
+                COUNT(r.room_id) as room_count,
+                SUM(CASE WHEN r.status = 'available' THEN 1 ELSE 0 END) as available_room_count
                 FROM hotels h 
                 LEFT JOIN rooms r ON h.hotel_id = r.hotel_id 
                 GROUP BY h.hotel_id 

@@ -160,6 +160,17 @@
     border-radius: 3px;
 }
 
+.reviews-h2 h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 70px;
+    height: 3px;
+    background: #7851A9;
+    border-radius: 3px;
+}
+
 .facility-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -235,15 +246,6 @@
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.reviews h2 {
-    font-size: 1.5rem;
-    color: #7851A9;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 24rem;
 }
 
 .review-summary {
@@ -771,6 +773,7 @@
     cursor: pointer;
     padding: 0.6rem 1.2rem;
     transition: all 0.3s ease;
+    margin-bottom: 2rem;
 }
 
 .submit-review:hover {

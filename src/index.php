@@ -7,25 +7,25 @@ include_once __DIR__ . '/includes/hotels_info.php';
         <section class="style-hero">
             <div class="style-search-container">
                 <h1>완벽한 숙소를 찾아보세요</h1>
-                <div class="style-search-box">
-                    <form action="hotel/hotels.php" method="GET">
+                <div class="style-search-box">   <!-- ✅ 박스 -->
+                    <form action="hotel/hotels.php" method="GET" class="style-search-form">  <!-- ✅ form은 따로 -->
                         <div class="style-search-input">
                             <i class="fas fa-map-marker-alt"></i>
                             <input type="text" name="search" placeholder="어디로 가시나요?" required>
                         </div>
                         <div class="style-search-input">
                             <i class="fas fa-calendar"></i>
-                            <input type="date" name="checkin" placeholder="체크인 날짜">
+                            <input type="date" name="checkin">
                         </div>
                         <div class="style-search-input">
                             <i class="fas fa-calendar"></i>
-                            <input type="date" name="checkout" placeholder="체크아웃 날짜">
+                            <input type="date" name="checkout">
                         </div>
                         <div class="style-search-input">
                             <i class="fas fa-user"></i>
-                            <input type="number" name="guests" placeholder="게스트 수" min="1" max="4" value="1">
+                            <input type="number" name="guests" placeholder="인원 수" min="1" max="4" value="">
                         </div>
-                        <button type="submit" class="style-search-btn" style="width: 100%;">검색</button>
+                        <button type="submit" class="style-search-btn">검색</button>
                     </form>
                 </div>
                 <div id="searchResults" class="search-results"></div>
