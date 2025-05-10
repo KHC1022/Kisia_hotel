@@ -43,7 +43,6 @@ include_once __DIR__ . '/../includes/pagination.php';
             <ul class="style-nav-links">
                 <li><a href="../index.php">홈</a></li>
                 <li><a href="../hotel/hotels.php">호텔</a></li>
-                <li><a href="../review/review.php">후기</a></li>
                 <li><a href="../inquiry/inquiry.php">문의</a></li>
             </ul>
             <div class="style-auth-buttons">

@@ -107,7 +107,11 @@ $room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
                     </div>
                 </section>
 
-                <section class="rooms">
+                <div class="section-tabs">
+                    <button class="tab-btn active" data-section="rooms">객실 타입</button>
+                    <button class="tab-btn" data-section="reviews">후기</button>
+                </div>
+                <section class="rooms section-tab-content" style="display: block;">
                     <h2>객실 타입</h2>
                     <?php if ($available_rooms > 0) : ?>
                     <div class="room-grid">
@@ -157,48 +161,121 @@ $room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
                     <?php endif; ?>
                 </section>
 
-                <section class="reviews">
+                <section class="reviews section-tab-content" style="display: none;">
                     <h2>후기</h2>
+                    <div class="reviews-section">
+                        <div class="write-review">
+                            <h3>후기 작성</h3>
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <form class="review-form" action="../action/review_action.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="hotel_id" value="<?php echo $hotel_id; ?>">
+                                    <div class="rating-input">
+                                        <label>평점</label>
+                                        <!-- ⭐⭐ 반드시 오른쪽부터 data-value가 작아지게 -->
+                                       <!-- 후기 작성 부분만 이렇게 바꾸세요 -->
+                                    <div class="star-rating">
+                                        <i class="far fa-star" data-value="1"></i>
+                                        <i class="far fa-star" data-value="2"></i>
+                                        <i class="far fa-star" data-value="3"></i>
+                                        <i class="far fa-star" data-value="4"></i>
+                                        <i class="far fa-star" data-value="5"></i>
+                                        <input type="hidden" name="rating" value="0" />
+                                    </div>
+                                    <div class="review-content">
+                                        <label for="content">후기 내용</label>
+                                        <textarea id="content" name="content" rows="4" required placeholder="호텔 이용 경험을 공유해주세요."></textarea>
+                                    </div>
+                                    <div class="review-travel-type">
+                                        <label for="travel_type">여행 유형</label>
+                                        <select name="travel_type" id="travel_type" required>
+                                            <option value="">선택하세요</option>
+                                            <option value="solo">혼자</option>
+                                            <option value="couple">커플</option>
+                                            <option value="friend">친구</option>
+                                            <option value="family">가족</option>
+                                            <option value="business">출장</option>
+                                        </select>
+                                    </div>
+                                    <div class="review-image">
+                                        <label for="image">사진 첨부 (선택)</label>
+                                        <input type="file" name="review_image" accept="image/*">
+                                    </div>
+                                    <button type="submit" name="submit_review" class="submit-review">후기 등록</button>
+                                </form>
+                            <?php else: ?>
+                                <div class="login-notice">
+                                    <p>후기를 작성하려면 <a href="../user/login.php">로그인</a>이 필요합니다.</p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                     <div class="review-list">
-                        <?php foreach ($reviews as $review) : ?>
-                        <div class="review-card">
-                            <div class="reviewer-info">
-                                <img src="<?php echo $review['profile_image'] ?>" alt="Reviewer">
-                                <div class="reviewer-details">
-                                    
-                                    <div class="review-rating">
-                                        <div class="stars">
+                        <?php if (!empty($reviews)): ?>
+                            <?php foreach ($reviews as $review) : ?>
+                            <div class="review-card">
+                                <div class="reviewer-info">
+                                    <img src="<?php echo $review['profile_image'] ?>" alt="Reviewer">
+                                    <div class="reviewer-details">
                                         <div class="reviewer-name"><?php echo $review['username']; ?></div>
-                                            <?php
-                                                $fullStars = floor($review['rating']);
-                                                $emptyStars = 5 - $fullStars;
-                                                
-                                                for ($i = 0; $i < $fullStars; $i++) {
-                                                    echo '<i class="fas fa-star"></i>';
-                                                }
-                                                for ($i = 0; $i < $emptyStars; $i++) {
-                                                    echo '<i class="far fa-star"></i>';
-                                                }
-                                            ?>
-                                            <span><?php echo $review['rating']; ?></span>
+                                        <div class="review-rating">
+                                            <div class="stars">
+                                                <?php
+                                                    $fullStars = floor($review['rating']);
+                                                    $emptyStars = 5 - $fullStars;
+                                                    
+                                                    for ($i = 0; $i < $fullStars; $i++) {
+                                                        echo '<i class="fas fa-star"></i>';
+                                                    }
+                                                    for ($i = 0; $i < $emptyStars; $i++) {
+                                                        echo '<i class="far fa-star"></i>';
+                                                    }
+                                                ?>
+                                                <span><?php echo $review['rating']; ?></span>
+                                            </div>
+                                            <div class="review-date"><?php echo $review['created_at']; ?></div>
                                         </div>
-                                        <div class="review-date"><?php echo $review['created_at']; ?></div>
                                     </div>
                                 </div>
+
+                                <!-- ✅ 여행 유형 표시 -->
+                                <div class="review-travel-type" style="color:#666; font-size:0.9rem; margin-bottom:10px;">
+                                    <?php
+                                    $types = [
+                                        'solo' => '혼자',
+                                        'couple' => '커플',
+                                        'friend' => '친구',
+                                        'family' => '가족',
+                                        'business' => '출장'
+                                    ];
+                                    echo "여행 유형: " . ($types[$review['travel_type']] ?? '미정');
+                                    ?>
+                                </div>
+                                <!-- ✅ 리뷰 사진 표시 (이미지 업로드한 경우만) -->
+                                <?php if (!empty($review['image_url'])): ?>
+                                <div class="review-image">
+                                    <img src="/<?php echo ltrim($review['image_url'], '/'); ?>" alt="Review Image" style="max-width:200px; border-radius:8px;">
+                                </div>
+                                <?php endif; ?>
+
+                                <div class="review-text">
+                                    <?php echo $review['content']; ?>
+                                </div>
+
+                                <div class="detail-review-actions">
+                                    <a href="../action/review_action.php?review_id=<?php echo $review['review_id']; ?>&action=helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
+                                        <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(<?php echo $review['count_is_helpful']; ?>)</span>
+                                    </a>
+                                    <a href="../action/review_action.php?review_id=<?php echo $review['review_id']; ?>&action=not_helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
+                                        <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(<?php echo $review['count_is_not_helpful']; ?>)</span>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="review-text">
-                                <?php echo $review['content']; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="no-reviews">
+                                <p class="no-review-text">아직 작성된 후기가 없습니다.</p>
                             </div>
-                            <div class="detail-review-actions" style="margin-left: 25rem;">
-                                <a href="../action/helpful_action.php?review_id=<?php echo $review['review_id']; ?>&action=helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
-                                    <i class="far fa-thumbs-up"></i>도움이 됨<span class="count">(<?php echo $review['count_is_helpful']; ?>)</span>
-                                </a>
-                                <a href="../action/helpful_action.php?review_id=<?php echo $review['review_id']; ?>&action=not_helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
-                                    <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(<?php echo $review['count_is_not_helpful']; ?>)</span>
-                                </a>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </section>
             </div>
@@ -247,3 +324,59 @@ $room_type = $_GET['room_type'] ?? 'deluxe'; // 기본값은 deluxe
     </main>
 
 <?php include_once __DIR__ . '/../includes/footer.php'; ?> 
+<script>
+// 탭 버튼 클릭 시 섹션 전환
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.section-tab-content');
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const section = this.getAttribute('data-section');
+        tabContents.forEach(content => {
+            if (content.classList.contains(section)) {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        });
+    });
+});
+const stars = document.querySelectorAll('.star-rating i');
+const ratingInput = document.querySelector('.star-rating input');
+
+stars.forEach(star => {
+    star.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        const starWidth = rect.width;
+        const value = parseInt(this.getAttribute('data-value'));
+        let selectedValue = value;
+
+        if (offsetX < starWidth / 2) selectedValue -= 0.5;
+        ratingInput.value = selectedValue;
+
+        stars.forEach(s => {
+            s.classList.remove('fas', 'far', 'fa-star', 'fa-star-half-alt', 'full', 'half');
+            s.classList.add('far', 'fa-star');
+        });
+
+        stars.forEach(s => {
+            const sValue = parseInt(s.getAttribute('data-value'));
+            s.classList.remove('far', 'fas', 'fa-star', 'fa-star-half-alt');
+
+            if (sValue < selectedValue) {
+                s.classList.add('fas', 'fa-star', 'full');
+            } else if (sValue === Math.ceil(selectedValue)) {
+                if (selectedValue % 1 === 0.5) {
+                    s.classList.add('fas', 'fa-star-half-alt', 'half');
+                } else {
+                    s.classList.add('fas', 'fa-star', 'full');
+                }
+            } else {
+                s.classList.add('far', 'fa-star');
+            }
+        });
+    });
+});
+</script> 
