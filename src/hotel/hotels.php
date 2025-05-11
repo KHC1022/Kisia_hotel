@@ -11,7 +11,7 @@ include_once __DIR__ . '/../includes/hotels_info.php';
 
         <div class="hotels-search-sort-container">
             <div class="hotels-search-box">
-                <form id="searchForm" method="GET" action="">
+                <form id="searchForm" method="GET">
                     <div class="hotels-search-row">
                         <div class="hotels-search-input">
                             <i class="fas fa-search"></i>

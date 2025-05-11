@@ -31,6 +31,10 @@ foreach ($_GET as $key => $value) {
                 $table_name = 'inquiries';
                 $id_name = 'inquiry_id';
                 break;
+            case 'notice':
+                $table_name = 'notices';
+                $id_name = 'notice_id';
+                break;
         }
         
         if ($action === 'edit' || $action === 'delete') {

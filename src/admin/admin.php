@@ -27,6 +27,10 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                     <i class="fas fa-question-circle"></i>
                     문의 관리
                 </li>
+                <li data-tab="notices">
+                    <i class="fas fa-bell"></i>
+                    공지사항 관리
+                </li>
             </ul>
         </div>
 
@@ -45,47 +49,51 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                         </form>
                     </div>
                 </div>
-                <div class="table-container">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>번호</th>
-                                <th>이름</th>
-                                <th>아이디</th>
-                                <th>비밀번호</th>
-                                <th>이메일</th>
-                                <th>전화번호</th>
-                                <th>가입일</th>
-                                <th style="padding-left: 30px;">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($users as $user): ?>
-                            <tr>
-                                <td><?= $user['user_id'] ?></td>
-                                <td><?= $user['username'] ?></td>
-                                <td><?= $user['real_id'] ?></td>
-                                <td><?= $user['password'] ?></td>
-                                <td><?= $user['email'] ?></td>
-                                <td><?= $user['phone'] ?></td>
-                                <td><?= $user['created_at'] ?></td>
-                                <td>
-                                    <form method="get" action="../action/admin_delete_action.php">
-                                        <button name="user_delete" class="action-btn delete" value="<?= $user['user_id'] ?>"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?php
-                if (isset($_GET['user_name_search'])) {
-                    searchPagination($page, $total_pages, 'users', $_GET['user_name_search']);
-                } else {
-                    Adminpagination($page, $total_pages, 'users');
-                }
-                ?>
+                <?php if (empty($users)): ?>
+                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                <?php else: ?>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>이름</th>
+                                    <th>아이디</th>
+                                    <th>비밀번호</th>
+                                    <th>이메일</th>
+                                    <th>전화번호</th>
+                                    <th>가입일</th>
+                                    <th style="padding-left: 30px;">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($users as $user): ?>
+                                    <tr>
+                                        <td><?= $user['user_id'] ?></td>
+                                        <td><?= $user['username'] ?></td>
+                                        <td><?= $user['real_id'] ?></td>
+                                        <td><?= $user['password'] ?></td>
+                                        <td><?= $user['email'] ?></td>
+                                        <td><?= $user['phone'] ?></td>
+                                        <td><?= $user['created_at'] ?></td>
+                                        <td>
+                                            <form method="get" action="../action/admin_delete_action.php">
+                                                <button name="user_delete" class="action-btn delete" value="<?= $user['user_id'] ?>"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php
+                    if (isset($_GET['user_name_search'])) {
+                        searchPagination($page, $total_pages, 'users', $_GET['user_name_search']);
+                    } else {
+                        Adminpagination($page, $total_pages, 'users');
+                    }
+                    ?>
+                <?php endif; ?>
             </section>
 
             <!-- 호텔 관리 섹션 -->
@@ -105,46 +113,50 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                         </form>
                     </div>
                 </div>
-                <div class="table-container">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>호텔명</th>
-                                <th>위치</th>
-                                <th>객실 수</th>
-                                <th>예약 가능 객실 수</th>
-                                <th style="padding-left: 35px;">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($hotels as $hotel): ?>
-                            <tr>
-                                <td><?= $hotel['hotel_id'] ?></td>
-                                <td><?= $hotel['name'] ?></td>
-                                <td><?= $hotel['location'] ?></td>
-                                <td style="padding-left: 40px;"><?= $hotel['room_count'] ?></td>
-                                <td style="padding-left: 40px;"><?= $hotel['available_room_count'] ?></td>
-                                <td>
-                                    <form method="get" action="../admin/hotel-edit.php">
-                                        <button name="hotel_edit" class="action-btn edit" value="<?= $hotel['hotel_id'] ?>"><i class="fas fa-edit"></i></button>
-                                    </form>
-                                    <form method="get" action="../action/admin_delete_action.php">
-                                        <button name="hotel_delete" class="action-btn delete" value="<?= $hotel['hotel_id'] ?>"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?php 
-                if (isset($_GET['hotel_name_search'])) {
-                    searchPagination($page, $total_pages, 'hotels', $_GET['hotel_name_search']);
-                } else {
-                    Adminpagination($page, $total_pages, 'hotels');
-                }
-                ?>
+                <?php if (empty($hotels)): ?>
+                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                <?php else: ?>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>호텔명</th>
+                                    <th>위치</th>
+                                    <th>객실 수</th>
+                                    <th>예약 가능 객실 수</th>
+                                    <th style="padding-left: 35px;">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($hotels as $hotel): ?>
+                                    <tr>
+                                        <td><?= $hotel['hotel_id'] ?></td>
+                                        <td><?= $hotel['name'] ?></td>
+                                        <td><?= $hotel['location'] ?></td>
+                                        <td style="padding-left: 40px;"><?= $hotel['room_count'] ?></td>
+                                        <td style="padding-left: 40px;"><?= $hotel['available_room_count'] ?></td>
+                                        <td>
+                                            <form method="get" action="../admin/hotel-edit.php">
+                                                <button name="hotel_edit" class="action-btn edit" value="<?= $hotel['hotel_id'] ?>"><i class="fas fa-edit"></i></button>
+                                            </form>
+                                            <form method="get" action="../action/admin_delete_action.php">
+                                                <button name="hotel_delete" class="action-btn delete" value="<?= $hotel['hotel_id'] ?>"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php 
+                    if (isset($_GET['hotel_name_search'])) {
+                        searchPagination($page, $total_pages, 'hotels', $_GET['hotel_name_search']);
+                    } else {
+                        Adminpagination($page, $total_pages, 'hotels');
+                    }
+                    ?>
+                <?php endif; ?>
             </section>
 
             <!-- 예약 관리 섹션 -->
@@ -161,61 +173,66 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                         </form>
                     </div>
                 </div>
-                <div class="table-container">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>예약번호</th>
-                                <th>호텔명</th>
-                                <th>고객명</th>
-                                <th>체크인</th>
-                                <th>체크아웃</th>
-                                <th>상태</th>
-                                <th style="padding-left: 30px;">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($reservations as $reservation): ?>
+                <?php if (empty($reservations)): ?>
+                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                <?php else: ?>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
                                 <tr>
-                                    <td><?= $reservation['reservation_id'] ?></td>
-                                    <td><?= $reservation['name'] ?></td>
-                                    <td><?= $reservation['username'] ?></td>
-                                    <td><?= $reservation['check_in'] ?></td>
-                                    <td><?= $reservation['check_out'] ?></td>
-                                    <td> <span class="status <?php 
-                                if ($reservation['status'] == 'done'): 
-                                    echo 'status-complete';
-                                elseif ($reservation['status'] == 'cancel'): 
-                                    echo 'status-pending';
-                                endif; 
-                            ?>">
-                                <?php 
-                                    if ($reservation['status'] == 'done'): 
-                                        echo '예약확정';
-                                    elseif ($reservation['status'] == 'cancel'): 
-                                        echo '취소완료';
-                                    endif; 
-                                ?>
-                            </span>
-                            </td>
-                                    <td>
-                                        <form method="get" action="../action/admin_delete_action.php">
-                                            <input type="hidden" name="room_id" value="<?= $reservation['room_id'] ?>">
-                                            <button name="reservation_delete" class="action-btn delete" value="<?= $reservation['reservation_id'] ?>"><i class="fas fa-trash"></i></button>
-                                        </form>
-                                    </td>
+                                    <th>예약번호</th>
+                                    <th>호텔명</th>
+                                    <th>고객명</th>
+                                    <th>체크인</th>
+                                    <th>체크아웃</th>
+                                    <th>상태</th>
+                                    <th style="padding-left: 30px;">관리</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?php 
-                if (isset($_GET['reservation_number_search'])) {
-                    searchPagination($page, $total_pages, 'reservations', $_GET['reservation_number_search']);
-                } else {
-                    Adminpagination($page, $total_pages, 'reservations');
-                }
-                ?>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($reservations as $reservation): ?>
+                                    <tr>
+                                        <td><?= $reservation['reservation_id'] ?></td>
+                                        <td><?= $reservation['name'] ?></td>
+                                        <td><?= $reservation['username'] ?></td>
+                                        <td><?= $reservation['check_in'] ?></td>
+                                        <td><?= $reservation['check_out'] ?></td>
+                                        <td>
+                                            <span class="status <?php 
+                                                if ($reservation['status'] == 'done'): 
+                                                    echo 'status-complete';
+                                                elseif ($reservation['status'] == 'cancel'): 
+                                                    echo 'status-pending';
+                                                endif; 
+                                            ?>">
+                                            <?php 
+                                                if ($reservation['status'] == 'done'): 
+                                                    echo '예약확정';
+                                                elseif ($reservation['status'] == 'cancel'): 
+                                                    echo '취소완료';
+                                                endif; 
+                                            ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <form method="get" action="../action/admin_delete_action.php">
+                                                <input type="hidden" name="room_id" value="<?= $reservation['room_id'] ?>">
+                                                <button name="reservation_delete" class="action-btn delete" value="<?= $reservation['reservation_id'] ?>"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php 
+                    if (isset($_GET['reservation_number_search'])) {
+                        searchPagination($page, $total_pages, 'reservations', $_GET['reservation_number_search']);
+                    } else {
+                        Adminpagination($page, $total_pages, 'reservations');
+                    }
+                    ?>
+                <?php endif; ?>
             </section>
 
             <!-- 후기 관리 섹션 -->
@@ -232,46 +249,50 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                         </form>
                     </div>
                 </div>
-                <div class="table-container">
-                    <table class="admin-table">
-                        <thead>
-                            <tr style="text-align: center;">
-                                <th style="width: 10%">번호</th>
-                                <th style="width: 20%">호텔</th>
-                                <th style="width: 15%">작성자</th>
-                                <th style="width: 10%">평점</th>
-                                <th style="width: 25%">내용</th>
-                                <th style="width: 15%">작성일</th>
-                                <th  style="padding-left: 30px;">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($reviews as $review): ?>
-                            <tr>
-                                <td><?= $review['review_id'] ?></td>
-                                <td><?= $review['hotel_name'] ?></td>
-                                <td><?= $review['username'] ?></td>
-                                <td><?= $review['rating'] ?></td>
-                                <td><?= mb_substr($review['content'], 0, 30) . (mb_strlen($review['content']) > 30 ? '...' : '') ?></td>
-                                <td><?= $review['created_at'] ?></td>
-                                <td>
-                                    <form method="get" action="../action/admin_delete_action.php">
-                                        <a href="../hotel/hotel-detail.php?id=<?= $review['hotel_id'] ?>" class="action-btn view"><i class="fas fa-eye"></i></a>
-                                        <button name="review_delete" class="action-btn delete" value="<?= $review['review_id'] ?>"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?php 
-                if (isset($_GET['review_number_search'])) {
-                    searchPagination($page, $total_pages, 'reviews', $_GET['review_number_search']);
-                } else {
-                    Adminpagination($page, $total_pages, 'reviews');
-                }
-                ?>
+                <?php if (empty($reviews)): ?>
+                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                <?php else: ?>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr style="text-align: center;">
+                                    <th style="width: 10%">번호</th>
+                                    <th style="width: 20%">호텔</th>
+                                    <th style="width: 15%">작성자</th>
+                                    <th style="width: 10%">평점</th>
+                                    <th style="width: 25%">내용</th>
+                                    <th style="width: 15%">작성일</th>
+                                    <th style="padding-left: 30px;">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($reviews as $review): ?>
+                                    <tr>
+                                        <td><?= $review['review_id'] ?></td>
+                                        <td><?= $review['hotel_name'] ?></td>
+                                        <td><?= $review['username'] ?></td>
+                                        <td><?= $review['rating'] ?></td>
+                                        <td><?= mb_substr($review['content'], 0, 30) . (mb_strlen($review['content']) > 30 ? '...' : '') ?></td>
+                                        <td><?= $review['created_at'] ?></td>
+                                        <td>
+                                            <form method="get" action="../action/admin_delete_action.php">
+                                                <a href="../hotel/hotel-detail.php?id=<?= $review['hotel_id'] ?>" class="action-btn view"><i class="fas fa-eye"></i></a>
+                                                <button name="review_delete" class="action-btn delete" value="<?= $review['review_id'] ?>"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php 
+                    if (isset($_GET['review_number_search'])) {
+                        searchPagination($page, $total_pages, 'reviews', $_GET['review_number_search']);
+                    } else {
+                        Adminpagination($page, $total_pages, 'reviews');
+                    }
+                    ?>
+                <?php endif; ?>
             </section>
 
             <!-- 문의 관리 섹션 -->
@@ -288,74 +309,145 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                         </form>
                     </div>
                 </div>
-                <div class="table-container">
-                    <table class="admin-table">
-                        <thead>
-                            <tr style="text-align: center;">
-                                <th style="width: 10%">번호</th>
-                                <th style="width: 10%">분류</th>
-                                <th style="width: 30%">제목</th>
-                                <th style="width: 15%">작성자</th>
-                                <th style="width: 20%">작성일</th>
-                                <th style="width: 10%">답변상태</th>
-                                <th style="width: 20%">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($inquiries as $inquiry): ?>
-                            <tr>
-                                <td><?= $inquiry['inquiry_id'] ?></td>
-                                <td>
-                                    <?php
-                                    switch($inquiry['category']) {
-                                        case 'reservation':
-                                            echo '예약';
-                                            break;
-                                        case 'payment':
-                                            echo '결제';
-                                            break;
-                                        case 'room':
-                                            echo '객실';
-                                            break;
-                                        case 'other':
-                                            echo '기타';
-                                            break;
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php if ($inquiry['is_secret']): ?>
-                                        <span class="lock-icon">🔒</span>
-                                    <?php endif; ?>
-                                    <?= $inquiry['title'] ?>
-                                </td>
-                                <td><?= $inquiry['username'] ?></td>
-                                <td><?= $inquiry['created_at'] ?></td>
-                                <td>
-                                    <?php if ($inquiry['is_answered']): ?>
-                                        <span class="status-complete">답변완료</span>
-                                    <?php else: ?>
-                                        <span class="status-pending">미답변</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <form method="get" action="../action/admin_delete_action.php">
-                                        <a href="../inquiry/inquiry_detail.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="action-btn view"><i class="fas fa-eye"></i></a>
-                                        <button name="inquiry_delete" class="action-btn delete" value="<?= $inquiry['inquiry_id'] ?>"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                <?php if (empty($inquiries)): ?>
+                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                <?php else: ?>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr style="text-align: center;">
+                                    <th style="width: 10%">번호</th>
+                                    <th style="width: 10%">분류</th>
+                                    <th style="width: 30%">제목</th>
+                                    <th style="width: 15%">작성자</th>
+                                    <th style="width: 20%">작성일</th>
+                                    <th style="width: 10%">답변상태</th>
+                                    <th style="width: 20%">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($inquiries as $inquiry): ?>
+                                    <tr>
+                                        <td><?= $inquiry['inquiry_id'] ?></td>
+                                        <td>
+                                            <?php
+                                            switch($inquiry['category']) {
+                                                case 'reservation':
+                                                    echo '예약';
+                                                    break;
+                                                case 'payment':
+                                                    echo '결제';
+                                                    break;
+                                                case 'room':
+                                                    echo '객실';
+                                                    break;
+                                                case 'other':
+                                                    echo '기타';
+                                                    break;
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($inquiry['is_secret']): ?>
+                                                <span class="lock-icon">🔒</span>
+                                            <?php endif; ?>
+                                            <?= $inquiry['title'] ?>
+                                        </td>
+                                        <td><?= $inquiry['username'] ?></td>
+                                        <td><?= $inquiry['created_at'] ?></td>
+                                        <td>
+                                            <?php if ($inquiry['is_answered']): ?>
+                                                <span class="status-complete">답변완료</span>
+                                            <?php else: ?>
+                                                <span class="status-pending">미답변</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <form method="get" action="../action/admin_delete_action.php">
+                                                <a href="../inquiry/inquiry_detail.php?inquiry_id=<?= $inquiry['inquiry_id'] ?>" class="action-btn view"><i class="fas fa-eye"></i></a>
+                                                <button name="inquiry_delete" class="action-btn delete" value="<?= $inquiry['inquiry_id'] ?>"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php 
+                    if (isset($_GET['inquiry_number_search'])) {
+                        searchPagination($page, $total_pages, 'inquiries', $_GET['inquiry_number_search']);
+                    } else {
+                        Adminpagination($page, $total_pages, 'inquiries');
+                    }
+                    ?>
+                <?php endif; ?>
+            </section>
+
+            <!-- 공지사항 관리 섹션 -->
+            <section id="notices" class="content-section">
+                <div class="section-header">
+                    <h2>공지사항 관리</h2>
+                    <div class="search-form-container">
+                        <div class="section-actions">
+                            <a href="notice-write.php" class="add-btn"><i class="fas fa-plus"></i> 공지사항 작성</a>
+                        </div>
+                        <form method="get" action="../includes/info_for_admin.php">
+                            <input type="hidden" name="search" value="notice_title_search">
+                            <div class="admin-search-box">
+                                <input type="text" name="notice_title_search" placeholder="공지사항 제목 검색...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <?php 
-                if (isset($_GET['inquiry_number_search'])) {
-                    searchPagination($page, $total_pages, 'inquiries', $_GET['inquiry_number_search']);
-                } else {
-                    Adminpagination($page, $total_pages, 'inquiries');
-                }
-                ?>
+                <?php if (empty($notices)): ?>
+                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                <?php else: ?>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>작성일</th>
+                                    <th>공개여부</th>
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($notices as $notice): ?>
+                                    <tr>
+                                        <td><?= $notice['notice_id'] ?></td>
+                                        <td><?= $notice['title'] ?></td>
+                                        <td><?= $notice['created_at'] ?></td>
+                                        <td>
+                                            <?php if ($notice['is_released']): ?>
+                                                <span class="status-complete">공개</span>
+                                            <?php else: ?>
+                                                <span class="status-pending">비공개</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <form method="get" action="../admin/notice-edit.php">
+                                                <button name="notice_edit" class="action-btn edit" value="<?= $notice['notice_id'] ?>"><i class="fas fa-edit"></i></button>
+                                            </form>
+                                            <form method="get" action="../action/admin_delete_action.php">
+                                                <button name="notice_delete" class="action-btn delete" value="<?= $notice['notice_id'] ?>"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php 
+                    if (isset($_GET['notice_title_search'])) {
+                        searchPagination($page, $total_pages, 'notices', $_GET['notice_title_search']);
+                    } else {
+                        Adminpagination($page, $total_pages, 'notices');
+                    }
+                    ?>
+                <?php endif; ?>
             </section>
         </div>
     </main>

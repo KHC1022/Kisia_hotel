@@ -262,6 +262,56 @@ else if ($current_tab === 'inquiries') {
     }
 }
 
+// 공지 관리 탭
+else if ($current_tab === 'notices') {
+    // 검색어가 있는 경우
+    if (isset($_GET['notice_title_search']) && trim($_GET['notice_title_search']) !== '') {
+        $keyword = trim($_GET['notice_title_search']);
+
+        $count_sql = "SELECT COUNT(*) as total FROM notices WHERE title LIKE '%$keyword%'";
+        $count_result = $conn->query($count_sql);
+        $total_items = $count_result->fetch_assoc()['total'];
+        $total_pages = ceil($total_items / $items_per_page);
+
+        $sql = "SELECT n.*, u.username 
+                FROM notices n 
+                JOIN users u ON n.user_id = u.user_id 
+                WHERE n.title LIKE '%$keyword%' 
+                ORDER BY n.notice_id DESC 
+                LIMIT $offset, $items_per_page";
+        $result = $conn->query($sql);
+
+        $notices = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $notices[] = $row;
+            }
+        }
+    }
+    // 검색어 없는 경우 전체 목록
+    else {
+        $count_sql = "SELECT COUNT(*) as total FROM notices";
+        $count_result = $conn->query($count_sql);
+        $total_items = $count_result->fetch_assoc()['total'];
+        $total_pages = ceil($total_items / $items_per_page);
+
+        $sql = "SELECT n.*, u.username 
+                FROM notices n 
+                JOIN users u ON n.user_id = u.user_id 
+                ORDER BY n.notice_id DESC 
+                LIMIT $offset, $items_per_page";
+        $result = $conn->query($sql);
+
+        $notices = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $notices[] = $row;
+            }
+        }
+    }
+}
+
+
 // 검색 타입에 따른 탭 결정
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
     $search_type = $_GET['search'];
@@ -291,6 +341,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
             break;
         case 'inquiry_number_search':
             $tab = 'inquiries';
+            break;
+        case 'notice_title_search':
+            $tab = 'notices';
             break;
     }
     

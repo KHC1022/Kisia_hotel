@@ -7,7 +7,6 @@ include_once __DIR__ . '/../action/inquiry_detail_action.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문의 상세 - KISIA HOTEL</title>
     <link rel="stylesheet" href="../style/inquiry-detail.css">
 </head>
 <body>

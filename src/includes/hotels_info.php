@@ -61,7 +61,7 @@ if (!empty($sort)) {
         case 'rating':
             $query .= " ORDER BY h.rating DESC, h.hotel_id ASC";
             break;
-        case 'hotel-id':
+        case 'none':
             $query .= " ORDER BY h.hotel_id ASC";
             break;
         default:
