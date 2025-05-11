@@ -3,10 +3,10 @@ include_once __DIR__ . '/../includes/session.php';
 include_once __DIR__ . '/../includes/db_connection.php';
 
 // 검색어 가져오기
-$search = isset($_GET['search']) ? $_GET['search'] : '';
-$checkin = isset($_GET['checkin']) ? $_GET['checkin'] : '';
-$checkout = isset($_GET['checkout']) ? $_GET['checkout'] : '';
-$guests = isset($_GET['guests']) ? (int)$_GET['guests'] : 1;
+$search = $_GET['search'] ?? '';
+$checkin = $_GET['checkin'] ?? '';
+$checkout = $_GET['checkout'] ?? '';
+$guests = $_GET['guests'] ?? 1;
 
 // 게스트 수 제한
 if ($guests > 4) {

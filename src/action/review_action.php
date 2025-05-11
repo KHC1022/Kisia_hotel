@@ -25,6 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
             VALUES ('$user_id', '$hotel_id', '$rating', '$content', '$image_path', '$travel_type', NOW())";
     mysqli_query($conn, $sql);
 
+    // 호텔 평점 업데이트
+    $update_rating_sql = "UPDATE hotels h 
+                         SET h.rating = (
+                             SELECT ROUND(AVG(r.rating), 1)
+                             FROM reviews r
+                             WHERE r.hotel_id = h.hotel_id
+                         )
+                         WHERE h.hotel_id = '$hotel_id'";
+    mysqli_query($conn, $update_rating_sql);
+
     header("Location: ../hotel/hotel-detail.php?id=$hotel_id");
     exit;
 }
