@@ -22,6 +22,7 @@ include_once __DIR__ . '/../includes/pagination.php';
     <link rel="stylesheet" href="../style/hotel-detail.css">
     <link rel="stylesheet" href="../style/hotel-add.css">
     <link rel="stylesheet" href="../style/inquiry.css">
+    <link rel="stylesheet" href="../style/coupon.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -47,6 +48,7 @@ include_once __DIR__ . '/../includes/pagination.php';
                 <li><a href="../hotel/hotels.php">호텔</a></li>
                 <li><a href="../inquiry/inquiry.php">문의</a></li>
                 <li><a href="../notice/notice.php">공지사항</a></li>
+                <li><a href="../coupon/coupon-list.php">쿠폰</a></li>
             </ul>
             <div class="style-auth-buttons">
                 <?php include __DIR__ . '/../action/auto_buttons.php'; ?>
