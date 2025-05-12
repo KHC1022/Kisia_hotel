@@ -31,6 +31,10 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                     <i class="fas fa-bell"></i>
                     공지사항 관리
                 </li>
+                <li data-tab="coupons">
+                    <i class="fas fa-tag"></i>
+                    쿠폰 관리
+                </li>
             </ul>
         </div>
 
@@ -63,6 +67,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                     <th>이메일</th>
                                     <th>전화번호</th>
                                     <th>가입일</th>
+                                    <th>등급</th>
                                     <th style="padding-left: 30px;">관리</th>
                                 </tr>
                             </thead>
@@ -76,6 +81,11 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                         <td><?= $user['email'] ?></td>
                                         <td><?= $user['phone'] ?></td>
                                         <td><?= $user['created_at'] ?></td>
+                                        <td><? if($user['vip'] == 1) {
+                                            echo 'VIP';
+                                        } else {
+                                            echo '일반';
+                                        } ?></td>
                                         <td>
                                             <form method="get" action="../action/admin_delete_action.php">
                                                 <button name="user_delete" class="action-btn delete" value="<?= $user['user_id'] ?>"><i class="fas fa-trash"></i></button>
@@ -445,6 +455,117 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                         searchPagination($page, $total_pages, 'notices', $_GET['notice_title_search']);
                     } else {
                         Adminpagination($page, $total_pages, 'notices');
+                    }
+                    ?>
+                <?php endif; ?>
+            </section>
+
+            <!-- 쿠폰 관리 섹션 -->
+            <section id="coupons" class="content-section">
+                <div class="section-header">
+                    <h2>쿠폰 관리</h2>
+                    <div class="search-form-container">
+                        <div class="section-actions">
+                            <a href="coupon-add.php" class="add-btn"><i class="fas fa-plus"></i> 쿠폰 추가</a>
+                        </div>
+                        <form method="get" action="../includes/info_for_admin.php">
+                            <input type="hidden" name="search" value="coupon_code_search">
+                            <div class="admin-search-box">
+                                <input type="text" name="coupon_code_search" placeholder="쿠폰 코드 검색...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <?php if (empty($coupons)): ?>
+                    <div class="admin-no-results">검색 결과가 없습니다.</div>
+                <?php else: ?>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr style="text-align: center;">
+                                    <th style="width: 10%">쿠폰 코드</th>
+                                    <th style="width: 14%">쿠폰명</th>
+                                    <th style="width: 10%">할인 유형</th>
+                                    <th style="width: 8%">할인 값</th>
+                                    <th style="width: 10%">시작일</th>
+                                    <th style="width: 10%">종료일</th>
+                                    <th style="width: 10%">최소 구매액</th>
+                                    <th style="width: 10%">최대 할인액</th>
+                                    <th style="width: 8%">사용 제한</th>
+                                    <th style="width: 6%">상태</th>
+                                    <th style="width: 5%">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($coupons as $coupon): ?>
+                                    <tr>
+                                        <td style="text-align: center;"><?= $coupon['code'] ?></td>
+                                        <td style="text-align: center;"><?= $coupon['name'] ?></td>
+                                        <td style="text-align: center;">
+                                            <?php
+                                            if ($coupon['discount_type'] == 'percentage') {
+                                                echo '퍼센트';
+                                            } else {
+                                                echo '정액';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <?php
+                                            if ($coupon['discount_type'] == 'percentage') {
+                                                echo $coupon['discount_value'] . '%';
+                                            } else {
+                                                echo number_format($coupon['discount_value']) . '원';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td style="text-align: center;"><?= $coupon['start_date'] ?></td>
+                                        <td style="text-align: center;"><?= $coupon['end_date'] ?></td>
+                                        <td style="text-align: center;"><?= number_format($coupon['minimum_purchase']) ?>원</td>
+                                        <td style="text-align: center;">
+                                            <?php
+                                            if ($coupon['maximum_discount'] === null) {
+                                                echo '-';
+                                            } else {
+                                                echo number_format($coupon['maximum_discount']) . '원';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <?php
+                                            if ($coupon['usage_limit'] === null) {
+                                                echo '무제한';
+                                            } else {
+                                                echo $coupon['usage_limit'] . '회';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <?php if ($coupon['is_active']): ?>
+                                                <span class="status-complete">활성</span>
+                                            <?php else: ?>
+                                                <span class="status-pending">비활성</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <form method="get" action="../admin/coupon-edit.php">
+                                                <button name="coupon_edit" class="action-btn edit" value="<?= $coupon['code'] ?>"><i class="fas fa-edit"></i></button>
+                                            </form>
+                                            <form method="get" action="../action/admin_delete_action.php">
+                                                <button name="coupon_delete" class="action-btn delete" value="<?= $coupon['code'] ?>"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php 
+                    if (isset($_GET['coupon_code_search'])) {
+                        searchPagination($page, $total_pages, 'coupons', $_GET['coupon_code_search']);
+                    } else {
+                        Adminpagination($page, $total_pages, 'coupons');
                     }
                     ?>
                 <?php endif; ?>

@@ -9,8 +9,8 @@
                 <ul>
                     <li><a href="../index.php">홈</a></li>
                     <li><a href="../hotel/hotels.php">호텔</a></li>
-                    <li><a href="../review/review.php">후기</a></li>
                     <li><a href="../inquiry/inquiry.php">문의</a></li>
+                    <li><a href="../notice/notice.php">공지사항</a></li>
                 </ul>
             </div>
             <div class="style-footer-section">

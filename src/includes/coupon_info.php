@@ -21,8 +21,8 @@ $vip_result = mysqli_query($conn, $vip_sql);
 $vip_user = mysqli_fetch_assoc($vip_result);
 $is_vip = $vip_user['vip'];
 
-// 전체 쿠폰 가져오기 (신규 회원이 아닌 경우 신규 회원 쿠폰 제외, VIP가 아닌 경우 VIP 쿠폰 제외)
-$sql = "SELECT * FROM coupons WHERE 1=1";
+// 전체 쿠폰 가져오기 (신규 회원이 아닌 경우 신규 회원 쿠폰 제외, VIP가 아닌 경우 VIP 쿠폰 제외, 비활성화된 쿠폰 제외)
+$sql = "SELECT * FROM coupons WHERE is_active = 1";
 if (!$is_new_user) {
     $sql .= " AND code != 'WELCOME10'";
 }

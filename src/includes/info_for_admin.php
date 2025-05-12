@@ -311,6 +311,32 @@ else if ($current_tab === 'notices') {
     }
 }
 
+// 쿠폰 관리 데이터 가져오기
+if (isset($_GET['tab']) && $_GET['tab'] == 'coupons' || isset($_GET['search']) && $_GET['search'] == 'coupon_code_search') {
+    $items_per_page = 10;
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $page = max(1, $page);
+    $offset = ($page - 1) * $items_per_page;
+
+    if (isset($_GET['search']) && $_GET['search'] == 'coupon_code_search' && !empty($_GET['coupon_code_search'])) {
+        $search = mysqli_real_escape_string($conn, $_GET['coupon_code_search']);
+        $count_sql = "SELECT COUNT(*) as total FROM coupons WHERE code LIKE '%$search%' OR name LIKE '%$search%'";
+        $sql = "SELECT * FROM coupons WHERE code LIKE '%$search%' OR name LIKE '%$search%' ORDER BY created_at DESC LIMIT $offset, $items_per_page";
+    } else {
+        $count_sql = "SELECT COUNT(*) as total FROM coupons";
+        $sql = "SELECT * FROM coupons ORDER BY created_at DESC LIMIT $offset, $items_per_page";
+    }
+
+    $count_result = mysqli_query($conn, $count_sql);
+    $total_items = mysqli_fetch_assoc($count_result)['total'];
+    $total_pages = ceil($total_items / $items_per_page);
+
+    $result = mysqli_query($conn, $sql);
+    if (!$result) {
+        die('쿠폰 정보 조회 오류: ' . mysqli_error($conn));
+    }
+    $coupons = mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 
 // 검색 타입에 따른 탭 결정
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {

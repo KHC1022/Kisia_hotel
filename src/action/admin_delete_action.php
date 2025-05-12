@@ -35,6 +35,10 @@ foreach ($_GET as $key => $value) {
                 $table_name = 'notices';
                 $id_name = 'notice_id';
                 break;
+            case 'coupon':
+                $table_name = 'coupons';
+                $id_name = 'code';
+                break;
         }
         
         if ($action === 'edit' || $action === 'delete') {
@@ -103,6 +107,35 @@ if ($action_type === 'delete') {
                 alert('존재하지 않는 $table_name 입니다.');
                 window.location.href = '../admin/admin.php?tab=$table_name';
             </script>";
+        }
+    }
+    else if ($table_name === 'coupons') {
+        // 쿠폰 삭제 전 사용 중인 쿠폰인지 확인
+        $check_sql = "SELECT COUNT(*) as count FROM user_coupons WHERE coupon_id = '$id'";
+        $check_result = mysqli_query($conn, $check_sql);
+        $check_row = mysqli_fetch_assoc($check_result);
+        
+        if ($check_row['count'] > 0) {
+            echo "<script>
+                    alert('사용 중인 쿠폰은 삭제할 수 없습니다.');
+                    window.location.href = '../admin/admin.php?tab=$table_name';
+                  </script>";
+            exit;
+        }
+        
+        $sql = "DELETE FROM $table_name WHERE $id_name = '$id'";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            echo "<script>
+                    alert('쿠폰이 삭제되었습니다.');
+                    window.location.href = '../admin/admin.php?tab=$table_name';
+                  </script>";
+        } else {
+            echo "<script>
+                    alert('쿠폰 삭제 중 오류가 발생했습니다.');
+                    window.location.href = '../admin/admin.php?tab=$table_name';
+                  </script>";
         }
     }
     else {
