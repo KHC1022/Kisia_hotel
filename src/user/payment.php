@@ -43,22 +43,31 @@ include_once __DIR__ . '/../includes/header.php';
                     <div id="coupon-list" style="display: none;">
                         <ul class="coupon-list">
                         <?php foreach ($available_coupons as $coupon): ?>
-                            <li>
+                            <?php 
+                                $is_used = $coupon['is_used'] == 1;
+                            ?>
+                            <li style="<?= $is_used ? 'opacity:0.5; pointer-events:none;' : '' ?>">
                                 <input type="radio" name="selected_coupon" class="coupon-radio"
                                     value="<?= $coupon['coupon_id'] ?>"
                                     data-discount-type="<?= $coupon['discount_type'] ?>"
                                     data-discount-value="<?= $coupon['discount_value'] ?>"
+                                    <?= $is_used ? 'disabled' : '' ?>
                                     onclick="toggleCouponSelection(this)">
                                 <div>
                                     <strong><?= $coupon['name'] ?> (<?= $coupon['code'] ?>)</strong><br>
-                                    <span><?= $coupon['discount_type'] === 'percentage' 
-                                            ? intval($coupon['discount_value']).'% 할인'
-                                            : number_format($coupon['discount_value']).'원 할인' ?>
+                                    <span>
+                                        <?= $coupon['discount_type'] === 'percentage' 
+                                                ? intval($coupon['discount_value']).'% 할인'
+                                                : number_format($coupon['discount_value']).'원 할인' ?>
                                         · <?= date('Y.m.d', strtotime($coupon['start_date'])) ?> ~ <?= date('Y.m.d', strtotime($coupon['end_date'])) ?>
+                                        <?php if ($is_used): ?>
+                                            <span style="color:red; font-weight:bold;">[사용 완료]</span>
+                                        <?php endif; ?>
                                     </span>
                                 </div>
                             </li>
                         <?php endforeach; ?>
+
                         </ul>
                     </div>
                 </div>

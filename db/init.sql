@@ -195,6 +195,7 @@ CREATE TABLE coupon_usage (
     coupon_id INT,
     user_id INT,
     reservation_id INT,
+    is_used BOOLEAN NOT NULL DEFAULT 0,
     used_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (coupon_id) REFERENCES coupons(coupon_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
@@ -205,6 +206,7 @@ CREATE TABLE coupon_usage (
 CREATE TABLE user_coupons (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
+    is_used BOOLEAN NOT NULL DEFAULT 0,
     coupon_id INT NOT NULL,
     received_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     UNIQUE KEY (user_id, coupon_id)
