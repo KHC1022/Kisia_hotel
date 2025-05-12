@@ -10,9 +10,15 @@ $sql2 = "UPDATE rooms SET status = 'available' WHERE room_id = $room_id";
 $result = mysqli_query($conn, $sql);
 $result2 = mysqli_query($conn, $sql2);
 
-if ($result && $result2) {
+if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] && $result && $result2) {
     echo "<script>
         alert('$reservation_id 번 예약이 취소되었습니다.');
+        window.location.href = '../admin/admin.php?tab=reservations';
+    </script>";
+}
+else if ($result && $result2) {
+    echo "<script>
+        alert('예약이 취소되었습니다.');
         window.location.href = '../user/mypage.php';
     </script>";
 }

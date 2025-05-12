@@ -1,28 +1,6 @@
 <?php
 include_once __DIR__ . '/../includes/header.php';
-include_once __DIR__ . '/../includes/session.php';
-include_once __DIR__ . '/../includes/db_connection.php';
-
-if (!isset($_SESSION['user_id'])) {
-    echo "<script>
-        alert('로그인 후 이용해 주세요.');
-        window.location.href='../user/login.php';
-    </script>";
-    exit();
-}
-
-$user_id = $_SESSION['user_id'];
-
-// ✅ 전체 쿠폰 가져오기
-$result = mysqli_query($conn, "SELECT * FROM coupons ORDER BY created_at DESC");
-$coupons = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-// ✅ 내가 받은 쿠폰 목록 가져오기
-$received_result = mysqli_query($conn, "SELECT coupon_id FROM user_coupons WHERE user_id = $user_id");
-$received = [];
-while ($row = mysqli_fetch_assoc($received_result)) {
-    $received[] = $row['coupon_id'];
-}
+include_once __DIR__ . '/../includes/coupon_info.php';
 ?>
 
 <main class="user-coupon-container">
@@ -36,14 +14,14 @@ while ($row = mysqli_fetch_assoc($received_result)) {
                 <div class="coupon-details">
                     <div class="coupon-header">
                         <i class="fas fa-ticket-alt"></i> 
-                        <?= $coupon['name'] ?> (<?= $coupon['code'] ?>) <!-- ✅ XSS 필터 제거 -->
+                        <?= $coupon['name'] ?> (<?= $coupon['code'] ?>)
                     </div>
                     <p style="color:red; font-weight:bold;">
                         <?= $coupon['discount_type'] === 'percentage'
                             ? (int)$coupon['discount_value'] . '% 할인'
                             : number_format($coupon['discount_value']) . '원 할인'; ?>
                     </p>
-                    <p>사용 기간: <?= $coupon['start_date'] ?> ~ <?= $coupon['end_date'] ?></p> <!-- ✅ date() 제거 -->
+                    <p>사용 기간: <?= $coupon['start_date'] ?> ~ <?= $coupon['end_date'] ?></p>
                 </div>
 
                 <div class="coupon-action">

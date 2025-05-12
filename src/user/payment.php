@@ -1,6 +1,6 @@
 <?php 
 include_once __DIR__ . '/../action/payment_action.php';
-include_once __DIR__ . '/../action/coupon_action.php'; 
+include_once __DIR__ . '/../action/coupon_view_action.php'; 
 include_once __DIR__ . '/../includes/header.php';
 ?>
 <main class="payment-container">
@@ -44,14 +44,15 @@ include_once __DIR__ . '/../includes/header.php';
                         <ul class="coupon-list">
                         <?php foreach ($available_coupons as $coupon): ?>
                             <li>
-                                <input type="radio" name="selected_coupon"
+                                <input type="radio" name="selected_coupon" class="coupon-radio"
                                     value="<?= $coupon['coupon_id'] ?>"
                                     data-discount-type="<?= $coupon['discount_type'] ?>"
-                                    data-discount-value="<?= $coupon['discount_value'] ?>">
+                                    data-discount-value="<?= $coupon['discount_value'] ?>"
+                                    onclick="toggleCouponSelection(this)">
                                 <div>
                                     <strong><?= $coupon['name'] ?> (<?= $coupon['code'] ?>)</strong><br>
                                     <span><?= $coupon['discount_type'] === 'percentage' 
-                                            ? $coupon['discount_value'].'% 할인'
+                                            ? intval($coupon['discount_value']).'% 할인'
                                             : number_format($coupon['discount_value']).'원 할인' ?>
                                         · <?= date('Y.m.d', strtotime($coupon['start_date'])) ?> ~ <?= date('Y.m.d', strtotime($coupon['end_date'])) ?>
                                     </span>
@@ -115,5 +116,23 @@ function toggleCoupons() {
     const icon = document.getElementById('toggle-icon');
     list.style.display = list.style.display === "none" ? "block" : "none";
     icon.textContent = list.style.display === "block" ? "▲" : "▼";
+}
+
+// 쿠폰 선택 토글 함수
+function toggleCouponSelection(radio) {
+    if (radio.checked && radio.dataset.wasChecked === 'true') {
+        radio.checked = false;
+        radio.dataset.wasChecked = 'false';
+        // 선택 해제 시 원래 가격으로 복원
+        const originalPrice = parseFloat(document.getElementById('finalPrice').dataset.originalPrice);
+        document.getElementById('finalPrice').innerText = originalPrice.toLocaleString() + ' P';
+        document.getElementById('chargeAmount').value = originalPrice;
+    } else {
+        // 다른 라디오 버튼들의 wasChecked 상태 초기화
+        document.querySelectorAll('.coupon-radio').forEach(r => {
+            r.dataset.wasChecked = 'false';
+        });
+        radio.dataset.wasChecked = 'true';
+    }
 }
 </script>

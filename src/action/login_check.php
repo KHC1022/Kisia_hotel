@@ -7,4 +7,5 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
             window.location.href = '../user/login.php';
         </script>";
 }
+
 ?>

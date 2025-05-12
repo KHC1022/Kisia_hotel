@@ -101,7 +101,8 @@
 }
 
 .payment-form-group {
-    margin-top: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
 }
 
 .payment-form-group label {
