@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/../includes/db_connection.php';
 include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/mypage_action.php';  // VIP 관련 함수를 포함
 
 $user_id = $_SESSION['user_id'] ?? null;
 $charge_amount = $_GET['charge_amount'] ?? 0;
@@ -23,6 +24,7 @@ if ($user && $user['point'] >= $charge_amount) {
     $rooms_update_sql = "UPDATE rooms SET status = 'reserved' WHERE room_id = '$room_id'";
     mysqli_query($conn, $rooms_update_sql);
 
+    // 예약 등록
     $reservation_sql = "INSERT INTO reservations (user_id, room_id, check_in, check_out, total_price, guests, created_at, status) 
                        VALUES ('$user_id', '$room_id', '$checkin', '$checkout', '$total_price', '$guests', NOW(), 'done')";
     $reservation_result = mysqli_query($conn, $reservation_sql);
@@ -31,6 +33,10 @@ if ($user && $user['point'] >= $charge_amount) {
         echo "<script>alert('예약 등록 중 오류가 발생했습니다: " . mysqli_error($conn) . "');</script>";
         exit;
     }
+
+    // VIP 상태 즉시 업데이트
+    $vip_score = calculate_vip_score($user_id, $conn);
+    update_vip_status($user_id, $vip_score, $conn);
 
     echo "<script>alert('결제가 완료되었습니다.'); location.href='../user/mypage.php';</script>";
     exit;
