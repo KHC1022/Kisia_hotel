@@ -1,7 +1,6 @@
 <?php
 include_once __DIR__ . '/../includes/db_connect.php';
 
-// 액션 타입 확인
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 // 쿠폰 추가
