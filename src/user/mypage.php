@@ -24,6 +24,13 @@ $users = $GLOBALS['users'];
                 </form>
                 <h2 id="username"><?= $users['username']?></h2>
                 <p id="email"><?= $users['email']?></p>
+                <div class="member-grade">
+                    <?php if($users['vip']): ?>
+                        <span class="vip-badge">VIP 회원</span>
+                    <?php else: ?>
+                        <span class="normal-badge">일반 회원</span>
+                    <?php endif; ?>
+                </div>
             </div>
             <nav class="mypage-nav">
                 <ul>
@@ -87,6 +94,8 @@ $users = $GLOBALS['users'];
                         </div>
                         <?php endforeach; ?>
                     </div>
+                    
+                    <?php pagination($total_reservation_items, $reservation_items_per_page); ?>
                 <?php endif; ?>
             </section>
 
@@ -158,6 +167,8 @@ $users = $GLOBALS['users'];
                             <?php endforeach; ?>
                             </tbody>
                     </table>
+                    
+                    <?php pagination($total_wishlist_items, $wishlist_items_per_page); ?>
                 <?php endif; ?>
             </section>
             <section id="point" class="content-section">
