@@ -160,18 +160,20 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                     <h2>후기 작성</h2>
                     <div class="reviews-section">
                         <div class="write-review">
-                            <?php if (isset($_SESSION['user_id'])): ?>
+                            <?php if (isset($_SESSION['user_id']) && $user_reservation_id !== null): ?>
                                 <form class="review-form" action="../action/review_action.php" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="hotel_id" value="<?php echo $hotel_id; ?>">
+                                    <input type="hidden" name="reservation_id" value="<?php echo $user_reservation_id; ?>">
                                     <div class="rating-input">
                                         <label>평점</label>
-                                    <div class="star-rating">
-                                        <i class="far fa-star" data-value="1"></i>
-                                        <i class="far fa-star" data-value="2"></i>
-                                        <i class="far fa-star" data-value="3"></i>
-                                        <i class="far fa-star" data-value="4"></i>
-                                        <i class="far fa-star" data-value="5"></i>
-                                        <input type="hidden" name="rating" value="0" />
+                                        <div class="star-rating">
+                                            <i class="far fa-star" data-value="1"></i>
+                                            <i class="far fa-star" data-value="2"></i>
+                                            <i class="far fa-star" data-value="3"></i>
+                                            <i class="far fa-star" data-value="4"></i>
+                                            <i class="far fa-star" data-value="5"></i>
+                                            <input type="hidden" name="rating" value="0" />
+                                        </div>
                                     </div>
                                     <div class="review-content">
                                         <label for="content">후기 내용</label>
@@ -196,9 +198,13 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                                         <button type="submit" name="submit_review" class="submit-review">후기 등록</button>
                                     </div>
                                 </form>
+                            <?php elseif (isset($_SESSION['user_id'])): ?>
+                                <div class="login-notice">
+                                    <p>해당 호텔 이용 후에만 후기를 작성할 수 있습니다.</p>
+                                </div>
                             <?php else: ?>
                                 <div class="login-notice">
-                                    <p>후기를 작성하려면 <a href="../user/login.php">로그인</a>이 필요합니다.</p>
+                                    <p>후기 작성을 위해서는 로그인이 필요합니다.</p>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -319,59 +325,3 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
     </main>
 
 <?php include_once __DIR__ . '/../includes/footer.php'; ?> 
-<script>
-// 탭 버튼 클릭 시 섹션 전환
-const tabBtns = document.querySelectorAll('.tab-btn');
-const tabContents = document.querySelectorAll('.section-tab-content');
-tabBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        const section = this.getAttribute('data-section');
-        tabContents.forEach(content => {
-            if (content.classList.contains(section)) {
-                content.style.display = 'block';
-            } else {
-                content.style.display = 'none';
-            }
-        });
-    });
-});
-const stars = document.querySelectorAll('.star-rating i');
-const ratingInput = document.querySelector('.star-rating input');
-
-stars.forEach(star => {
-    star.addEventListener('click', function(e) {
-        const rect = this.getBoundingClientRect();
-        const offsetX = e.clientX - rect.left;
-        const starWidth = rect.width;
-        const value = parseInt(this.getAttribute('data-value'));
-        let selectedValue = value;
-
-        if (offsetX < starWidth / 2) selectedValue -= 0.5;
-        ratingInput.value = selectedValue;
-
-        stars.forEach(s => {
-            s.classList.remove('fas', 'far', 'fa-star', 'fa-star-half-alt', 'full', 'half');
-            s.classList.add('far', 'fa-star');
-        });
-
-        stars.forEach(s => {
-            const sValue = parseInt(s.getAttribute('data-value'));
-            s.classList.remove('far', 'fas', 'fa-star', 'fa-star-half-alt');
-
-            if (sValue < selectedValue) {
-                s.classList.add('fas', 'fa-star', 'full');
-            } else if (sValue === Math.ceil(selectedValue)) {
-                if (selectedValue % 1 === 0.5) {
-                    s.classList.add('fas', 'fa-star-half-alt', 'half');
-                } else {
-                    s.classList.add('fas', 'fa-star', 'full');
-                }
-            } else {
-                s.classList.add('far', 'fa-star');
-            }
-        });
-    });
-});
-</script> 

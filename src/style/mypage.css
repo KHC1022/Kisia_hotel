@@ -499,3 +499,73 @@
     font-size: 16px;
     font-weight: normal;
 }
+
+/* 빈 결과 메시지 */
+.mypage-no-results {
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(44, 82, 130, 0.1);
+    width: auto;
+    min-width: fit-content;
+    margin: 0 auto;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    padding: 50px 2rem;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.mypage-no-results::before {
+    content: '\f002';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    display: block;
+    font-size: 2.5rem;
+    color: #999;
+    margin-bottom: 15px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+    .mypage-no-results {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .mypage-no-results {
+        width: 95%;
+        padding: 40px 1rem;
+    }
+}
+
+/* 섹션 제목 스타일 */
+.mypage-content h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e9ecef;
+    position: relative;
+}
+
+.mypage-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #7851A9;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .mypage-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.8rem;
+    }
+}

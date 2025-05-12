@@ -932,9 +932,5 @@ INSERT INTO coupons
 (code, name, description, discount_type, discount_value, start_date, end_date, minimum_purchase, maximum_discount, usage_limit, is_active)
 VALUES 
 ('WELCOME10', '신규 회원 할인', '신규 가입 회원 대상 10% 할인 쿠폰', 'percentage', 10.00, '2025-05-01', '2025-12-31', 5000, 20000, 1, TRUE),
-
 ('MAY5000', '5월 한정 할인', '5월 한정 5,000원 할인 쿠폰', 'fixed', 5000.00, '2025-05-01', '2025-05-31', 20000, NULL, 100, TRUE),
-
-('VIP20', 'VIP 전용 할인', 'VIP 회원 전용 20% 할인 쿠폰', 'percentage', 20.00, '2025-05-01', '2025-12-31', 10000, 50000, NULL, TRUE),
-
-('TEST1000', '테스트용 쿠폰', '테스트용 1,000원 할인 쿠폰', 'fixed', 1000.00, '2025-05-01', '2025-12-31', NULL, NULL, NULL, TRUE);
+('VIP20', 'VIP 전용 할인', 'VIP 회원 전용 20% 할인 쿠폰', 'percentage', 20.00, '2025-05-01', '2025-12-31', 10000, 50000, NULL, TRUE);

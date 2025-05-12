@@ -1,5 +1,6 @@
 <?php 
 include_once __DIR__ . '/../includes/header.php';
+include_once __DIR__ . '/../action/already_login_check.php';
 ?>
 
     <main class="login-container">

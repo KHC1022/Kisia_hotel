@@ -104,4 +104,22 @@ while ($review = $reviews_result->fetch_assoc()) {
     $reviews[] = $review;
 }
 
+// 로그인한 사용자의 예약 ID 가져오기
+$user_reservation_id = null;
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $reservation_sql = "SELECT r.reservation_id 
+                       FROM reservations r 
+                       JOIN rooms rm ON r.room_id = rm.room_id 
+                       WHERE r.user_id = $user_id 
+                       AND rm.hotel_id = $hotel_id 
+                       AND r.status = 'done'";
+    $reservation_result = $conn->query($reservation_sql);
+    
+    if ($reservation_result && $reservation_result->num_rows > 0) {
+        $reservation_row = $reservation_result->fetch_assoc();
+        $user_reservation_id = $reservation_row['reservation_id'];
+    }
+}
+
 ?>

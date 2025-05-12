@@ -1,6 +1,4 @@
 <?php 
-include_once __DIR__ . '/../includes/session.php';
-include_once __DIR__ . '/../includes/db_connection.php';
 include_once __DIR__ . '/../includes/header.php';
 include_once __DIR__ . '/../action/mypage_action.php';
 $users = $GLOBALS['users'];
@@ -41,38 +39,55 @@ $users = $GLOBALS['users'];
             <!-- 예약 관리 섹션 -->
             <section id="reservations" class="content-section active">
                 <h2>예약 관리</h2>
-                <div class="reservation-list">
-                    <?php foreach ($reservations as $reservation): ?>
-                    <div class="reservation-card">
-                        <div class="reservation-header">
-                            <h3><?=$reservation['hotel_name']?></h3>
-                            <span class="status <?=$reservation['status']?>"><?=$reservation['status']?></span>
+                <?php if (empty($reservations)): ?>
+                    <div class="mypage-no-results">예약 내역이 없습니다.</div>
+                <?php else: ?>
+                    <div class="reservation-list">
+                        <?php foreach ($reservations as $reservation): ?>
+                        <div class="reservation-card">
+                            <div class="reservation-header">
+                                <h3><?=$reservation['hotel_name']?></h3>
+                                <?php if($reservation['status'] == 'done'): ?>
+                                    <span class="status-complete">예약확정</span>
+                                <?php elseif($reservation['status'] == 'cancel'): ?>
+                                    <span class="status-pending">예약취소</span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="reservation-details">
+                                <div class="mypage-detail-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>체크인:  <?=$reservation['check_in']?></span>
+                                </div>
+                                <div class="mypage-detail-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>체크아웃:  <?=$reservation['check_out']?></span>
+                                </div>
+                                <div class="mypage-detail-item">
+                                    <i class="fas fa-bed"></i>
+                                    <?php if($reservation['room_type'] == 'deluxe'): ?>
+                                        <span>디럭스 룸</span>
+                                    <?php elseif($reservation['room_type'] == 'suite'): ?>
+                                        <span>스위트 룸</span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="mypage-detail-item">
+                                    <i class="fas fa-user"></i>
+                                    <span><?=$reservation['guests']?>명</span>
+                                </div>
+                            </div>
+                            <?php if($reservation['status'] == 'done'): ?>
+                            <form method="get" action="../action/reservation_cancel_action.php">
+                                <input type="hidden" name="reservation_id" value="<?=$reservation['reservation_id']?>">
+                                <input type="hidden" name="room_id" value="<?=$reservation['room_id']?>">
+                                <div class="reservation-actions">
+                                    <button class="mypage-cancel-btn">예약 취소</button>
+                                </div>
+                            </form>
+                            <?php endif; ?>
                         </div>
-                        <div class="reservation-details">
-                            <div class="mypage-detail-item">
-                                <i class="fas fa-calendar"></i>
-                                <span>체크인: <?=$reservation['check_in']?></span>
-                            </div>
-                            <div class="mypage-detail-item">
-                                <i class="fas fa-calendar"></i>
-                                <span>체크아웃: <?=$reservation['check_out']?></span>
-                            </div>
-                            <div class="mypage-detail-item">
-                                <i class="fas fa-bed"></i>
-                                <span><?=$reservation['room_type']?></span>
-                            </div>
-                            <div class="mypage-detail-item">
-                                <i class="fas fa-user"></i>
-                                <span><?=$reservation['guests']?>명</span>
-                            </div>
-                        </div>
-                        <div class="reservation-actions">
-                            <button class="modify-btn" onclick="window.location.href='../hotel/hotel-detail.php?id=<?=$reservation['hotel_id']?>'">상세보기</button>
-                            <button class="mypage-cancel-btn">예약 취소</button>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
-                    <?php endforeach; ?>
-                </div>
+                <?php endif; ?>
             </section>
 
             <!-- 여행객 정보 섹션 -->
@@ -112,34 +127,38 @@ $users = $GLOBALS['users'];
             <!-- 찜 목록 섹션 -->
             <section id="wishlist" class="content-section">
                 <h2>찜 목록</h2>
-                <table class="wishlist-table">
-                    <thead>
-                        <tr>
-                            <th width="90%">호텔 이름</th>
-                            <th width="10%" style="padding-left: 25px;">관리</th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                        <?php foreach ($wishlist_items as $hotel): ?>
+                <?php if (empty($wishlist_items)): ?>
+                    <div class="mypage-no-results">찜한 호텔이 없습니다.</div>
+                <?php else: ?>
+                    <table class="wishlist-table">
+                        <thead>
                             <tr>
-                                <td>
-                                    <div class="hotel-row">
-                                        <h2 class="hotel-name"><?=$hotel['name'] ?></h2>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="button-group">
-                                        <a href="../hotel/hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="detail-btn">상세보기</a>
-                                        <form method="get" action="../action/wishlist_delete.php" style="display:inline;">
-                                            <input type="hidden" name="hotel_id" value="<?= $hotel['hotel_id'] ?>">
-                                            <button type="submit" class="delete-btn"><i class="fas fa-trash"></i></button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <th width="90%">호텔 이름</th>
+                                <th width="10%" style="padding-left: 25px;">관리</th>
                             </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                </table>
+                        </thead>
+                            <tbody>
+                            <?php foreach ($wishlist_items as $hotel): ?>
+                                <tr>
+                                    <td>
+                                        <div class="hotel-row">
+                                            <h3 class="hotel-name"><?=$hotel['name'] ?></h3>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="button-group">
+                                            <a href="../hotel/hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="detail-btn">상세보기</a>
+                                            <form method="get" action="../action/wishlist_delete.php" style="display:inline;">
+                                                <input type="hidden" name="hotel_id" value="<?= $hotel['hotel_id'] ?>">
+                                                <button type="submit" class="delete-btn"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                    </table>
+                <?php endif; ?>
             </section>
             <section id="point" class="content-section">
                 <h2>포인트 관리</h2>

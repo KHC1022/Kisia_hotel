@@ -50,7 +50,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                     </div>
                 </div>
                 <?php if (empty($users)): ?>
-                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                    <div class="admin-no-results">검색 결과가 없습니다.</div>
                 <?php else: ?>
                     <div class="table-container">
                         <table class="admin-table">
@@ -114,7 +114,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                     </div>
                 </div>
                 <?php if (empty($hotels)): ?>
-                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                    <div class="admin-no-results">검색 결과가 없습니다.</div>
                 <?php else: ?>
                     <div class="table-container">
                         <table class="admin-table">
@@ -174,7 +174,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                     </div>
                 </div>
                 <?php if (empty($reservations)): ?>
-                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                    <div class="admin-no-results">검색 결과가 없습니다.</div>
                 <?php else: ?>
                     <div class="table-container">
                         <table class="admin-table">
@@ -250,7 +250,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                     </div>
                 </div>
                 <?php if (empty($reviews)): ?>
-                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                    <div class="admin-no-results">검색 결과가 없습니다.</div>
                 <?php else: ?>
                     <div class="table-container">
                         <table class="admin-table">
@@ -310,7 +310,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                     </div>
                 </div>
                 <?php if (empty($inquiries)): ?>
-                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                    <div class="admin-no-results">검색 결과가 없습니다.</div>
                 <?php else: ?>
                     <div class="table-container">
                         <table class="admin-table">
@@ -401,7 +401,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                     </div>
                 </div>
                 <?php if (empty($notices)): ?>
-                    <p style="max-width: 80%; margin: 0 auto; margin-top: 3rem; margin-bottom: 4rem;" class="no-results">검색 결과가 없습니다.</p>
+                    <div class="admin-no-results">검색 결과가 없습니다.</div>
                 <?php else: ?>
                     <div class="table-container">
                         <table class="admin-table">

@@ -43,19 +43,19 @@ if (!$coupon) {
         <div class="form-group">
             <label for="couponCode">쿠폰 코드</label>
             <input type="text" id="couponCode" name="code" 
-                   value="<?php echo htmlspecialchars($coupon['code']); ?>" required>
+                   value="<?php echo $coupon['code']; ?>" required>
         </div>
         
         <div class="form-group">
             <label for="couponName">쿠폰 이름</label>
             <input type="text" id="couponName" name="name" 
-                   value="<?php echo htmlspecialchars($coupon['name']); ?>" required>
+                   value="<?php echo $coupon['name']; ?>" required>
         </div>
         
         <div class="form-group">
             <label for="description">설명</label>
             <input type="text" id="description" name="description" 
-                   value="<?php echo htmlspecialchars($coupon['description']); ?>" required>
+                   value="<?php echo $coupon['description']; ?>" required>
         </div>
         
         <div class="form-group">

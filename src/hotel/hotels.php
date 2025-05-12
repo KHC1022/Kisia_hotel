@@ -15,7 +15,7 @@ include_once __DIR__ . '/../includes/hotels_info.php';
                     <div class="hotels-search-row">
                         <div class="hotels-search-input">
                             <i class="fas fa-search"></i>
-                            <input class="hotels-search-input-input" type="text" name="search" placeholder="호텔 이름 또는 위치를 입력하세요" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+                            <input class="hotels-search-input-input" type="text" name="search" placeholder="호텔 이름 또는 위치를 입력하세요" value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
                         </div>
                         <button type="submit" class="style-search-btn">검색</button>
                     </div>
