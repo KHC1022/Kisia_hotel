@@ -170,7 +170,44 @@ CREATE TABLE notices (
     is_released BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+-- 15. 쿠폰 테이블
+CREATE TABLE coupons (
+    coupon_id INT PRIMARY KEY AUTO_INCREMENT,
+    code VARCHAR(50) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    discount_type ENUM('percentage', 'fixed') NOT NULL,
+    discount_value DECIMAL(10,2) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    minimum_purchase DECIMAL(10,2),
+    maximum_discount DECIMAL(10,2),
+    usage_limit INT,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 
+-- 16. 쿠폰 사용 기록 테이블
+CREATE TABLE coupon_usage (
+    usage_id INT PRIMARY KEY AUTO_INCREMENT,
+    coupon_id INT,
+    user_id INT,
+    reservation_id INT,
+    used_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (coupon_id) REFERENCES coupons(coupon_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id) ON DELETE CASCADE
+);
+
+-- 17. 유저 쿠폰 테이블
+CREATE TABLE user_coupons (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    coupon_id INT NOT NULL,
+    received_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY (user_id, coupon_id)
+);
 SET NAMES utf8mb4;
 
 -- 사용자 계정 추가
@@ -890,3 +927,14 @@ INSERT INTO notices (user_id, title, content, created_at, is_released) VALUES
 (1, '[예약 안내] 비수기 특별 프로모션', '비수기 특별 프로모션이 진행됩니다. - 평일 예약 시 20% 추가 할인. - 주말 예약 시 10% 추가 할인. - 연박 예약 시 1박 무료. * 다른 프로모션과 중복 적용 불가.', '2025-05-08 16:00:00', 0),
 (1, '[시스템] 포인트 적립 정책 변경', '포인트 적립 정책이 다음과 같이 변경됩니다. - 객실 요금 1만원당 100포인트. - 레스토랑 이용 1만원당 50포인트. - 스파 이용 1만원당 30포인트. * 포인트는 1년간 유효합니다.', '2025-05-09 10:00:00', 1),
 (1, '[예약 안내] 단체 예약 특별 프로모션', '단체 예약 시 다음과 같은 특별 혜택을 제공합니다. - 10명 이상: 15% 할인. - 20명 이상: 20% 할인. - 30명 이상: 25% 할인. * 단체 예약은 전화 문의 바랍니다.', '2025-05-10 14:00:00', 0);
+
+INSERT INTO coupons 
+(code, name, description, discount_type, discount_value, start_date, end_date, minimum_purchase, maximum_discount, usage_limit, is_active)
+VALUES 
+('WELCOME10', '신규 회원 할인', '신규 가입 회원 대상 10% 할인 쿠폰', 'percentage', 10.00, '2025-05-01', '2025-12-31', 5000, 20000, 1, TRUE),
+
+('MAY5000', '5월 한정 할인', '5월 한정 5,000원 할인 쿠폰', 'fixed', 5000.00, '2025-05-01', '2025-05-31', 20000, NULL, 100, TRUE),
+
+('VIP20', 'VIP 전용 할인', 'VIP 회원 전용 20% 할인 쿠폰', 'percentage', 20.00, '2025-05-01', '2025-12-31', 10000, 50000, NULL, TRUE),
+
+('TEST1000', '테스트용 쿠폰', '테스트용 1,000원 할인 쿠폰', 'fixed', 1000.00, '2025-05-01', '2025-12-31', NULL, NULL, NULL, TRUE);
