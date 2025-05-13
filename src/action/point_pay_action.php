@@ -42,9 +42,15 @@ if ($user && $user['point'] >= $charge_amount) {
     mysqli_query($conn, $rooms_update_sql);
 
     // 예약 등록
-    $reservation_sql = "INSERT INTO reservations (user_id, room_id, check_in, check_out, total_price, guests, created_at, status) 
-                       VALUES ('$user_id', '$room_id', '$checkin', '$checkout', '$total_price', '$guests', NOW(), 'done')";
+    // 예약 등록
+    $reservation_sql = "INSERT INTO reservations 
+        (user_id, room_id, check_in, check_out, total_price, guests, created_at, status, coupon_id) 
+        VALUES 
+        ('$user_id', '$room_id', '$checkin', '$checkout', '$total_price', '$guests', NOW(), 'done', " . 
+        ($selected_coupon != '' ? "'$selected_coupon'" : "NULL") . ")";
+
     $reservation_result = mysqli_query($conn, $reservation_sql);
+
 
     // ✅ 쿠폰 사용 처리
     if ($selected_coupon != '') {

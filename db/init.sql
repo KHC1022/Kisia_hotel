@@ -63,6 +63,7 @@ CREATE TABLE reservations (
     reservation_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
     room_id INT,
+    coupon_id INT,
     check_in DATE NOT NULL,
     check_out DATE NOT NULL,
     total_price INT NOT NULL,
