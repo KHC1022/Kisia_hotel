@@ -1,14 +1,16 @@
 /* 관리자 페이지 전체 컨테이너 */
 .admin-container {
-    max-width: 70%;
-    margin: 0;
+    width: 90%;                /* ✅ 고정 폭 대신 비율 */
+    max-width: 1600px;         /* ✅ 최대 폭 제한은 그대로 */
+    margin: 0 auto;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.95);
     min-height: 100%;
     box-sizing: border-box;
     margin-bottom: 5rem;
-    margin: 0 auto;
 }
+
+
 
 /* 관리자 페이지 전체 배경 */
 .admin-body {
@@ -193,9 +195,11 @@
 /* 테이블 스타일 */
 .admin-table {
     width: 100%;
+    min-width: 1200px;   /* ✅ 추가: 최소 1200px로 */
     border-collapse: separate;
     border-spacing: 0;
 }
+
 
 .admin-table th {
     background: #ebf8ff;
@@ -207,31 +211,28 @@
     border-bottom: 2px solid #bee3f8;
 }
 
-.admin-table td {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid #e2e8f0;
-    color: #2d3748;
-    vertical-align: middle;
+
+.table-container {
+    overflow-x: auto;
 }
 
+#coupons .admin-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .admin-table tr:hover {
     background-color: #ebf8ff;
 }
 
 /* 액션 버튼 */
 .action-btn {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin: 0 0.2rem;
-    width: 35px;
-    height: 35px;
-    display: inline-flex;
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
 }
 
 .action-btn.edit {
@@ -655,4 +656,75 @@
         width: 95%;
         padding: 40px 1rem;
     }
+}
+/* ✅ 모든 테이블 기본 행 높이 강제 고정 */
+.admin-table th,
+.admin-table td {
+    text-align: center !important;   /* ✅ 중앙 정렬 */
+    vertical-align: middle !important;
+    padding: 0.8rem 0.5rem !important;
+}
+
+
+/* ✅ 모든 테이블 아이콘 크기 통일 */
+.admin-table i {
+    font-size: 16px !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ✅ 모든 action 버튼 크기 통일 */
+.action-btn {
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+}
+.admin-table td form {
+    display: inline-block;
+    margin: 0;
+}
+/* VIP 라벨 스타일 개선 */
+.admin-table .grade-label {
+    background-color: #edf2f7;
+    border: 1px solid #cbd5e0;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* VIP 전용 스타일 */
+.admin-table .grade-label.vip {
+    background-color: #fff8dc;
+    border: 1px solid #f6e05e;
+    color: #d69e2e;
+    font-weight: 700;
+}
+
+.admin-table .grade-label.vip i {
+    color: #d69e2e;
+    font-size: 14px;
+}
+
+.admin-table td > form {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px !important;
+}
+/* ✅ 관리자 전용 스타일 */
+.admin-table .grade-label.admin {
+    background-color: #e6fffa;
+    border: 1px solid #38b2ac;
+    color: #2c7a7b;
+    font-weight: 700;
+}
+
+.admin-table .grade-label.admin i {
+    color: #2c7a7b;
+    font-size: 14px;
 }

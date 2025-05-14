@@ -68,7 +68,7 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                     <th>전화번호</th>
                                     <th>가입일</th>
                                     <th>등급</th>
-                                    <th style="padding-left: 30px;">관리</th>
+                                    <th>관리</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,14 +81,46 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                         <td><?= $user['email'] ?></td>
                                         <td><?= $user['phone'] ?></td>
                                         <td><?= $user['created_at'] ?></td>
-                                        <td><? if($user['vip'] == 1) {
-                                            echo 'VIP';
-                                        } else {
-                                            echo '일반';
-                                        } ?></td>
                                         <td>
-                                            <form method="get" action="../action/admin_delete_action.php">
-                                                <button name="user_delete" class="action-btn delete" value="<?= $user['user_id'] ?>"><i class="fas fa-trash"></i></button>
+                                            <?php if ($user['is_admin'] == 1): ?>
+                                                <span class="grade-label admin">
+                                                    <i class="fas fa-user-shield"></i> 관리자
+                                                </span>
+                                            <?php elseif($user['vip'] == 1): ?>
+                                                <span class="grade-label vip">
+                                                    <i class="fas fa-crown"></i> VIP
+                                                </span>
+                                            <?php else: ?>
+                                                <span class="grade-label">
+                                                    일반 사용자
+                                                </span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($user['is_admin'] != 1): ?>
+                                                <form method="get" action="admin_vip_toggle_action.php" style="display:inline;">
+                                                    <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
+                                                    <?php if($user['vip'] == 1): ?>
+                                                        <!-- VIP → 일반 사용자 -->
+                                                        <input type="hidden" name="vip_status" value="0">
+                                                        <button type="submit" class="action-btn vip-toggle" title="일반 사용자로 변경">
+                                                            <i class="fas fa-user"></i>
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <!-- 일반 사용자 → VIP -->
+                                                        <input type="hidden" name="vip_status" value="1">
+                                                        <button type="submit" class="action-btn vip-toggle" title="VIP로 변경">
+                                                            <i class="fas fa-crown"></i>
+                                                        </button>
+                                                    <?php endif; ?>
+                                                </form>
+                                            <?php endif; ?>
+
+                                            <!-- 회원 삭제 -->
+                                            <form method="get" action="../action/admin_delete_action.php" style="display:inline;">
+                                                <button name="user_delete" class="action-btn delete" value="<?= $user['user_id'] ?>">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
