@@ -4,6 +4,18 @@ include_once __DIR__ . '/../includes/db_connection.php';
 
 $hotel_id = $_GET['id'];
 
+// 이벤트 변수 초기화
+$event_busan = 0;
+$event_japan = 0;
+
+if (isset($_GET['event_busan'])) {
+    $event_busan = $_GET['event_busan'];
+}
+
+if (isset($_GET['event_japan'])) {
+    $event_japan = $_GET['event_japan'];
+}
+
 $sql = "SELECT * FROM hotels WHERE hotel_id = $hotel_id";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
@@ -70,6 +82,39 @@ if ($room_suite_result && $room_suite_result->num_rows > 0) {
     $room_row = $room_suite_result->fetch_assoc();
     $hotel_rooms_suite[] = $room_row;
     $suite_room_id = intval($room_row['room_id']);
+}
+
+// 이벤트 할인 적용
+if ($event_busan == 1) {
+    $hotel_price_per_night = $row['price_per_night'] * 0.6;
+    
+    if (!empty($hotel_rooms_deluxe)) {
+        foreach ($hotel_rooms_deluxe as &$room) {
+            $room['price'] = $room['price'] * 0.6;
+        }
+    }
+    
+    if (!empty($hotel_rooms_suite)) {
+        foreach ($hotel_rooms_suite as &$room) {
+            $room['price'] = $room['price'] * 0.6;
+        }
+    }
+}
+
+if ($event_japan == 1) {
+    $hotel_price_per_night = $row['price_per_night'] * 0.8;
+    
+    if (!empty($hotel_rooms_deluxe)) {
+        foreach ($hotel_rooms_deluxe as &$room) {
+            $room['price'] = $room['price'] * 0.8;
+        }
+    }
+    
+    if (!empty($hotel_rooms_suite)) {
+        foreach ($hotel_rooms_suite as &$room) {
+            $room['price'] = $room['price'] * 0.8;
+        }   
+    }
 }
 
 // room_ids 배열 초기화

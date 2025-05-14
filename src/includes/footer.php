@@ -1,3 +1,5 @@
+<?php include_once __DIR__ . '/session.php'; ?>
+    <?php if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] == 0) { ?>
     <footer class="style-footer">
         <div class="style-footer-content">
             <div class="style-footer-section">
@@ -23,5 +25,6 @@
             <p>&copy; 2025 KISIA HOTEL. All rights reserved.</p>
         </div>
     </footer>
+    <?php } ?>
 </body>
 </html> 
