@@ -122,10 +122,17 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                                     <li><i class="fas fa-tv"></i> 55인치 스마트 TV</li>
                                     <li><i class="fas fa-coffee"></i> 커피/티 메이커</li>
                                 </ul>
+                                <?php if ($event_busan == 1 || $event_japan == 1) : ?>
+                                <div class="timedeal-price-info">
+                                    <span class="timedeal-original-price">₩<?= $deluxe['price'] ?></span>
+                                    <p class="timedeal-discount-price">₩<?= $deluxe['price'] ?>/박</p>
+                                </div>
+                                <?php else : ?>
                                 <div class="room-price">
                                     <span class="price">₩<?php echo $deluxe['price']; ?></span>
                                     <span class="per-night">/ 박</span>
                                 </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -141,10 +148,17 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                                     <li><i class="fas fa-tv"></i> 65인치 스마트 TV</li>
                                     <li><i class="fas fa-hot-tub"></i> 스파 욕조</li>
                                 </ul>
+                                <?php if ($event_busan == 1 || $event_japan == 1) : ?>
+                                <div class="timedeal-price-info">
+                                    <span class="timedeal-original-price">₩<?= $suite['price'] ?></span>
+                                    <p class="timedeal-discount-price">₩<?= $suite['price'] ?>/박</p>
+                                </div>
+                                <?php else : ?>
                                 <div class="room-price">
                                     <span class="price">₩<?php echo $suite['price']; ?></span>
                                     <span class="per-night">/ 박</span>
                                 </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -199,11 +213,11 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                                     </div>
                                 </form>
                             <?php elseif (isset($_SESSION['user_id'])): ?>
-                                <div class="login-notice">
+                                <div class="no-rooms-message">
                                     <p>해당 호텔 이용 후에만 후기를 작성할 수 있습니다.</p>
                                 </div>
                             <?php else: ?>
-                                <div class="login-notice">
+                                <div class="no-rooms-message">
                                     <p>후기 작성을 위해서는 로그인이 필요합니다.</p>
                                 </div>
                             <?php endif; ?>
@@ -316,6 +330,12 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                             <input type="hidden" name="suite_room_id" value="<?= $suite_room_id ?>">
                             <?php endif; ?>
                         </div>
+                        <?php if ($event_busan == 1) : ?>
+                        <input type="hidden" name="event_busan" value="<?= $event_busan ?>">
+                        <?php endif; ?>
+                        <?php if ($event_japan == 1) : ?>
+                        <input type="hidden" name="event_japan" value="<?= $event_japan ?>">
+                        <?php endif; ?>
                         <button type="submit" class="book-now-btn">예약하기</button>
                     </form>
                 </div>

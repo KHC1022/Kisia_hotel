@@ -35,7 +35,11 @@ include_once __DIR__ . '/../includes/hotels_info.php';
                                         <span class="timedeal-original-price">₩<?= number_format($hotel['price_per_night']) ?></span>
                                         <p class="timedeal-discount-price">₩<?= number_format($hotel['price_per_night']*0.8) ?>/박</p>
                                     </div>
-                                    <a href="../hotel/hotel-detail.php?id=<?= $hotel['hotel_id'] ?>" class="style-detail-btn">상세보기</a>
+                                    <form action="../hotel/hotel-detail.php" method="get">
+                                        <input type="hidden" name="event_japan" id="event_japan" value="1">
+                                        <input type="hidden" name="id" id="id" value="<?= $hotel['hotel_id'] ?>">
+                                        <button type="submit" class="style-detail-btn" style="border: none;">상세보기</button>
+                                    </form>
                                 </div>
                             </div>
                         <?php endforeach; ?>

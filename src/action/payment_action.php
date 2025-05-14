@@ -11,6 +11,8 @@ $guests = $_GET['guests'] ?? '';
 $room_type = $_GET['room_type'] ?? '';
 $deluxe_room_id = $_GET['deluxe_room_id'] ?? 0;
 $suite_room_id = $_GET['suite_room_id'] ?? 0;
+$event_busan = $_GET['event_busan'] ?? 0;
+$event_japan = $_GET['event_japan'] ?? 0;
 
 if ($room_type == 'deluxe') {
     $room_id = $deluxe_room_id;
@@ -51,10 +53,22 @@ if ($checkin && $checkout) {
 }
 
 // 객실 요금 계산
-$room_price_sql = "SELECT price FROM rooms WHERE room_id = $room_id";
-$room_price_result = mysqli_query($conn, $room_price_sql);
-$room = mysqli_fetch_assoc($room_price_result);
-$price_per_night = $room['price'] ?? 0;
+if ($event_busan == 1) {
+    $room_price_sql = "SELECT price FROM rooms WHERE room_id = $room_id";
+    $room_price_result = mysqli_query($conn, $room_price_sql);
+    $room = mysqli_fetch_assoc($room_price_result);
+    $price_per_night = $room['price'] * 0.6;
+} else if ($event_japan == 1) {
+    $room_price_sql = "SELECT price FROM rooms WHERE room_id = $room_id";
+    $room_price_result = mysqli_query($conn, $room_price_sql);
+    $room = mysqli_fetch_assoc($room_price_result);
+    $price_per_night = $room['price'] * 0.8;
+} else {
+    $room_price_sql = "SELECT price FROM rooms WHERE room_id = $room_id";
+    $room_price_result = mysqli_query($conn, $room_price_sql);
+    $room = mysqli_fetch_assoc($room_price_result);
+    $price_per_night = $room['price'] ?? 0;
+}
 $room_fee = $price_per_night * $days;
 
 // 세금 및 수수료: 객실 요금의 10%
