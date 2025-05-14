@@ -11,7 +11,7 @@ $user_id = $_SESSION['user_id'];
 $sql2 = "UPDATE rooms SET status = 'available' WHERE room_id = $room_id";
 $result2 = mysqli_query($conn, $sql2);
 
-// ✅ 예약 정보 + 쿠폰 정보 조회
+// 예약 정보 + 쿠폰 정보 조회
 $reservation_sql = "SELECT total_price, coupon_id FROM reservations WHERE reservation_id = $reservation_id";
 $reservation_result = mysqli_query($conn, $reservation_sql);
 $reservation = mysqli_fetch_assoc($reservation_result);
@@ -19,10 +19,10 @@ $reservation = mysqli_fetch_assoc($reservation_result);
 $total_price = $reservation['total_price'];
 $coupon_id = $reservation['coupon_id'];
 
-// ✅ 환불 금액 계산 : 쿠폰 적용 금액으로만 환불
-$refund_amount = $total_price; // 기본은 total_price
+// 환불 금액 계산 : 쿠폰 적용 금액으로만 환불
+$refund_amount = $total_price;
 
-// ✅ 쿠폰 사용한 경우 쿠폰 정보로 할인 계산
+// 쿠폰 사용한 경우 쿠폰 정보로 할인 계산
 if ($coupon_id !== null) {
     $coupon_sql = "SELECT discount_type, discount_value FROM coupons WHERE coupon_id = $coupon_id";
     $coupon_result = mysqli_query($conn, $coupon_sql);
@@ -47,7 +47,7 @@ $result = mysqli_query($conn, $sql);
 // 포인트 환불
 mysqli_query($conn, "UPDATE users SET point = point + $refund_amount WHERE user_id = $user_id");
 
-// ✅ 쿠폰 복구 (사용 상태 해제)
+// 쿠폰 복구 (사용 상태 해제)
 if ($coupon_id !== null) {
     mysqli_query($conn, "
         UPDATE user_coupons 

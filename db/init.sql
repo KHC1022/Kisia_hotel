@@ -16,7 +16,8 @@ CREATE TABLE users (
     marketing BOOLEAN DEFAULT FALSE,
     profile_image VARCHAR(255) DEFAULT '/image/default_profile.jpg',
     point INT,
-    vip BOOLEAN DEFAULT FALSE
+    vip BOOLEAN DEFAULT FALSE,
+    vip_status ENUM('auto', 'manual') DEFAULT 'auto'
 );
 
 -- 2. hotels (호텔 정보)

@@ -17,10 +17,20 @@ function calculate_vip_score($user_id, $conn) {
 
 // VIP 상태 업데이트 함수
 function update_vip_status($user_id, $vip_score, $conn) {
+    // 현재 VIP 상태 확인
+    $check_sql = "SELECT vip_status FROM users WHERE user_id = '$user_id'";
+    $check_result = mysqli_query($conn, $check_sql);
+    $user = mysqli_fetch_assoc($check_result);
+    
+    // 관리자가 수동으로 지정한 VIP는 자동 계산에서 제외
+    if ($user['vip_status'] === 'manual') {
+        return true;
+    }
+    
     if ($vip_score >= 5) {
-        $update_vip_sql = "UPDATE users SET vip = TRUE WHERE user_id = '$user_id'";
+        $update_vip_sql = "UPDATE users SET vip = TRUE, vip_status = 'auto' WHERE user_id = '$user_id'";
     } else {
-        $update_vip_sql = "UPDATE users SET vip = FALSE WHERE user_id = '$user_id'";
+        $update_vip_sql = "UPDATE users SET vip = FALSE, vip_status = 'auto' WHERE user_id = '$user_id'";
     }
     return mysqli_query($conn, $update_vip_sql);
 }

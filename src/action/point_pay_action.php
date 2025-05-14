@@ -18,7 +18,7 @@ $user = mysqli_fetch_assoc($pay_result);
 
 if ($user && $user['point'] >= $charge_amount) {
 
-    // ✅✅✅ [여기 추가] 쿠폰 사용 가능 여부 체크
+    // 쿠폰 사용 가능 여부 체크
     if ($selected_coupon != '') {
         $check_coupon = mysqli_query($conn, "
             SELECT * FROM user_coupons 
@@ -42,7 +42,6 @@ if ($user && $user['point'] >= $charge_amount) {
     mysqli_query($conn, $rooms_update_sql);
 
     // 예약 등록
-    // 예약 등록
     $reservation_sql = "INSERT INTO reservations 
         (user_id, room_id, check_in, check_out, total_price, guests, created_at, status, coupon_id) 
         VALUES 
@@ -52,7 +51,7 @@ if ($user && $user['point'] >= $charge_amount) {
     $reservation_result = mysqli_query($conn, $reservation_sql);
 
 
-    // ✅ 쿠폰 사용 처리
+    // 쿠폰 사용 처리
     if ($selected_coupon != '') {
         mysqli_query($conn, 
             "UPDATE user_coupons 
