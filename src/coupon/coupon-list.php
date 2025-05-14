@@ -24,7 +24,7 @@ include_once __DIR__ . '/../includes/coupon_info.php';
                             ? (int)$coupon['discount_value'] . '% 할인'
                             : number_format($coupon['discount_value']) . '원 할인'; ?>
                         <?php if ($is_used): ?>
-                            <span style="color:red; font-weight:bold;">[사용 완료]</span> <!-- ✅ 추가 -->
+                            <span style="color:red; font-weight:bold;">[사용 완료]</span>
                         <?php endif; ?>
                     </p>
                     <p>사용 기간: <?= $coupon['start_date'] ?> ~ <?= $coupon['end_date'] ?></p>
@@ -41,11 +41,11 @@ include_once __DIR__ . '/../includes/coupon_info.php';
                     <?php 
                     elseif ($is_used):
                     ?>
-                        <button disabled><i class="fas fa-check-double"></i></button> <!-- ✅ 이미 사용한 경우 -->
+                        <button disabled><i class="fas fa-check-double"></i></button>
                     <?php 
                     elseif ($already_received):
                     ?>
-                        <button disabled><i class="fas fa-check"></i></button> <!-- ✅ 받은 상태지만 사용 안 한 경우 -->
+                        <button disabled><i class="fas fa-check"></i></button>
                     <?php 
                     else:
                     ?>

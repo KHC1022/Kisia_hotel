@@ -18,7 +18,7 @@ $one_week_ago = strtotime('-1 week');
 // 신규 회원 여부 확인
 $is_new_user = ($user_created_at >= $one_week_ago);
 
-// ✅ VIP 상태는 users 테이블에서 확인
+// VIP 상태 확인
 $vip_sql = "SELECT vip FROM users WHERE user_id = '$user_id'";
 $vip_result = mysqli_query($conn, $vip_sql);
 if (!$vip_result) {

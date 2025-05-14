@@ -1,7 +1,7 @@
 /* 관리자 페이지 전체 컨테이너 */
 .admin-container {
-    width: 90%;                /* ✅ 고정 폭 대신 비율 */
-    max-width: 1600px;         /* ✅ 최대 폭 제한은 그대로 */
+    width: 90%;            
+    max-width: 1600px;        
     margin: 0 auto;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.95);
@@ -195,7 +195,7 @@
 /* 테이블 스타일 */
 .admin-table {
     width: 100%;
-    min-width: 1200px;   /* ✅ 추가: 최소 1200px로 */
+    min-width: 1200px; 
     border-collapse: separate;
     border-spacing: 0;
 }
@@ -657,16 +657,15 @@
         padding: 40px 1rem;
     }
 }
-/* ✅ 모든 테이블 기본 행 높이 강제 고정 */
+
 .admin-table th,
 .admin-table td {
-    text-align: center !important;   /* ✅ 중앙 정렬 */
+    text-align: center !important; 
     vertical-align: middle !important;
     padding: 0.8rem 0.5rem !important;
 }
 
 
-/* ✅ 모든 테이블 아이콘 크기 통일 */
 .admin-table i {
     font-size: 16px !important;
     line-height: 1 !important;

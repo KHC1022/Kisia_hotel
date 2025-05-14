@@ -115,7 +115,6 @@ try {
     $message = '데이터베이스 오류가 발생했습니다: ' . $e->getMessage();
 }
 
-// 결과 페이지로 리다이렉트
 $redirectUrl = 'coupon-list.php';
 if ($message) {
     $redirectUrl .= '?message=' . urlencode($message) . '&success=' . ($success ? '1' : '0');
