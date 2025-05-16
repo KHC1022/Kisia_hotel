@@ -117,11 +117,13 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                                             <?php endif; ?>
 
                                             <!-- 회원 삭제 -->
+                                             <?php if($user['is_admin'] != 1): ?>
                                             <form method="get" action="../action/admin_delete_action.php" style="display:inline;">
                                                 <button name="user_delete" class="action-btn delete" value="<?= $user['user_id'] ?>">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
