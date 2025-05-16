@@ -4,10 +4,10 @@ include_once __DIR__ . '/../action/login_check.php';
 ?>
 
     <main class="inquiry-board-container">
-        <div class="inquiry-board-header">
-            <h1 class="inquiry-board-title">문의 작성</h1>
-        </div>
         <div class="inquiry-form-container">
+            <div class="hotel-add-admin-header" style="margin-top: 4rem;">
+                <h1 class="hotel-add-admin-title" style="color:black;">문의 작성</h1>
+            </div>
             <form class="inquiry-form" method="post" action="../action/inquiry_write_action.php" enctype="multipart/form-data">
                 <div class="inquiry-form-group">
                     <label for="category">분류</label>
