@@ -235,17 +235,27 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                                         <div class="review-rating">
                                             <div class="stars">
                                                 <?php
-                                                    $fullStars = floor($review['rating']);
-                                                    $emptyStars = 5 - $fullStars;
+                                                    $rating = $review['rating'];
+                                                    $fullStars = floor($rating);
+                                                    $hasHalfStar = ($rating - $fullStars) >= 0.5;
+                                                    $emptyStars = 5 - $fullStars - ($hasHalfStar ? 1 : 0);
                                                     
+                                                    // 완전한 별 출력
                                                     for ($i = 0; $i < $fullStars; $i++) {
                                                         echo '<i class="fas fa-star"></i>';
                                                     }
+                                                    
+                                                    // 반별 출력
+                                                    if ($hasHalfStar) {
+                                                        echo '<i class="fas fa-star-half-alt"></i>';
+                                                    }
+                                                    
+                                                    // 빈 별 출력
                                                     for ($i = 0; $i < $emptyStars; $i++) {
                                                         echo '<i class="far fa-star"></i>';
                                                     }
                                                 ?>
-                                                <span><?php echo $review['rating']; ?></span>
+                                                <span><?php echo number_format($review['rating'], 1); ?></span>
                                             </div>
                                             <div class="review-date"><?php echo $review['created_at']; ?></div>
                                         </div>
@@ -343,5 +353,45 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
             </div>
         </div>
     </main>
+
+<script>
+const stars = document.querySelectorAll('.star-rating i');
+const ratingInput = document.querySelector('.star-rating input');
+
+stars.forEach(star => {
+    star.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        const starWidth = rect.width;
+        const value = parseInt(this.getAttribute('data-value'));
+        let selectedValue = value;
+
+        if (offsetX < starWidth / 2) selectedValue -= 0.5;
+        ratingInput.value = selectedValue;
+
+        stars.forEach(s => {
+            s.classList.remove('fas', 'far', 'fa-star', 'fa-star-half-alt', 'full', 'half');
+            s.classList.add('far', 'fa-star');
+        });
+
+        stars.forEach(s => {
+            const sValue = parseInt(s.getAttribute('data-value'));
+            s.classList.remove('far', 'fas', 'fa-star', 'fa-star-half-alt');
+
+            if (sValue < selectedValue) {
+                s.classList.add('fas', 'fa-star', 'full');
+            } else if (sValue === Math.ceil(selectedValue)) {
+                if (selectedValue % 1 === 0.5) {
+                    s.classList.add('fas', 'fa-star-half-alt', 'half');
+                } else {
+                    s.classList.add('fas', 'fa-star', 'full');
+                }
+            } else {
+                s.classList.add('far', 'fa-star');
+            }
+        });
+    });
+});
+</script> 
 
 <?php include_once __DIR__ . '/../includes/footer.php'; ?> 

@@ -519,7 +519,6 @@
     transform: translateY(0);
 }
 
-/* 반응형 디자인 */
 @media (max-width: 768px) {
     .booking-widget {
         padding: 1.2rem;
@@ -693,11 +692,11 @@
 }
 
 .star-rating i.full {
-    color: #ffd700; /* 노란색 full star */
+    color: #ffd700; 
 }
 
 .star-rating i.half {
-    color: #ffd700; /* 노란색 half star */
+    color: #ffd700; 
 }
 
 .star-rating label {
@@ -706,7 +705,6 @@
     cursor: pointer;
 }
 
-/* 👉 객실 타입, 후기 탭 버튼 개선 */
 .section-tabs {
     display: flex;
     gap: 0.5rem;
@@ -733,14 +731,13 @@
     color: white;
     border-color: #7851A9;
 }
-/* ⭐ 후기 작성 폼 세로 정렬 */
+
 .review-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-/* ⭐ 평점 입력 영역 세로 정렬로 수정 */
 .rating-input {
     display: flex;
     flex-direction: column;
@@ -749,10 +746,9 @@
 }
 
 
-/* ✅ textarea 폭 + 높이 개선 */
 .review-content textarea {
-    width: 600px;    /* ⭐ 원하는 폭으로 지정 */
-    max-width: 100%; /* 모바일 대응 */
+    width: 600px;    
+    max-width: 100%; 
     min-height: 150px;
     resize: vertical;
     padding: 0.5rem;
@@ -762,7 +758,6 @@
 }
 
 
-/* ⭐ 후기 등록 버튼 조정 */
 .submit-review {
     align-self: flex-start;
     background-color: #7851A9;
