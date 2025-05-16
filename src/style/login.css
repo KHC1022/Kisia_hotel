@@ -247,7 +247,6 @@ header .login-btn:hover {
     }
 }
 
-/* 회원가입 페이지에서만 적용: signup.html에서 <body>에 signup-page 클래스 추가 필요 */
 .signup-page header .signup-btn {
     background-color: #7851A9 !important;
     color: #fff !important;

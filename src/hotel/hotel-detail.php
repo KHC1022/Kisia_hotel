@@ -303,11 +303,11 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                         <input type="hidden" name="id" id="id" value="<?= $hotel_id ?>">
                         <div class="booking-form-group">
                             <label for="check-in">체크인</label>
-                            <input type="date" id="check-in" name="checkin" value="<?= isset($_GET['checkin']) ? $_GET['checkin'] : '' ?>" required>
+                            <input type="date" id="check-in" name="checkin" value="<?= isset($_GET['checkin']) ? $_GET['checkin'] : '' ?>" min="<?= $today ?>" required>
                         </div>
                         <div class="booking-form-group">
                             <label for="check-out">체크아웃</label>
-                            <input type="date" id="check-out" name="checkout" value="<?= isset($_GET['checkout']) ? $_GET['checkout'] : '' ?>" required>
+                            <input type="date" id="check-out" name="checkout" value="<?= isset($_GET['checkout']) ? $_GET['checkout'] : '' ?>" min="<?= $today ?>" required>
                         </div>
                         <div class="booking-form-group">
                             <label for="guests">인원</label>

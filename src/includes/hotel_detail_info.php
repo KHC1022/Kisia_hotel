@@ -3,6 +3,7 @@ include_once __DIR__ . '/../includes/session.php';
 include_once __DIR__ . '/../includes/db_connection.php';
 
 $hotel_id = $_GET['id'];
+$today = date('Y-m-d');
 
 // 이벤트 변수 초기화
 $event_busan = 0;

@@ -22,7 +22,7 @@ function update_vip_status($user_id, $vip_score, $conn) {
     $check_result = mysqli_query($conn, $check_sql);
     $user = mysqli_fetch_assoc($check_result);
     
-    // 관리자가 수동으로 지정한 VIP는 자동 계산에서 제외
+    // 관리자가 수동으로 지정한 VIP는 계산에서 제외
     if ($user['vip_status'] === 'manual') {
         return true;
     }
@@ -52,7 +52,7 @@ $wishlist_items_per_page = 5;     // 찜 목록은 페이지당 5개
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $page = max(1, $page);
 
-// 찜 목록 조회 (페이지네이션 적용)
+// 찜 목록 조회
 $wishlist_count_query = "
     SELECT COUNT(*) as total 
     FROM wishlist w
@@ -76,7 +76,7 @@ while ($row = mysqli_fetch_assoc($wishlist_result)) {
     $wishlist_items[] = $row;
 }
 
-// 예약 내역 조회 (페이지네이션 적용)
+// 예약 내역 조회
 $reservation_count_query = "
     SELECT COUNT(*) as total 
     FROM reservations r
@@ -103,7 +103,6 @@ while ($row = mysqli_fetch_assoc($reservation_result)) {
     $reservations[] = $row;
 }
 
-// 전역 변수로 저장
 $GLOBALS['reservations'] = $reservations;
 $GLOBALS['wishlist_items'] = $wishlist_items;
 $GLOBALS['page'] = $page;
