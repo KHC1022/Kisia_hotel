@@ -295,4 +295,45 @@
     background-color: #fff3e0;
     color: #ef6c00;
     width: 90px;
+}
+
+.inquiry-edit-files {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.inquiry-edit-files h3 {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.inquiry-edit-files .file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inquiry-edit-files .file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.inquiry-edit-files .file-item:hover {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.inquiry-edit-files .file-item i {
+    color: #7851A9;
+    font-size: 1.1rem;
 } 

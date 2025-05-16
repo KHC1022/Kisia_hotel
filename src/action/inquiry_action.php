@@ -29,15 +29,27 @@ if ($keyword !== '') {
     ";
     $result = mysqli_query($conn, $sql);
 
-    $total_inquiries = mysqli_num_rows($result);
-    $total_pages = 1;
-    $page = 1;
+    if (!$result) {
+        $inquiry_list = [];
+        $total_inquiries = 0;
+        $total_pages = 1;
+        $page = 1;
+    } else {
+        $total_inquiries = mysqli_num_rows($result);
+        $total_pages = 1;
+        $page = 1;
+    }
 } else {
     $count_query = "SELECT COUNT(*) AS total FROM inquiries";
     $count_result = mysqli_query($conn, $count_query);
-    $count_row = mysqli_fetch_assoc($count_result);
-    $total_inquiries = $count_row['total'];
-    $total_pages = ceil($total_inquiries / $limit);
+    if (!$count_result) {
+        $total_inquiries = 0;
+        $total_pages = 1;
+    } else {
+        $count_row = mysqli_fetch_assoc($count_result);
+        $total_inquiries = $count_row['total'];
+        $total_pages = ceil($total_inquiries / $limit);
+    }
 
     $sql = "
         SELECT i.inquiry_id, i.category, i.title, i.created_at, i.is_secret, u.username
@@ -48,21 +60,24 @@ if ($keyword !== '') {
     ";
     $result = mysqli_query($conn, $sql);
 }
-while ($row = mysqli_fetch_assoc($result)) {
-    $inquiry_id = $row['inquiry_id'];
-    $res_query = "SELECT content, created_at FROM inquiry_responses WHERE inquiry_id = $inquiry_id LIMIT 1";
-    $res_result = mysqli_query($conn, $res_query);
-    $response = mysqli_fetch_assoc($res_result);
 
-    $inquiry_list[] = [
-        'inquiry_id' => $inquiry_id,
-        'category' => $category_map[$row['category']] ?? $row['category'],
-        'title' => $row['title'],
-        'username' => $row['username'],
-        'created_at' => $row['created_at'],
-        'is_secret' => $row['is_secret'],
-        'response' => $response
-    ];
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $inquiry_id = $row['inquiry_id'];
+        $res_query = "SELECT content, created_at FROM inquiry_responses WHERE inquiry_id = $inquiry_id LIMIT 1";
+        $res_result = mysqli_query($conn, $res_query);
+        $response = mysqli_fetch_assoc($res_result);
+
+        $inquiry_list[] = [
+            'inquiry_id' => $inquiry_id,
+            'category' => $category_map[$row['category']] ?? $row['category'],
+            'title' => $row['title'],
+            'username' => $row['username'],
+            'created_at' => $row['created_at'],
+            'is_secret' => $row['is_secret'],
+            'response' => $response
+        ];
+    }
 }
 
 $GLOBALS['inquiry_list'] = $inquiry_list;

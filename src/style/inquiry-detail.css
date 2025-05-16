@@ -164,6 +164,7 @@ main.board-container {
 .list-btn:hover {
     background-color: #68439a;
 }
+
 .inquiry-files {
     margin-top: 1.5rem;
 }
@@ -198,6 +199,7 @@ main.board-container {
 .inquiry-files a:hover {
     background-color: #e0e0e0;
 }
+
 .admin-answer-form {
     margin-top: 5rem;
     margin-bottom: 2rem;

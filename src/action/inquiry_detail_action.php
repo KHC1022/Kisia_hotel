@@ -24,7 +24,7 @@ if (!$inquiry) {
     exit;
 }
 
-// ✅ 비밀글 접근 제한 처리
+// 비밀글 접근 제한
 $current_user_id = $_SESSION['user_id'] ?? null;
 $is_admin = $_SESSION['is_admin'] ?? false;
 

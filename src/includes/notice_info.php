@@ -21,7 +21,6 @@ $query = "SELECT n.*, u.username
 
 // 검색어 조건
 if (!empty($search)) {
-    $search = $conn->real_escape_string($search);
     $query .= " AND n.title LIKE '%$search%'";
 }
 
@@ -32,9 +31,11 @@ $query .= ($sort === 'recent') ? " ORDER BY n.notice_id ASC" : " ORDER BY n.noti
 $count_query = "SELECT COUNT(*) as total FROM notices where is_released = 1";
 $count_result = $conn->query($count_query);
 if (!$count_result) {
-    die("전체 개수 조회 오류: " . $conn->error);
+    echo "<script>alert('전체 개수 조회 오류: " . $conn->error . "');</script>";
+    $total_notices = 0;
+} else {
+    $total_notices = $count_result->fetch_assoc()['total'];
 }
-$total_notices = $count_result->fetch_assoc()['total'];
 $total_pages = ceil($total_notices / $items_per_page);
 
 // 페이지네이션 적용
@@ -42,19 +43,20 @@ $query .= " LIMIT $offset, $items_per_page";
 $result = $conn->query($query);
 
 if (!$result) {
-    die("목록 조회 오류: " . $conn->error);
-}
-
-// 공지사항 목록 저장
-$notice_list = array();
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $notice_list[] = [
-            'notice_id' => $row['notice_id'],
-            'title' => $row['title'],
-            'username' => $row['username'],
-            'created_at' => $row['created_at']
-        ];
+    echo "<script>alert('목록 조회 오류: " . $conn->error . "');</script>";
+    $notice_list = array();
+} else {
+    // 공지사항 목록 저장
+    $notice_list = array();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $notice_list[] = [
+                'notice_id' => $row['notice_id'],
+                'title' => $row['title'],
+                'username' => $row['username'],
+                'created_at' => $row['created_at']
+            ];
+        }
     }
 }
 
@@ -64,9 +66,5 @@ $GLOBALS['total_notice'] = $total_notices;
 $GLOBALS['page'] = $page;
 $GLOBALS['sort'] = $sort;
 $GLOBALS['search'] = $search;
-
-// 디버깅용 출력
-error_log("Notice List: " . print_r($notice_list, true));
-error_log("Total Notices: " . $total_notices);
 ?>
 

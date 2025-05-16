@@ -11,6 +11,10 @@ $sql = "SELECT * FROM inquiries WHERE inquiry_id = $inquiry_id";
 $result = mysqli_query($conn, $sql);
 $inquiry = mysqli_fetch_assoc($result);
 
+// 현재 업로드된 파일 목록 가져오기
+$files_sql = "SELECT * FROM inquiry_files WHERE inquiry_id = $inquiry_id";
+$files_result = mysqli_query($conn, $files_sql);
+
 ?>
     <main class="inquiry-board-container">
         <div class="inquiry-form-container">
@@ -40,10 +44,23 @@ $inquiry = mysqli_fetch_assoc($result);
                     <label for="content">내용</label>
                     <textarea id="content" name="content" required><?= $inquiry['content'] ?></textarea>
                 </div>
+                <?php if ($files_result && mysqli_num_rows($files_result) > 0): ?>
+                    <div class="inquiry-edit-files">
+                        <h3>📎 첨부 파일</h3>
+                        <div class="file-list">
+                            <?php while ($file = mysqli_fetch_assoc($files_result)): ?>
+                                <a href="../<?= $file['file_path'] ?>" class="file-item" download="">
+                                    <i class="fas fa-file-alt"></i> <?=$file['file_name'] ?>
+                                </a>
+                            <?php endwhile; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
                 <div class="inquiry-form-group">
-                    <label for="files">파일 첨부 (선택)</label>
-                    <input type="file" id="files" name="files[]" multiple>
+                    <label for="files">첨부 파일 수정 (선택)</label>
+                    <input type="file" id="files" name="files" accept="*/*">
+                    <small class="file-help-text" style="margin-left: 1rem;">새 파일을 업로드하면 기존 파일은 삭제됩니다.</small>
                 </div>
 
                 <div class="inquiry-form-actions">

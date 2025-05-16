@@ -178,7 +178,7 @@ $users = $GLOBALS['users'];
                     <form action="../action/charge_point_action.php" method="get">
                         <div class="mypage-form-group">
                             <label for="charge_amount">충전할 포인트</label>
-                            <input type="number" name="point" id="point" min="1000" step="1000" required>
+                            <input type="number" name="point" id="point" required>
                         </div>
                         <button type="submit" class="save-btn">충전</button>
                     </form>
