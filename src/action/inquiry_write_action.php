@@ -13,7 +13,7 @@ VALUES ('$user_id', '$category', '$title', '$content', '$is_secret')");
 
 $inquiry_id = mysqli_insert_id($conn);
 
-$upload_dir = '../uploads/';
+$upload_dir = __DIR__ . '/../uploads/';
 if (!is_dir($upload_dir)) {
     mkdir($upload_dir, 0777, true);
 }
