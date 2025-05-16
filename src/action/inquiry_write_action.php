@@ -25,14 +25,16 @@ if (isset($_FILES['files']['name'])) {
         $original_name = $_FILES['files']['name'][$i];
         $tmp_name = $_FILES['files']['tmp_name'][$i];
         
-        $ext = pathinfo($original_name, PATHINFO_EXTENSION);
-        $safe_name = time() . '_' . uniqid() . '.' . $ext;
-        $target = $upload_dir . $safe_name;
+        $target = $upload_dir . $original_name;
 
         if (move_uploaded_file($tmp_name, $target)) {
-            // DB에는 원래 한글 이름 저장
-            mysqli_query($conn, "INSERT INTO inquiry_files (inquiry_id, file_name, file_path)
-            VALUES ($inquiry_id, '$original_name', 'uploads/$safe_name')");
+            $insert_query = "INSERT INTO inquiry_files (inquiry_id, file_name, file_path) 
+                           VALUES ($inquiry_id, '$original_name', 'uploads/$original_name')";
+            
+            if (!mysqli_query($conn, $insert_query)) {
+                echo "파일 정보 저장 실패: " . mysqli_error($conn) . "<br>";
+                unlink($target);
+            }
         } else {
             echo "파일 업로드 실패: $original_name<br>";
             break;

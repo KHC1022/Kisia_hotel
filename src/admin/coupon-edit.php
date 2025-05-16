@@ -10,7 +10,6 @@ include_once __DIR__ . '/../includes/coupon_edit_info.php';
             <h1 class="hotel-add-admin-title">쿠폰 수정</h1>
         </div>
 
-        <!-- 쿠폰 코드를 hidden 필드로 추가 -->
         <input type="hidden" name="code" value="<?php echo $coupon['code']; ?>">
 
         <!-- 쿠폰 정보 -->

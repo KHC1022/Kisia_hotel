@@ -49,7 +49,6 @@ if (isset($_GET['review_id']) && isset($_GET['action'])) {
     // 이미 눌렀는지 확인
     $check = mysqli_query($conn, "SELECT * FROM review_helpful WHERE review_id = '$review_id' AND user_id = '$user_id'");
     if (mysqli_num_rows($check) > 0) {
-        // ✅ 이미 눌렀음 → alert 후 되돌아가기
         echo "<script>alert('이미 참여하셨습니다.'); location.href='../hotel/hotel-detail.php?id=$hotel_id';</script>";
         exit;
     }
@@ -67,7 +66,6 @@ if (isset($_GET['review_id']) && isset($_GET['action'])) {
             count_is_not_helpful = (SELECT COUNT(*) FROM review_helpful WHERE review_id = reviews.review_id AND not_helpful = 1)
         WHERE review_id = '$review_id'");
 
-    // ✅ 성공 → alert 후 되돌아가기
     echo "<script>alert('소중한 의견 감사합니다!'); location.href='../hotel/hotel-detail.php?id=$hotel_id';</script>";
     exit;
 }

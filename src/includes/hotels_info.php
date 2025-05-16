@@ -20,9 +20,9 @@ $query = "SELECT h.*,
 
 // 검색어 조건
 if (!empty($search)) {
-    $search = $conn->real_escape_string($search);
     $query .= " AND (h.name LIKE '%$search%' OR h.location LIKE '%$search%')";
 }
+
 
 // 가격 필터 조건
 if (!empty($price_filter)) {

@@ -32,13 +32,12 @@ if (empty($search)) {
 $result = mysqli_query($conn, $sql);
 
 if (!$result) {
-    die("쿼리 실행 오류: " . mysqli_error($conn));
-}
-
-$current_hotels = [];
-
-while ($row = mysqli_fetch_assoc($result)) {
-    $current_hotels[] = $row;
+    $current_hotels = [];
+} else {
+    $current_hotels = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $current_hotels[] = $row;
+    }
 }
 
 // 검색 파라미터 저장
