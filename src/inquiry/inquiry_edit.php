@@ -13,11 +13,10 @@ $inquiry = mysqli_fetch_assoc($result);
 
 ?>
     <main class="inquiry-board-container">
-        <div class="inquiry-board-header">
-            <h1 class="inquiry-board-title">문의 수정</h1>
-        </div>
-
         <div class="inquiry-form-container">
+            <div class="hotel-add-admin-header" style="margin-top: 4rem;">
+                <h1 class="hotel-add-admin-title" style="color:black;">문의 수정</h1>
+            </div>
             <form class="inquiry-form" method="post" action="../action/inquiry_edit_action.php" enctype="multipart/form-data">
                 <input type="hidden" name="inquiry_id" value="<?= $inquiry['inquiry_id'] ?>">
 

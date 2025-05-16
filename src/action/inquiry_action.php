@@ -29,7 +29,6 @@ if ($keyword !== '') {
     ";
     $result = mysqli_query($conn, $sql);
 
-    // 검색 결과일 때도 개수 설정해줘야 번호가 제대로 나옴
     $total_inquiries = mysqli_num_rows($result);
     $total_pages = 1;
     $page = 1;
