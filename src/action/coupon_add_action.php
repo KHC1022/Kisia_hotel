@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         exit;
     }
 
-    // 취약한 쿼리 (SQL 인젝션 취약점)
     $sql = "INSERT INTO coupons (code, name, discount_type, discount_value, start_date, end_date, 
             minimum_purchase, maximum_discount, usage_limit, is_active, created_at) 
             VALUES ('$code', '$name', '$discount_type', $discount_value, '$start_date', '$end_date', 

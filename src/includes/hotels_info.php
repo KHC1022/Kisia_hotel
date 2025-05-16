@@ -3,6 +3,7 @@ include_once __DIR__ . '/../includes/session.php';
 include_once __DIR__ . '/../includes/db_connection.php';
 
 $hotels = array();
+$today = date('Y-m-d');
 
 // 검색어 및 필터 파라미터 가져오기
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';

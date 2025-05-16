@@ -1,4 +1,4 @@
-/* 마이페이지 컨테이너 */
+
 .mypage-container {
     display: flex;
     max-width: 1400px;
@@ -9,7 +9,6 @@
     gap: 2rem;
 }
 
-/* 사이드바 */
 .mypage-sidebar {
     width: 300px;
     background: #fff;
@@ -41,11 +40,11 @@
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    display: block; /* ✅ 이미지가 화면에 보이도록 설정 */
+    display: block;
 }
 
 .profile-image-container::before {
-    content: '\f007'; /* Font Awesome user icon */
+    content: '\f007';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     font-size: 4rem;
@@ -102,7 +101,6 @@
     color: #7851A9;
 }
 
-/* 메인 컨텐츠 */
 .mypage-content {
     flex: 1;
     background: #fff;
@@ -119,7 +117,6 @@
     display: block;
 }
 
-/* 예약 관리 */
 .reservation-card {
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -208,7 +205,6 @@
     background-color: #c82333;
 }
 
-/* 여행객 정보 */
 .profile-form-container {
     background: white;
     padding: 2rem;
@@ -271,7 +267,6 @@
     background-color: #5B3B8A;
 }
 
-/* 찜 목록 */
 .wishlist-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -355,7 +350,7 @@
     color: #c82333;
 }
 
-/* 반응형 디자인 */
+
 @media (max-width: 768px) {
     .mypage-container {
         flex-direction: column;
@@ -492,7 +487,7 @@
     border-color: #7851A9;
 } 
 .readonly-input {
-    background-color: #f9f9f9; /* 입력 불가능한 느낌 */
+    background-color: #f9f9f9;
     color: #333;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -501,7 +496,6 @@
     font-weight: normal;
 }
 
-/* 빈 결과 메시지 */
 .mypage-no-results {
     background: #f8f9fa;
     border-radius: 12px;
@@ -527,7 +521,6 @@
     margin-bottom: 15px;
 }
 
-/* 반응형 디자인 */
 @media (max-width: 1024px) {
     .mypage-no-results {
         width: 90%;
@@ -541,7 +534,6 @@
     }
 }
 
-/* 섹션 제목 스타일 */
 .mypage-content h2 {
     color: #2c3e50;
     font-size: 1.8rem;
@@ -562,7 +554,6 @@
     background-color: #7851A9;
 }
 
-/* 반응형 디자인 */
 @media (max-width: 768px) {
     .mypage-content h2 {
         font-size: 1.5rem;

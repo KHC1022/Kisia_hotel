@@ -10,7 +10,6 @@ if (!isset($_GET['coupon_edit'])) {
 
 $code = $_GET['coupon_edit'];
 
-// 쿠폰 정보 가져오기 (취약한 쿼리)
 $sql = "SELECT * FROM coupons WHERE code = '$code'";
 $result = mysqli_query($conn, $sql);
 
@@ -21,7 +20,6 @@ if (!$result || mysqli_num_rows($result) === 0) {
 
 $coupon = mysqli_fetch_assoc($result);
 
-// 쿠폰 사용 내역 확인 (취약한 쿼리)
 $usage_sql = "SELECT COUNT(*) as usage_count FROM user_coupons WHERE coupon_id = '$code'";
 $usage_result = mysqli_query($conn, $usage_sql);
 $usage_data = mysqli_fetch_assoc($usage_result);
