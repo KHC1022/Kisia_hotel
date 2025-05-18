@@ -125,7 +125,7 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                                 <?php if ($event_busan == 1 || $event_japan == 1) : ?>
                                 <div class="timedeal-price-info">
                                     <span class="timedeal-original-price">₩<?= $deluxe['price'] ?></span>
-                                    <p class="timedeal-discount-price">₩<?= $deluxe['price'] ?>/박</p>
+                                    <p class="timedeal-discount-price">₩<?= $deluxe_sale_price?>/박</p>
                                 </div>
                                 <?php else : ?>
                                 <div class="room-price">
@@ -151,7 +151,7 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                                 <?php if ($event_busan == 1 || $event_japan == 1) : ?>
                                 <div class="timedeal-price-info">
                                     <span class="timedeal-original-price">₩<?= $suite['price'] ?></span>
-                                    <p class="timedeal-discount-price">₩<?= $suite['price'] ?>/박</p>
+                                    <p class="timedeal-discount-price">₩<?= $suite_sale_price ?>/박</p>
                                 </div>
                                 <?php else : ?>
                                 <div class="room-price">

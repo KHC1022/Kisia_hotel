@@ -91,13 +91,13 @@ if ($event_busan == 1) {
     
     if (!empty($hotel_rooms_deluxe)) {
         foreach ($hotel_rooms_deluxe as &$room) {
-            $room['price'] = $room['price'] * 0.6;
+            $deluxe_sale_price = $room['price'] * 0.6;
         }
     }
     
     if (!empty($hotel_rooms_suite)) {
         foreach ($hotel_rooms_suite as &$room) {
-            $room['price'] = $room['price'] * 0.6;
+            $suite_sale_price = $room['price'] * 0.6;
         }
     }
 }
@@ -107,13 +107,13 @@ if ($event_japan == 1) {
     
     if (!empty($hotel_rooms_deluxe)) {
         foreach ($hotel_rooms_deluxe as &$room) {
-            $room['price'] = $room['price'] * 0.8;
+            $deluxe_sale_price = $room['price'] * 0.8;
         }
     }
     
     if (!empty($hotel_rooms_suite)) {
         foreach ($hotel_rooms_suite as &$room) {
-            $room['price'] = $room['price'] * 0.8;
+            $suite_sale_price = $room['price'] * 0.8;
         }   
     }
 }

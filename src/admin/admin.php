@@ -285,9 +285,9 @@ include_once __DIR__ . '/../includes/info_for_admin.php';
                     <h2>후기 관리</h2>
                     <div class="search-form-container">
                         <form method="get" action="../includes/info_for_admin.php">
-                            <input type="hidden" name="search" value="review_number_search">
                             <div class="admin-search-box">
-                                <input type="text" name="review_number_search" placeholder="후기 번호 검색...">
+                                <input type="hidden" name="search" value="review_hotel_search">
+                                <input type="text" id="review_hotel_search" name="review_hotel_search" placeholder="호텔 이름 검색...">
                                 <button><i class="fas fa-search"></i></button>
                             </div>
                         </form>
