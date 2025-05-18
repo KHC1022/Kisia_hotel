@@ -161,10 +161,13 @@ else if ($current_tab === 'reservations') {
 // 후기 관리 탭
 else if ($current_tab === 'reviews') {
     // 검색어가 있는 경우
-    if (isset($_GET['review_number_search']) && trim($_GET['review_number_search']) !== '') {
-        $keyword = (int)trim($_GET['review_number_search']);
+    if (isset($_GET['review_hotel_search']) && trim($_GET['review_hotel_search']) !== '') {
+        $keyword = trim($_GET['review_hotel_search']);
         
-        $count_sql = "SELECT COUNT(*) as total FROM reviews WHERE review_id = $keyword";
+        $count_sql = "SELECT COUNT(*) as total 
+                      FROM reviews r 
+                      LEFT JOIN hotels h ON r.hotel_id = h.hotel_id 
+                      WHERE h.name LIKE '%$keyword%'";
         $count_result = $conn->query($count_sql);
         $total_items = $count_result->fetch_assoc()['total'];
         $total_pages = ceil($total_items / $items_per_page);
@@ -173,7 +176,7 @@ else if ($current_tab === 'reviews') {
                 FROM reviews r 
                 LEFT JOIN hotels h ON r.hotel_id = h.hotel_id 
                 LEFT JOIN users u ON r.user_id = u.user_id 
-                WHERE r.review_id = $keyword 
+                WHERE h.name LIKE '%$keyword%' 
                 ORDER BY r.review_id ASC 
                 LIMIT $offset, $items_per_page";
         $result = $conn->query($sql);
@@ -319,7 +322,7 @@ if (isset($_GET['tab']) && $_GET['tab'] == 'coupons' || isset($_GET['search']) &
     $offset = ($page - 1) * $items_per_page;
 
     if (isset($_GET['search']) && $_GET['search'] == 'coupon_code_search' && !empty($_GET['coupon_code_search'])) {
-        $search = mysqli_real_escape_string($conn, $_GET['coupon_code_search']);
+        $search = trim($_GET['coupon_code_search']);
         $count_sql = "SELECT COUNT(*) as total FROM coupons WHERE code LIKE '%$search%' OR name LIKE '%$search%'";
         $sql = "SELECT * FROM coupons WHERE code LIKE '%$search%' OR name LIKE '%$search%' ORDER BY created_at DESC LIMIT $offset, $items_per_page";
     } else {
@@ -362,7 +365,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
         case 'reservation_number_search':
             $tab = 'reservations';
             break;
-        case 'review_number_search':
+        case 'review_hotel_search':
             $tab = 'reviews';
             break;
         case 'inquiry_number_search':

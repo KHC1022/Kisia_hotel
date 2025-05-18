@@ -672,8 +672,8 @@ INSERT INTO rooms (hotel_id, room_type, max_person, price, rooms_image) VALUES
 (42, 'deluxe', 2, 350000, '/image/deluxe.jpg'),
 (42, 'suite', 4, 450000, '/image/suite.jpg'),
 -- 호텔 43
-(43, 'deluxe', 2, 420000, '/image/deluxe.jpg'),
-(43, 'suite', 4, 520000, '/image/suite.jpg'),
+(43, 'deluxe', 2, 550000, '/image/deluxe.jpg'),
+(43, 'suite', 4, 650000, '/image/suite.jpg'),
 -- 호텔 44
 (44, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
 (44, 'suite', 4, 480000, '/image/suite.jpg'),
@@ -681,8 +681,8 @@ INSERT INTO rooms (hotel_id, room_type, max_person, price, rooms_image) VALUES
 (45, 'deluxe', 2, 380000, '/image/deluxe.jpg'),
 (45, 'suite', 4, 480000, '/image/suite.jpg'),
 -- 호텔 46
-(46, 'deluxe', 2, 780000, '/image/deluxe.jpg'),
-(46, 'suite', 4, 880000, '/image/suite.jpg'),
+(46, 'deluxe', 2, 580000, '/image/deluxe.jpg'),
+(46, 'suite', 4, 680000, '/image/suite.jpg'),
 -- 호텔 47
 (47, 'deluxe', 2, 350000, '/image/deluxe.jpg'),
 (47, 'suite', 4, 450000, '/image/suite.jpg'),
