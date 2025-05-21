@@ -297,6 +297,13 @@ $room_type = $_GET['room_type'] ?? 'deluxe';
                                         <a href="../action/review_action.php?review_id=<?php echo $review['review_id']; ?>&action=not_helpful&hotel_id=<?php echo $hotel_id; ?>" class="action-btn">
                                             <i class="far fa-thumbs-down"></i>도움이 되지 않음<span class="count">(<?php echo $review['count_is_not_helpful']; ?>)</span>
                                         </a>
+                                        <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $review['user_id']) : ?>
+                                        <a href="../action/review_action.php?action=delete&review_id=<?php echo $review['review_id']; ?>&hotel_id=<?php echo $hotel_id; ?>"
+                                        class="action-btn"
+                                        onclick="return confirm('정말 삭제하시겠습니까?');">
+                                        🗑 삭제
+                                        </a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
