@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/../includes/db_connection.php';
 include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/../action/login_check.php';
 
 // 후기 작성 처리
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
@@ -96,6 +97,5 @@ if (isset($_GET['review_id']) && isset($_GET['action'])) {
     echo "<script>alert('소중한 의견 감사합니다!'); location.href='../hotel/hotel-detail.php?id=$hotel_id';</script>";
     exit;
 }
-
 
 ?>
