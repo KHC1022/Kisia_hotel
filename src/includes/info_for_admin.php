@@ -252,7 +252,7 @@ else if ($current_tab === 'inquiries') {
                 FROM inquiries i 
                 LEFT JOIN users u ON i.user_id = u.user_id 
                 LEFT JOIN inquiry_responses ir ON i.inquiry_id = ir.inquiry_id 
-                ORDER BY i.inquiry_id ASC 
+                ORDER BY i.inquiry_id DESC 
                 LIMIT $offset, $items_per_page";
         $result = $conn->query($sql);
         
